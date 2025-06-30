@@ -18,51 +18,51 @@ const Women = () => {
   const womenProducts = [
     {
       id: 1,
-      name: "Serengeti Queen Crop Top",
+      name: "FINEST Crop Top Red",
       price: "KSh 3,200",
-      image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/83e9eb03-ffaa-4765-956a-cb1f637e3b77.png",
       badge: "NEW",
-      colors: ["Black", "Gold", "Red"]
+      colors: ["Red", "White", "Black"]
     },
     {
       id: 2,
-      name: "Maasai Princess Dress",
+      name: "FINEST Group Collection",
       price: "TSh 95,000",
-      image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/7f0b3db7-fa12-4dda-9ab8-e43780531947.png",
       badge: "BESTSELLER",
-      colors: ["Red", "Blue", "White"]
+      colors: ["Red", "Black", "White"]
     },
     {
       id: 3,
-      name: "Nairobi Nights Bodysuit",
+      name: "FINEST Black Crop Top",
       price: "KSh 4,800",
-      image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/c1a27c87-fecb-4603-846b-e559103c12ef.png",
       badge: "EXCLUSIVE",
-      colors: ["Black", "Gold"]
+      colors: ["Black", "White"]
     },
     {
       id: 4,
-      name: "Zanzibar Sunset Skirt",
+      name: "NYUMBANI QWETU Purple",
       price: "TSh 55,000",
-      image: "https://images.unsplash.com/photo-1583496661160-fb5886a13804?auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/6a04cec4-55f6-473d-b3d2-82836bbbadde.png",
       badge: "CULTURE",
-      colors: ["Orange", "Yellow", "Pink"]
+      colors: ["Purple", "White", "Beige"]
     },
     {
       id: 5,
-      name: "Kilimanjaro Goddess Hoodie",
+      name: "FINEST Split Jeans Style",
       price: "TSh 75,000",
-      image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/cab6174c-81c0-4121-bea1-7e06bcd15fae.png",
       badge: "LIMITED",
-      colors: ["Black", "Purple", "Gold"]
+      colors: ["White", "Blue", "Black"]
     },
     {
       id: 6,
-      name: "Safari Empress Jacket",
+      name: "FINEST Pose Collection",
       price: "KSh 8,500",
-      image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/e634235e-8a2c-4e35-91ca-4d56793cad8f.png",
       badge: "PRIDE",
-      colors: ["Khaki", "Green", "Brown"]
+      colors: ["Red", "White", "Black"]
     }
   ];
 
@@ -89,38 +89,38 @@ const Women = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-white text-black">
       {/* Navigation */}
-      <nav className="bg-black border-b border-gray-800 sticky top-0 z-50">
+      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex-shrink-0">
-              <h1 className="text-2xl font-bold text-white">
-                AFRICAN'S <span className="text-yellow-500">FINEST</span>
+              <h1 className="text-2xl font-bold text-black">
+                AFRICAN'S <span className="text-red-600">FINEST</span>
               </h1>
             </div>
 
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
-                <a href="/" className="text-white hover:text-yellow-500 transition-colors">HOME</a>
-                <a href="/men" className="text-white hover:text-yellow-500 transition-colors">MEN</a>
-                <a href="/women" className="text-yellow-500 border-b-2 border-yellow-500 pb-1">WOMEN</a>
-                <a href="/lookbook" className="text-white hover:text-yellow-500 transition-colors">LOOKBOOK</a>
-                <a href="/about" className="text-white hover:text-yellow-500 transition-colors">ABOUT</a>
-                <a href="/culture" className="text-white hover:text-yellow-500 transition-colors">CULTURE</a>
+                <a href="/" className="text-black hover:text-red-600 transition-colors">HOME</a>
+                <a href="/men" className="text-black hover:text-red-600 transition-colors">MEN</a>
+                <a href="/women" className="text-red-600 border-b-2 border-red-600 pb-1">WOMEN</a>
+                <a href="/lookbook" className="text-black hover:text-red-600 transition-colors">LOOKBOOK</a>
+                <a href="/about" className="text-black hover:text-red-600 transition-colors">ABOUT</a>
+                <a href="/culture" className="text-black hover:text-red-600 transition-colors">CULTURE</a>
               </div>
             </div>
 
             <div className="flex items-center space-x-4">
-              <Search className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" />
+              <Search className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
               <User 
-                className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" 
+                className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
                 onClick={() => setIsProfileOpen(true)}
               />
-              <Heart className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" />
+              <Heart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
               <div className="relative">
                 <ShoppingCart 
-                  className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" 
+                  className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
                   onClick={() => setIsCartOpen(true)}
                 />
                 <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
@@ -137,7 +137,7 @@ const Women = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=2000&q=80')`,
+            backgroundImage: `url('/lovable-uploads/c1a27c87-fecb-4603-846b-e559103c12ef.png')`,
           }}
         >
           <div className="absolute inset-0 bg-black bg-opacity-60"></div>
@@ -145,7 +145,7 @@ const Women = () => {
         
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <h2 className="text-5xl md:text-6xl font-bold mb-4 text-white">
-            WOMEN'S <span className="text-yellow-500">COLLECTION</span>
+            WOMEN'S <span className="text-red-600">COLLECTION</span>
           </h2>
           <p className="text-xl text-gray-200">
             Empress-level fashion celebrating East African beauty
@@ -154,33 +154,33 @@ const Women = () => {
       </section>
 
       {/* Filter Section */}
-      <section className="py-6 bg-gray-900">
+      <section className="py-6 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-6">
-              <Button variant="outline" className="border-gray-600 text-white hover:bg-gray-800">
+              <Button variant="outline" className="border-gray-400 text-black hover:bg-gray-200">
                 <Filter className="h-4 w-4 mr-2" />
                 Filter
               </Button>
               <div className="flex space-x-4 text-sm">
-                <a href="#" className="text-yellow-500 border-b border-yellow-500">ALL</a>
-                <a href="#" className="text-gray-400 hover:text-white">DRESSES</a>
-                <a href="#" className="text-gray-400 hover:text-white">TOPS</a>
-                <a href="#" className="text-gray-400 hover:text-white">BOTTOMS</a>
-                <a href="#" className="text-gray-400 hover:text-white">OUTERWEAR</a>
+                <a href="#" className="text-red-600 border-b border-red-600">ALL</a>
+                <a href="#" className="text-gray-600 hover:text-black">DRESSES</a>
+                <a href="#" className="text-gray-600 hover:text-black">TOPS</a>
+                <a href="#" className="text-gray-600 hover:text-black">BOTTOMS</a>
+                <a href="#" className="text-gray-600 hover:text-black">OUTERWEAR</a>
               </div>
             </div>
-            <p className="text-gray-400 text-sm">{womenProducts.length} products</p>
+            <p className="text-gray-600 text-sm">{womenProducts.length} products</p>
           </div>
         </div>
       </section>
 
       {/* Products Grid */}
-      <section className="py-16 bg-black">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {womenProducts.map((product) => (
-              <Card key={product.id} className="bg-gray-900 border-gray-800 hover:border-yellow-500 transition-all duration-300 group">
+              <Card key={product.id} className="bg-white border-gray-200 hover:border-red-600 transition-all duration-300 group">
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
                     <img 
@@ -188,13 +188,13 @@ const Women = () => {
                       alt={product.name}
                       className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    <Badge className="absolute top-4 left-4 bg-red-600 hover:bg-red-600">
+                    <Badge className="absolute top-4 left-4 bg-red-600 hover:bg-red-600 text-white">
                       {product.badge}
                     </Badge>
                     <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                       <Heart 
                         className={`h-6 w-6 cursor-pointer ${
-                          isFavorite(product.id) ? 'text-red-500 fill-red-500' : 'text-white hover:text-red-500'
+                          isFavorite(product.id) ? 'text-red-500 fill-red-500' : 'text-black hover:text-red-500'
                         }`}
                         onClick={() => handleToggleFavorite(product)}
                       />
@@ -202,26 +202,26 @@ const Women = () => {
                   </div>
                   
                   <div className="p-6">
-                    <h4 className="text-white font-bold text-lg mb-2">{product.name}</h4>
-                    <p className="text-yellow-500 font-bold text-xl mb-4">{product.price}</p>
+                    <h4 className="text-black font-bold text-lg mb-2">{product.name}</h4>
+                    <p className="text-red-600 font-bold text-xl mb-4">{product.price}</p>
                     
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex space-x-2">
                         {product.colors.map((color, index) => (
-                          <div key={index} className="w-4 h-4 rounded-full bg-gray-700 border border-gray-600"></div>
+                          <div key={index} className="w-4 h-4 rounded-full bg-gray-300 border border-gray-400"></div>
                         ))}
                       </div>
                       
                       <div className="flex items-center space-x-1">
                         {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                          <Star key={i} className="h-4 w-4 fill-red-600 text-red-600" />
                         ))}
                       </div>
                     </div>
 
                     <Button 
                       onClick={() => handleAddToCart(product)}
-                      className="w-full bg-yellow-600 hover:bg-yellow-700 text-black font-bold"
+                      className="w-full bg-red-600 hover:bg-red-700 text-white font-bold"
                     >
                       ADD TO CART
                     </Button>

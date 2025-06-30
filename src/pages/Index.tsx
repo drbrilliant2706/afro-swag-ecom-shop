@@ -12,83 +12,87 @@ const Index = () => {
   const featuredProducts = [
     {
       id: 1,
-      name: "Kilimanjaro Crown Tee",
+      name: "FINEST African Mask Tee",
       price: "TSh 45,000",
-      image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/83e9eb03-ffaa-4765-956a-cb1f637e3b77.png",
       badge: "NEW",
-      colors: ["Black", "Gold", "Green"]
+      colors: ["Red", "White", "Black"]
     },
     {
       id: 2,
-      name: "Maasai Warrior Hoodie",
-      price: "KSh 6,200",
-      image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=80",
+      name: "FINEST Blue Oversized Tee",
+      price: "TSh 48,000",
+      image: "/lovable-uploads/1f0eef57-3784-4a0d-84d8-62b9fcb1c8d9.png",
       badge: "BESTSELLER",
-      colors: ["Black", "Red", "White"]
+      colors: ["Blue", "White", "Black"]
     },
     {
       id: 3,
-      name: "Safari Spirit Joggers",
-      price: "TSh 65,000",
-      image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=800&q=80",
+      name: "NYUMBANI QWETU Collection",
+      price: "TSh 52,000",
+      image: "/lovable-uploads/86a2ceca-f52f-4c63-91b6-7fd6da14145f.png",
       badge: "LIMITED",
-      colors: ["Khaki", "Olive", "Navy"]
+      colors: ["Beige", "Purple", "Black"]
     },
     {
       id: 4,
-      name: "Serengeti Bomber Jacket",
-      price: "KSh 8,500",
-      image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80",
+      name: "AFRIKA'S Finest Tee",
+      price: "TSh 46,000",
+      image: "/lovable-uploads/036867e1-6684-4f8f-889e-e89c5719d973.png",
       badge: "EXCLUSIVE",
-      colors: ["Black", "Gold", "Burgundy"]
+      colors: ["Tan", "Black", "White"]
     }
   ];
 
+  const handleShopCollection = () => {
+    window.location.href = '/men';
+  };
+
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-white text-black">
       {/* Announcement Bar */}
-      <div className="bg-gradient-to-r from-yellow-600 to-red-600 text-black text-center py-2 text-sm font-medium">
+      <div className="bg-red-600 text-white text-center py-2 text-sm font-medium">
         FREE SHIPPING ACROSS EAST AFRICA ON ORDERS TSh 100,000+ | AUTHENTIC TANZANIAN & KENYAN STREETWEAR | WORLDWIDE DELIVERY
       </div>
 
       {/* Navigation */}
-      <nav className="bg-black border-b border-gray-800 sticky top-0 z-50">
+      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <h1 className="text-2xl font-bold text-white">
-                AFRICAN'S <span className="text-yellow-500">FINEST</span>
+              <h1 className="text-2xl font-bold text-black">
+                AFRICAN'S <span className="text-red-600">FINEST</span>
               </h1>
-              <p className="text-xs text-gray-400 -mt-1">Unapologetically African. Universally Finest.</p>
+              <p className="text-xs text-gray-600 -mt-1">Unapologetically African. Universally Finest.</p>
             </div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
-                <a href="/" className="text-yellow-500 border-b-2 border-yellow-500 pb-1">HOME</a>
-                <a href="/men" className="text-white hover:text-yellow-500 transition-colors">MEN</a>
-                <a href="/women" className="text-white hover:text-yellow-500 transition-colors">WOMEN</a>
-                <a href="/lookbook" className="text-white hover:text-yellow-500 transition-colors">LOOKBOOK</a>
-                <a href="/about" className="text-white hover:text-yellow-500 transition-colors">ABOUT</a>
-                <a href="/culture" className="text-white hover:text-yellow-500 transition-colors">CULTURE</a>
+                <a href="/" className="text-red-600 border-b-2 border-red-600 pb-1">HOME</a>
+                <a href="/men" className="text-black hover:text-red-600 transition-colors">MEN</a>
+                <a href="/women" className="text-black hover:text-red-600 transition-colors">WOMEN</a>
+                <a href="/lookbook" className="text-black hover:text-red-600 transition-colors">LOOKBOOK</a>
+                <a href="/about" className="text-black hover:text-red-600 transition-colors">ABOUT</a>
+                <a href="/culture" className="text-black hover:text-red-600 transition-colors">CULTURE</a>
               </div>
             </div>
 
             {/* Right Side Icons */}
             <div className="flex items-center space-x-4">
-              <Search className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" />
-              <User className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" />
-              <Heart className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" />
+              <Search className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
+              <User className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
+              <Heart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
               <div className="relative">
-                <ShoppingCart className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" />
+                <ShoppingCart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
                 <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
               </div>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="md:hidden"
               >
-                <Menu className="h-5 w-5 text-white" />
+                <Menu className="h-5 w-5 text-black" />
               </button>
             </div>
           </div>
@@ -100,25 +104,26 @@ const Index = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=2000&q=80')`,
+            backgroundImage: `url('/lovable-uploads/7f0b3db7-fa12-4dda-9ab8-e43780531947.png')`,
           }}
         >
-          <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+          <div className="absolute inset-0 bg-black bg-opacity-40"></div>
         </div>
         
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <h2 className="text-6xl md:text-8xl font-bold mb-6 text-white">
-            SPRING<span className="text-yellow-500">25</span>
+            SPRING<span className="text-red-600">25</span>
           </h2>
-          <p className="text-xl md:text-2xl mb-8 text-gray-200">
+          <p className="text-xl md:text-2xl mb-8 text-white">
             WHERE EAST AFRICAN HERITAGE MEETS STREETWEAR
           </p>
-          <p className="text-lg mb-12 text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg mb-12 text-gray-200 max-w-2xl mx-auto">
             From Kilimanjaro to the Serengeti, from Dar es Salaam to Nairobi - authentic designs that celebrate our roots while defining the future.
           </p>
           <Button 
             size="lg" 
-            className="bg-yellow-600 hover:bg-yellow-700 text-black font-bold px-12 py-4 text-lg transition-all duration-300 transform hover:scale-105"
+            onClick={handleShopCollection}
+            className="bg-red-600 hover:bg-red-700 text-white font-bold px-12 py-4 text-lg transition-all duration-300 transform hover:scale-105"
           >
             SHOP THE COLLECTION
           </Button>
@@ -126,30 +131,30 @@ const Index = () => {
       </section>
 
       {/* Category Navigation */}
-      <section className="py-8 bg-gray-900">
+      <section className="py-8 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-center space-x-8 text-sm font-medium">
-            <a href="#" className="text-white hover:text-yellow-500 border-b-2 border-yellow-500 pb-2">NEW ARRIVALS</a>
-            <a href="#" className="text-gray-400 hover:text-yellow-500 pb-2">TEES</a>
-            <a href="#" className="text-gray-400 hover:text-yellow-500 pb-2">HOODIES</a>
-            <a href="#" className="text-gray-400 hover:text-yellow-500 pb-2">JACKETS</a>
-            <a href="#" className="text-gray-400 hover:text-yellow-500 pb-2">ACCESSORIES</a>
-            <a href="#" className="text-gray-400 hover:text-yellow-500 pb-2">WOMEN</a>
+            <a href="#" className="text-black hover:text-red-600 border-b-2 border-red-600 pb-2">NEW ARRIVALS</a>
+            <a href="#" className="text-gray-600 hover:text-red-600 pb-2">TEES</a>
+            <a href="#" className="text-gray-600 hover:text-red-600 pb-2">HOODIES</a>
+            <a href="#" className="text-gray-600 hover:text-red-600 pb-2">JACKETS</a>
+            <a href="#" className="text-gray-600 hover:text-red-600 pb-2">ACCESSORIES</a>
+            <a href="#" className="text-gray-600 hover:text-red-600 pb-2">WOMEN</a>
           </div>
         </div>
       </section>
 
       {/* Featured Products */}
-      <section className="py-16 bg-black">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h3 className="text-4xl font-bold text-white mb-4">FEATURED DROPS</h3>
-            <p className="text-gray-400">Handpicked pieces celebrating East African excellence</p>
+            <h3 className="text-4xl font-bold text-black mb-4">FEATURED DROPS</h3>
+            <p className="text-gray-600">Handpicked pieces celebrating East African excellence</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {featuredProducts.map((product) => (
-              <Card key={product.id} className="bg-gray-900 border-gray-800 hover:border-yellow-500 transition-all duration-300 group">
+              <Card key={product.id} className="bg-white border-gray-200 hover:border-red-600 transition-all duration-300 group">
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
                     <img 
@@ -157,28 +162,28 @@ const Index = () => {
                       alt={product.name}
                       className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    <Badge className="absolute top-4 left-4 bg-red-600 hover:bg-red-600">
+                    <Badge className="absolute top-4 left-4 bg-red-600 hover:bg-red-600 text-white">
                       {product.badge}
                     </Badge>
                     <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Heart className="h-6 w-6 text-white hover:text-red-500 cursor-pointer" />
+                      <Heart className="h-6 w-6 text-black hover:text-red-600 cursor-pointer" />
                     </div>
                   </div>
                   
                   <div className="p-6">
-                    <h4 className="text-white font-bold text-lg mb-2">{product.name}</h4>
-                    <p className="text-yellow-500 font-bold text-xl mb-4">{product.price}</p>
+                    <h4 className="text-black font-bold text-lg mb-2">{product.name}</h4>
+                    <p className="text-red-600 font-bold text-xl mb-4">{product.price}</p>
                     
                     <div className="flex items-center justify-between">
                       <div className="flex space-x-2">
                         {product.colors.map((color, index) => (
-                          <div key={index} className="w-4 h-4 rounded-full bg-gray-700 border border-gray-600"></div>
+                          <div key={index} className="w-4 h-4 rounded-full bg-gray-300 border border-gray-400"></div>
                         ))}
                       </div>
                       
                       <div className="flex items-center space-x-1">
                         {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                          <Star key={i} className="h-4 w-4 fill-red-600 text-red-600" />
                         ))}
                       </div>
                     </div>
@@ -189,7 +194,7 @@ const Index = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Button variant="outline" className="border-white text-white hover:bg-white hover:text-black px-8 py-3">
+            <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white px-8 py-3">
               VIEW ALL PRODUCTS
             </Button>
           </div>
@@ -197,25 +202,25 @@ const Index = () => {
       </section>
 
       {/* Culture Section */}
-      <section className="py-16 bg-gradient-to-r from-green-900 via-yellow-800 to-red-900">
+      <section className="py-16 bg-red-600">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h3 className="text-5xl font-bold text-white mb-6">THE MOVEMENT</h3>
-              <p className="text-xl text-gray-200 mb-6">
+              <p className="text-xl text-white mb-6">
                 More than fashion. We're celebrating the richness of East African culture through contemporary streetwear that tells our story.
               </p>
-              <p className="text-lg text-gray-300 mb-8">
+              <p className="text-lg text-gray-100 mb-8">
                 From Dar es Salaam to Nairobi, Zanzibar to Mombasa - we carry our heritage with pride, style, and uncompromising quality that represents the finest of Tanzania and Kenya.
               </p>
-              <Button className="bg-black text-white hover:bg-gray-800 px-8 py-3">
+              <Button className="bg-white text-red-600 hover:bg-gray-100 px-8 py-3">
                 <a href="/culture">DISCOVER OUR STORY</a>
               </Button>
             </div>
             
             <div className="relative">
               <img 
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80"
+                src="/lovable-uploads/c1a27c87-fecb-4603-846b-e559103c12ef.png"
                 alt="East African Culture"
                 className="rounded-lg shadow-2xl"
               />
@@ -225,7 +230,7 @@ const Index = () => {
       </section>
 
       {/* Newsletter Signup */}
-      <section className="py-16 bg-gray-900">
+      <section className="py-16 bg-black">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h3 className="text-4xl font-bold text-white mb-4">JOIN THE FAMILY</h3>
           <p className="text-xl text-gray-400 mb-8">
@@ -235,9 +240,9 @@ const Index = () => {
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
             <Input 
               placeholder="Enter your email" 
-              className="bg-black border-gray-700 text-white placeholder-gray-500 flex-1"
+              className="bg-white border-gray-300 text-black placeholder-gray-500 flex-1"
             />
-            <Button className="bg-yellow-600 hover:bg-yellow-700 text-black font-bold px-8">
+            <Button className="bg-red-600 hover:bg-red-700 text-white font-bold px-8">
               GET YOUR DISCOUNT
             </Button>
           </div>
@@ -255,7 +260,7 @@ const Index = () => {
             {/* Brand */}
             <div>
               <h4 className="text-2xl font-bold text-white mb-4">
-                AFRICAN'S <span className="text-yellow-500">FINEST</span>
+                AFRICAN'S <span className="text-red-600">FINEST</span>
               </h4>
               <p className="text-gray-400 mb-6">
                 Unapologetically African. Universally Finest.

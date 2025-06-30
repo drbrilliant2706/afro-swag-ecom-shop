@@ -7,83 +7,83 @@ const Lookbook = () => {
   const lookbookItems = [
     {
       id: 1,
-      title: "KILIMANJARO SUMMIT",
-      description: "Peak performance meets street style",
-      image: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=800&q=80",
-      products: ["Kilimanjaro Summit Tee - TSh 45,000", "Safari Cargo Pants - KSh 5,500"],
+      title: "FINEST COLLECTION",
+      description: "Bold statements with African pride",
+      image: "/lovable-uploads/7f0b3db7-fa12-4dda-9ab8-e43780531947.png",
+      products: ["FINEST Group Tees - TSh 45,000", "Coordinated Crop Tops - KSh 5,500"],
       season: "Spring 2025"
     },
     {
       id: 2,
-      title: "SERENGETI QUEEN",
-      description: "Empress-level elegance with wild spirit",
-      image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=800&q=80",
-      products: ["Serengeti Queen Dress - TSh 95,000", "Gold Maasai Earrings - KSh 2,800"],
+      title: "NYUMBANI QWETU",
+      description: "Home is where the heart is - African style",
+      image: "/lovable-uploads/86a2ceca-f52f-4c63-91b6-7fd6da14145f.png",
+      products: ["NYUMBANI QWETU Tee - TSh 52,000", "Cultural Pride Collection - KSh 2,800"],
       season: "Spring 2025"
     },
     {
       id: 3,
-      title: "URBAN NAIROBI",
-      description: "City lights and cultural pride",
-      image: "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=crop&w=800&q=80",
-      products: ["Nairobi Nights Hoodie - KSh 6,200", "Urban Warrior Joggers - TSh 55,000"],
+      title: "STREET STYLE FINEST",
+      description: "Urban elegance meets African heritage",
+      image: "/lovable-uploads/036867e1-6684-4f8f-889e-e89c5719d973.png",
+      products: ["AFRIKA'S Finest Tee - TSh 46,000", "Street Style Essentials - TSh 55,000"],
       season: "Spring 2025"
     },
     {
       id: 4,
-      title: "ZANZIBAR SUNSET",
-      description: "Coastal vibes with heritage roots",
-      image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80",
-      products: ["Zanzibar Sunset Dress - TSh 85,000", "Coral Reef Accessories - KSh 3,500"],
+      title: "BOLD & BEAUTIFUL",
+      description: "Celebrating African femininity with style",
+      image: "/lovable-uploads/c1a27c87-fecb-4603-846b-e559103c12ef.png",
+      products: ["FINEST Black Crop - TSh 48,000", "Confident Style Collection - KSh 3,500"],
       season: "Spring 2025"
     },
     {
       id: 5,
-      title: "MAASAI WARRIOR",
-      description: "Traditional strength, modern expression",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
-      products: ["Warrior Spirit Jacket - TSh 110,000", "Traditional Pattern Tee - KSh 3,800"],
+      title: "SPLIT STYLE REVOLUTION",
+      description: "Unique fashion meets cultural expression",
+      image: "/lovable-uploads/cab6174c-81c0-4121-bea1-7e06bcd15fae.png",
+      products: ["Split Jeans Collection - TSh 65,000", "Revolutionary Style - KSh 3,800"],
       season: "Spring 2025"
     },
     {
       id: 6,
-      title: "SAFARI EMPRESS",
-      description: "Adventure-ready luxury fashion",
-      image: "https://images.unsplash.com/photo-1583496661160-fb5886a13804?auto=format&fit=crop&w=800&q=80",
-      products: ["Safari Empress Jacket - KSh 8,500", "Adventure Chic Pants - TSh 65,000"],
+      title: "CONFIDENT POSE",
+      description: "Stand tall with African pride",
+      image: "/lovable-uploads/e634235e-8a2c-4e35-91ca-4d56793cad8f.png",
+      products: ["Confident Pose Collection - KSh 8,500", "Pride Statement Pieces - TSh 65,000"],
       season: "Spring 2025"
     }
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-white text-black">
       {/* Navigation */}
-      <nav className="bg-black border-b border-gray-800 sticky top-0 z-50">
+      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex-shrink-0">
-              <h1 className="text-2xl font-bold text-white">
-                AFRICAN'S <span className="text-yellow-500">FINEST</span>
+              <h1 className="text-2xl font-bold text-black">
+                AFRICAN'S <span className="text-red-600">FINEST</span>
               </h1>
             </div>
 
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
-                <a href="/" className="text-white hover:text-yellow-500 transition-colors">HOME</a>
-                <a href="/men" className="text-white hover:text-yellow-500 transition-colors">MEN</a>
-                <a href="/women" className="text-white hover:text-yellow-500 transition-colors">WOMEN</a>
-                <a href="/lookbook" className="text-yellow-500 border-b-2 border-yellow-500 pb-1">LOOKBOOK</a>
-                <a href="/about" className="text-white hover:text-yellow-500 transition-colors">ABOUT</a>
-                <a href="/culture" className="text-white hover:text-yellow-500 transition-colors">CULTURE</a>
+                <a href="/" className="text-black hover:text-red-600 transition-colors">HOME</a>
+                <a href="/men" className="text-black hover:text-red-600 transition-colors">MEN</a>
+                <a href="/women" className="text-black hover:text-red-600 transition-colors">WOMEN</a>
+                <a href="/lookbook" className="text-red-600 border-b-2 border-red-600 pb-1">LOOKBOOK</a>
+                <a href="/about" className="text-black hover:text-red-600 transition-colors">ABOUT</a>
+                <a href="/culture" className="text-black hover:text-red-600 transition-colors">CULTURE</a>
               </div>
             </div>
 
             <div className="flex items-center space-x-4">
-              <Search className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" />
-              <User className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" />
-              <Heart className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" />
+              <Search className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
+              <User className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
+              <Heart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
               <div className="relative">
-                <ShoppingCart className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" />
+                <ShoppingCart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
                 <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
               </div>
             </div>
@@ -96,7 +96,7 @@ const Lookbook = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=2000&q=80')`,
+            backgroundImage: `url('/lovable-uploads/7f0b3db7-fa12-4dda-9ab8-e43780531947.png')`,
           }}
         >
           <div className="absolute inset-0 bg-black bg-opacity-70"></div>
@@ -104,7 +104,7 @@ const Lookbook = () => {
         
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <h2 className="text-5xl md:text-6xl font-bold mb-4 text-white">
-            SPRING <span className="text-yellow-500">LOOKBOOK</span>
+            SPRING <span className="text-red-600">LOOKBOOK</span>
           </h2>
           <p className="text-xl text-gray-200">
             East African elegance meets contemporary streetwear
@@ -113,23 +113,23 @@ const Lookbook = () => {
       </section>
 
       {/* Season Navigation */}
-      <section className="py-6 bg-gray-900">
+      <section className="py-6 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-center space-x-8 text-sm font-medium">
-            <a href="#" className="text-yellow-500 border-b-2 border-yellow-500 pb-2">SPRING 2025</a>
-            <a href="#" className="text-gray-400 hover:text-yellow-500 pb-2">SUMMER 2025</a>
-            <a href="#" className="text-gray-400 hover:text-yellow-500 pb-2">FALL 2024</a>
-            <a href="#" className="text-gray-400 hover:text-yellow-500 pb-2">WINTER 2024</a>
+            <a href="#" className="text-red-600 border-b-2 border-red-600 pb-2">SPRING 2025</a>
+            <a href="#" className="text-gray-600 hover:text-red-600 pb-2">SUMMER 2025</a>
+            <a href="#" className="text-gray-600 hover:text-red-600 pb-2">FALL 2024</a>
+            <a href="#" className="text-gray-600 hover:text-red-600 pb-2">WINTER 2024</a>
           </div>
         </div>
       </section>
 
       {/* Lookbook Grid */}
-      <section className="py-16 bg-black">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {lookbookItems.map((item, index) => (
-              <Card key={item.id} className={`bg-gray-900 border-gray-800 hover:border-yellow-500 transition-all duration-300 group ${index % 3 === 0 ? 'md:col-span-2' : ''}`}>
+              <Card key={item.id} className={`bg-white border-gray-200 hover:border-red-600 transition-all duration-300 group ${index % 3 === 0 ? 'md:col-span-2' : ''}`}>
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
                     <img 
@@ -153,15 +153,15 @@ const Lookbook = () => {
                         </div>
                         
                         <div className="flex items-center justify-between">
-                          <span className="text-xs text-yellow-500 font-semibold">{item.season}</span>
+                          <span className="text-xs text-red-600 font-semibold">{item.season}</span>
                           <div className="flex space-x-3">
-                            <button className="text-white hover:text-yellow-500 transition-colors">
+                            <button className="text-white hover:text-red-600 transition-colors">
                               <Eye className="h-5 w-5" />
                             </button>
-                            <button className="text-white hover:text-yellow-500 transition-colors">
+                            <button className="text-white hover:text-red-600 transition-colors">
                               <Heart className="h-5 w-5" />
                             </button>
-                            <button className="text-white hover:text-yellow-500 transition-colors">
+                            <button className="text-white hover:text-red-600 transition-colors">
                               <Share className="h-5 w-5" />
                             </button>
                           </div>
@@ -177,27 +177,27 @@ const Lookbook = () => {
       </section>
 
       {/* Style Guide Section */}
-      <section className="py-16 bg-gradient-to-r from-yellow-600 to-red-600">
+      <section className="py-16 bg-red-600">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h3 className="text-4xl font-bold text-black mb-6">STYLE GUIDE</h3>
-          <p className="text-xl text-black mb-8">
+          <h3 className="text-4xl font-bold text-white mb-6">STYLE GUIDE</h3>
+          <p className="text-xl text-white mb-8">
             Learn how to style our pieces for different occasions and express your unique African identity
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="bg-black bg-opacity-20 p-6 rounded-lg">
-              <h4 className="text-xl font-bold text-black mb-2">STREET STYLE</h4>
-              <p className="text-black">Casual urban looks with cultural flair</p>
+            <div className="bg-white bg-opacity-20 p-6 rounded-lg">
+              <h4 className="text-xl font-bold text-white mb-2">STREET STYLE</h4>
+              <p className="text-white">Casual urban looks with cultural flair</p>
             </div>
-            <div className="bg-black bg-opacity-20 p-6 rounded-lg">
-              <h4 className="text-xl font-bold text-black mb-2">CULTURAL EVENTS</h4>
-              <p className="text-black">Elevated pieces for special occasions</p>
+            <div className="bg-white bg-opacity-20 p-6 rounded-lg">
+              <h4 className="text-xl font-bold text-white mb-2">CULTURAL EVENTS</h4>
+              <p className="text-white">Elevated pieces for special occasions</p>
             </div>
-            <div className="bg-black bg-opacity-20 p-6 rounded-lg">
-              <h4 className="text-xl font-bold text-black mb-2">TRAVEL READY</h4>
-              <p className="text-black">Versatile pieces for the global citizen</p>
+            <div className="bg-white bg-opacity-20 p-6 rounded-lg">
+              <h4 className="text-xl font-bold text-white mb-2">TRAVEL READY</h4>
+              <p className="text-white">Versatile pieces for the global citizen</p>
             </div>
           </div>
-          <Button className="bg-black text-white hover:bg-gray-800 px-8 py-3">
+          <Button className="bg-white text-red-600 hover:bg-gray-100 px-8 py-3">
             DOWNLOAD STYLE GUIDE
           </Button>
         </div>
