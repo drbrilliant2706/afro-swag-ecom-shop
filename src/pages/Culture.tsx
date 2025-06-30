@@ -9,7 +9,7 @@ const Culture = () => {
       id: 1,
       title: "The Maasai Warrior Spirit",
       excerpt: "How traditional Maasai culture inspires our boldest designs",
-      image: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/83e9eb03-ffaa-4765-956a-cb1f637e3b77.png",
       date: "March 15, 2025",
       author: "Amani Mwalimu"
     },
@@ -17,7 +17,7 @@ const Culture = () => {
       id: 2,
       title: "Swahili Coast Fashion Heritage",
       excerpt: "Exploring the rich textile traditions of the East African coast",
-      image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/1f0eef57-3784-4a0d-84d8-62b9fcb1c8d9.png",
       date: "March 10, 2025",
       author: "Kesi Nguvu"
     },
@@ -25,7 +25,7 @@ const Culture = () => {
       id: 3,
       title: "Urban Nairobi Street Style",
       excerpt: "The vibrant fashion scene in Kenya's capital city",
-      image: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/036867e1-6684-4f8f-889e-e89c5719d973.png",
       date: "March 5, 2025",
       author: "Zara Kilifi"
     }
@@ -56,34 +56,34 @@ const Culture = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-white text-black">
       {/* Navigation */}
-      <nav className="bg-black border-b border-gray-800 sticky top-0 z-50">
+      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex-shrink-0">
-              <h1 className="text-2xl font-bold text-white">
-                AFRICAN'S <span className="text-yellow-500">FINEST</span>
+              <h1 className="text-2xl font-bold text-black">
+                AFRICAN'S <span className="text-red-600">FINEST</span>
               </h1>
             </div>
 
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
-                <a href="/" className="text-white hover:text-yellow-500 transition-colors">HOME</a>
-                <a href="/men" className="text-white hover:text-yellow-500 transition-colors">MEN</a>
-                <a href="/women" className="text-white hover:text-yellow-500 transition-colors">WOMEN</a>
-                <a href="/lookbook" className="text-white hover:text-yellow-500 transition-colors">LOOKBOOK</a>
-                <a href="/about" className="text-white hover:text-yellow-500 transition-colors">ABOUT</a>
-                <a href="/culture" className="text-yellow-500 border-b-2 border-yellow-500 pb-1">CULTURE</a>
+                <a href="/" className="text-black hover:text-red-600 transition-colors">HOME</a>
+                <a href="/men" className="text-black hover:text-red-600 transition-colors">MEN</a>
+                <a href="/women" className="text-black hover:text-red-600 transition-colors">WOMEN</a>
+                <a href="/lookbook" className="text-black hover:text-red-600 transition-colors">LOOKBOOK</a>
+                <a href="/about" className="text-black hover:text-red-600 transition-colors">ABOUT</a>
+                <a href="/culture" className="text-red-600 border-b-2 border-red-600 pb-1">CULTURE</a>
               </div>
             </div>
 
             <div className="flex items-center space-x-4">
-              <Search className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" />
-              <User className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" />
-              <Heart className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" />
+              <Search className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
+              <User className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
+              <Heart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
               <div className="relative">
-                <ShoppingCart className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" />
+                <ShoppingCart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
                 <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
               </div>
             </div>
@@ -96,7 +96,7 @@ const Culture = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=2000&q=80')`,
+            backgroundImage: `url('/lovable-uploads/e634235e-8a2c-4e35-91ca-4d56793cad8f.png')`,
           }}
         >
           <div className="absolute inset-0 bg-black bg-opacity-70"></div>
@@ -104,7 +104,7 @@ const Culture = () => {
         
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <h2 className="text-5xl md:text-6xl font-bold mb-4 text-white">
-            OUR <span className="text-yellow-500">CULTURE</span>
+            OUR <span className="text-red-600">CULTURE</span>
           </h2>
           <p className="text-xl text-gray-200">
             Stories, traditions, and inspirations from East Africa
@@ -113,16 +113,16 @@ const Culture = () => {
       </section>
 
       {/* Cultural Stories Section */}
-      <section className="py-16 bg-black">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h3 className="text-4xl font-bold text-white mb-4">CULTURAL STORIES</h3>
-            <p className="text-xl text-gray-400">The heritage behind our designs</p>
+            <h3 className="text-4xl font-bold text-black mb-4">CULTURAL STORIES</h3>
+            <p className="text-xl text-gray-600">The heritage behind our designs</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {culturalStories.map((story) => (
-              <Card key={story.id} className="bg-gray-900 border-gray-800 hover:border-yellow-500 transition-all duration-300 group">
+              <Card key={story.id} className="bg-white border-gray-200 hover:border-red-600 transition-all duration-300 group">
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
                     <img 
@@ -133,8 +133,8 @@ const Culture = () => {
                   </div>
                   
                   <div className="p-6">
-                    <h4 className="text-white font-bold text-xl mb-3">{story.title}</h4>
-                    <p className="text-gray-400 mb-4">{story.excerpt}</p>
+                    <h4 className="text-black font-bold text-xl mb-3">{story.title}</h4>
+                    <p className="text-gray-600 mb-4">{story.excerpt}</p>
                     
                     <div className="flex items-center justify-between text-sm text-gray-500">
                       <span className="flex items-center">
@@ -150,7 +150,7 @@ const Culture = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Button variant="outline" className="border-white text-white hover:bg-white hover:text-black px-8 py-3">
+            <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white px-8 py-3">
               READ MORE STORIES
             </Button>
           </div>
@@ -158,7 +158,7 @@ const Culture = () => {
       </section>
 
       {/* Heritage Section */}
-      <section className="py-16 bg-gradient-to-r from-green-900 via-yellow-800 to-red-900">
+      <section className="py-16 bg-red-600">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -169,15 +169,15 @@ const Culture = () => {
               </p>
               <div className="space-y-4">
                 <div className="flex items-center">
-                  <div className="w-4 h-4 bg-red-600 rounded-full mr-3"></div>
+                  <div className="w-4 h-4 bg-white rounded-full mr-3"></div>
                   <span className="text-gray-200">Maasai warrior traditions and symbolism</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-4 h-4 bg-green-600 rounded-full mr-3"></div>
+                  <div className="w-4 h-4 bg-black rounded-full mr-3"></div>
                   <span className="text-gray-200">Swahili coastal textile heritage</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-4 h-4 bg-yellow-600 rounded-full mr-3"></div>
+                  <div className="w-4 h-4 bg-white rounded-full mr-3"></div>
                   <span className="text-gray-200">Urban street culture fusion</span>
                 </div>
               </div>
@@ -185,7 +185,7 @@ const Culture = () => {
             
             <div className="relative">
               <img 
-                src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80"
+                src="/lovable-uploads/cab6174c-81c0-4121-bea1-7e06bcd15fae.png"
                 alt="East African Heritage"
                 className="rounded-lg shadow-2xl"
               />
@@ -195,33 +195,33 @@ const Culture = () => {
       </section>
 
       {/* Events Section */}
-      <section className="py-16 bg-gray-900">
+      <section className="py-16 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h3 className="text-4xl font-bold text-white mb-4">UPCOMING EVENTS</h3>
-            <p className="text-xl text-gray-400">Join us at fashion and cultural events across East Africa</p>
+            <h3 className="text-4xl font-bold text-black mb-4">UPCOMING EVENTS</h3>
+            <p className="text-xl text-gray-600">Join us at fashion and cultural events across East Africa</p>
           </div>
 
           <div className="space-y-8">
             {events.map((event) => (
-              <Card key={event.id} className="bg-black border-gray-800">
+              <Card key={event.id} className="bg-white border-gray-200">
                 <CardContent className="p-8">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div>
-                      <h4 className="text-2xl font-bold text-white mb-2">{event.title}</h4>
-                      <div className="flex items-center text-yellow-500 mb-2">
+                      <h4 className="text-2xl font-bold text-black mb-2">{event.title}</h4>
+                      <div className="flex items-center text-red-600 mb-2">
                         <Calendar className="h-4 w-4 mr-2" />
                         {event.date}
                       </div>
-                      <div className="flex items-center text-gray-400">
+                      <div className="flex items-center text-gray-600">
                         <MapPin className="h-4 w-4 mr-2" />
                         {event.location}
                       </div>
                     </div>
                     
                     <div className="md:col-span-2">
-                      <p className="text-gray-300 mb-4">{event.description}</p>
-                      <Button className="bg-yellow-600 hover:bg-yellow-700 text-black">
+                      <p className="text-gray-700 mb-4">{event.description}</p>
+                      <Button className="bg-red-600 hover:bg-red-700 text-white">
                         LEARN MORE
                       </Button>
                     </div>
@@ -234,21 +234,21 @@ const Culture = () => {
       </section>
 
       {/* Community Section */}
-      <section className="py-16 bg-black">
+      <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <div className="mb-8">
-            <Users className="h-16 w-16 text-yellow-500 mx-auto mb-4" />
-            <h3 className="text-4xl font-bold text-white mb-6">JOIN OUR COMMUNITY</h3>
-            <p className="text-xl text-gray-300 mb-8">
+            <Users className="h-16 w-16 text-red-600 mx-auto mb-4" />
+            <h3 className="text-4xl font-bold text-black mb-6">JOIN OUR COMMUNITY</h3>
+            <p className="text-xl text-gray-700 mb-8">
               Connect with fellow culture enthusiasts and be part of the African's Finest family
             </p>
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-yellow-600 hover:bg-yellow-700 text-black px-8 py-3">
+            <Button className="bg-red-600 hover:bg-red-700 text-white px-8 py-3">
               FOLLOW ON INSTAGRAM
             </Button>
-            <Button variant="outline" className="border-white text-white hover:bg-white hover:text-black px-8 py-3">
+            <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white px-8 py-3">
               JOIN NEWSLETTER
             </Button>
           </div>

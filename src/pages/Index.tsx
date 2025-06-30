@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -291,10 +290,10 @@ const Index = () => {
               <h5 className="text-white font-bold text-lg mb-4">ABOUT</h5>
               <ul className="space-y-2">
                 <li><a href="/about" className="text-gray-400 hover:text-white transition-colors">Our Story</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Size Guide</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Shipping Info</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Returns</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                <li><a href="/size-guide" className="text-gray-400 hover:text-white transition-colors">Size Guide</a></li>
+                <li><a href="/shipping-info" className="text-gray-400 hover:text-white transition-colors">Shipping Info</a></li>
+                <li><a href="/returns" className="text-gray-400 hover:text-white transition-colors">Returns</a></li>
+                <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</a></li>
               </ul>
             </div>
 
