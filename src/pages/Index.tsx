@@ -12,32 +12,32 @@ const Index = () => {
   const featuredProducts = [
     {
       id: 1,
-      name: "Heritage Crown Tee",
-      price: "₦45,000",
+      name: "Kilimanjaro Crown Tee",
+      price: "TSh 45,000",
       image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80",
       badge: "NEW",
       colors: ["Black", "Gold", "Green"]
     },
     {
       id: 2,
-      name: "Afrofuture Hoodie",
-      price: "₦85,000",
+      name: "Maasai Warrior Hoodie",
+      price: "KSh 6,200",
       image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=80",
       badge: "BESTSELLER",
       colors: ["Black", "Red", "White"]
     },
     {
       id: 3,
-      name: "Diaspora Joggers",
-      price: "₦65,000",
+      name: "Safari Spirit Joggers",
+      price: "TSh 65,000",
       image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=800&q=80",
       badge: "LIMITED",
-      colors: ["Black", "Olive", "Navy"]
+      colors: ["Khaki", "Olive", "Navy"]
     },
     {
       id: 4,
-      name: "Royal Bomber Jacket",
-      price: "₦120,000",
+      name: "Serengeti Bomber Jacket",
+      price: "KSh 8,500",
       image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80",
       badge: "EXCLUSIVE",
       colors: ["Black", "Gold", "Burgundy"]
@@ -48,7 +48,7 @@ const Index = () => {
     <div className="min-h-screen bg-black text-white">
       {/* Announcement Bar */}
       <div className="bg-gradient-to-r from-yellow-600 to-red-600 text-black text-center py-2 text-sm font-medium">
-        FREE SHIPPING TO AFRICA ON ORDERS ₦100,000+ | AUTHENTIC AFRICAN STREETWEAR | WORLDWIDE DELIVERY
+        FREE SHIPPING ACROSS EAST AFRICA ON ORDERS TSh 100,000+ | AUTHENTIC TANZANIAN & KENYAN STREETWEAR | WORLDWIDE DELIVERY
       </div>
 
       {/* Navigation */}
@@ -66,12 +66,12 @@ const Index = () => {
             {/* Desktop Navigation */}
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
-                <a href="#" className="text-white hover:text-yellow-500 transition-colors">SHOP</a>
-                <a href="#" className="text-white hover:text-yellow-500 transition-colors">MEN</a>
-                <a href="#" className="text-white hover:text-yellow-500 transition-colors">WOMEN</a>
-                <a href="#" className="text-white hover:text-yellow-500 transition-colors">LOOKBOOK</a>
-                <a href="#" className="text-white hover:text-yellow-500 transition-colors">ABOUT</a>
-                <a href="#" className="text-white hover:text-yellow-500 transition-colors">CULTURE</a>
+                <a href="/" className="text-yellow-500 border-b-2 border-yellow-500 pb-1">HOME</a>
+                <a href="/men" className="text-white hover:text-yellow-500 transition-colors">MEN</a>
+                <a href="/women" className="text-white hover:text-yellow-500 transition-colors">WOMEN</a>
+                <a href="/lookbook" className="text-white hover:text-yellow-500 transition-colors">LOOKBOOK</a>
+                <a href="/about" className="text-white hover:text-yellow-500 transition-colors">ABOUT</a>
+                <a href="/culture" className="text-white hover:text-yellow-500 transition-colors">CULTURE</a>
               </div>
             </div>
 
@@ -108,13 +108,13 @@ const Index = () => {
         
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <h2 className="text-6xl md:text-8xl font-bold mb-6 text-white">
-            SUMMER<span className="text-yellow-500">25</span>
+            SPRING<span className="text-yellow-500">25</span>
           </h2>
           <p className="text-xl md:text-2xl mb-8 text-gray-200">
-            WHERE HERITAGE MEETS STREETWEAR
+            WHERE EAST AFRICAN HERITAGE MEETS STREETWEAR
           </p>
           <p className="text-lg mb-12 text-gray-300 max-w-2xl mx-auto">
-            Authentic African designs reimagined for the global stage. Bold. Unapologetic. Finest.
+            From Kilimanjaro to the Serengeti, from Dar es Salaam to Nairobi - authentic designs that celebrate our roots while defining the future.
           </p>
           <Button 
             size="lg" 
@@ -144,7 +144,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h3 className="text-4xl font-bold text-white mb-4">FEATURED DROPS</h3>
-            <p className="text-gray-400">Handpicked pieces that define African excellence</p>
+            <p className="text-gray-400">Handpicked pieces celebrating East African excellence</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -203,20 +203,20 @@ const Index = () => {
             <div>
               <h3 className="text-5xl font-bold text-white mb-6">THE MOVEMENT</h3>
               <p className="text-xl text-gray-200 mb-6">
-                More than fashion. We're celebrating the richness of African culture through contemporary streetwear that tells our story.
+                More than fashion. We're celebrating the richness of East African culture through contemporary streetwear that tells our story.
               </p>
               <p className="text-lg text-gray-300 mb-8">
-                From Lagos to London, Johannesburg to New York - we carry our heritage with pride, style, and uncompromising quality.
+                From Dar es Salaam to Nairobi, Zanzibar to Mombasa - we carry our heritage with pride, style, and uncompromising quality that represents the finest of Tanzania and Kenya.
               </p>
               <Button className="bg-black text-white hover:bg-gray-800 px-8 py-3">
-                DISCOVER OUR STORY
+                <a href="/culture">DISCOVER OUR STORY</a>
               </Button>
             </div>
             
             <div className="relative">
               <img 
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80"
-                alt="African Culture"
+                alt="East African Culture"
                 className="rounded-lg shadow-2xl"
               />
             </div>
@@ -229,7 +229,7 @@ const Index = () => {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h3 className="text-4xl font-bold text-white mb-4">JOIN THE FAMILY</h3>
           <p className="text-xl text-gray-400 mb-8">
-            Get 10% off your first order and stay updated on exclusive drops
+            Get 10% off your first order and stay updated on exclusive drops from East Africa
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
@@ -274,8 +274,8 @@ const Index = () => {
               <h5 className="text-white font-bold text-lg mb-4">SHOP</h5>
               <ul className="space-y-2">
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">New Arrivals</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Men's Collection</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Women's Collection</a></li>
+                <li><a href="/men" className="text-gray-400 hover:text-white transition-colors">Men's Collection</a></li>
+                <li><a href="/women" className="text-gray-400 hover:text-white transition-colors">Women's Collection</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Accessories</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Sale</a></li>
               </ul>
@@ -285,7 +285,7 @@ const Index = () => {
             <div>
               <h5 className="text-white font-bold text-lg mb-4">ABOUT</h5>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Our Story</a></li>
+                <li><a href="/about" className="text-gray-400 hover:text-white transition-colors">Our Story</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Size Guide</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Shipping Info</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Returns</a></li>
@@ -308,13 +308,14 @@ const Index = () => {
           {/* Bottom Footer */}
           <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
-              © 2025 African's Finest. All rights reserved. Proudly African.
+              © 2025 African's Finest. All rights reserved. Proudly representing Tanzania & Kenya.
             </p>
             <div className="flex space-x-4 mt-4 md:mt-0">
               <span className="text-gray-400 text-sm">Accept:</span>
+              <span className="text-gray-400 text-sm">M-Pesa</span>
+              <span className="text-gray-400 text-sm">Airtel Money</span>
               <span className="text-gray-400 text-sm">Visa</span>
               <span className="text-gray-400 text-sm">Mastercard</span>
-              <span className="text-gray-400 text-sm">PayPal</span>
             </div>
           </div>
         </div>
