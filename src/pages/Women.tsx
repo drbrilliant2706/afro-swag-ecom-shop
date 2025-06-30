@@ -1,12 +1,19 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Heart, ShoppingCart, Search, User, Menu, Star, Filter } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { useCart } from "@/contexts/CartContext";
+import { useFavorites } from "@/contexts/FavoritesContext";
+import ProfileModal from "@/components/profile/ProfileModal";
+import CartModal from "@/components/cart/CartModal";
 
 const Women = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const { addToCart, getTotalItems } = useCart();
+  const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
 
   const womenProducts = [
     {
@@ -59,6 +66,28 @@ const Women = () => {
     }
   ];
 
+  const handleAddToCart = (product: any) => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image
+    });
+  };
+
+  const handleToggleFavorite = (product: any) => {
+    if (isFavorite(product.id)) {
+      removeFromFavorites(product.id);
+    } else {
+      addToFavorites({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Navigation */}
@@ -84,11 +113,19 @@ const Women = () => {
 
             <div className="flex items-center space-x-4">
               <Search className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" />
-              <User className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" />
+              <User 
+                className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" 
+                onClick={() => setIsProfileOpen(true)}
+              />
               <Heart className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" />
               <div className="relative">
-                <ShoppingCart className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" />
-                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                <ShoppingCart 
+                  className="h-5 w-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" 
+                  onClick={() => setIsCartOpen(true)}
+                />
+                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                  {getTotalItems()}
+                </span>
               </div>
             </div>
           </div>
@@ -155,7 +192,12 @@ const Women = () => {
                       {product.badge}
                     </Badge>
                     <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Heart className="h-6 w-6 text-white hover:text-red-500 cursor-pointer" />
+                      <Heart 
+                        className={`h-6 w-6 cursor-pointer ${
+                          isFavorite(product.id) ? 'text-red-500 fill-red-500' : 'text-white hover:text-red-500'
+                        }`}
+                        onClick={() => handleToggleFavorite(product)}
+                      />
                     </div>
                   </div>
                   
@@ -163,7 +205,7 @@ const Women = () => {
                     <h4 className="text-white font-bold text-lg mb-2">{product.name}</h4>
                     <p className="text-yellow-500 font-bold text-xl mb-4">{product.price}</p>
                     
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between mb-4">
                       <div className="flex space-x-2">
                         {product.colors.map((color, index) => (
                           <div key={index} className="w-4 h-4 rounded-full bg-gray-700 border border-gray-600"></div>
@@ -176,6 +218,13 @@ const Women = () => {
                         ))}
                       </div>
                     </div>
+
+                    <Button 
+                      onClick={() => handleAddToCart(product)}
+                      className="w-full bg-yellow-600 hover:bg-yellow-700 text-black font-bold"
+                    >
+                      ADD TO CART
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
@@ -192,6 +241,10 @@ const Women = () => {
           </p>
         </div>
       </footer>
+
+      {/* Modals */}
+      <ProfileModal isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
+      <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </div>
   );
 };
