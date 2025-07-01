@@ -1,12 +1,15 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Heart, ShoppingCart, Search, User, Menu, Star, Instagram, Facebook, Twitter, Youtube } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { useCart } from "@/contexts/CartContext";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { getTotalItems } = useCart();
 
   const featuredProducts = [
     {
@@ -47,11 +50,23 @@ const Index = () => {
     window.location.href = '/men';
   };
 
+  const handleProductClick = (productId: number) => {
+    window.location.href = `/product/${productId}`;
+  };
+
   return (
     <div className="min-h-screen bg-white text-black">
-      {/* Announcement Bar */}
-      <div className="bg-red-600 text-white text-center py-2 text-sm font-medium">
-        FREE SHIPPING ACROSS EAST AFRICA ON ORDERS TSh 100,000+ | AUTHENTIC TANZANIAN & KENYAN STREETWEAR | WORLDWIDE DELIVERY
+      {/* Announcement Bar with Marquee Effect */}
+      <div className="bg-red-600 text-white text-center py-2 text-sm font-medium overflow-hidden">
+        <div className="whitespace-nowrap animate-[scroll_20s_linear_infinite]">
+          FREE SHIPPING ACROSS EAST AFRICA ON ORDERS TSh 100,000+ | AUTHENTIC TANZANIAN & KENYAN STREETWEAR | WORLDWIDE DELIVERY
+        </div>
+        <style jsx>{`
+          @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+          }
+        `}</style>
       </div>
 
       {/* Navigation */}
@@ -60,7 +75,7 @@ const Index = () => {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <h1 className="text-2xl font-bold text-black">
+              <h1 className="text-2xl font-bold text-black hover:text-red-600 transition-colors cursor-pointer">
                 AFRICAN'S <span className="text-red-600">FINEST</span>
               </h1>
               <p className="text-xs text-gray-600 -mt-1">Unapologetically African. Universally Finest.</p>
@@ -69,7 +84,7 @@ const Index = () => {
             {/* Desktop Navigation */}
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
-                <a href="/" className="text-red-600 border-b-2 border-red-600 pb-1">HOME</a>
+                <a href="/" className="text-red-600 border-b-2 border-red-600 pb-1 hover:text-red-700 transition-colors">HOME</a>
                 <a href="/men" className="text-black hover:text-red-600 transition-colors">MEN</a>
                 <a href="/women" className="text-black hover:text-red-600 transition-colors">WOMEN</a>
                 <a href="/lookbook" className="text-black hover:text-red-600 transition-colors">LOOKBOOK</a>
@@ -80,16 +95,18 @@ const Index = () => {
 
             {/* Right Side Icons */}
             <div className="flex items-center space-x-4">
-              <Search className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
-              <User className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
-              <Heart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
+              <Search className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors transform hover:scale-110" />
+              <User className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors transform hover:scale-110" />
+              <Heart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors transform hover:scale-110" />
               <div className="relative">
-                <ShoppingCart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
-                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                <ShoppingCart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors transform hover:scale-110" />
+                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                  {getTotalItems()}
+                </span>
               </div>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="md:hidden"
+                className="md:hidden hover:text-red-600 transition-colors"
               >
                 <Menu className="h-5 w-5 text-black" />
               </button>
@@ -133,12 +150,12 @@ const Index = () => {
       <section className="py-8 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-center space-x-8 text-sm font-medium">
-            <a href="#" className="text-black hover:text-red-600 border-b-2 border-red-600 pb-2">NEW ARRIVALS</a>
-            <a href="#" className="text-gray-600 hover:text-red-600 pb-2">TEES</a>
-            <a href="#" className="text-gray-600 hover:text-red-600 pb-2">HOODIES</a>
-            <a href="#" className="text-gray-600 hover:text-red-600 pb-2">JACKETS</a>
-            <a href="#" className="text-gray-600 hover:text-red-600 pb-2">ACCESSORIES</a>
-            <a href="#" className="text-gray-600 hover:text-red-600 pb-2">WOMEN</a>
+            <a href="#" className="text-black hover:text-red-600 border-b-2 border-red-600 pb-2 transition-colors">NEW ARRIVALS</a>
+            <a href="#" className="text-gray-600 hover:text-red-600 pb-2 transition-colors">TEES</a>
+            <a href="#" className="text-gray-600 hover:text-red-600 pb-2 transition-colors">HOODIES</a>
+            <a href="#" className="text-gray-600 hover:text-red-600 pb-2 transition-colors">JACKETS</a>
+            <a href="#" className="text-gray-600 hover:text-red-600 pb-2 transition-colors">ACCESSORIES</a>
+            <a href="#" className="text-gray-600 hover:text-red-600 pb-2 transition-colors">WOMEN</a>
           </div>
         </div>
       </section>
@@ -153,7 +170,11 @@ const Index = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {featuredProducts.map((product) => (
-              <Card key={product.id} className="bg-white border-gray-200 hover:border-red-600 transition-all duration-300 group">
+              <Card 
+                key={product.id} 
+                className="bg-white border-gray-200 hover:border-red-600 transition-all duration-300 group cursor-pointer transform hover:scale-105 hover:shadow-lg"
+                onClick={() => handleProductClick(product.id)}
+              >
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
                     <img 
@@ -165,7 +186,7 @@ const Index = () => {
                       {product.badge}
                     </Badge>
                     <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Heart className="h-6 w-6 text-black hover:text-red-600 cursor-pointer" />
+                      <Heart className="h-6 w-6 text-black hover:text-red-600 cursor-pointer transform hover:scale-110" />
                     </div>
                   </div>
                   
@@ -176,7 +197,7 @@ const Index = () => {
                     <div className="flex items-center justify-between">
                       <div className="flex space-x-2">
                         {product.colors.map((color, index) => (
-                          <div key={index} className="w-4 h-4 rounded-full bg-gray-300 border border-gray-400"></div>
+                          <div key={index} className="w-4 h-4 rounded-full bg-gray-300 border border-gray-400 hover:scale-110 transition-transform cursor-pointer"></div>
                         ))}
                       </div>
                       
@@ -193,7 +214,7 @@ const Index = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white px-8 py-3">
+            <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white px-8 py-3 transition-all duration-300 transform hover:scale-105">
               VIEW ALL PRODUCTS
             </Button>
           </div>
@@ -212,7 +233,7 @@ const Index = () => {
               <p className="text-lg text-gray-100 mb-8">
                 From Dar es Salaam to Nairobi, Zanzibar to Mombasa - we carry our heritage with pride, style, and uncompromising quality that represents the finest of Tanzania and Kenya.
               </p>
-              <Button className="bg-white text-red-600 hover:bg-gray-100 px-8 py-3">
+              <Button className="bg-white text-red-600 hover:bg-gray-100 px-8 py-3 transition-all duration-300 transform hover:scale-105">
                 <a href="/culture">DISCOVER OUR STORY</a>
               </Button>
             </div>
@@ -221,7 +242,7 @@ const Index = () => {
               <img 
                 src="/lovable-uploads/c1a27c87-fecb-4603-846b-e559103c12ef.png"
                 alt="East African Culture"
-                className="rounded-lg shadow-2xl"
+                className="rounded-lg shadow-2xl hover:scale-105 transition-transform duration-300"
               />
             </div>
           </div>
@@ -239,9 +260,9 @@ const Index = () => {
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
             <Input 
               placeholder="Enter your email" 
-              className="bg-white border-gray-300 text-black placeholder-gray-500 flex-1"
+              className="bg-white border-gray-300 text-black placeholder-gray-500 flex-1 focus:ring-2 focus:ring-red-600 transition-all"
             />
-            <Button className="bg-red-600 hover:bg-red-700 text-white font-bold px-8">
+            <Button className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 transition-all duration-300 transform hover:scale-105">
               GET YOUR DISCOUNT
             </Button>
           </div>
@@ -258,7 +279,7 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Brand */}
             <div>
-              <h4 className="text-2xl font-bold text-white mb-4">
+              <h4 className="text-2xl font-bold text-white mb-4 hover:text-red-600 transition-colors cursor-pointer">
                 AFRICAN'S <span className="text-red-600">FINEST</span>
               </h4>
               <p className="text-gray-400 mb-6">
@@ -266,10 +287,10 @@ const Index = () => {
               </p>
               
               <div className="flex space-x-4">
-                <Instagram className="h-6 w-6 text-gray-400 hover:text-white cursor-pointer transition-colors" />
-                <Facebook className="h-6 w-6 text-gray-400 hover:text-white cursor-pointer transition-colors" />
-                <Twitter className="h-6 w-6 text-gray-400 hover:text-white cursor-pointer transition-colors" />
-                <Youtube className="h-6 w-6 text-gray-400 hover:text-white cursor-pointer transition-colors" />
+                <Instagram className="h-6 w-6 text-gray-400 hover:text-white cursor-pointer transition-colors transform hover:scale-110" />
+                <Facebook className="h-6 w-6 text-gray-400 hover:text-white cursor-pointer transition-colors transform hover:scale-110" />
+                <Twitter className="h-6 w-6 text-gray-400 hover:text-white cursor-pointer transition-colors transform hover:scale-110" />
+                <Youtube className="h-6 w-6 text-gray-400 hover:text-white cursor-pointer transition-colors transform hover:scale-110" />
               </div>
             </div>
 

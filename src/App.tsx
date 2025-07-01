@@ -18,6 +18,7 @@ import SizeGuide from "./pages/SizeGuide";
 import ShippingInfo from "./pages/ShippingInfo";
 import Returns from "./pages/Returns";
 import Contact from "./pages/Contact";
+import Product from "./pages/Product";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -43,6 +44,7 @@ const App = () => (
                 <Route path="/shipping-info" element={<ShippingInfo />} />
                 <Route path="/returns" element={<Returns />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/product/:id" element={<Product />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
