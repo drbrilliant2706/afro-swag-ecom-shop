@@ -1,15 +1,23 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Heart, ShoppingCart, Search, User, Menu, Star, Instagram, Facebook, Twitter, Youtube } from "lucide-react";
+import { Heart, ShoppingCart, Search, User, Star, Menu } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { useCart } from "@/contexts/CartContext";
+import { useFavorites } from "@/contexts/FavoritesContext";
+import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from "@/hooks/use-toast";
+import ProfileModal from "@/components/profile/ProfileModal";
+import CartModal from "@/components/cart/CartModal";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { getTotalItems } = useCart();
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const { addToCart, getTotalItems } = useCart();
+  const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
+  const { user } = useAuth();
+  const { toast } = useToast();
 
   const featuredProducts = [
     {
@@ -17,340 +25,338 @@ const Index = () => {
       name: "FINEST African Mask Tee",
       price: "TSh 25,000",
       image: "/lovable-uploads/83e9eb03-ffaa-4765-956a-cb1f637e3b77.png",
-      badge: "NEW",
-      colors: ["Red", "White", "Black"]
+      badge: "BESTSELLER"
     },
     {
       id: 2,
       name: "FINEST Blue Oversized Tee",
       price: "TSh 25,000",
       image: "/lovable-uploads/1f0eef57-3784-4a0d-84d8-62b9fcb1c8d9.png",
-      badge: "BESTSELLER",
-      colors: ["Blue", "White", "Black"]
+      badge: "LIMITED"
     },
     {
       id: 3,
       name: "NYUMBANI QWETU Collection",
       price: "TSh 25,000",
       image: "/lovable-uploads/86a2ceca-f52f-4c63-91b6-7fd6da14145f.png",
-      badge: "LIMITED",
-      colors: ["Beige", "Purple", "Black"]
+      badge: "EXCLUSIVE"
     },
     {
       id: 4,
       name: "AFRIKA'S Finest Tee",
       price: "TSh 25,000",
       image: "/lovable-uploads/036867e1-6684-4f8f-889e-e89c5719d973.png",
-      badge: "EXCLUSIVE",
-      colors: ["Tan", "Black", "White"]
+      badge: "NEW"
     }
   ];
 
-  const handleShopCollection = () => {
-    window.location.href = '/men';
+  const handleAddToCart = (product: any) => {
+    if (!user) {
+      toast({
+        title: "Please log in",
+        description: "You must be logged in to add items to your cart.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image
+    });
+
+    toast({
+      title: "Added to cart!",
+      description: `${product.name} has been added to your cart.`,
+    });
   };
 
-  const handleProductClick = (productId: number) => {
-    window.location.href = `/product/${productId}`;
+  const handleToggleFavorite = (product: any) => {
+    if (!user) {
+      toast({
+        title: "Please log in",
+        description: "You must be logged in to add items to favorites.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (isFavorite(product.id)) {
+      removeFromFavorites(product.id);
+      toast({
+        title: "Removed from favorites",
+        description: `${product.name} has been removed from your favorites.`,
+      });
+    } else {
+      addToFavorites({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image
+      });
+      toast({
+        title: "Added to favorites!",
+        description: `${product.name} has been added to your favorites.`,
+      });
+    }
   };
 
   return (
     <div className="min-h-screen bg-white text-black">
-      {/* Announcement Bar with Marquee Effect */}
-      <div className="bg-red-600 text-white text-center py-2 text-sm font-medium overflow-hidden">
-        <div className="whitespace-nowrap animate-scroll">
-          Fashion at it's ultimate prime. Shop with us and become part of our vast family worldwide. Afrika's finest telling our African Story.
+      <style>
+        {`
+          @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+          }
+          .marquee {
+            animation: marquee 15s linear infinite;
+          }
+        `}
+      </style>
+
+      {/* Marquee Header */}
+      <div className="bg-red-600 text-white py-2 overflow-hidden">
+        <div className="marquee whitespace-nowrap text-sm md:text-base">
+          🎉 Fashion at it's ultimate prime. Shop with us and become part of our vast family worldwide. Afrika's finest telling our African Story. 🎉
         </div>
-        <style>
-          {`
-            @keyframes scroll {
-              0% { transform: translateX(100%); }
-              100% { transform: translateX(-100%); }
-            }
-            .animate-scroll {
-              animation: scroll 30s linear infinite;
-            }
-          `}
-        </style>
       </div>
 
       {/* Navigation */}
       <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Logo */}
             <div className="flex-shrink-0">
-              <h1 className="text-2xl font-bold text-black hover:text-red-600 transition-colors cursor-pointer">
+              <h1 className="text-xl md:text-2xl font-bold text-black">
                 AFRICAN'S <span className="text-red-600">FINEST</span>
               </h1>
-              <p className="text-xs text-gray-600 -mt-1">Unapologetically African. Universally Finest.</p>
             </div>
 
-            {/* Desktop Navigation */}
             <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-8">
-                <a href="/" className="text-red-600 border-b-2 border-red-600 pb-1 hover:text-red-700 transition-colors">HOME</a>
-                <a href="/men" className="text-black hover:text-red-600 transition-colors">MEN</a>
-                <a href="/women" className="text-black hover:text-red-600 transition-colors">WOMEN</a>
-                <a href="/lookbook" className="text-black hover:text-red-600 transition-colors">LOOKBOOK</a>
-                <a href="/about" className="text-black hover:text-red-600 transition-colors">ABOUT</a>
-                <a href="/culture" className="text-black hover:text-red-600 transition-colors">CULTURE</a>
+              <div className="ml-10 flex items-baseline space-x-4 lg:space-x-8">
+                <a href="/" className="text-red-600 border-b-2 border-red-600 pb-1 text-sm lg:text-base">HOME</a>
+                <a href="/men" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">MEN</a>
+                <a href="/women" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">WOMEN</a>
+                <a href="/lookbook" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">LOOKBOOK</a>
+                <a href="/about" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">ABOUT</a>
+                <a href="/culture" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">CULTURE</a>
               </div>
             </div>
 
-            {/* Right Side Icons */}
-            <div className="flex items-center space-x-4">
-              <Search className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors transform hover:scale-110" />
-              <User className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors transform hover:scale-110" />
-              <Heart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors transform hover:scale-110" />
+            <div className="flex items-center space-x-3 md:space-x-4">
+              <Search className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
+              <User 
+                className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
+                onClick={() => setIsProfileOpen(true)}
+              />
+              <a href="/favorites">
+                <Heart className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
+              </a>
               <div className="relative">
-                <ShoppingCart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors transform hover:scale-110" />
+                <ShoppingCart 
+                  className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
+                  onClick={() => setIsCartOpen(true)}
+                />
                 <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
                   {getTotalItems()}
                 </span>
               </div>
-              <button
+              <Menu 
+                className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors md:hidden" 
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="md:hidden hover:text-red-600 transition-colors"
-              >
-                <Menu className="h-5 w-5 text-black" />
-              </button>
+              />
             </div>
           </div>
+
+          {/* Mobile Menu */}
+          {isMenuOpen && (
+            <div className="md:hidden border-t border-gray-200 py-4">
+              <div className="flex flex-col space-y-2">
+                <a href="/" className="text-red-600 py-2">HOME</a>
+                <a href="/men" className="text-black hover:text-red-600 transition-colors py-2">MEN</a>
+                <a href="/women" className="text-black hover:text-red-600 transition-colors py-2">WOMEN</a>
+                <a href="/lookbook" className="text-black hover:text-red-600 transition-colors py-2">LOOKBOOK</a>
+                <a href="/about" className="text-black hover:text-red-600 transition-colors py-2">ABOUT</a>
+                <a href="/culture" className="text-black hover:text-red-600 transition-colors py-2">CULTURE</a>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative h-64 md:h-96 lg:h-screen flex items-center justify-center overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: `url('/lovable-uploads/7f0b3db7-fa12-4dda-9ab8-e43780531947.png')`,
           }}
         >
-          <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+          <div className="absolute inset-0 bg-black bg-opacity-60"></div>
         </div>
         
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
-          <h2 className="text-6xl md:text-8xl font-bold mb-6 text-white">
-            SPRING<span className="text-red-600">25</span>
+          <h2 className="text-3xl md:text-5xl lg:text-7xl font-bold mb-4 text-white">
+            AFRICA'S <span className="text-red-600">FINEST</span>
           </h2>
-          <p className="text-xl md:text-2xl mb-8 text-white">
-            WHERE EAST AFRICAN HERITAGE MEETS STREETWEAR
+          <p className="text-lg md:text-xl lg:text-2xl text-gray-200 mb-8">
+            Authentic streetwear celebrating East African culture
           </p>
-          <p className="text-lg mb-12 text-gray-200 max-w-2xl mx-auto">
-            From Kilimanjaro to the Serengeti, from Dar es Salaam to Nairobi - authentic designs that celebrate our roots while defining the future.
-          </p>
-          <Button 
-            size="lg" 
-            onClick={handleShopCollection}
-            className="bg-red-600 hover:bg-red-700 text-white font-bold px-12 py-4 text-lg transition-all duration-300 transform hover:scale-105"
-          >
-            SHOP THE COLLECTION
-          </Button>
-        </div>
-      </section>
-
-      {/* Category Navigation */}
-      <section className="py-8 bg-gray-100">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex justify-center space-x-8 text-sm font-medium">
-            <a href="#" className="text-black hover:text-red-600 border-b-2 border-red-600 pb-2 transition-colors">NEW ARRIVALS</a>
-            <a href="#" className="text-gray-600 hover:text-red-600 pb-2 transition-colors">TEES</a>
-            <a href="#" className="text-gray-600 hover:text-red-600 pb-2 transition-colors">HOODIES</a>
-            <a href="#" className="text-gray-600 hover:text-red-600 pb-2 transition-colors">JACKETS</a>
-            <a href="#" className="text-gray-600 hover:text-red-600 pb-2 transition-colors">ACCESSORIES</a>
-            <a href="#" className="text-gray-600 hover:text-red-600 pb-2 transition-colors">WOMEN</a>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 md:px-8">
+              <a href="/men">SHOP MEN</a>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black font-bold px-6 md:px-8">
+              <a href="/women">SHOP WOMEN</a>
+            </Button>
           </div>
         </div>
       </section>
 
       {/* Featured Products */}
-      <section className="py-16 bg-white">
+      <section className="py-8 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h3 className="text-4xl font-bold text-black mb-4">FEATURED DROPS</h3>
-            <p className="text-gray-600">Handpicked pieces celebrating East African excellence</p>
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-4xl font-bold text-black mb-4">
+              FEATURED <span className="text-red-600">PRODUCTS</span>
+            </h2>
+            <p className="text-gray-600 text-base md:text-lg">Discover our most popular items</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {featuredProducts.map((product) => (
-              <Card 
-                key={product.id} 
-                className="bg-white border-gray-200 hover:border-red-600 transition-all duration-300 group cursor-pointer transform hover:scale-105 hover:shadow-lg"
-                onClick={() => handleProductClick(product.id)}
-              >
+              <Card key={product.id} className="bg-white border-gray-200 hover:border-red-600 transition-all duration-300 group">
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
-                    <img 
-                      src={product.image} 
-                      alt={product.name}
-                      className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <Badge className="absolute top-4 left-4 bg-red-600 hover:bg-red-600 text-white">
+                    <a href={`/product/${product.id}`}>
+                      <img 
+                        src={product.image} 
+                        alt={product.name}
+                        className="w-full h-48 md:h-64 object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
+                      />
+                    </a>
+                    <Badge className="absolute top-4 left-4 bg-red-600 hover:bg-red-600 text-white text-xs">
                       {product.badge}
                     </Badge>
                     <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Heart className="h-6 w-6 text-black hover:text-red-600 cursor-pointer transform hover:scale-110" />
+                      <Heart 
+                        className={`h-5 w-5 md:h-6 md:w-6 cursor-pointer ${
+                          isFavorite(product.id) ? 'text-red-500 fill-red-500' : 'text-black hover:text-red-500'
+                        }`}
+                        onClick={() => handleToggleFavorite(product)}
+                      />
                     </div>
                   </div>
                   
-                  <div className="p-6">
-                    <h4 className="text-black font-bold text-lg mb-2">{product.name}</h4>
-                    <p className="text-red-600 font-bold text-xl mb-4">{product.price}</p>
-                    
-                    <div className="flex items-center justify-between">
-                      <div className="flex space-x-2">
-                        {product.colors.map((color, index) => (
-                          <div key={index} className="w-4 h-4 rounded-full bg-gray-300 border border-gray-400 hover:scale-110 transition-transform cursor-pointer"></div>
-                        ))}
-                      </div>
-                      
+                  <div className="p-4">
+                    <a href={`/product/${product.id}`}>
+                      <h4 className="text-black font-bold text-sm md:text-base mb-2 hover:text-red-600 transition-colors cursor-pointer">{product.name}</h4>
+                    </a>
+                    <div className="flex items-center justify-between mb-4">
+                      <p className="text-red-600 font-bold text-base md:text-lg">{product.price}</p>
                       <div className="flex items-center space-x-1">
                         {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="h-4 w-4 fill-red-600 text-red-600" />
+                          <Star key={i} className="h-3 w-3 md:h-4 md:w-4 fill-red-600 text-red-600" />
                         ))}
                       </div>
                     </div>
+
+                    <Button 
+                      onClick={() => handleAddToCart(product)}
+                      className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-sm"
+                    >
+                      ADD TO CART
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white px-8 py-3 transition-all duration-300 transform hover:scale-105">
-              VIEW ALL PRODUCTS
+          <div className="text-center mt-8 md:mt-12">
+            <Button asChild size="lg" variant="outline" className="border-red-600 text-red-600 hover:bg-red-600 hover:text-white font-bold">
+              <a href="/men">VIEW ALL PRODUCTS</a>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Culture Section */}
-      <section className="py-16 bg-red-600">
+      {/* About Section */}
+      <section className="py-8 md:py-16 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
-              <h3 className="text-5xl font-bold text-white mb-6">THE MOVEMENT</h3>
-              <p className="text-xl text-white mb-6">
-                More than fashion. We're celebrating the richness of East African culture through contemporary streetwear that tells our story.
+              <h2 className="text-2xl md:text-4xl font-bold text-black mb-4 md:mb-6">
+                OUR <span className="text-red-600">STORY</span>
+              </h2>
+              <p className="text-gray-600 text-base md:text-lg mb-4 md:mb-6">
+                African's Finest is more than just clothing—it's a movement celebrating the rich heritage and vibrant culture of East Africa. Each piece tells a story of tradition, pride, and contemporary style.
               </p>
-              <p className="text-lg text-gray-100 mb-8">
-                From Dar es Salaam to Nairobi, Zanzibar to Mombasa - we carry our heritage with pride, style, and uncompromising quality that represents the finest of Tanzania and Kenya.
+              <p className="text-gray-600 text-base md:text-lg mb-6 md:mb-8">
+                From the bustling streets of Nairobi to the cultural heart of Dar es Salaam, we bring you authentic designs that honor our roots while embracing modern fashion.
               </p>
-              <Button className="bg-white text-red-600 hover:bg-gray-100 px-8 py-3 transition-all duration-300 transform hover:scale-105">
-                <a href="/culture">DISCOVER OUR STORY</a>
+              <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold">
+                <a href="/about">LEARN MORE</a>
               </Button>
             </div>
-            
             <div className="relative">
               <img 
-                src="/lovable-uploads/c1a27c87-fecb-4603-846b-e559103c12ef.png"
-                alt="East African Culture"
-                className="rounded-lg shadow-2xl hover:scale-105 transition-transform duration-300"
+                src="/lovable-uploads/c1a27c87-fecb-4603-846b-e559103c12ef.png" 
+                alt="African Fashion"
+                className="w-full h-64 md:h-96 object-cover rounded-lg shadow-xl"
               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Newsletter Signup */}
-      <section className="py-16 bg-black">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h3 className="text-4xl font-bold text-white mb-4">JOIN THE FAMILY</h3>
-          <p className="text-xl text-gray-400 mb-8">
-            Get 10% off your first order and stay updated on exclusive drops from East Africa
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <Input 
-              placeholder="Enter your email" 
-              className="bg-white border-gray-300 text-black placeholder-gray-500 flex-1 focus:ring-2 focus:ring-red-600 transition-all"
-            />
-            <Button className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 transition-all duration-300 transform hover:scale-105">
-              GET YOUR DISCOUNT
-            </Button>
-          </div>
-          
-          <p className="text-sm text-gray-500 mt-4">
-            By subscribing, you agree to our Privacy Policy and Terms of Service
-          </p>
-        </div>
-      </section>
-
       {/* Footer */}
-      <footer className="bg-black border-t border-gray-800 py-16">
+      <footer className="bg-black text-white py-8 md:py-12">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Brand */}
-            <div>
-              <h4 className="text-2xl font-bold text-white mb-4 hover:text-red-600 transition-colors cursor-pointer">
+            <div className="col-span-1 md:col-span-2">
+              <h3 className="text-xl md:text-2xl font-bold mb-4">
                 AFRICAN'S <span className="text-red-600">FINEST</span>
-              </h4>
-              <p className="text-gray-400 mb-6">
+              </h3>
+              <p className="text-gray-300 text-sm md:text-base mb-4">
                 Fashion at it's ultimate prime. Shop with us and become part of our vast family worldwide. Afrika's finest telling our African Story.
               </p>
-              
-              <div className="flex space-x-4">
-                <Instagram className="h-6 w-6 text-gray-400 hover:text-white cursor-pointer transition-colors transform hover:scale-110" />
-                <Facebook className="h-6 w-6 text-gray-400 hover:text-white cursor-pointer transition-colors transform hover:scale-110" />
-                <Twitter className="h-6 w-6 text-gray-400 hover:text-white cursor-pointer transition-colors transform hover:scale-110" />
-                <Youtube className="h-6 w-6 text-gray-400 hover:text-white cursor-pointer transition-colors transform hover:scale-110" />
-              </div>
             </div>
-
-            {/* Shop */}
+            
             <div>
-              <h5 className="text-white font-bold text-lg mb-4">SHOP</h5>
-              <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">New Arrivals</a></li>
-                <li><a href="/men" className="text-gray-400 hover:text-white transition-colors">Men's Collection</a></li>
-                <li><a href="/women" className="text-gray-400 hover:text-white transition-colors">Women's Collection</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Accessories</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Sale</a></li>
+              <h4 className="font-bold mb-4 text-sm md:text-base">QUICK LINKS</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="/men" className="text-gray-300 hover:text-red-600 transition-colors">Men</a></li>
+                <li><a href="/women" className="text-gray-300 hover:text-red-600 transition-colors">Women</a></li>
+                <li><a href="/lookbook" className="text-gray-300 hover:text-red-600 transition-colors">Lookbook</a></li>
+                <li><a href="/about" className="text-gray-300 hover:text-red-600 transition-colors">About</a></li>
               </ul>
             </div>
-
-            {/* About */}
+            
             <div>
-              <h5 className="text-white font-bold text-lg mb-4">ABOUT</h5>
-              <ul className="space-y-2">
-                <li><a href="/about" className="text-gray-400 hover:text-white transition-colors">Our Story</a></li>
-                <li><a href="/faq" className="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
-                <li><a href="/size-guide" className="text-gray-400 hover:text-white transition-colors">Size Guide</a></li>
-                <li><a href="/shipping-info" className="text-gray-400 hover:text-white transition-colors">Shipping Info</a></li>
-                <li><a href="/returns" className="text-gray-400 hover:text-white transition-colors">Returns</a></li>
-                <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</a></li>
-              </ul>
-            </div>
-
-            {/* Legal */}
-            <div>
-              <h5 className="text-white font-bold text-lg mb-4">LEGAL</h5>
-              <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Cookie Policy</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Careers</a></li>
+              <h4 className="font-bold mb-4 text-sm md:text-base">SUPPORT</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="/contact" className="text-gray-300 hover:text-red-600 transition-colors">Contact</a></li>
+                <li><a href="/faq" className="text-gray-300 hover:text-red-600 transition-colors">FAQ</a></li>
+                <li><a href="/shipping-info" className="text-gray-300 hover:text-red-600 transition-colors">Shipping</a></li>
+                <li><a href="/returns" className="text-gray-300 hover:text-red-600 transition-colors">Returns</a></li>
               </ul>
             </div>
           </div>
-
-          {/* Bottom Footer */}
-          <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+          
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
             <p className="text-gray-400 text-sm">
-              © 2025 African's Finest. All rights reserved. Proudly representing Tanzania & Kenya.
+              © 2025 African's Finest. Proudly representing Tanzania & Kenya.
             </p>
-            <div className="flex space-x-4 mt-4 md:mt-0">
-              <span className="text-gray-400 text-sm">Accept:</span>
-              <span className="text-gray-400 text-sm">M-Pesa</span>
-              <span className="text-gray-400 text-sm">Airtel Money</span>
-              <span className="text-gray-400 text-sm">Visa</span>
-              <span className="text-gray-400 text-sm">Mastercard</span>
-            </div>
           </div>
         </div>
       </footer>
+
+      {/* Modals */}
+      <ProfileModal isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
+      <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </div>
   );
 };

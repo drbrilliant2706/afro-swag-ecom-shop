@@ -19,6 +19,7 @@ import SizeGuide from "./pages/SizeGuide";
 import ShippingInfo from "./pages/ShippingInfo";
 import Returns from "./pages/Returns";
 import Product from "./pages/Product";
+import Favorites from "./pages/Favorites";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 
@@ -46,6 +47,7 @@ const App = () => (
                 <Route path="/shipping-info" element={<ShippingInfo />} />
                 <Route path="/returns" element={<Returns />} />
                 <Route path="/product/:id" element={<Product />} />
+                <Route path="/favorites" element={<Favorites />} />
                 <Route path="/admin" element={<Admin />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
