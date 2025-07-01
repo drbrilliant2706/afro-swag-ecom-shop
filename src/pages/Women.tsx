@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Heart, ShoppingCart, Search, User, Menu, Star, Filter, X } from "lucide-react";
@@ -24,58 +25,76 @@ const Women = () => {
 
   const womenProducts = [
     {
-      id: 11,
-      name: "FINEST Crop Top Red",
+      id: 21,
+      name: "AFRIKA'S FINEST Crop Collection",
       price: "TSh 25,000",
-      image: "/lovable-uploads/83e9eb03-ffaa-4765-956a-cb1f637e3b77.png",
+      image: "/lovable-uploads/5c33a062-0000-460d-af95-63a3342380ea.png",
       badge: "NEW",
-      colors: ["Red", "White", "Black"],
+      colors: ["White", "Black"],
       category: "TOPS"
     },
     {
-      id: 12,
-      name: "FINEST Group Collection",
+      id: 22,
+      name: "AFRIKA'S FINEST Purple Oversized Tee",
       price: "TSh 25,000",
-      image: "/lovable-uploads/7f0b3db7-fa12-4dda-9ab8-e43780531947.png",
+      image: "/lovable-uploads/c0791d3c-b695-4f10-a6c8-3f40e5817d35.png",
       badge: "BESTSELLER",
-      colors: ["Red", "Black", "White"],
+      colors: ["Purple", "Black"],
+      category: "TOPS"
+    },
+    {
+      id: 23,
+      name: "AFRIKA'S FINEST Beige Oversized Tee",
+      price: "TSh 25,000",
+      image: "/lovable-uploads/9281b935-05bf-4bc6-bc91-b290612beca6.png",
+      badge: "EXCLUSIVE",
+      colors: ["Beige", "White"],
+      category: "TOPS"
+    },
+    {
+      id: 24,
+      name: "AFRIKA'S FINEST Navy Chair Collection",
+      price: "TSh 25,000",
+      image: "/lovable-uploads/d3f3d3e5-9d95-4e58-a22a-3f858fda41fc.png",
+      badge: "LIMITED",
+      colors: ["Navy", "Black"],
       category: "DRESSES"
     },
     {
-      id: 13,
-      name: "FINEST Black Crop Top",
+      id: 25,
+      name: "AFRIKA'S FINEST Oversized Statement Tee",
       price: "TSh 25,000",
-      image: "/lovable-uploads/c1a27c87-fecb-4603-846b-e559103c12ef.png",
-      badge: "EXCLUSIVE",
-      colors: ["Black", "White"],
+      image: "/lovable-uploads/5e0f328b-f1d8-4431-8107-31754766376e.png",
+      badge: "CULTURE",
+      colors: ["Navy", "Black"],
       category: "TOPS"
     },
     {
-      id: 14,
-      name: "NYUMBANI QWETU Purple",
+      id: 26,
+      name: "NYUMBANI QWETU NI AFRIKA Collection",
       price: "TSh 25,000",
-      image: "/lovable-uploads/6a04cec4-55f6-473d-b3d2-82836bbbadde.png",
-      badge: "CULTURE",
-      colors: ["Purple", "White", "Beige"],
+      image: "/lovable-uploads/ff71bc8e-6331-4e52-8f9f-5c838167aa34.png",
+      badge: "PRIDE",
+      colors: ["White", "Camo"],
       category: "OUTERWEAR"
     },
     {
-      id: 15,
-      name: "FINEST Split Jeans Style",
+      id: 27,
+      name: "FINEST Back Print Collection",
       price: "TSh 25,000",
-      image: "/lovable-uploads/cab6174c-81c0-4121-bea1-7e06bcd15fae.png",
-      badge: "LIMITED",
-      colors: ["White", "Blue", "Black"],
-      category: "BOTTOMS"
+      image: "/lovable-uploads/093741ff-4455-45a5-981c-1152e3ee8456.png",
+      badge: "NEW",
+      colors: ["White", "Burgundy"],
+      category: "TOPS"
     },
     {
-      id: 16,
-      name: "FINEST Pose Collection",
+      id: 28,
+      name: "FINEST Duo Collection",
       price: "TSh 25,000",
-      image: "/lovable-uploads/e634235e-8a2c-4e35-91ca-4d56793cad8f.png",
-      badge: "PRIDE",
-      colors: ["Red", "White", "Black"],
-      category: "DRESSES"
+      image: "/lovable-uploads/6e193c65-0c7e-4fef-83e2-6acb7a9dc7fc.png",
+      badge: "BESTSELLER",
+      colors: ["White", "Black"],
+      category: "TOPS"
     }
   ];
 
@@ -210,7 +229,7 @@ const Women = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('/lovable-uploads/c1a27c87-fecb-4603-846b-e559103c12ef.png')`,
+            backgroundImage: `url('/lovable-uploads/5c33a062-0000-460d-af95-63a3342380ea.png')`,
           }}
         >
           <div className="absolute inset-0 bg-black bg-opacity-60"></div>
@@ -322,11 +341,14 @@ const Women = () => {
               <Card key={product.id} className="bg-white border-gray-200 hover:border-red-600 transition-all duration-300 group">
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
-                    <img 
-                      src={product.image} 
-                      alt={product.name}
-                      className="w-full h-48 md:h-80 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
+                    <a href={`/product/${product.id}`}>
+                      <img 
+                        src={product.image} 
+                        alt={product.name}
+                        className="w-full h-48 md:h-80 object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                    </a>
                     <Badge className="absolute top-4 left-4 bg-red-600 hover:bg-red-600 text-white text-xs">
                       {product.badge}
                     </Badge>
@@ -341,7 +363,9 @@ const Women = () => {
                   </div>
                   
                   <div className="p-4 md:p-6">
-                    <h4 className="text-black font-bold text-base md:text-lg mb-2">{product.name}</h4>
+                    <a href={`/product/${product.id}`}>
+                      <h4 className="text-black font-bold text-base md:text-lg mb-2 hover:text-red-600 transition-colors">{product.name}</h4>
+                    </a>
                     <p className="text-red-600 font-bold text-lg md:text-xl mb-4">{product.price}</p>
                     
                     <div className="flex items-center justify-between mb-4">

@@ -6,6 +6,7 @@ const Product = () => {
   const { id } = useParams();
   
   const products = [
+    // Men's Products
     {
       id: 1,
       name: "FINEST African Mask Tee",
@@ -76,6 +77,151 @@ const Product = () => {
         "Continental Pride",
         "High-Quality Print",
         "Comfortable Wear"
+      ]
+    },
+    // Women's Products
+    {
+      id: 21,
+      name: "AFRIKA'S FINEST Crop Collection",
+      price: "TSh 25,000",
+      image: "/lovable-uploads/5c33a062-0000-460d-af95-63a3342380ea.png",
+      badge: "NEW",
+      colors: ["White", "Black"],
+      sizes: ["XS", "S", "M", "L", "XL"],
+      description: "Stylish crop tee collection showcasing African pride. Perfect for modern women who want to celebrate their heritage with contemporary fashion.",
+      features: [
+        "Crop Top Design",
+        "Premium Cotton Material",
+        "African Pride Branding",
+        "Comfortable Fit",
+        "Modern Styling",
+        "Machine Washable"
+      ]
+    },
+    {
+      id: 22,
+      name: "AFRIKA'S FINEST Purple Oversized Tee",
+      price: "TSh 25,000",
+      image: "/lovable-uploads/c0791d3c-b695-4f10-a6c8-3f40e5817d35.png",
+      badge: "BESTSELLER",
+      colors: ["Purple", "Black"],
+      sizes: ["XS", "S", "M", "L", "XL"],
+      description: "Bestselling oversized tee in rich purple color, featuring the iconic Afrika's Finest logo with traditional mask design.",
+      features: [
+        "Oversized Fit",
+        "Rich Purple Color",
+        "Traditional Mask Logo",
+        "Premium Fabric",
+        "Streetwear Style",
+        "Comfortable Wear"
+      ]
+    },
+    {
+      id: 23,
+      name: "AFRIKA'S FINEST Beige Oversized Tee",
+      price: "TSh 25,000",
+      image: "/lovable-uploads/9281b935-05bf-4bc6-bc91-b290612beca6.png",
+      badge: "EXCLUSIVE",
+      colors: ["Beige", "White"],
+      sizes: ["XS", "S", "M", "L", "XL"],
+      description: "Exclusive beige oversized tee with traditional African mask design. Perfect for casual wear with a touch of cultural elegance.",
+      features: [
+        "Exclusive Beige Color",
+        "Oversized Design",
+        "Cultural Mask Print",
+        "Premium Cotton",
+        "Casual Elegance",
+        "Easy Care"
+      ]
+    },
+    {
+      id: 24,
+      name: "AFRIKA'S FINEST Navy Chair Collection",
+      price: "TSh 25,000",
+      image: "/lovable-uploads/d3f3d3e5-9d95-4e58-a22a-3f858fda41fc.png",
+      badge: "LIMITED",
+      colors: ["Navy", "Black"],
+      sizes: ["XS", "S", "M", "L", "XL"],
+      description: "Limited edition navy dress from our special chair collection. Artistic representation of African heritage in modern fashion.",
+      features: [
+        "Limited Edition",
+        "Navy Blue Color",
+        "Artistic Design",
+        "Comfortable Dress",
+        "Heritage Inspired",
+        "Unique Styling"
+      ]
+    },
+    {
+      id: 25,
+      name: "AFRIKA'S FINEST Oversized Statement Tee",
+      price: "TSh 25,000",
+      image: "/lovable-uploads/5e0f328b-f1d8-4431-8107-31754766376e.png",
+      badge: "CULTURE",
+      colors: ["Navy", "Black"],
+      sizes: ["XS", "S", "M", "L", "XL"],
+      description: "Make a statement with this oversized tee featuring 'Afrika's Finest - The African Story' branding. Perfect for cultural expression.",
+      features: [
+        "Statement Design",
+        "Cultural Message",
+        "Oversized Fit",
+        "Bold Typography",
+        "African Story Theme",
+        "Premium Quality"
+      ]
+    },
+    {
+      id: 26,
+      name: "NYUMBANI QWETU NI AFRIKA Collection",
+      price: "TSh 25,000",
+      image: "/lovable-uploads/ff71bc8e-6331-4e52-8f9f-5c838167aa34.png",
+      badge: "PRIDE",
+      colors: ["White", "Camo"],
+      sizes: ["XS", "S", "M", "L", "XL"],
+      description: "Pride collection featuring 'Nyumbani Qwetu Ni Afrika' (Our Home is Africa) message with camouflage pants styling.",
+      features: [
+        "Pride Collection",
+        "Swahili Message",
+        "Mixed Styling",
+        "Cultural Pride",
+        "Unique Design",
+        "Comfortable Fit"
+      ]
+    },
+    {
+      id: 27,
+      name: "FINEST Back Print Collection",
+      price: "TSh 25,000",
+      image: "/lovable-uploads/093741ff-4455-45a5-981c-1152e3ee8456.png",
+      badge: "NEW",
+      colors: ["White", "Burgundy"],
+      sizes: ["XS", "S", "M", "L", "XL"],
+      description: "New collection featuring bold back print design with 'FINEST' branding and African mask logo in striking colors.",
+      features: [
+        "Back Print Design",
+        "Bold Graphics",
+        "Striking Colors",
+        "African Mask Logo",
+        "New Collection",
+        "Quality Print"
+      ]
+    },
+    {
+      id: 28,
+      name: "FINEST Duo Collection",
+      price: "TSh 25,000",
+      image: "/lovable-uploads/6e193c65-0c7e-4fef-83e2-6acb7a9dc7fc.png",
+      badge: "BESTSELLER",
+      colors: ["White", "Black"],
+      sizes: ["XS", "S", "M", "L", "XL"],
+      description: "Bestselling duo collection perfect for matching outfits. Features the classic 'FINEST' design in versatile white.",
+      features: [
+        "Duo Collection",
+        "Matching Design",
+        "Classic White",
+        "Versatile Style",
+        "Bestseller",
+        "Premium Cotton"
       ]
     }
   ];
