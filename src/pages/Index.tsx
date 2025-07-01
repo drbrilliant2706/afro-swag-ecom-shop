@@ -58,15 +58,17 @@ const Index = () => {
     <div className="min-h-screen bg-white text-black">
       {/* Announcement Bar with Marquee Effect */}
       <div className="bg-red-600 text-white text-center py-2 text-sm font-medium overflow-hidden">
-        <div className="whitespace-nowrap animate-[scroll_20s_linear_infinite]">
+        <div className="whitespace-nowrap animate-scroll">
           FREE SHIPPING ACROSS EAST AFRICA ON ORDERS TSh 100,000+ | AUTHENTIC TANZANIAN & KENYAN STREETWEAR | WORLDWIDE DELIVERY
         </div>
-        <style jsx>{`
-          @keyframes scroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-          }
-        `}</style>
+        <style>
+          {`
+            @keyframes scroll {
+              0% { transform: translateX(100%); }
+              100% { transform: translateX(-100%); }
+            }
+          `}
+        </style>
       </div>
 
       {/* Navigation */}
