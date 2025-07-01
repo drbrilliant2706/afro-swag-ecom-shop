@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Heart, ShoppingCart, Star, Minus, Plus, CreditCard, Smartphone } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
+import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 
 interface ProductDetailProps {
@@ -29,9 +30,19 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
   
   const { addToCart } = useCart();
   const { addToFavorites, isFavorite } = useFavorites();
+  const { user } = useAuth();
   const { toast } = useToast();
 
   const handleAddToCart = () => {
+    if (!user) {
+      toast({
+        title: "Please log in",
+        description: "You must be logged in to add items to your cart.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     if (!selectedSize) {
       toast({
         title: "Please select a size",
@@ -57,6 +68,15 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
   };
 
   const handleAddToFavorites = () => {
+    if (!user) {
+      toast({
+        title: "Please log in",
+        description: "You must be logged in to add items to favorites.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     addToFavorites({
       id: product.id,
       name: product.name,

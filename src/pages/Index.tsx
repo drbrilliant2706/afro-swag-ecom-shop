@@ -15,7 +15,7 @@ const Index = () => {
     {
       id: 1,
       name: "FINEST African Mask Tee",
-      price: "TSh 45,000",
+      price: "TSh 25,000",
       image: "/lovable-uploads/83e9eb03-ffaa-4765-956a-cb1f637e3b77.png",
       badge: "NEW",
       colors: ["Red", "White", "Black"]
@@ -23,7 +23,7 @@ const Index = () => {
     {
       id: 2,
       name: "FINEST Blue Oversized Tee",
-      price: "TSh 48,000",
+      price: "TSh 25,000",
       image: "/lovable-uploads/1f0eef57-3784-4a0d-84d8-62b9fcb1c8d9.png",
       badge: "BESTSELLER",
       colors: ["Blue", "White", "Black"]
@@ -31,7 +31,7 @@ const Index = () => {
     {
       id: 3,
       name: "NYUMBANI QWETU Collection",
-      price: "TSh 52,000",
+      price: "TSh 25,000",
       image: "/lovable-uploads/86a2ceca-f52f-4c63-91b6-7fd6da14145f.png",
       badge: "LIMITED",
       colors: ["Beige", "Purple", "Black"]
@@ -39,7 +39,7 @@ const Index = () => {
     {
       id: 4,
       name: "AFRIKA'S Finest Tee",
-      price: "TSh 46,000",
+      price: "TSh 25,000",
       image: "/lovable-uploads/036867e1-6684-4f8f-889e-e89c5719d973.png",
       badge: "EXCLUSIVE",
       colors: ["Tan", "Black", "White"]
@@ -59,13 +59,16 @@ const Index = () => {
       {/* Announcement Bar with Marquee Effect */}
       <div className="bg-red-600 text-white text-center py-2 text-sm font-medium overflow-hidden">
         <div className="whitespace-nowrap animate-scroll">
-          FREE SHIPPING ACROSS EAST AFRICA ON ORDERS TSh 100,000+ | AUTHENTIC TANZANIAN & KENYAN STREETWEAR | WORLDWIDE DELIVERY
+          Fashion at it's ultimate prime. Shop with us and become part of our vast family worldwide. Afrika's finest telling our African Story.
         </div>
         <style>
           {`
             @keyframes scroll {
               0% { transform: translateX(100%); }
               100% { transform: translateX(-100%); }
+            }
+            .animate-scroll {
+              animation: scroll 30s linear infinite;
             }
           `}
         </style>
@@ -285,7 +288,7 @@ const Index = () => {
                 AFRICAN'S <span className="text-red-600">FINEST</span>
               </h4>
               <p className="text-gray-400 mb-6">
-                Unapologetically African. Universally Finest.
+                Fashion at it's ultimate prime. Shop with us and become part of our vast family worldwide. Afrika's finest telling our African Story.
               </p>
               
               <div className="flex space-x-4">
@@ -313,6 +316,7 @@ const Index = () => {
               <h5 className="text-white font-bold text-lg mb-4">ABOUT</h5>
               <ul className="space-y-2">
                 <li><a href="/about" className="text-gray-400 hover:text-white transition-colors">Our Story</a></li>
+                <li><a href="/faq" className="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
                 <li><a href="/size-guide" className="text-gray-400 hover:text-white transition-colors">Size Guide</a></li>
                 <li><a href="/shipping-info" className="text-gray-400 hover:text-white transition-colors">Shipping Info</a></li>
                 <li><a href="/returns" className="text-gray-400 hover:text-white transition-colors">Returns</a></li>

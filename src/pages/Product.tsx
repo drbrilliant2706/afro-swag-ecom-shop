@@ -9,7 +9,7 @@ const Product = () => {
     {
       id: 1,
       name: "FINEST African Mask Tee",
-      price: "TSh 45,000",
+      price: "TSh 25,000",
       image: "/lovable-uploads/83e9eb03-ffaa-4765-956a-cb1f637e3b77.png",
       badge: "NEW",
       colors: ["Red", "White", "Black"],
@@ -27,7 +27,7 @@ const Product = () => {
     {
       id: 2,
       name: "FINEST Blue Oversized Tee",
-      price: "TSh 48,000",
+      price: "TSh 25,000",
       image: "/lovable-uploads/1f0eef57-3784-4a0d-84d8-62b9fcb1c8d9.png",
       badge: "BESTSELLER",
       colors: ["Blue", "White", "Black"],
@@ -45,7 +45,7 @@ const Product = () => {
     {
       id: 3,
       name: "NYUMBANI QWETU Collection",
-      price: "TSh 52,000",
+      price: "TSh 25,000",
       image: "/lovable-uploads/86a2ceca-f52f-4c63-91b6-7fd6da14145f.png",
       badge: "LIMITED",
       colors: ["Beige", "Purple", "Black"],
@@ -63,7 +63,7 @@ const Product = () => {
     {
       id: 4,
       name: "AFRIKA'S Finest Tee",
-      price: "TSh 46,000",
+      price: "TSh 25,000",
       image: "/lovable-uploads/036867e1-6684-4f8f-889e-e89c5719d973.png",
       badge: "EXCLUSIVE",
       colors: ["Tan", "Black", "White"],

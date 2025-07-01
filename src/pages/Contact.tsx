@@ -47,6 +47,7 @@ const Contact = () => {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold text-white mb-4">CONTACT US</h1>
           <p className="text-xl text-white">Get in touch with the African's Finest family</p>
+          <p className="text-lg text-white mt-2">Fashion at it's ultimate prime. Shop with us and become part of our vast family worldwide.</p>
         </div>
       </section>
 
@@ -58,8 +59,8 @@ const Contact = () => {
               <CardContent className="p-8">
                 <Mail className="h-12 w-12 text-red-600 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-black mb-3">EMAIL US</h3>
-                <p className="text-gray-600 mb-2">info@africansfinest.com</p>
-                <p className="text-gray-600">support@africansfinest.com</p>
+                <p className="text-gray-600 mb-2">Kevinchaz091@gmail.com</p>
+                <p className="text-gray-600">info@africansfinest.com</p>
               </CardContent>
             </Card>
 
@@ -67,8 +68,8 @@ const Contact = () => {
               <CardContent className="p-8">
                 <Phone className="h-12 w-12 text-black mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-black mb-3">CALL US</h3>
-                <p className="text-gray-600 mb-2">TZ: +255 123 456 789</p>
-                <p className="text-gray-600">KE: +254 123 456 789</p>
+                <p className="text-gray-600 mb-2">+255 628 009 126</p>
+                <p className="text-gray-600">+255 748 996 330</p>
               </CardContent>
             </Card>
 
@@ -84,7 +85,7 @@ const Contact = () => {
             <Card className="bg-white border-gray-200 text-center">
               <CardContent className="p-8">
                 <Clock className="h-12 w-12 text-black mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-black mb-3">BUSINESS HOURS</h3>
+                <h3 className="text-xl font-bold text-black mb-3">LET'S TALK</h3>
                 <p className="text-gray-600 mb-2">Mon-Fri: 8AM-6PM</p>
                 <p className="text-gray-600">Sat: 9AM-4PM (EAT)</p>
               </CardContent>
@@ -146,15 +147,15 @@ const Contact = () => {
                     <div className="space-y-2 text-gray-700">
                       <p className="flex items-center">
                         <MapPin className="h-4 w-4 text-red-600 mr-2" />
-                        Masaki, Dar es Salaam, Tanzania
+                        Dar es Salaam, Tanzania
                       </p>
                       <p className="flex items-center">
                         <Phone className="h-4 w-4 text-red-600 mr-2" />
-                        +255 123 456 789
+                        +255 628 009 126
                       </p>
                       <p className="flex items-center">
                         <Mail className="h-4 w-4 text-red-600 mr-2" />
-                        tanzania@africansfinest.com
+                        Kevinchaz091@gmail.com
                       </p>
                     </div>
                   </CardContent>
@@ -166,15 +167,15 @@ const Contact = () => {
                     <div className="space-y-2 text-gray-700">
                       <p className="flex items-center">
                         <MapPin className="h-4 w-4 text-red-600 mr-2" />
-                        Westlands, Nairobi, Kenya
+                        Nairobi, Kenya
                       </p>
                       <p className="flex items-center">
                         <Phone className="h-4 w-4 text-red-600 mr-2" />
-                        +254 123 456 789
+                        +255 748 996 330
                       </p>
                       <p className="flex items-center">
                         <Mail className="h-4 w-4 text-red-600 mr-2" />
-                        kenya@africansfinest.com
+                        info@africansfinest.com
                       </p>
                     </div>
                   </CardContent>
@@ -240,7 +241,7 @@ const Contact = () => {
       <footer className="bg-black border-t border-gray-800 py-8">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-gray-400">
-            © 2025 African's Finest. Proudly representing Tanzania & Kenya.
+            © 2025 African's Finest. Fashion at it's ultimate prime. Proudly representing Tanzania & Kenya.
           </p>
         </div>
       </footer>
