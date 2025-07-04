@@ -64,7 +64,7 @@ const AddProductModal = ({ isOpen, onClose }: AddProductModalProps) => {
       category: '',
       gender: '',
       sku: '',
-      stockQuantury: '',
+      stockQuantity: '',
       brand: 'AFRIKA\'S FINEST',
       images: []
     });
