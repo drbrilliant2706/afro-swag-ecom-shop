@@ -1,4 +1,3 @@
-
 import { useState, lazy, Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -20,18 +19,18 @@ import {
   X
 } from 'lucide-react';
 
-// Lazy load admin components for better performance
-const AdminDashboard = lazy(() => import('./AdminDashboard'));
+// Lazy load admin components for better performance - fix named exports
+const AdminDashboard = lazy(() => import('./AdminDashboard').then(module => ({ default: module.AdminDashboard })));
 const ProductManagement = lazy(() => import('./ProductManagement').then(module => ({ default: module.ProductManagement })));
-const OrderManagement = lazy(() => import('./OrderManagement'));
-const CustomerManagement = lazy(() => import('./CustomerManagement'));
-const InventoryManagement = lazy(() => import('./InventoryManagement'));
-const PricingPromotions = lazy(() => import('./PricingPromotions'));
-const Analytics = lazy(() => import('./Analytics'));
-const PaymentSettings = lazy(() => import('./PaymentSettings'));
-const ContentManagement = lazy(() => import('./ContentManagement'));
-const VendorManagement = lazy(() => import('./VendorManagement'));
-const SecurityFraud = lazy(() => import('./SecurityFraud'));
+const OrderManagement = lazy(() => import('./OrderManagement').then(module => ({ default: module.OrderManagement })));
+const CustomerManagement = lazy(() => import('./CustomerManagement').then(module => ({ default: module.CustomerManagement })));
+const InventoryManagement = lazy(() => import('./InventoryManagement').then(module => ({ default: module.InventoryManagement })));
+const PricingPromotions = lazy(() => import('./PricingPromotions').then(module => ({ default: module.PricingPromotions })));
+const Analytics = lazy(() => import('./Analytics').then(module => ({ default: module.Analytics })));
+const PaymentSettings = lazy(() => import('./PaymentSettings').then(module => ({ default: module.PaymentSettings })));
+const ContentManagement = lazy(() => import('./ContentManagement').then(module => ({ default: module.ContentManagement })));
+const VendorManagement = lazy(() => import('./VendorManagement').then(module => ({ default: module.VendorManagement })));
+const SecurityFraud = lazy(() => import('./SecurityFraud').then(module => ({ default: module.SecurityFraud })));
 
 interface MenuItem {
   id: string;
