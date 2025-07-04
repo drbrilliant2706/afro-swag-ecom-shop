@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Heart, ShoppingCart, Search, User, Menu, Star, Filter, X } from "lucide-react";
@@ -10,11 +9,13 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import ProfileModal from "@/components/profile/ProfileModal";
 import CartModal from "@/components/cart/CartModal";
+import SearchModal from "@/components/search/SearchModal";
 
 const Men = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("ALL");
   const [priceRange, setPriceRange] = useState("ALL");
@@ -167,7 +168,10 @@ const Men = () => {
             </div>
 
             <div className="flex items-center space-x-3 md:space-x-4">
-              <Search className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
+              <Search 
+                className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
+                onClick={() => setIsSearchOpen(true)}
+              />
               <User 
                 className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
                 onClick={() => setIsProfileOpen(true)}
@@ -384,6 +388,7 @@ const Men = () => {
       {/* Modals */}
       <ProfileModal isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
       <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </div>
   );
 };

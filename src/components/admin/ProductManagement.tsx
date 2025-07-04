@@ -12,6 +12,7 @@ import {
   TableRow 
 } from '@/components/ui/table';
 import { Plus, Search, Edit, Trash2, Eye, Filter } from 'lucide-react';
+import AddProductModal from './AddProductModal';
 
 const products = [
   { 
@@ -68,7 +69,7 @@ export const ProductManagement = () => {
             Manage your product catalog with intuitive controls
           </p>
         </div>
-        <Button onClick={() => setShowAddProduct(true)} className="w-full sm:w-auto">
+        <Button onClick={() => setShowAddProduct(true)} className="w-full sm:w-auto bg-red-600 hover:bg-red-700">
           <Plus className="h-4 w-4 mr-2" />
           Add Product
         </Button>
@@ -181,6 +182,11 @@ export const ProductManagement = () => {
           </CardContent>
         </Card>
       </div>
+
+      <AddProductModal 
+        isOpen={showAddProduct} 
+        onClose={() => setShowAddProduct(false)} 
+      />
     </div>
   );
 };

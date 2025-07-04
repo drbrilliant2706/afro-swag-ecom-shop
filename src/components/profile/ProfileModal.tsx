@@ -34,14 +34,14 @@ const ProfileModal = ({ isOpen, onClose }: ProfileModalProps) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-black border border-gray-800 rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
-        <div className="p-4 border-b border-gray-800 flex justify-between items-center">
+      <div className="bg-black border border-red-600 rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
+        <div className="p-4 border-b border-red-600 flex justify-between items-center">
           <h2 className="text-xl font-bold text-white">
             {user ? 'Profile' : 'Account'}
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-white"
+            className="text-red-400 hover:text-white"
           >
             ✕
           </button>
@@ -64,32 +64,32 @@ const ProfileModal = ({ isOpen, onClose }: ProfileModalProps) => {
               )}
             </>
           ) : (
-            <Card className="bg-gray-900 border-gray-800">
+            <Card className="bg-red-900 border-red-600">
               <CardHeader>
                 <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center">
-                    <User className="h-6 w-6 text-black" />
+                  <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center">
+                    <User className="h-6 w-6 text-white" />
                   </div>
                   <div>
                     <h3 className="text-white font-bold">{user.name}</h3>
-                    <p className="text-gray-400 text-sm">{user.email}</p>
+                    <p className="text-red-200 text-sm">{user.email}</p>
                     {isAdmin() && (
-                      <span className="text-yellow-500 text-xs font-bold">ADMIN</span>
+                      <span className="text-red-400 text-xs font-bold">ADMIN</span>
                     )}
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-black p-4 rounded-lg text-center">
-                    <ShoppingBag className="h-6 w-6 text-yellow-500 mx-auto mb-2" />
+                  <div className="bg-black p-4 rounded-lg text-center border border-red-600">
+                    <ShoppingBag className="h-6 w-6 text-red-500 mx-auto mb-2" />
                     <p className="text-white font-bold">{getTotalItems()}</p>
-                    <p className="text-gray-400 text-sm">Cart Items</p>
+                    <p className="text-red-200 text-sm">Cart Items</p>
                   </div>
-                  <div className="bg-black p-4 rounded-lg text-center">
+                  <div className="bg-black p-4 rounded-lg text-center border border-red-600">
                     <Heart className="h-6 w-6 text-red-500 mx-auto mb-2" />
                     <p className="text-white font-bold">{favorites.length}</p>
-                    <p className="text-gray-400 text-sm">Favorites</p>
+                    <p className="text-red-200 text-sm">Favorites</p>
                   </div>
                 </div>
 
@@ -99,7 +99,7 @@ const ProfileModal = ({ isOpen, onClose }: ProfileModalProps) => {
                       window.location.href = '/admin';
                       onClose();
                     }}
-                    className="w-full bg-yellow-600 hover:bg-yellow-700 text-black"
+                    className="w-full bg-red-600 hover:bg-red-700 text-white"
                   >
                     <Settings className="h-4 w-4 mr-2" />
                     Admin Panel
@@ -109,7 +109,7 @@ const ProfileModal = ({ isOpen, onClose }: ProfileModalProps) => {
                 <Button
                   onClick={handleLogout}
                   variant="outline"
-                  className="w-full border-gray-600 text-white hover:bg-gray-800"
+                  className="w-full border-red-600 text-white hover:bg-red-600 hover:text-white"
                 >
                   <LogOut className="h-4 w-4 mr-2" />
                   Logout
