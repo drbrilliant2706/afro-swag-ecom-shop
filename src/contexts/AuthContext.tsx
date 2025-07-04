@@ -1,7 +1,9 @@
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { User, Session } from '@supabase/supabase-js';
 
-interface User {
+interface AuthUser {
   id: string;
   email: string;
   name: string;
@@ -9,11 +11,13 @@ interface User {
 }
 
 interface AuthContextType {
-  user: User | null;
+  user: AuthUser | null;
+  session: Session | null;
   login: (email: string, password: string) => Promise<boolean>;
   register: (email: string, password: string, name: string) => Promise<boolean>;
   logout: () => void;
   isAdmin: () => boolean;
+  loading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -27,46 +31,105 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<AuthUser | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Set up auth state listener
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        setSession(session);
+        
+        if (session?.user) {
+          // Check if user has admin role or is the demo admin
+          const isAdminEmail = session.user.email === 'admin@africansfinest.com';
+          
+          setUser({
+            id: session.user.id,
+            email: session.user.email || '',
+            name: session.user.user_metadata?.name || session.user.email?.split('@')[0] || 'User',
+            role: isAdminEmail ? 'admin' : 'user'
+          });
+        } else {
+          setUser(null);
+        }
+        
+        setLoading(false);
+      }
+    );
+
+    // Check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) {
+        const isAdminEmail = session.user.email === 'admin@africansfinest.com';
+        
+        setUser({
+          id: session.user.id,
+          email: session.user.email || '',
+          name: session.user.user_metadata?.name || session.user.email?.split('@')[0] || 'User',
+          role: isAdminEmail ? 'admin' : 'user'
+        });
+      }
+      setSession(session);
+      setLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   const login = async (email: string, password: string): Promise<boolean> => {
-    // Simulate login - in real app, this would call an API
-    if (email === 'admin@africansfinest.com' && password === 'admin123') {
-      setUser({
-        id: '1',
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
-        name: 'Admin User',
-        role: 'admin'
+        password,
       });
-      return true;
-    } else if (email && password) {
-      setUser({
-        id: '2',
-        email,
-        name: email.split('@')[0],
-        role: 'user'
-      });
-      return true;
+
+      if (error) {
+        console.error('Login error:', error);
+        return false;
+      }
+
+      return !!data.user;
+    } catch (error) {
+      console.error('Login error:', error);
+      return false;
     }
-    return false;
   };
 
   const register = async (email: string, password: string, name: string): Promise<boolean> => {
-    // Simulate registration
-    if (email && password && name) {
-      setUser({
-        id: Date.now().toString(),
+    try {
+      const { data, error } = await supabase.auth.signUp({
         email,
-        name,
-        role: 'user'
+        password,
+        options: {
+          data: {
+            name: name
+          },
+          emailRedirectTo: `${window.location.origin}/`
+        }
       });
-      return true;
+
+      if (error) {
+        console.error('Registration error:', error);
+        return false;
+      }
+
+      return !!data.user;
+    } catch (error) {
+      console.error('Registration error:', error);
+      return false;
     }
-    return false;
   };
 
-  const logout = () => {
-    setUser(null);
+  const logout = async () => {
+    try {
+      await supabase.auth.signOut();
+      setUser(null);
+      setSession(null);
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   };
 
   const isAdmin = () => {
@@ -76,10 +139,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   return (
     <AuthContext.Provider value={{
       user,
+      session,
       login,
       register,
       logout,
-      isAdmin
+      isAdmin,
+      loading
     }}>
       {children}
     </AuthContext.Provider>

@@ -39,10 +39,10 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto bg-gray-900 border-gray-800">
+    <Card className="w-full max-w-md mx-auto bg-black border-red-600">
       <CardHeader>
         <h2 className="text-2xl font-bold text-white text-center">REGISTER</h2>
-        <p className="text-gray-400 text-center">Join the African's Finest family</p>
+        <p className="text-red-200 text-center">Join the African's Finest family</p>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -52,7 +52,7 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="bg-black border-gray-700 text-white"
+              className="bg-red-900 border-red-600 text-white placeholder-red-300"
               required
             />
           </div>
@@ -63,7 +63,7 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="bg-black border-gray-700 text-white"
+              className="bg-red-900 border-red-600 text-white placeholder-red-300"
               required
             />
           </div>
@@ -74,25 +74,25 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="bg-black border-gray-700 text-white"
+              className="bg-red-900 border-red-600 text-white placeholder-red-300"
               required
             />
           </div>
-          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {error && <p className="text-red-400 text-sm">{error}</p>}
           <Button
             type="submit"
             disabled={loading}
-            className="w-full bg-yellow-600 hover:bg-yellow-700 text-black"
+            className="w-full bg-red-600 hover:bg-red-700 text-white font-bold"
           >
             {loading ? 'Creating Account...' : 'CREATE ACCOUNT'}
           </Button>
           <div className="text-center">
-            <p className="text-gray-400 text-sm">
+            <p className="text-red-200 text-sm">
               Already have an account?{' '}
               <button
                 type="button"
                 onClick={onSwitchToLogin}
-                className="text-yellow-500 hover:underline"
+                className="text-red-400 hover:underline"
               >
                 Login here
               </button>
