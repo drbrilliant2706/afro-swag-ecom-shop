@@ -1,5 +1,7 @@
-import { useState } from 'react';
+
+import { useState, lazy, Suspense } from 'react';
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useAuth } from '@/contexts/AuthContext';
 import { 
   LayoutDashboard, 
@@ -12,23 +14,24 @@ import {
   Truck,
   Tag,
   FileText,
-  Search,
   UserCheck,
   Shield,
   Menu,
   X
 } from 'lucide-react';
-import { AdminDashboard } from './AdminDashboard';
-import { ProductManagement } from './ProductManagement';
-import { OrderManagement } from './OrderManagement';
-import { CustomerManagement } from './CustomerManagement';
-import { InventoryManagement } from './InventoryManagement';
-import { PricingPromotions } from './PricingPromotions';
-import { Analytics } from './Analytics';
-import { PaymentSettings } from './PaymentSettings';
-import { ContentManagement } from './ContentManagement';
-import { VendorManagement } from './VendorManagement';
-import { SecurityFraud } from './SecurityFraud';
+
+// Lazy load admin components for better performance
+const AdminDashboard = lazy(() => import('./AdminDashboard'));
+const ProductManagement = lazy(() => import('./ProductManagement').then(module => ({ default: module.ProductManagement })));
+const OrderManagement = lazy(() => import('./OrderManagement'));
+const CustomerManagement = lazy(() => import('./CustomerManagement'));
+const InventoryManagement = lazy(() => import('./InventoryManagement'));
+const PricingPromotions = lazy(() => import('./PricingPromotions'));
+const Analytics = lazy(() => import('./Analytics'));
+const PaymentSettings = lazy(() => import('./PaymentSettings'));
+const ContentManagement = lazy(() => import('./ContentManagement'));
+const VendorManagement = lazy(() => import('./VendorManagement'));
+const SecurityFraud = lazy(() => import('./SecurityFraud'));
 
 interface MenuItem {
   id: string;
@@ -51,6 +54,19 @@ const menuItems: MenuItem[] = [
   { id: 'vendors', label: 'Vendors', icon: UserCheck, component: VendorManagement },
   { id: 'security', label: 'Security', icon: Shield, component: SecurityFraud },
 ];
+
+const LoadingSkeleton = () => (
+  <div className="space-y-4">
+    <Skeleton className="h-8 w-64" />
+    <Skeleton className="h-4 w-48" />
+    <div className="grid gap-4 md:grid-cols-3">
+      {[1, 2, 3].map((i) => (
+        <Skeleton key={i} className="h-32" />
+      ))}
+    </div>
+    <Skeleton className="h-64 w-full" />
+  </div>
+);
 
 export const AdminLayout = () => {
   const { user, logout } = useAuth();
@@ -140,7 +156,9 @@ export const AdminLayout = () => {
         {/* Main content */}
         <main className="flex-1 min-h-screen md:pl-0">
           <div className="container py-6">
-            <ActiveComponent />
+            <Suspense fallback={<LoadingSkeleton />}>
+              <ActiveComponent />
+            </Suspense>
           </div>
         </main>
       </div>

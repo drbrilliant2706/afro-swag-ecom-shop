@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/contexts/CartContext';
 import { useFavorites } from '@/contexts/FavoritesContext';
-import { User, ShoppingBag, Heart, Settings, LogOut } from 'lucide-react';
+import { User, ShoppingBag, Heart, Settings, LogOut, Shield } from 'lucide-react';
 import LoginForm from '@/components/auth/LoginForm';
 import RegisterForm from '@/components/auth/RegisterForm';
 
@@ -29,6 +29,11 @@ const ProfileModal = ({ isOpen, onClose }: ProfileModalProps) => {
   const handleLogout = () => {
     logout();
     setActiveTab('login');
+    onClose();
+  };
+
+  const handleAdminAccess = () => {
+    window.location.href = '/admin';
     onClose();
   };
 
@@ -74,7 +79,10 @@ const ProfileModal = ({ isOpen, onClose }: ProfileModalProps) => {
                     <h3 className="text-white font-bold">{user.name}</h3>
                     <p className="text-red-200 text-sm">{user.email}</p>
                     {isAdmin() && (
-                      <span className="text-red-400 text-xs font-bold">ADMIN</span>
+                      <div className="flex items-center gap-1 mt-1">
+                        <Shield className="h-3 w-3 text-red-400" />
+                        <span className="text-red-400 text-xs font-bold">ADMINISTRATOR</span>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -95,14 +103,11 @@ const ProfileModal = ({ isOpen, onClose }: ProfileModalProps) => {
 
                 {isAdmin() && (
                   <Button
-                    onClick={() => {
-                      window.location.href = '/admin';
-                      onClose();
-                    }}
-                    className="w-full bg-red-600 hover:bg-red-700 text-white"
+                    onClick={handleAdminAccess}
+                    className="w-full bg-red-600 hover:bg-red-700 text-white font-bold"
                   >
                     <Settings className="h-4 w-4 mr-2" />
-                    Admin Panel
+                    Access Admin Panel
                   </Button>
                 )}
 
