@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Heart, ShoppingCart, Search, User, Star, Menu } from "lucide-react";
@@ -118,45 +119,50 @@ const Index = () => {
       </style>
 
       {/* Marquee Header */}
-      <div className="bg-red-600 text-white py-2 overflow-hidden">
-        <div className="marquee whitespace-nowrap text-sm md:text-base">
+      <div className="bg-red-600 text-white py-1.5 sm:py-2 overflow-hidden">
+        <div className="marquee whitespace-nowrap text-xs sm:text-sm md:text-base px-2">
           🎉 Fashion at it's ultimate prime. Shop with us and become part of our vast family worldwide. Afrika's finest telling our African Story. 🎉
         </div>
       </div>
 
       {/* Navigation */}
       <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex-shrink-0">
-              <h1 className="text-xl md:text-2xl font-bold text-black">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+          <div className="flex justify-between items-center h-14 sm:h-16">
+            <div className="flex-shrink-0 flex items-center">
+              <img 
+                src="/lovable-uploads/05b02c6d-e604-4df1-b5f6-7267787edde7.png" 
+                alt="Afrika's Finest Logo" 
+                className="h-8 w-auto sm:h-10 md:h-12 mr-2"
+              />
+              <h1 className="text-sm sm:text-lg md:text-xl font-bold text-black hidden xs:block">
                 AFRICAN'S <span className="text-red-600">FINEST</span>
               </h1>
             </div>
 
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-4 lg:space-x-8">
-                <a href="/" className="text-red-600 border-b-2 border-red-600 pb-1 text-sm lg:text-base">HOME</a>
-                <a href="/men" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">MEN</a>
-                <a href="/women" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">WOMEN</a>
-                <a href="/lookbook" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">LOOKBOOK</a>
-                <a href="/about" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">ABOUT</a>
-                <a href="/culture" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">CULTURE</a>
+            <div className="hidden lg:block">
+              <div className="ml-10 flex items-baseline space-x-6 xl:space-x-8">
+                <a href="/" className="text-red-600 border-b-2 border-red-600 pb-1 text-sm xl:text-base font-medium">HOME</a>
+                <a href="/men" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">MEN</a>
+                <a href="/women" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">WOMEN</a>
+                <a href="/lookbook" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">LOOKBOOK</a>
+                <a href="/about" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">ABOUT</a>
+                <a href="/culture" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">CULTURE</a>
               </div>
             </div>
 
-            <div className="flex items-center space-x-3 md:space-x-4">
-              <Search className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <Search className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
               <User 
-                className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
+                className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
                 onClick={() => setIsProfileOpen(true)}
               />
               <a href="/favorites">
-                <Heart className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
+                <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
               </a>
               <div className="relative">
                 <ShoppingCart 
-                  className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
+                  className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
                   onClick={() => setIsCartOpen(true)}
                 />
                 <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
@@ -164,7 +170,7 @@ const Index = () => {
                 </span>
               </div>
               <Menu 
-                className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors md:hidden" 
+                className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors lg:hidden" 
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
               />
             </div>
@@ -172,9 +178,9 @@ const Index = () => {
 
           {/* Mobile Menu */}
           {isMenuOpen && (
-            <div className="md:hidden border-t border-gray-200 py-4">
-              <div className="flex flex-col space-y-2">
-                <a href="/" className="text-red-600 py-2">HOME</a>
+            <div className="lg:hidden border-t border-gray-200 py-3 bg-white">
+              <div className="flex flex-col space-y-3 px-2">
+                <a href="/" className="text-red-600 py-2 font-medium">HOME</a>
                 <a href="/men" className="text-black hover:text-red-600 transition-colors py-2">MEN</a>
                 <a href="/women" className="text-black hover:text-red-600 transition-colors py-2">WOMEN</a>
                 <a href="/lookbook" className="text-black hover:text-red-600 transition-colors py-2">LOOKBOOK</a>
@@ -187,7 +193,7 @@ const Index = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative h-64 md:h-96 lg:h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative h-60 sm:h-80 md:h-96 lg:h-screen flex items-center justify-center overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
@@ -198,17 +204,17 @@ const Index = () => {
         </div>
         
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
-          <h2 className="text-3xl md:text-5xl lg:text-7xl font-bold mb-4 text-white">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-3 sm:mb-4 text-white leading-tight">
             AFRICA'S <span className="text-red-600">FINEST</span>
           </h2>
-          <p className="text-lg md:text-xl lg:text-2xl text-gray-200 mb-8">
+          <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 sm:mb-8 px-4">
             Authentic streetwear celebrating East African culture
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 md:px-8">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
+            <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 md:px-8 w-full sm:w-auto">
               <a href="/men">SHOP MEN</a>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black font-bold px-6 md:px-8">
+            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black font-bold px-6 md:px-8 w-full sm:w-auto">
               <a href="/women">SHOP WOMEN</a>
             </Button>
           </div>
@@ -216,16 +222,16 @@ const Index = () => {
       </section>
 
       {/* Featured Products */}
-      <section className="py-8 md:py-16 bg-white">
+      <section className="py-6 sm:py-8 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-4xl font-bold text-black mb-4">
+          <div className="text-center mb-6 sm:mb-8 md:mb-12">
+            <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-black mb-2 sm:mb-4">
               FEATURED <span className="text-red-600">PRODUCTS</span>
             </h2>
-            <p className="text-gray-600 text-base md:text-lg">Discover our most popular items</p>
+            <p className="text-gray-600 text-sm sm:text-base md:text-lg">Discover our most popular items</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-8">
             {featuredProducts.map((product) => (
               <Card key={product.id} className="bg-white border-gray-200 hover:border-red-600 transition-all duration-300 group">
                 <CardContent className="p-0">
@@ -234,15 +240,15 @@ const Index = () => {
                       <img 
                         src={product.image} 
                         alt={product.name}
-                        className="w-full h-48 md:h-64 object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
+                        className="w-full h-32 sm:h-48 md:h-64 object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
                       />
                     </a>
-                    <Badge className="absolute top-4 left-4 bg-red-600 hover:bg-red-600 text-white text-xs">
+                    <Badge className="absolute top-2 left-2 bg-red-600 hover:bg-red-600 text-white text-xs">
                       {product.badge}
                     </Badge>
-                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                       <Heart 
-                        className={`h-5 w-5 md:h-6 md:w-6 cursor-pointer ${
+                        className={`h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 cursor-pointer ${
                           isFavorite(product.id) ? 'text-red-500 fill-red-500' : 'text-black hover:text-red-500'
                         }`}
                         onClick={() => handleToggleFavorite(product)}
@@ -250,22 +256,22 @@ const Index = () => {
                     </div>
                   </div>
                   
-                  <div className="p-4">
+                  <div className="p-2 sm:p-3 md:p-4">
                     <a href={`/product/${product.id}`}>
-                      <h4 className="text-black font-bold text-sm md:text-base mb-2 hover:text-red-600 transition-colors cursor-pointer">{product.name}</h4>
+                      <h4 className="text-black font-bold text-xs sm:text-sm md:text-base mb-1 sm:mb-2 hover:text-red-600 transition-colors cursor-pointer line-clamp-2">{product.name}</h4>
                     </a>
-                    <div className="flex items-center justify-between mb-4">
-                      <p className="text-red-600 font-bold text-base md:text-lg">{product.price}</p>
+                    <div className="flex items-center justify-between mb-2 sm:mb-3 md:mb-4">
+                      <p className="text-red-600 font-bold text-sm sm:text-base md:text-lg">{product.price}</p>
                       <div className="flex items-center space-x-1">
                         {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="h-3 w-3 md:h-4 md:w-4 fill-red-600 text-red-600" />
+                          <Star key={i} className="h-2 w-2 sm:h-3 sm:w-3 md:h-4 md:w-4 fill-red-600 text-red-600" />
                         ))}
                       </div>
                     </div>
 
                     <Button 
                       onClick={() => handleAddToCart(product)}
-                      className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-sm"
+                      className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs sm:text-sm py-1.5 sm:py-2"
                     >
                       ADD TO CART
                     </Button>
@@ -275,7 +281,7 @@ const Index = () => {
             ))}
           </div>
 
-          <div className="text-center mt-8 md:mt-12">
+          <div className="text-center mt-6 sm:mt-8 md:mt-12">
             <Button asChild size="lg" variant="outline" className="border-red-600 text-red-600 hover:bg-red-600 hover:text-white font-bold">
               <a href="/men">VIEW ALL PRODUCTS</a>
             </Button>
@@ -284,28 +290,28 @@ const Index = () => {
       </section>
 
       {/* About Section */}
-      <section className="py-8 md:py-16 bg-gray-100">
+      <section className="py-6 sm:py-8 md:py-16 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
-            <div>
-              <h2 className="text-2xl md:text-4xl font-bold text-black mb-4 md:mb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center">
+            <div className="order-2 lg:order-1">
+              <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-black mb-3 sm:mb-4 md:mb-6">
                 OUR <span className="text-red-600">STORY</span>
               </h2>
-              <p className="text-gray-600 text-base md:text-lg mb-4 md:mb-6">
+              <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-3 sm:mb-4 md:mb-6">
                 African's Finest is more than just clothing—it's a movement celebrating the rich heritage and vibrant culture of East Africa. Each piece tells a story of tradition, pride, and contemporary style.
               </p>
-              <p className="text-gray-600 text-base md:text-lg mb-6 md:mb-8">
+              <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-4 sm:mb-6 md:mb-8">
                 From the bustling streets of Nairobi to the cultural heart of Dar es Salaam, we bring you authentic designs that honor our roots while embracing modern fashion.
               </p>
-              <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold">
+              <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold w-full sm:w-auto">
                 <a href="/about">LEARN MORE</a>
               </Button>
             </div>
-            <div className="relative">
+            <div className="relative order-1 lg:order-2">
               <img 
                 src="/lovable-uploads/c1a27c87-fecb-4603-846b-e559103c12ef.png" 
                 alt="African Fashion"
-                className="w-full h-64 md:h-96 object-cover rounded-lg shadow-xl"
+                className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-xl"
               />
             </div>
           </div>
@@ -313,20 +319,27 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black text-white py-8 md:py-12">
+      <footer className="bg-black text-white py-6 sm:py-8 md:py-12">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="col-span-1 md:col-span-2">
-              <h3 className="text-xl md:text-2xl font-bold mb-4">
-                AFRICAN'S <span className="text-red-600">FINEST</span>
-              </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            <div className="col-span-1 sm:col-span-2">
+              <div className="flex items-center mb-3 sm:mb-4">
+                <img 
+                  src="/lovable-uploads/05b02c6d-e604-4df1-b5f6-7267787edde7.png" 
+                  alt="Afrika's Finest Logo" 
+                  className="h-8 w-auto sm:h-10 mr-2 filter invert"
+                />
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold">
+                  AFRICAN'S <span className="text-red-600">FINEST</span>
+                </h3>
+              </div>
               <p className="text-gray-300 text-sm md:text-base mb-4">
                 Fashion at it's ultimate prime. Shop with us and become part of our vast family worldwide. Afrika's finest telling our African Story.
               </p>
             </div>
             
             <div>
-              <h4 className="font-bold mb-4 text-sm md:text-base">QUICK LINKS</h4>
+              <h4 className="font-bold mb-3 sm:mb-4 text-sm md:text-base">QUICK LINKS</h4>
               <ul className="space-y-2 text-sm">
                 <li><a href="/men" className="text-gray-300 hover:text-red-600 transition-colors">Men</a></li>
                 <li><a href="/women" className="text-gray-300 hover:text-red-600 transition-colors">Women</a></li>
@@ -336,7 +349,7 @@ const Index = () => {
             </div>
             
             <div>
-              <h4 className="font-bold mb-4 text-sm md:text-base">SUPPORT</h4>
+              <h4 className="font-bold mb-3 sm:mb-4 text-sm md:text-base">SUPPORT</h4>
               <ul className="space-y-2 text-sm">
                 <li><a href="/contact" className="text-gray-300 hover:text-red-600 transition-colors">Contact</a></li>
                 <li><a href="/faq" className="text-gray-300 hover:text-red-600 transition-colors">FAQ</a></li>
@@ -346,7 +359,7 @@ const Index = () => {
             </div>
           </div>
           
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
+          <div className="border-t border-gray-800 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center">
             <p className="text-gray-400 text-sm">
               © 2025 African's Finest. Proudly representing Tanzania & Kenya.
             </p>
