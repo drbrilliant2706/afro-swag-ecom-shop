@@ -200,43 +200,45 @@ const Index = () => {
           </DropAnimation>
           
           <DropAnimationGroup staggerDelay={0.1} dropHeight={60} duration={0.8}>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {products.map((product) => (
-                <Card key={product.id} className="bg-gray-900 border-gray-800 hover:border-red-600 transition-all duration-300 group">
-                  <CardContent className="p-4">
-                    <div className="relative mb-4">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-64 object-cover rounded group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className={`absolute top-2 right-2 ${
-                          isFavorite(product.id) ? 'text-red-500' : 'text-white'
-                        } hover:text-red-500`}
-                        onClick={() => toggleFavorite(product)}
-                      >
-                        <Heart className={`h-5 w-5 ${isFavorite(product.id) ? 'fill-current' : ''}`} />
-                      </Button>
-                    </div>
-                    <h4 className="text-white font-bold mb-2">{product.name}</h4>
-                    <p className="text-gray-400 text-sm mb-2">{product.category}</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-red-500 font-bold">{product.price}</span>
-                      <Button
-                        size="sm"
-                        onClick={() => handleAddToCart(product)}
-                        className="bg-red-600 hover:bg-red-700"
-                      >
-                        Add to Cart
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {products.map((product) => (
+                  <Card key={product.id} className="bg-gray-900 border-gray-800 hover:border-red-600 transition-all duration-300 group">
+                    <CardContent className="p-4">
+                      <div className="relative mb-4">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-full h-64 object-cover rounded group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className={`absolute top-2 right-2 ${
+                            isFavorite(product.id) ? 'text-red-500' : 'text-white'
+                          } hover:text-red-500`}
+                          onClick={() => toggleFavorite(product)}
+                        >
+                          <Heart className={`h-5 w-5 ${isFavorite(product.id) ? 'fill-current' : ''}`} />
+                        </Button>
+                      </div>
+                      <h4 className="text-white font-bold mb-2">{product.name}</h4>
+                      <p className="text-gray-400 text-sm mb-2">{product.category}</p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-red-500 font-bold">{product.price}</span>
+                        <Button
+                          size="sm"
+                          onClick={() => handleAddToCart(product)}
+                          className="bg-red-600 hover:bg-red-700"
+                        >
+                          Add to Cart
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </>
           </DropAnimationGroup>
         </div>
       </section>

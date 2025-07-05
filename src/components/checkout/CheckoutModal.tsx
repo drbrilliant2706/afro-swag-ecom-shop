@@ -8,11 +8,15 @@ import { useCart } from '@/contexts/CartContext';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
 import { X, CreditCard } from 'lucide-react';
+import { Database } from '@/integrations/supabase/types';
 
 interface CheckoutModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+type OrderInsert = Database['public']['Tables']['orders']['Insert'];
+type OrderItemInsert = Database['public']['Tables']['order_items']['Insert'];
 
 export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose }) => {
   const { items, getTotalPrice, clearCart } = useCart();
@@ -46,17 +50,22 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
 
     setLoading(true);
     try {
-      // Create order in database
-      const orderData = {
-        customer_email: customerInfo.email,
-        customer_name: customerInfo.name,
-        customer_phone: customerInfo.phone,
-        total_amount: parseFloat(getTotalPrice().replace(/,/g, '')),
+      const totalAmount = parseFloat(getTotalPrice().replace(/,/g, ''));
+      
+      // Create order in database with proper structure
+      const orderData: OrderInsert = {
+        subtotal: totalAmount,
+        total_amount: totalAmount,
         currency: 'TSh',
         status: 'pending',
         payment_status: 'pending',
-        shipping_address: { address: customerInfo.address },
-        items: items
+        shipping_address: { 
+          address: customerInfo.address,
+          customer_name: customerInfo.name,
+          customer_email: customerInfo.email,
+          customer_phone: customerInfo.phone
+        },
+        items: items // Store cart items in the items JSONB field
       };
 
       const { data: order, error } = await supabase
@@ -67,8 +76,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
 
       if (error) throw error;
 
-      // Create order items
-      const orderItems = items.map(item => ({
+      // Create order items for detailed tracking
+      const orderItems: OrderItemInsert[] = items.map(item => ({
         order_id: order.id,
         product_name: item.name,
         product_image: item.image,
