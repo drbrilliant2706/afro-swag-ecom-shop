@@ -1,13 +1,12 @@
-
 import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { ShoppingCart, Heart, Search, Menu, X, User } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
 import { useFavorites } from '@/contexts/FavoritesContext';
 import CartModal from '@/components/cart/CartModal';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { ShoppingCart, Menu, X, User, Heart } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
 import { DropAnimation, DropAnimationGroup } from '@/components/animations/DropAnimation';
+import { useAuth } from '@/contexts/AuthContext';
 
 const products = [
   {
@@ -69,13 +68,11 @@ const products = [
 ];
 
 const Index = () => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const { addToCart, items } = useCart();
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
   const { user, isAdmin } = useAuth();
-
-  const cartItemCount = items.reduce((total, item) => total + item.quantity, 0);
 
   const handleAddToCart = (product: any) => {
     addToCart(product);
@@ -88,6 +85,8 @@ const Index = () => {
       addToFavorites(product);
     }
   };
+
+  const cartItemCount = items.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -193,7 +192,7 @@ const Index = () => {
         </section>
       </DropAnimation>
 
-      {/* Product Grid */}
+      {/* Featured Products */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <DropAnimation delay={400} dropHeight={40}>

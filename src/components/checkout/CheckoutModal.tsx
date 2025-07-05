@@ -34,12 +34,6 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
     });
   };
 
-  const generateOrderNumber = () => {
-    const timestamp = Date.now();
-    const random = Math.floor(Math.random() * 1000);
-    return `ORD-${timestamp}-${random}`;
-  };
-
   const handleCheckout = async () => {
     if (!customerInfo.name || !customerInfo.email) {
       toast({
@@ -52,26 +46,17 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
 
     setLoading(true);
     try {
-      const totalAmount = parseFloat(getTotalPrice().replace(/,/g, ''));
-      
-      // Create order in database with proper structure
+      // Create order in database
       const orderData = {
-        order_number: generateOrderNumber(),
         customer_email: customerInfo.email,
         customer_name: customerInfo.name,
         customer_phone: customerInfo.phone,
-        total_amount: totalAmount,
-        subtotal: totalAmount,
+        total_amount: parseFloat(getTotalPrice().replace(/,/g, '')),
         currency: 'TSh',
-        status: 'pending' as const,
-        payment_status: 'pending' as const,
-        shipping_address: { 
-          address: customerInfo.address,
-          customer_name: customerInfo.name,
-          customer_email: customerInfo.email,
-          customer_phone: customerInfo.phone
-        },
-        items: items // Store cart items in the items JSONB field
+        status: 'pending',
+        payment_status: 'pending',
+        shipping_address: { address: customerInfo.address },
+        items: items
       };
 
       const { data: order, error } = await supabase
@@ -82,7 +67,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
 
       if (error) throw error;
 
-      // Create order items for detailed tracking
+      // Create order items
       const orderItems = items.map(item => ({
         order_id: order.id,
         product_name: item.name,

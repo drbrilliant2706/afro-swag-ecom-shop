@@ -14,20 +14,21 @@ import {
 import { Eye, Package, Truck, CheckCircle, RefreshCw } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
-import { Database } from '@/integrations/supabase/types';
 
-type OrderRow = Database['public']['Tables']['orders']['Row'];
-type OrderStatus = Database['public']['Enums']['order_status'];
-
-interface ExtendedOrderRow extends OrderRow {
-  customer_email?: string;
-  customer_name?: string;
-  customer_phone?: string;
-  items?: any;
+interface Order {
+  id: string;
+  order_number: string;
+  customer_name: string;
+  customer_email: string;
+  total_amount: number;
+  status: string;
+  payment_status: string;
+  created_at: string;
+  items: any[];
 }
 
 export const OrderManagement = () => {
-  const [orders, setOrders] = useState<ExtendedOrderRow[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
     pending: 0,
@@ -71,7 +72,7 @@ export const OrderManagement = () => {
     }
   };
 
-  const updateOrderStatus = async (orderId: string, newStatus: OrderStatus) => {
+  const updateOrderStatus = async (orderId: string, newStatus: string) => {
     try {
       const { error } = await supabase
         .from('orders')
@@ -115,40 +116,6 @@ export const OrderManagement = () => {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(amount);
-  };
-
-  const getCustomerInfo = (order: ExtendedOrderRow) => {
-    // Try to get customer info from direct fields first
-    if (order.customer_name || order.customer_email) {
-      return {
-        name: order.customer_name || 'Unknown Customer',
-        email: order.customer_email || 'No email'
-      };
-    }
-    
-    // Fallback to shipping_address if it exists
-    if (order.shipping_address && typeof order.shipping_address === 'object') {
-      const addr = order.shipping_address as any;
-      return {
-        name: addr.customer_name || 'Unknown Customer',
-        email: addr.customer_email || 'No email'
-      };
-    }
-    
-    return {
-      name: 'Unknown Customer',
-      email: 'No email'
-    };
-  };
-
-  const getItemsCount = (order: ExtendedOrderRow) => {
-    if (Array.isArray(order.items)) {
-      return order.items.length;
-    }
-    if (order.items && typeof order.items === 'object' && 'length' in order.items) {
-      return (order.items as any).length || 0;
-    }
-    return 0;
   };
 
   if (loading) {
@@ -257,67 +224,64 @@ export const OrderManagement = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {orders.map((order) => {
-                  const customerInfo = getCustomerInfo(order);
-                  return (
-                    <TableRow key={order.id}>
-                      <TableCell className="font-mono">{order.order_number}</TableCell>
-                      <TableCell>
-                        <div>
-                          <p className="font-medium">{customerInfo.name}</p>
-                          <p className="text-sm text-muted-foreground">{customerInfo.email}</p>
-                        </div>
-                      </TableCell>
-                      <TableCell>{getItemsCount(order)}</TableCell>
-                      <TableCell className="font-medium">TSh {formatCurrency(order.total_amount)}</TableCell>
-                      <TableCell>
-                        <Badge className={getStatusColor(order.status || 'pending')} variant="secondary">
-                          {order.status || 'pending'}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>
-                        <Badge 
-                          className={order.payment_status === 'paid' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'} 
-                          variant="secondary"
-                        >
-                          {order.payment_status || 'pending'}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>{new Date(order.created_at || '').toLocaleDateString()}</TableCell>
-                      <TableCell className="text-right">
-                        <div className="flex gap-1 justify-end">
-                          {order.status === 'pending' && (
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => updateOrderStatus(order.id, 'processing')}
-                            >
-                              Process
-                            </Button>
-                          )}
-                          {order.status === 'processing' && (
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => updateOrderStatus(order.id, 'shipped')}
-                            >
-                              Ship
-                            </Button>
-                          )}
-                          {order.status === 'shipped' && (
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => updateOrderStatus(order.id, 'delivered')}
-                            >
-                              Deliver
-                            </Button>
-                          )}
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
+                {orders.map((order) => (
+                  <TableRow key={order.id}>
+                    <TableCell className="font-mono">{order.order_number}</TableCell>
+                    <TableCell>
+                      <div>
+                        <p className="font-medium">{order.customer_name}</p>
+                        <p className="text-sm text-muted-foreground">{order.customer_email}</p>
+                      </div>
+                    </TableCell>
+                    <TableCell>{order.items?.length || 0}</TableCell>
+                    <TableCell className="font-medium">TSh {formatCurrency(order.total_amount)}</TableCell>
+                    <TableCell>
+                      <Badge className={getStatusColor(order.status)} variant="secondary">
+                        {order.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <Badge 
+                        className={order.payment_status === 'paid' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'} 
+                        variant="secondary"
+                      >
+                        {order.payment_status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>{new Date(order.created_at).toLocaleDateString()}</TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex gap-1 justify-end">
+                        {order.status === 'pending' && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => updateOrderStatus(order.id, 'processing')}
+                          >
+                            Process
+                          </Button>
+                        )}
+                        {order.status === 'processing' && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => updateOrderStatus(order.id, 'shipped')}
+                          >
+                            Ship
+                          </Button>
+                        )}
+                        {order.status === 'shipped' && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => updateOrderStatus(order.id, 'delivered')}
+                          >
+                            Deliver
+                          </Button>
+                        )}
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           )}
