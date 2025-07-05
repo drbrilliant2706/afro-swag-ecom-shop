@@ -30,48 +30,71 @@ export const useAuth = () => {
   return context;
 };
 
+const ADMIN_EMAIL = 'admin@africansfinest.com';
+const ADMIN_PASSWORD = 'admin123';
+
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const createUserFromSession = (session: Session): AuthUser => {
+    const isAdminEmail = session.user.email === ADMIN_EMAIL;
+    return {
+      id: session.user.id,
+      email: session.user.email || '',
+      name: session.user.user_metadata?.name || session.user.email?.split('@')[0] || 'User',
+      role: isAdminEmail ? 'admin' : 'user'
+    };
+  };
+
+  const handleAuthStateChange = async (event: string, session: Session | null) => {
+    console.log('Auth state change:', event, session?.user?.email);
+    setSession(session);
+    
+    if (session?.user) {
+      setUser(createUserFromSession(session));
+    } else {
+      setUser(null);
+    }
+    
+    setLoading(false);
+  };
+
+  const createDemoAdmin = async () => {
+    try {
+      console.log('Creating demo admin account...');
+      const { data, error } = await supabase.auth.signUp({
+        email: ADMIN_EMAIL,
+        password: ADMIN_PASSWORD,
+        options: {
+          data: { name: 'Admin' },
+          emailRedirectTo: `${window.location.origin}/`
+        }
+      });
+
+      if (error) {
+        console.error('Demo admin creation error:', error);
+        return false;
+      }
+
+      console.log('Demo admin account created:', data.user?.email);
+      return !!data.user;
+    } catch (err) {
+      console.error('Demo admin creation error:', err);
+      return false;
+    }
+  };
+
   useEffect(() => {
     // Set up auth state listener
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        console.log('Auth state change:', event, session?.user?.email);
-        setSession(session);
-        
-        if (session?.user) {
-          // Check if user has admin role or is the demo admin
-          const isAdminEmail = session.user.email === 'admin@africansfinest.com';
-          
-          setUser({
-            id: session.user.id,
-            email: session.user.email || '',
-            name: session.user.user_metadata?.name || session.user.email?.split('@')[0] || 'User',
-            role: isAdminEmail ? 'admin' : 'user'
-          });
-        } else {
-          setUser(null);
-        }
-        
-        setLoading(false);
-      }
-    );
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(handleAuthStateChange);
 
     // Check for existing session
     supabase.auth.getSession().then(({ data: { session } }) => {
       console.log('Initial session check:', session?.user?.email);
       if (session?.user) {
-        const isAdminEmail = session.user.email === 'admin@africansfinest.com';
-        
-        setUser({
-          id: session.user.id,
-          email: session.user.email || '',
-          name: session.user.user_metadata?.name || session.user.email?.split('@')[0] || 'User',
-          role: isAdminEmail ? 'admin' : 'user'
-        });
+        setUser(createUserFromSession(session));
       }
       setSession(session);
       setLoading(false);
@@ -84,10 +107,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       console.log('Attempting login for:', email);
       
-      // Handle demo admin with fallback creation
-      if (email === 'admin@africansfinest.com' && password === 'admin123') {
+      // Handle demo admin
+      if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
         try {
-          // First try to sign in
           const { data, error } = await supabase.auth.signInWithPassword({
             email,
             password,
@@ -95,27 +117,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
           if (error && error.message === 'Invalid login credentials') {
             console.log('Demo admin not found, creating account...');
-            
-            // If login fails, create the demo admin account
-            const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
-              email,
-              password,
-              options: {
-                data: {
-                  name: 'Admin'
-                },
-                emailRedirectTo: `${window.location.origin}/`
-              }
-            });
-
-            if (signUpError) {
-              console.error('Demo admin creation error:', signUpError);
-              return false;
-            }
-
-            // Auto-confirm the demo admin user (this might require additional setup)
-            console.log('Demo admin account created:', signUpData.user?.email);
-            return !!signUpData.user;
+            return await createDemoAdmin();
           }
 
           if (error) {
@@ -125,7 +127,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
           return !!data.user;
         } catch (err) {
-          console.error('Demo admin login/creation error:', err);
+          console.error('Demo admin login error:', err);
           return false;
         }
       }
@@ -154,9 +156,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         email,
         password,
         options: {
-          data: {
-            name: name
-          },
+          data: { name },
           emailRedirectTo: `${window.location.origin}/`
         }
       });
@@ -183,9 +183,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const isAdmin = () => {
-    return user?.role === 'admin';
-  };
+  const isAdmin = () => user?.role === 'admin';
 
   return (
     <AuthContext.Provider value={{
