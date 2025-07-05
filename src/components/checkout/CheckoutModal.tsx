@@ -8,15 +8,11 @@ import { useCart } from '@/contexts/CartContext';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
 import { X, CreditCard } from 'lucide-react';
-import { Database } from '@/integrations/supabase/types';
 
 interface CheckoutModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
-
-type OrderInsert = Database['public']['Tables']['orders']['Insert'];
-type OrderItemInsert = Database['public']['Tables']['order_items']['Insert'];
 
 export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose }) => {
   const { items, getTotalPrice, clearCart } = useCart();
@@ -53,12 +49,15 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
       const totalAmount = parseFloat(getTotalPrice().replace(/,/g, ''));
       
       // Create order in database with proper structure
-      const orderData: OrderInsert = {
-        subtotal: totalAmount,
+      const orderData = {
+        customer_email: customerInfo.email,
+        customer_name: customerInfo.name,
+        customer_phone: customerInfo.phone,
         total_amount: totalAmount,
+        subtotal: totalAmount,
         currency: 'TSh',
-        status: 'pending',
-        payment_status: 'pending',
+        status: 'pending' as const,
+        payment_status: 'pending' as const,
         shipping_address: { 
           address: customerInfo.address,
           customer_name: customerInfo.name,
@@ -77,7 +76,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
       if (error) throw error;
 
       // Create order items for detailed tracking
-      const orderItems: OrderItemInsert[] = items.map(item => ({
+      const orderItems = items.map(item => ({
         order_id: order.id,
         product_name: item.name,
         product_image: item.image,

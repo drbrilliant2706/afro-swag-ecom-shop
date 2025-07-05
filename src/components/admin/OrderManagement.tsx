@@ -16,13 +16,18 @@ import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
 import { Database } from '@/integrations/supabase/types';
 
-// Use the database types directly
 type OrderRow = Database['public']['Tables']['orders']['Row'];
 type OrderStatus = Database['public']['Enums']['order_status'];
-type PaymentStatus = Database['public']['Enums']['payment_status'];
+
+interface ExtendedOrderRow extends OrderRow {
+  customer_email?: string;
+  customer_name?: string;
+  customer_phone?: string;
+  items?: any;
+}
 
 export const OrderManagement = () => {
-  const [orders, setOrders] = useState<OrderRow[]>([]);
+  const [orders, setOrders] = useState<ExtendedOrderRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
     pending: 0,
@@ -112,25 +117,35 @@ export const OrderManagement = () => {
     }).format(amount);
   };
 
-  // Extract customer info from items JSON or use fallback
-  const getCustomerInfo = (order: OrderRow) => {
-    if (typeof order.items === 'object' && order.items && 'customer_name' in order.items) {
+  const getCustomerInfo = (order: ExtendedOrderRow) => {
+    // Try to get customer info from direct fields first
+    if (order.customer_name || order.customer_email) {
       return {
-        name: (order.items as any).customer_name || 'Unknown Customer',
-        email: (order.items as any).customer_email || 'No email'
+        name: order.customer_name || 'Unknown Customer',
+        email: order.customer_email || 'No email'
       };
     }
+    
+    // Fallback to shipping_address if it exists
+    if (order.shipping_address && typeof order.shipping_address === 'object') {
+      const addr = order.shipping_address as any;
+      return {
+        name: addr.customer_name || 'Unknown Customer',
+        email: addr.customer_email || 'No email'
+      };
+    }
+    
     return {
       name: 'Unknown Customer',
       email: 'No email'
     };
   };
 
-  const getItemsCount = (order: OrderRow) => {
+  const getItemsCount = (order: ExtendedOrderRow) => {
     if (Array.isArray(order.items)) {
       return order.items.length;
     }
-    if (typeof order.items === 'object' && order.items && 'length' in order.items) {
+    if (order.items && typeof order.items === 'object' && 'length' in order.items) {
       return (order.items as any).length || 0;
     }
     return 0;
