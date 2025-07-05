@@ -34,6 +34,12 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
     });
   };
 
+  const generateOrderNumber = () => {
+    const timestamp = Date.now();
+    const random = Math.floor(Math.random() * 1000);
+    return `ORD-${timestamp}-${random}`;
+  };
+
   const handleCheckout = async () => {
     if (!customerInfo.name || !customerInfo.email) {
       toast({
@@ -50,6 +56,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
       
       // Create order in database with proper structure
       const orderData = {
+        order_number: generateOrderNumber(),
         customer_email: customerInfo.email,
         customer_name: customerInfo.name,
         customer_phone: customerInfo.phone,

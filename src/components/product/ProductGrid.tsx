@@ -32,17 +32,19 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
         </DropAnimation>
         
         <DropAnimationGroup staggerDelay={0.1} dropHeight={60} duration={0.8}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {products.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                onAddToCart={onAddToCart}
-                onToggleFavorite={onToggleFavorite}
-                isFavorite={isFavorite(product.id)}
-              />
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {products.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onAddToCart={onAddToCart}
+                  onToggleFavorite={onToggleFavorite}
+                  isFavorite={isFavorite(product.id)}
+                />
+              ))}
+            </div>
+          </>
         </DropAnimationGroup>
       </div>
     </section>
