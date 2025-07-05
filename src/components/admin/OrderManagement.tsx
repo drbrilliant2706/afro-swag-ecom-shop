@@ -1,5 +1,3 @@
-
-import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -11,95 +9,39 @@ import {
   TableHeader, 
   TableRow 
 } from '@/components/ui/table';
-import { Eye, Package, Truck, CheckCircle, RefreshCw } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
-import { useToast } from '@/components/ui/use-toast';
+import { Eye, Package, Truck, CheckCircle } from 'lucide-react';
 
-interface Order {
-  id: string;
-  order_number: string;
-  customer_name: string;
-  customer_email: string;
-  total_amount: number;
-  status: string;
-  payment_status: string;
-  created_at: string;
-  items: any[];
-}
+const orders = [
+  { 
+    id: 'ORD-001', 
+    customer: 'John Mwangi', 
+    items: 3, 
+    total: 'TSh 75,000', 
+    status: 'pending', 
+    date: '2025-01-02',
+    paymentStatus: 'paid'
+  },
+  { 
+    id: 'ORD-002', 
+    customer: 'Sarah Njeri', 
+    items: 1, 
+    total: 'TSh 25,000', 
+    status: 'processing', 
+    date: '2025-01-02',
+    paymentStatus: 'paid'
+  },
+  { 
+    id: 'ORD-003', 
+    customer: 'David Kimani', 
+    items: 2, 
+    total: 'TSh 50,000', 
+    status: 'shipped', 
+    date: '2025-01-01',
+    paymentStatus: 'paid'
+  },
+];
 
 export const OrderManagement = () => {
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [stats, setStats] = useState({
-    pending: 0,
-    processing: 0,
-    shipped: 0,
-    delivered: 0,
-    totalRevenue: 0
-  });
-  const { toast } = useToast();
-
-  const fetchOrders = async () => {
-    setLoading(true);
-    try {
-      const { data, error } = await supabase
-        .from('orders')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-
-      setOrders(data || []);
-      
-      // Calculate stats
-      const newStats = {
-        pending: data?.filter(o => o.status === 'pending').length || 0,
-        processing: data?.filter(o => o.status === 'processing').length || 0,
-        shipped: data?.filter(o => o.status === 'shipped').length || 0,
-        delivered: data?.filter(o => o.status === 'delivered').length || 0,
-        totalRevenue: data?.reduce((sum, o) => sum + Number(o.total_amount), 0) || 0
-      };
-      setStats(newStats);
-    } catch (error) {
-      console.error('Error fetching orders:', error);
-      toast({
-        title: "Error",
-        description: "Failed to fetch orders",
-        variant: "destructive"
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const updateOrderStatus = async (orderId: string, newStatus: string) => {
-    try {
-      const { error } = await supabase
-        .from('orders')
-        .update({ status: newStatus })
-        .eq('id', orderId);
-
-      if (error) throw error;
-
-      toast({
-        title: "Success",
-        description: "Order status updated successfully"
-      });
-      
-      fetchOrders();
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to update order status",
-        variant: "destructive"
-      });
-    }
-  };
-
-  useEffect(() => {
-    fetchOrders();
-  }, []);
-
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300';
@@ -110,47 +52,23 @@ export const OrderManagement = () => {
     }
   };
 
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-TZ', {
-      style: 'decimal',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(amount);
-  };
-
-  if (loading) {
-    return (
-      <div className="space-y-6">
-        <div className="flex items-center justify-center p-8">
-          <RefreshCw className="h-6 w-6 animate-spin" />
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-3xl font-bold tracking-tight">Order Management</h2>
-          <p className="text-muted-foreground">
-            Track and manage all customer orders
-          </p>
-        </div>
-        <Button onClick={fetchOrders} variant="outline">
-          <RefreshCw className="h-4 w-4 mr-2" />
-          Refresh
-        </Button>
+      <div>
+        <h2 className="text-3xl font-bold tracking-tight">Order Management</h2>
+        <p className="text-muted-foreground">
+          Track and manage all customer orders with seamless processing
+        </p>
       </div>
 
       {/* Order Stats */}
-      <div className="grid gap-4 md:grid-cols-5">
+      <div className="grid gap-4 md:grid-cols-4">
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center gap-2">
               <Package className="h-5 w-5 text-yellow-600" />
               <div>
-                <div className="text-2xl font-bold">{stats.pending}</div>
+                <div className="text-2xl font-bold">23</div>
                 <p className="text-sm text-muted-foreground">Pending Orders</p>
               </div>
             </div>
@@ -159,21 +77,10 @@ export const OrderManagement = () => {
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center gap-2">
-              <RefreshCw className="h-5 w-5 text-blue-600" />
+              <Truck className="h-5 w-5 text-blue-600" />
               <div>
-                <div className="text-2xl font-bold">{stats.processing}</div>
-                <p className="text-sm text-muted-foreground">Processing</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center gap-2">
-              <Truck className="h-5 w-5 text-purple-600" />
-              <div>
-                <div className="text-2xl font-bold">{stats.shipped}</div>
-                <p className="text-sm text-muted-foreground">Shipped</p>
+                <div className="text-2xl font-bold">15</div>
+                <p className="text-sm text-muted-foreground">In Transit</p>
               </div>
             </div>
           </CardContent>
@@ -183,7 +90,7 @@ export const OrderManagement = () => {
             <div className="flex items-center gap-2">
               <CheckCircle className="h-5 w-5 text-green-600" />
               <div>
-                <div className="text-2xl font-bold">{stats.delivered}</div>
+                <div className="text-2xl font-bold">89</div>
                 <p className="text-sm text-muted-foreground">Delivered</p>
               </div>
             </div>
@@ -192,7 +99,7 @@ export const OrderManagement = () => {
         <Card>
           <CardContent className="p-6">
             <div>
-              <div className="text-2xl font-bold">TSh {formatCurrency(stats.totalRevenue)}</div>
+              <div className="text-2xl font-bold">TSh 2.4M</div>
               <p className="text-sm text-muted-foreground">Total Revenue</p>
             </div>
           </CardContent>
@@ -202,89 +109,43 @@ export const OrderManagement = () => {
       {/* Orders Table */}
       <Card>
         <CardHeader>
-          <CardTitle>Recent Orders ({orders.length})</CardTitle>
+          <CardTitle>Recent Orders</CardTitle>
         </CardHeader>
         <CardContent>
-          {orders.length === 0 ? (
-            <div className="text-center py-8">
-              <p className="text-muted-foreground">No orders found</p>
-            </div>
-          ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Order ID</TableHead>
-                  <TableHead>Customer</TableHead>
-                  <TableHead>Items</TableHead>
-                  <TableHead>Total</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Payment</TableHead>
-                  <TableHead>Date</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Order ID</TableHead>
+                <TableHead>Customer</TableHead>
+                <TableHead>Items</TableHead>
+                <TableHead>Total</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Date</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {orders.map((order) => (
+                <TableRow key={order.id}>
+                  <TableCell className="font-mono">{order.id}</TableCell>
+                  <TableCell className="font-medium">{order.customer}</TableCell>
+                  <TableCell>{order.items}</TableCell>
+                  <TableCell className="font-medium">{order.total}</TableCell>
+                  <TableCell>
+                    <Badge className={getStatusColor(order.status)} variant="secondary">
+                      {order.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>{order.date}</TableCell>
+                  <TableCell className="text-right">
+                    <Button variant="ghost" size="sm">
+                      <Eye className="h-4 w-4" />
+                    </Button>
+                  </TableCell>
                 </TableRow>
-              </TableHeader>
-              <TableBody>
-                {orders.map((order) => (
-                  <TableRow key={order.id}>
-                    <TableCell className="font-mono">{order.order_number}</TableCell>
-                    <TableCell>
-                      <div>
-                        <p className="font-medium">{order.customer_name}</p>
-                        <p className="text-sm text-muted-foreground">{order.customer_email}</p>
-                      </div>
-                    </TableCell>
-                    <TableCell>{order.items?.length || 0}</TableCell>
-                    <TableCell className="font-medium">TSh {formatCurrency(order.total_amount)}</TableCell>
-                    <TableCell>
-                      <Badge className={getStatusColor(order.status)} variant="secondary">
-                        {order.status}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <Badge 
-                        className={order.payment_status === 'paid' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'} 
-                        variant="secondary"
-                      >
-                        {order.payment_status}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>{new Date(order.created_at).toLocaleDateString()}</TableCell>
-                    <TableCell className="text-right">
-                      <div className="flex gap-1 justify-end">
-                        {order.status === 'pending' && (
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => updateOrderStatus(order.id, 'processing')}
-                          >
-                            Process
-                          </Button>
-                        )}
-                        {order.status === 'processing' && (
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => updateOrderStatus(order.id, 'shipped')}
-                          >
-                            Ship
-                          </Button>
-                        )}
-                        {order.status === 'shipped' && (
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => updateOrderStatus(order.id, 'delivered')}
-                          >
-                            Deliver
-                          </Button>
-                        )}
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          )}
+              ))}
+            </TableBody>
+          </Table>
         </CardContent>
       </Card>
     </div>
