@@ -29,10 +29,7 @@ export const useDashboardStats = () => {
         .rpc('get_dashboard_stats');
 
       if (fetchError) throw fetchError;
-      
-      // Parse the JSON response safely
-      const parsedStats = typeof data === 'string' ? JSON.parse(data) : data;
-      setStats(parsedStats as DashboardStats);
+      setStats(data);
     } catch (err: any) {
       setError(err.message);
       toast({

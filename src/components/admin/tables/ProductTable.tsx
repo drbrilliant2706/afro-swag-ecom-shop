@@ -10,7 +10,17 @@ import {
   TableRow 
 } from '@/components/ui/table';
 import { Edit, Trash2, Eye } from 'lucide-react';
-import { Product } from '@/hooks/useProducts';
+
+interface Product {
+  id: number;
+  name: string;
+  sku: string;
+  price: string;
+  stock: number;
+  status: string;
+  category: string;
+  sales: number;
+}
 
 interface ProductTableProps {
   products: Product[];
@@ -35,6 +45,7 @@ const ProductTable = ({ products }: ProductTableProps) => {
           <TableHead>Price</TableHead>
           <TableHead>Stock</TableHead>
           <TableHead>Status</TableHead>
+          <TableHead>Sales</TableHead>
           <TableHead className="text-right">Actions</TableHead>
         </TableRow>
       </TableHeader>
@@ -48,10 +59,10 @@ const ProductTable = ({ products }: ProductTableProps) => {
               </div>
             </TableCell>
             <TableCell className="font-mono text-sm">{product.sku}</TableCell>
-            <TableCell className="font-medium">TSh {product.price.toLocaleString()}</TableCell>
+            <TableCell className="font-medium">{product.price}</TableCell>
             <TableCell>
-              <span className={product.stock_quantity < product.low_stock_threshold ? 'text-red-600 font-medium' : ''}>
-                {product.stock_quantity}
+              <span className={product.stock < 10 ? 'text-red-600 font-medium' : ''}>
+                {product.stock}
               </span>
             </TableCell>
             <TableCell>
@@ -59,6 +70,7 @@ const ProductTable = ({ products }: ProductTableProps) => {
                 {product.status.replace('_', ' ')}
               </Badge>
             </TableCell>
+            <TableCell>{product.sales}</TableCell>
             <TableCell className="text-right">
               <div className="flex justify-end gap-2">
                 <Button variant="ghost" size="sm">

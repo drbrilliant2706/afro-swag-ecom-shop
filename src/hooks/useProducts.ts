@@ -16,7 +16,7 @@ export interface Product {
   low_stock_threshold: number;
   max_stock_quantity: number;
   reorder_point: number;
-  status: 'active' | 'inactive' | 'low_stock' | 'out_of_stock';
+  status: 'active' | 'inactive' | 'discontinued';
   images: string[] | null;
   tags: string[] | null;
   material: string | null;
@@ -61,11 +61,11 @@ export const useProducts = () => {
     }
   };
 
-  const createProduct = async (productData: Omit<Product, 'id' | 'created_at' | 'updated_at'>) => {
+  const createProduct = async (productData: Partial<Product>) => {
     try {
       const { data, error: createError } = await supabase
         .from('products')
-        .insert(productData)
+        .insert([productData])
         .select()
         .single();
 
@@ -88,7 +88,7 @@ export const useProducts = () => {
     }
   };
 
-  const updateProduct = async (id: string, updates: Partial<Omit<Product, 'id' | 'created_at' | 'updated_at'>>) => {
+  const updateProduct = async (id: string, updates: Partial<Product>) => {
     try {
       const { data, error: updateError } = await supabase
         .from('products')
