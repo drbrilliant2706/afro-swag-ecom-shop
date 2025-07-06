@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -24,11 +23,12 @@ interface ProductFormData {
   material: string;
   care_instructions: string;
   weight: string;
-  status: 'active' | 'inactive';
+  status: 'active' | 'inactive' | 'low_stock' | 'out_of_stock';
   is_featured: boolean;
   tags: string;
   seo_title: string;
   seo_description: string;
+  images: string[];
 }
 
 interface ProductFormProps {
@@ -60,23 +60,23 @@ const ProductForm = ({ onSubmit, onCancel, initialData }: ProductFormProps) => {
     tags: initialData?.tags || '',
     seo_title: initialData?.seo_title || '',
     seo_description: initialData?.seo_description || '',
+    images: initialData?.images || [],
   });
 
-  const [images, setImages] = useState<string[]>(initialData?.images || []);
   const [loading, setLoading] = useState(false);
 
-  const handleInputChange = (field: keyof ProductFormData, value: string | boolean) => {
+  const handleInputChange = (field: keyof ProductFormData, value: string | boolean | string[]) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
   const handleImageUpload = async (file: File) => {
     const url = await uploadProductImage(file);
-    setImages(prev => [...prev, url]);
+    setFormData(prev => ({ ...prev, images: [...prev.images, url] }));
     return url;
   };
 
   const handleImageRemove = (url: string) => {
-    setImages(prev => prev.filter(img => img !== url));
+    setFormData(prev => ({ ...prev, images: prev.images.filter(img => img !== url) }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -102,10 +102,13 @@ const ProductForm = ({ onSubmit, onCancel, initialData }: ProductFormProps) => {
         weight: formData.weight ? parseFloat(formData.weight) : null,
         status: formData.status,
         is_featured: formData.is_featured,
-        images: images,
+        images: formData.images,
         tags: formData.tags ? formData.tags.split(',').map(tag => tag.trim()) : null,
         seo_title: formData.seo_title,
         seo_description: formData.seo_description,
+        dimensions: null,
+        size_guide: null,
+        supplier_info: null,
       };
 
       await onSubmit(productData);
@@ -312,7 +315,7 @@ const ProductForm = ({ onSubmit, onCancel, initialData }: ProductFormProps) => {
         <ImageUpload
           onImageUpload={handleImageUpload}
           onImageRemove={handleImageRemove}
-          images={images}
+          images={formData.images}
           maxImages={5}
         />
       </div>
@@ -324,13 +327,15 @@ const ProductForm = ({ onSubmit, onCancel, initialData }: ProductFormProps) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <Label htmlFor="status">Status</Label>
-            <Select value={formData.status} onValueChange={(value: 'active' | 'inactive') => handleInputChange('status', value)}>
+            <Select value={formData.status} onValueChange={(value: 'active' | 'inactive' | 'low_stock' | 'out_of_stock') => handleInputChange('status', value)}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="active">Active</SelectItem>
                 <SelectItem value="inactive">Inactive</SelectItem>
+                <SelectItem value="low_stock">Low Stock</SelectItem>
+                <SelectItem value="out_of_stock">Out of Stock</SelectItem>
               </SelectContent>
             </Select>
           </div>
