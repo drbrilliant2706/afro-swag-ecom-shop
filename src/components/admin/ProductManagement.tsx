@@ -3,46 +3,95 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Plus, Search, Filter } from 'lucide-react';
+import { Plus, Search, Filter, Download } from 'lucide-react';
 import AddProductModal from './AddProductModal';
 import ProductTable from './tables/ProductTable';
-
-const products = [
-  { 
-    id: 1, 
-    name: 'AFRIKA\'S FINEST Mask Tee', 
-    sku: 'AF-MT-001', 
-    price: 'TSh 25,000', 
-    stock: 45, 
-    status: 'active',
-    category: 'Men\'s T-Shirts',
-    sales: 128
-  },
-  { 
-    id: 2, 
-    name: 'FINEST Crop Collection', 
-    sku: 'FC-CC-002', 
-    price: 'TSh 25,000', 
-    stock: 23, 
-    status: 'active',
-    category: 'Women\'s Tops',
-    sales: 89
-  },
-  { 
-    id: 3, 
-    name: 'NYUMBANI QWETU Tee', 
-    sku: 'NQ-T-003', 
-    price: 'TSh 25,000', 
-    stock: 8, 
-    status: 'low_stock',
-    category: 'Unisex',
-    sales: 234
-  },
-];
+import { useProducts } from '@/hooks/useProducts';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export const ProductManagement = () => {
+  const { products, loading, createProduct } = useProducts();
   const [searchTerm, setSearchTerm] = useState('');
   const [showAddProduct, setShowAddProduct] = useState(false);
+  const [categoryFilter, setCategoryFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState('all');
+
+  const filteredProducts = products.filter(product => {
+    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         product.sku.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = categoryFilter === 'all' || product.category === categoryFilter;
+    const matchesStatus = statusFilter === 'all' || product.status === statusFilter;
+    return matchesSearch && matchesCategory && matchesStatus;
+  });
+
+  const handleAddProduct = async (productData: any) => {
+    await createProduct(productData);
+    setShowAddProduct(false);
+  };
+
+  const exportData = () => {
+    const csvContent = [
+      ['Name', 'SKU', 'Category', 'Price', 'Stock', 'Status'],
+      ...filteredProducts.map(p => [
+        p.name,
+        p.sku,
+        p.category || '',
+        p.price,
+        p.stock_quantity,
+        p.status
+      ])
+    ].map(row => row.join(',')).join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'products-export.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const lowStockCount = products.filter(p => p.stock_quantity <= p.low_stock_threshold).length;
+  const outOfStockCount = products.filter(p => p.stock_quantity === 0).length;
+  const totalValue = products.reduce((sum, p) => sum + (p.stock_quantity * (p.cost_price || p.price)), 0);
+
+  if (loading) {
+    return (
+      <div className="space-y-6">
+        <div className="flex justify-between items-center">
+          <div>
+            <Skeleton className="h-8 w-64 mb-2" />
+            <Skeleton className="h-4 w-96" />
+          </div>
+          <Skeleton className="h-10 w-32" />
+        </div>
+        
+        <div className="grid gap-4 md:grid-cols-3">
+          {[...Array(3)].map((_, i) => (
+            <Card key={i}>
+              <CardContent className="p-6">
+                <Skeleton className="h-8 w-16 mb-2" />
+                <Skeleton className="h-4 w-24" />
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+        
+        <Card>
+          <CardHeader>
+            <Skeleton className="h-6 w-32" />
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {[...Array(5)].map((_, i) => (
+                <Skeleton key={i} className="h-12 w-full" />
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -73,11 +122,28 @@ export const ProductManagement = () => {
               />
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm">
-                <Filter className="h-4 w-4 mr-2" />
-                Filter
-              </Button>
-              <Button variant="outline" size="sm">
+              <select 
+                value={categoryFilter} 
+                onChange={(e) => setCategoryFilter(e.target.value)}
+                className="flex h-10 rounded-md border border-input bg-background px-3 py-2 text-sm"
+              >
+                <option value="all">All Categories</option>
+                <option value="T-Shirts">T-Shirts</option>
+                <option value="Hoodies">Hoodies</option>
+                <option value="Tops">Tops</option>
+                <option value="Accessories">Accessories</option>
+              </select>
+              <select 
+                value={statusFilter} 
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="flex h-10 rounded-md border border-input bg-background px-3 py-2 text-sm"
+              >
+                <option value="all">All Status</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+              <Button variant="outline" size="sm" onClick={exportData}>
+                <Download className="h-4 w-4 mr-2" />
                 Export
               </Button>
             </div>
@@ -88,10 +154,10 @@ export const ProductManagement = () => {
       {/* Products Table */}
       <Card>
         <CardHeader>
-          <CardTitle>Products ({products.length})</CardTitle>
+          <CardTitle>Products ({filteredProducts.length})</CardTitle>
         </CardHeader>
         <CardContent>
-          <ProductTable products={products} />
+          <ProductTable products={filteredProducts} />
         </CardContent>
       </Card>
 
@@ -99,19 +165,19 @@ export const ProductManagement = () => {
       <div className="grid gap-4 md:grid-cols-3">
         <Card>
           <CardContent className="p-6">
-            <div className="text-2xl font-bold">156</div>
+            <div className="text-2xl font-bold">{products.length}</div>
             <p className="text-sm text-muted-foreground">Total Products</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-6">
-            <div className="text-2xl font-bold text-red-600">8</div>
+            <div className="text-2xl font-bold text-red-600">{lowStockCount}</div>
             <p className="text-sm text-muted-foreground">Low Stock Items</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-6">
-            <div className="text-2xl font-bold text-green-600">TSh 3.8M</div>
+            <div className="text-2xl font-bold text-green-600">TSh {totalValue.toLocaleString()}</div>
             <p className="text-sm text-muted-foreground">Total Inventory Value</p>
           </CardContent>
         </Card>
@@ -119,7 +185,8 @@ export const ProductManagement = () => {
 
       <AddProductModal 
         isOpen={showAddProduct} 
-        onClose={() => setShowAddProduct(false)} 
+        onClose={() => setShowAddProduct(false)}
+        onSubmit={handleAddProduct}
       />
     </div>
   );

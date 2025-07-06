@@ -2,186 +2,388 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Label } from '@/components/ui/label';
-import { Upload } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { ImageUpload } from '../ImageUpload';
+import { useProducts } from '@/hooks/useProducts';
 
 interface ProductFormData {
   name: string;
   description: string;
   price: string;
-  category: string;
-  gender: string;
+  cost_price: string;
   sku: string;
-  stockQuantity: string;
+  category: string;
   brand: string;
-  images: string[];
+  gender: string;
+  stock_quantity: string;
+  low_stock_threshold: string;
+  max_stock_quantity: string;
+  reorder_point: string;
+  material: string;
+  care_instructions: string;
+  weight: string;
+  status: 'active' | 'inactive';
+  is_featured: boolean;
+  tags: string;
+  seo_title: string;
+  seo_description: string;
 }
 
 interface ProductFormProps {
-  onSubmit: (data: ProductFormData) => void;
+  onSubmit: (data: any) => void;
   onCancel: () => void;
+  initialData?: Partial<ProductFormData>;
 }
 
-const ProductForm = ({ onSubmit, onCancel }: ProductFormProps) => {
+const ProductForm = ({ onSubmit, onCancel, initialData }: ProductFormProps) => {
+  const { uploadProductImage } = useProducts();
   const [formData, setFormData] = useState<ProductFormData>({
-    name: '',
-    description: '',
-    price: '',
-    category: '',
-    gender: '',
-    sku: '',
-    stockQuantity: '',
-    brand: 'AFRIKA\'S FINEST',
-    images: []
+    name: initialData?.name || '',
+    description: initialData?.description || '',
+    price: initialData?.price || '',
+    cost_price: initialData?.cost_price || '',
+    sku: initialData?.sku || '',
+    category: initialData?.category || '',
+    brand: initialData?.brand || 'AFRIKA\'S FINEST',
+    gender: initialData?.gender || '',
+    stock_quantity: initialData?.stock_quantity || '0',
+    low_stock_threshold: initialData?.low_stock_threshold || '10',
+    max_stock_quantity: initialData?.max_stock_quantity || '1000',
+    reorder_point: initialData?.reorder_point || '15',
+    material: initialData?.material || '',
+    care_instructions: initialData?.care_instructions || '',
+    weight: initialData?.weight || '',
+    status: initialData?.status || 'active',
+    is_featured: initialData?.is_featured || false,
+    tags: initialData?.tags || '',
+    seo_title: initialData?.seo_title || '',
+    seo_description: initialData?.seo_description || '',
   });
-  const { toast } = useToast();
 
-  const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: value
-    }));
+  const [images, setImages] = useState<string[]>(initialData?.images || []);
+  const [loading, setLoading] = useState(false);
+
+  const handleInputChange = (field: keyof ProductFormData, value: string | boolean) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!formData.name || !formData.price || !formData.category || !formData.gender) {
-      toast({
-        title: "Validation Error",
-        description: "Please fill in all required fields.",
-        variant: "destructive",
-      });
-      return;
-    }
+  const handleImageUpload = async (file: File) => {
+    const url = await uploadProductImage(file);
+    setImages(prev => [...prev, url]);
+    return url;
+  };
 
-    onSubmit(formData);
+  const handleImageRemove = (url: string) => {
+    setImages(prev => prev.filter(img => img !== url));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const productData = {
+        name: formData.name,
+        description: formData.description,
+        price: parseFloat(formData.price),
+        cost_price: formData.cost_price ? parseFloat(formData.cost_price) : null,
+        sku: formData.sku,
+        category: formData.category,
+        brand: formData.brand,
+        gender: formData.gender,
+        stock_quantity: parseInt(formData.stock_quantity),
+        low_stock_threshold: parseInt(formData.low_stock_threshold),
+        max_stock_quantity: parseInt(formData.max_stock_quantity),
+        reorder_point: parseInt(formData.reorder_point),
+        material: formData.material,
+        care_instructions: formData.care_instructions,
+        weight: formData.weight ? parseFloat(formData.weight) : null,
+        status: formData.status,
+        is_featured: formData.is_featured,
+        images: images,
+        tags: formData.tags ? formData.tags.split(',').map(tag => tag.trim()) : null,
+        seo_title: formData.seo_title,
+        seo_description: formData.seo_description,
+      };
+
+      await onSubmit(productData);
+    } catch (error) {
+      console.error('Form submission error:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* Basic Information */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-medium">Basic Information</h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <Label htmlFor="name">Product Name *</Label>
+            <Input
+              id="name"
+              value={formData.name}
+              onChange={(e) => handleInputChange('name', e.target.value)}
+              required
+            />
+          </div>
+          
+          <div>
+            <Label htmlFor="sku">SKU *</Label>
+            <Input
+              id="sku"
+              value={formData.sku}
+              onChange={(e) => handleInputChange('sku', e.target.value)}
+              required
+            />
+          </div>
+        </div>
+
         <div>
-          <Label htmlFor="name" className="text-sm font-medium text-black">Product Name *</Label>
-          <Input
-            id="name"
-            value={formData.name}
-            onChange={(e) => handleInputChange('name', e.target.value)}
-            placeholder="e.g., FINEST African Mask Tee"
-            className="mt-1"
-            required
+          <Label htmlFor="description">Description</Label>
+          <Textarea
+            id="description"
+            value={formData.description}
+            onChange={(e) => handleInputChange('description', e.target.value)}
+            rows={4}
           />
         </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <Label htmlFor="price">Selling Price (TSh) *</Label>
+            <Input
+              id="price"
+              type="number"
+              step="0.01"
+              value={formData.price}
+              onChange={(e) => handleInputChange('price', e.target.value)}
+              required
+            />
+          </div>
+          
+          <div>
+            <Label htmlFor="cost_price">Cost Price (TSh)</Label>
+            <Input
+              id="cost_price"
+              type="number"
+              step="0.01"
+              value={formData.cost_price}
+              onChange={(e) => handleInputChange('cost_price', e.target.value)}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Category & Details */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-medium">Category & Details</h3>
         
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <Label htmlFor="category">Category</Label>
+            <Select value={formData.category} onValueChange={(value) => handleInputChange('category', value)}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select category" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="T-Shirts">T-Shirts</SelectItem>
+                <SelectItem value="Hoodies">Hoodies</SelectItem>
+                <SelectItem value="Tops">Tops</SelectItem>
+                <SelectItem value="Accessories">Accessories</SelectItem>
+                <SelectItem value="Bottoms">Bottoms</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          
+          <div>
+            <Label htmlFor="gender">Gender</Label>
+            <Select value={formData.gender} onValueChange={(value) => handleInputChange('gender', value)}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select gender" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Men">Men</SelectItem>
+                <SelectItem value="Women">Women</SelectItem>
+                <SelectItem value="Unisex">Unisex</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          
+          <div>
+            <Label htmlFor="brand">Brand</Label>
+            <Input
+              id="brand"
+              value={formData.brand}
+              onChange={(e) => handleInputChange('brand', e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <Label htmlFor="material">Material</Label>
+            <Input
+              id="material"
+              value={formData.material}
+              onChange={(e) => handleInputChange('material', e.target.value)}
+              placeholder="e.g., 100% Cotton"
+            />
+          </div>
+          
+          <div>
+            <Label htmlFor="weight">Weight (kg)</Label>
+            <Input
+              id="weight"
+              type="number"
+              step="0.01"
+              value={formData.weight}
+              onChange={(e) => handleInputChange('weight', e.target.value)}
+            />
+          </div>
+        </div>
+
         <div>
-          <Label htmlFor="price" className="text-sm font-medium text-black">Price *</Label>
-          <Input
-            id="price"
-            value={formData.price}
-            onChange={(e) => handleInputChange('price', e.target.value)}
-            placeholder="e.g., TSh 25,000"
-            className="mt-1"
-            required
+          <Label htmlFor="care_instructions">Care Instructions</Label>
+          <Textarea
+            id="care_instructions"
+            value={formData.care_instructions}
+            onChange={(e) => handleInputChange('care_instructions', e.target.value)}
+            placeholder="e.g., Machine wash cold, tumble dry low"
           />
         </div>
       </div>
 
-      <div>
-        <Label htmlFor="description" className="text-sm font-medium text-black">Description</Label>
-        <Textarea
-          id="description"
-          value={formData.description}
-          onChange={(e) => handleInputChange('description', e.target.value)}
-          placeholder="Product description..."
-          className="mt-1"
-          rows={3}
+      {/* Inventory */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-medium">Inventory Management</h3>
+        
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div>
+            <Label htmlFor="stock_quantity">Current Stock</Label>
+            <Input
+              id="stock_quantity"
+              type="number"
+              value={formData.stock_quantity}
+              onChange={(e) => handleInputChange('stock_quantity', e.target.value)}
+            />
+          </div>
+          
+          <div>
+            <Label htmlFor="low_stock_threshold">Low Stock Alert</Label>
+            <Input
+              id="low_stock_threshold"
+              type="number"
+              value={formData.low_stock_threshold}
+              onChange={(e) => handleInputChange('low_stock_threshold', e.target.value)}
+            />
+          </div>
+          
+          <div>
+            <Label htmlFor="max_stock_quantity">Max Stock</Label>
+            <Input
+              id="max_stock_quantity"
+              type="number"
+              value={formData.max_stock_quantity}
+              onChange={(e) => handleInputChange('max_stock_quantity', e.target.value)}
+            />
+          </div>
+          
+          <div>
+            <Label htmlFor="reorder_point">Reorder Point</Label>
+            <Input
+              id="reorder_point"
+              type="number"
+              value={formData.reorder_point}
+              onChange={(e) => handleInputChange('reorder_point', e.target.value)}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Product Images */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-medium">Product Images</h3>
+        <ImageUpload
+          onImageUpload={handleImageUpload}
+          onImageRemove={handleImageRemove}
+          images={images}
+          maxImages={5}
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div>
-          <Label htmlFor="category" className="text-sm font-medium text-black">Category *</Label>
-          <Select value={formData.category} onValueChange={(value) => handleInputChange('category', value)}>
-            <SelectTrigger className="mt-1">
-              <SelectValue placeholder="Select category" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="TEES">T-Shirts</SelectItem>
-              <SelectItem value="HOODIES">Hoodies</SelectItem>
-              <SelectItem value="BOTTOMS">Bottoms</SelectItem>
-              <SelectItem value="ACCESSORIES">Accessories</SelectItem>
-            </SelectContent>
-          </Select>
+      {/* SEO & Marketing */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-medium">SEO & Marketing</h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <Label htmlFor="status">Status</Label>
+            <Select value={formData.status} onValueChange={(value: 'active' | 'inactive') => handleInputChange('status', value)}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="active">Active</SelectItem>
+                <SelectItem value="inactive">Inactive</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          
+          <div className="flex items-center space-x-2 pt-6">
+            <input
+              type="checkbox"
+              id="is_featured"
+              checked={formData.is_featured}
+              onChange={(e) => handleInputChange('is_featured', e.target.checked)}
+              className="rounded"
+            />
+            <Label htmlFor="is_featured">Featured Product</Label>
+          </div>
         </div>
 
         <div>
-          <Label htmlFor="gender" className="text-sm font-medium text-black">Gender *</Label>
-          <Select value={formData.gender} onValueChange={(value) => handleInputChange('gender', value)}>
-            <SelectTrigger className="mt-1">
-              <SelectValue placeholder="Select gender" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="MEN">Men</SelectItem>
-              <SelectItem value="WOMEN">Women</SelectItem>
-              <SelectItem value="UNISEX">Unisex</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div>
-          <Label htmlFor="stockQuantity" className="text-sm font-medium text-black">Stock Quantity</Label>
+          <Label htmlFor="tags">Tags (comma-separated)</Label>
           <Input
-            id="stockQuantity"
-            type="number"
-            value={formData.stockQuantity}
-            onChange={(e) => handleInputChange('stockQuantity', e.target.value)}
-            placeholder="0"
-            className="mt-1"
-          />
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <Label htmlFor="sku" className="text-sm font-medium text-black">SKU</Label>
-          <Input
-            id="sku"
-            value={formData.sku}
-            onChange={(e) => handleInputChange('sku', e.target.value)}
-            placeholder="e.g., AF-MT-001"
-            className="mt-1"
+            id="tags"
+            value={formData.tags}
+            onChange={(e) => handleInputChange('tags', e.target.value)}
+            placeholder="e.g., african, fashion, cotton"
           />
         </div>
 
         <div>
-          <Label htmlFor="brand" className="text-sm font-medium text-black">Brand</Label>
+          <Label htmlFor="seo_title">SEO Title</Label>
           <Input
-            id="brand"
-            value={formData.brand}
-            onChange={(e) => handleInputChange('brand', e.target.value)}
-            className="mt-1"
+            id="seo_title"
+            value={formData.seo_title}
+            onChange={(e) => handleInputChange('seo_title', e.target.value)}
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="seo_description">SEO Description</Label>
+          <Textarea
+            id="seo_description"
+            value={formData.seo_description}
+            onChange={(e) => handleInputChange('seo_description', e.target.value)}
+            rows={3}
           />
         </div>
       </div>
 
-      <div>
-        <Label className="text-sm font-medium text-black">Product Images</Label>
-        <div className="mt-1 border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-          <Upload className="mx-auto h-12 w-12 text-gray-400" />
-          <p className="mt-2 text-sm text-gray-600">Click to upload or drag and drop</p>
-          <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
-        </div>
-      </div>
-
-      <div className="flex justify-end space-x-4 pt-4">
+      {/* Form Actions */}
+      <div className="flex justify-end space-x-4 pt-6">
         <Button type="button" variant="outline" onClick={onCancel}>
           Cancel
         </Button>
-        <Button type="submit" className="bg-red-600 hover:bg-red-700 text-white">
-          Add Product
+        <Button type="submit" disabled={loading} className="bg-red-600 hover:bg-red-700">
+          {loading ? 'Saving...' : 'Save Product'}
         </Button>
       </div>
     </form>
