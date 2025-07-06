@@ -9,6 +9,69 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      analytics: {
+        Row: {
+          created_at: string | null
+          event_data: Json | null
+          event_type: string
+          id: string
+          session_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          event_data?: Json | null
+          event_type: string
+          id?: string
+          session_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          event_data?: Json | null
+          event_type?: string
+          id?: string
+          session_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      content_pages: {
+        Row: {
+          content: string | null
+          created_at: string | null
+          id: string
+          is_published: boolean | null
+          meta_description: string | null
+          meta_title: string | null
+          slug: string
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string | null
+          id?: string
+          is_published?: boolean | null
+          meta_description?: string | null
+          meta_title?: string | null
+          slug: string
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string | null
+          id?: string
+          is_published?: boolean | null
+          meta_description?: string | null
+          meta_title?: string | null
+          slug?: string
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       customers: {
         Row: {
           billing_address: Json | null
@@ -155,6 +218,36 @@ export type Database = {
           },
         ]
       }
+      notifications: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_read: boolean | null
+          message: string
+          title: string
+          type: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          message: string
+          title: string
+          type?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          message?: string
+          title?: string
+          type?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       order_items: {
         Row: {
           created_at: string | null
@@ -277,66 +370,87 @@ export type Database = {
       products: {
         Row: {
           brand: string | null
+          care_instructions: string | null
           category: string | null
           cost_price: number | null
           created_at: string | null
           description: string | null
           dimensions: Json | null
+          gender: string | null
           id: string
           images: string[] | null
           is_featured: boolean | null
           low_stock_threshold: number | null
+          material: string | null
+          max_stock_quantity: number | null
           name: string
           price: number
+          reorder_point: number | null
           seo_description: string | null
           seo_title: string | null
+          size_guide: Json | null
           sku: string
           status: Database["public"]["Enums"]["product_status"] | null
           stock_quantity: number | null
+          supplier_info: Json | null
           tags: string[] | null
           updated_at: string | null
           weight: number | null
         }
         Insert: {
           brand?: string | null
+          care_instructions?: string | null
           category?: string | null
           cost_price?: number | null
           created_at?: string | null
           description?: string | null
           dimensions?: Json | null
+          gender?: string | null
           id?: string
           images?: string[] | null
           is_featured?: boolean | null
           low_stock_threshold?: number | null
+          material?: string | null
+          max_stock_quantity?: number | null
           name: string
           price: number
+          reorder_point?: number | null
           seo_description?: string | null
           seo_title?: string | null
+          size_guide?: Json | null
           sku: string
           status?: Database["public"]["Enums"]["product_status"] | null
           stock_quantity?: number | null
+          supplier_info?: Json | null
           tags?: string[] | null
           updated_at?: string | null
           weight?: number | null
         }
         Update: {
           brand?: string | null
+          care_instructions?: string | null
           category?: string | null
           cost_price?: number | null
           created_at?: string | null
           description?: string | null
           dimensions?: Json | null
+          gender?: string | null
           id?: string
           images?: string[] | null
           is_featured?: boolean | null
           low_stock_threshold?: number | null
+          material?: string | null
+          max_stock_quantity?: number | null
           name?: string
           price?: number
+          reorder_point?: number | null
           seo_description?: string | null
           seo_title?: string | null
+          size_guide?: Json | null
           sku?: string
           status?: Database["public"]["Enums"]["product_status"] | null
           stock_quantity?: number | null
+          supplier_info?: Json | null
           tags?: string[] | null
           updated_at?: string | null
           weight?: number | null
@@ -468,6 +582,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_dashboard_stats: {
+        Args: Record<PropertyKey, never>
+        Returns: Json
+      }
       get_user_role: {
         Args: { user_id: string }
         Returns: Database["public"]["Enums"]["user_role"]

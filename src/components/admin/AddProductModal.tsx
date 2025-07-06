@@ -2,11 +2,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { X } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 import ProductForm from './forms/ProductForm';
 
 interface AddProductModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onProductAdded: () => void;
 }
 
 interface ProductFormData {
@@ -21,18 +23,58 @@ interface ProductFormData {
   images: string[];
 }
 
-const AddProductModal = ({ isOpen, onClose }: AddProductModalProps) => {
+const AddProductModal = ({ isOpen, onClose, onProductAdded }: AddProductModalProps) => {
   const { toast } = useToast();
 
-  const handleSubmit = (formData: ProductFormData) => {
-    console.log('Product data:', formData);
-    
-    toast({
-      title: "Product Added Successfully!",
-      description: `${formData.name} has been added to the ${formData.gender.toLowerCase()} collection.`,
-    });
+  const handleSubmit = async (formData: ProductFormData) => {
+    try {
+      console.log('Submitting product data:', formData);
+      
+      const { data, error } = await supabase
+        .from('products')
+        .insert([
+          {
+            name: formData.name,
+            description: formData.description,
+            price: parseFloat(formData.price),
+            category: formData.category,
+            gender: formData.gender,
+            sku: formData.sku || `AF-${Date.now()}`,
+            stock_quantity: parseInt(formData.stockQuantity) || 0,
+            brand: formData.brand,
+            images: formData.images,
+            status: 'active'
+          }
+        ])
+        .select();
 
-    onClose();
+      if (error) {
+        console.error('Error adding product:', error);
+        toast({
+          title: "Error",
+          description: "Failed to add product. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      console.log('Product added successfully:', data);
+      
+      toast({
+        title: "Product Added Successfully!",
+        description: `${formData.name} has been added to the ${formData.gender.toLowerCase()} collection.`,
+      });
+
+      onProductAdded();
+      onClose();
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   if (!isOpen) return null;

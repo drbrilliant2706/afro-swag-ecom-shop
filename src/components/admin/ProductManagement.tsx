@@ -6,43 +6,23 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Plus, Search, Filter } from 'lucide-react';
 import AddProductModal from './AddProductModal';
 import ProductTable from './tables/ProductTable';
-
-const products = [
-  { 
-    id: 1, 
-    name: 'AFRIKA\'S FINEST Mask Tee', 
-    sku: 'AF-MT-001', 
-    price: 'TSh 25,000', 
-    stock: 45, 
-    status: 'active',
-    category: 'Men\'s T-Shirts',
-    sales: 128
-  },
-  { 
-    id: 2, 
-    name: 'FINEST Crop Collection', 
-    sku: 'FC-CC-002', 
-    price: 'TSh 25,000', 
-    stock: 23, 
-    status: 'active',
-    category: 'Women\'s Tops',
-    sales: 89
-  },
-  { 
-    id: 3, 
-    name: 'NYUMBANI QWETU Tee', 
-    sku: 'NQ-T-003', 
-    price: 'TSh 25,000', 
-    stock: 8, 
-    status: 'low_stock',
-    category: 'Unisex',
-    sales: 234
-  },
-];
+import { useProducts } from '@/hooks/useProducts';
+import { useDashboardStats } from '@/hooks/useDashboardStats';
 
 export const ProductManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showAddProduct, setShowAddProduct] = useState(false);
+  const { products, loading, refetch } = useProducts();
+  const { stats } = useDashboardStats();
+
+  const handleProductAdded = () => {
+    refetch();
+  };
+
+  const filteredProducts = products.filter(product =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    product.sku.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="space-y-6">
@@ -88,10 +68,16 @@ export const ProductManagement = () => {
       {/* Products Table */}
       <Card>
         <CardHeader>
-          <CardTitle>Products ({products.length})</CardTitle>
+          <CardTitle>Products ({filteredProducts.length})</CardTitle>
         </CardHeader>
         <CardContent>
-          <ProductTable products={products} />
+          {loading ? (
+            <div className="flex justify-center items-center py-8">
+              <div className="text-muted-foreground">Loading products...</div>
+            </div>
+          ) : (
+            <ProductTable products={filteredProducts} />
+          )}
         </CardContent>
       </Card>
 
@@ -99,19 +85,19 @@ export const ProductManagement = () => {
       <div className="grid gap-4 md:grid-cols-3">
         <Card>
           <CardContent className="p-6">
-            <div className="text-2xl font-bold">156</div>
+            <div className="text-2xl font-bold">{stats?.total_products || 0}</div>
             <p className="text-sm text-muted-foreground">Total Products</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-6">
-            <div className="text-2xl font-bold text-red-600">8</div>
+            <div className="text-2xl font-bold text-red-600">{stats?.low_stock_products || 0}</div>
             <p className="text-sm text-muted-foreground">Low Stock Items</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-6">
-            <div className="text-2xl font-bold text-green-600">TSh 3.8M</div>
+            <div className="text-2xl font-bold text-green-600">TSh {stats?.inventory_value?.toLocaleString() || 0}</div>
             <p className="text-sm text-muted-foreground">Total Inventory Value</p>
           </CardContent>
         </Card>
@@ -119,7 +105,8 @@ export const ProductManagement = () => {
 
       <AddProductModal 
         isOpen={showAddProduct} 
-        onClose={() => setShowAddProduct(false)} 
+        onClose={() => setShowAddProduct(false)}
+        onProductAdded={handleProductAdded}
       />
     </div>
   );

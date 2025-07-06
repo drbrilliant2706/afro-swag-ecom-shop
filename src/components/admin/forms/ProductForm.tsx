@@ -5,8 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
-import { Upload } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import ImageUpload from '../ImageUpload';
 
 interface ProductFormData {
   name: string;
@@ -46,6 +46,13 @@ const ProductForm = ({ onSubmit, onCancel }: ProductFormProps) => {
     }));
   };
 
+  const handleImagesChange = (images: string[]) => {
+    setFormData(prev => ({
+      ...prev,
+      images
+    }));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -82,8 +89,9 @@ const ProductForm = ({ onSubmit, onCancel }: ProductFormProps) => {
             id="price"
             value={formData.price}
             onChange={(e) => handleInputChange('price', e.target.value)}
-            placeholder="e.g., TSh 25,000"
+            placeholder="e.g., 25000"
             className="mt-1"
+            type="number"
             required
           />
         </div>
@@ -169,10 +177,12 @@ const ProductForm = ({ onSubmit, onCancel }: ProductFormProps) => {
 
       <div>
         <Label className="text-sm font-medium text-black">Product Images</Label>
-        <div className="mt-1 border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-          <Upload className="mx-auto h-12 w-12 text-gray-400" />
-          <p className="mt-2 text-sm text-gray-600">Click to upload or drag and drop</p>
-          <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+        <div className="mt-1">
+          <ImageUpload
+            onImagesChange={handleImagesChange}
+            maxImages={5}
+            existingImages={formData.images}
+          />
         </div>
       </div>
 

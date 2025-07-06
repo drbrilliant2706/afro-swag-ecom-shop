@@ -1,25 +1,19 @@
 
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
-} from '@/components/ui/table';
 import { Edit, Trash2, Eye } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface Product {
-  id: number;
+  id: string;
   name: string;
   sku: string;
-  price: string;
-  stock: number;
-  status: string;
-  category: string;
-  sales: number;
+  price: number;
+  stock_quantity: number | null;
+  status: 'active' | 'inactive' | 'low_stock' | 'out_of_stock';
+  category: string | null;
+  images: string[] | null;
 }
 
 interface ProductTableProps {
@@ -27,67 +21,91 @@ interface ProductTableProps {
 }
 
 const ProductTable = ({ products }: ProductTableProps) => {
-  const getStatusColor = (status: string) => {
+  const getStatusBadge = (status: string, stock: number | null) => {
+    if (stock === 0) {
+      return <Badge variant="destructive">Out of Stock</Badge>;
+    }
+    if (stock && stock <= 10) {
+      return <Badge variant="outline" className="border-yellow-500 text-yellow-600">Low Stock</Badge>;
+    }
     switch (status) {
-      case 'active': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300';
-      case 'low_stock': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300';
-      case 'out_of_stock': return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300';
-      default: return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300';
+      case 'active':
+        return <Badge variant="default" className="bg-green-500">Active</Badge>;
+      case 'inactive':
+        return <Badge variant="secondary">Inactive</Badge>;
+      default:
+        return <Badge variant="outline">{status}</Badge>;
     }
   };
 
+  if (products.length === 0) {
+    return (
+      <div className="text-center py-8">
+        <p className="text-muted-foreground">No products found</p>
+      </div>
+    );
+  }
+
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Product</TableHead>
-          <TableHead>SKU</TableHead>
-          <TableHead>Price</TableHead>
-          <TableHead>Stock</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Sales</TableHead>
-          <TableHead className="text-right">Actions</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {products.map((product) => (
-          <TableRow key={product.id}>
-            <TableCell>
-              <div>
-                <p className="font-medium">{product.name}</p>
-                <p className="text-sm text-muted-foreground">{product.category}</p>
-              </div>
-            </TableCell>
-            <TableCell className="font-mono text-sm">{product.sku}</TableCell>
-            <TableCell className="font-medium">{product.price}</TableCell>
-            <TableCell>
-              <span className={product.stock < 10 ? 'text-red-600 font-medium' : ''}>
-                {product.stock}
-              </span>
-            </TableCell>
-            <TableCell>
-              <Badge className={getStatusColor(product.status)} variant="secondary">
-                {product.status.replace('_', ' ')}
-              </Badge>
-            </TableCell>
-            <TableCell>{product.sales}</TableCell>
-            <TableCell className="text-right">
-              <div className="flex justify-end gap-2">
-                <Button variant="ghost" size="sm">
-                  <Eye className="h-4 w-4" />
-                </Button>
-                <Button variant="ghost" size="sm">
-                  <Edit className="h-4 w-4" />
-                </Button>
-                <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
-                  <Trash2 className="h-4 w-4" />
-                </Button>
-              </div>
-            </TableCell>
+    <div className="overflow-x-auto">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Product</TableHead>
+            <TableHead>SKU</TableHead>
+            <TableHead>Price</TableHead>
+            <TableHead>Stock</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Category</TableHead>
+            <TableHead className="text-right">Actions</TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {products.map((product) => (
+            <TableRow key={product.id}>
+              <TableCell>
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
+                    {product.images && product.images.length > 0 ? (
+                      <img 
+                        src={product.images[0]} 
+                        alt={product.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <span className="text-xs text-gray-400">No Image</span>
+                    )}
+                  </div>
+                  <div>
+                    <div className="font-medium">{product.name}</div>
+                  </div>
+                </div>
+              </TableCell>
+              <TableCell className="font-mono text-sm">{product.sku}</TableCell>
+              <TableCell>TSh {product.price.toLocaleString()}</TableCell>
+              <TableCell>{product.stock_quantity || 0}</TableCell>
+              <TableCell>{getStatusBadge(product.status, product.stock_quantity)}</TableCell>
+              <TableCell>{product.category || 'Uncategorized'}</TableCell>
+              <TableCell className="text-right">
+                <div className="flex items-center justify-end space-x-2">
+                  <Link to={`/product/${product.id}`}>
+                    <Button variant="ghost" size="sm">
+                      <Eye className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                  <Button variant="ghost" size="sm">
+                    <Edit className="h-4 w-4" />
+                  </Button>
+                  <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                </div>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 };
 
