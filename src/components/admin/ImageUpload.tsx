@@ -9,9 +9,10 @@ interface ImageUploadProps {
   onImagesChange: (images: string[]) => void;
   maxImages?: number;
   existingImages?: string[];
+  productId?: string;
 }
 
-const ImageUpload = ({ onImagesChange, maxImages = 5, existingImages = [] }: ImageUploadProps) => {
+const ImageUpload = ({ onImagesChange, maxImages = 5, existingImages = [], productId }: ImageUploadProps) => {
   const [images, setImages] = useState<string[]>(existingImages);
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -34,6 +35,20 @@ const ImageUpload = ({ onImagesChange, maxImages = 5, existingImages = [] }: Ima
       const { data } = supabase.storage
         .from('product-images')
         .getPublicUrl(filePath);
+
+      // If we have a productId, save to the product_images table
+      if (productId && data.publicUrl) {
+        await supabase
+          .from('product_images')
+          .insert({
+            product_id: productId,
+            image_url: data.publicUrl,
+            image_name: file.name,
+            file_size: file.size,
+            mime_type: file.type,
+            is_primary: images.length === 0 // First image is primary
+          });
+      }
 
       return data.publicUrl;
     } catch (error) {
@@ -110,7 +125,18 @@ const ImageUpload = ({ onImagesChange, maxImages = 5, existingImages = [] }: Ima
     }
   };
 
-  const removeImage = (index: number) => {
+  const removeImage = async (index: number) => {
+    const imageUrl = images[index];
+    
+    // Remove from database if we have a productId
+    if (productId) {
+      await supabase
+        .from('product_images')
+        .delete()
+        .eq('product_id', productId)
+        .eq('image_url', imageUrl);
+    }
+
     const updatedImages = images.filter((_, i) => i !== index);
     setImages(updatedImages);
     onImagesChange(updatedImages);

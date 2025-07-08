@@ -23,9 +23,10 @@ interface ProductFormData {
 interface ProductFormProps {
   onSubmit: (data: ProductFormData) => void;
   onCancel: () => void;
+  productId?: string;
 }
 
-const ProductForm = ({ onSubmit, onCancel }: ProductFormProps) => {
+const ProductForm = ({ onSubmit, onCancel, productId }: ProductFormProps) => {
   const [formData, setFormData] = useState<ProductFormData>({
     name: '',
     description: '',
@@ -148,6 +149,7 @@ const ProductForm = ({ onSubmit, onCancel }: ProductFormProps) => {
             onChange={(e) => handleInputChange('stockQuantity', e.target.value)}
             placeholder="0"
             className="mt-1"
+            min="0"
           />
         </div>
       </div>
@@ -182,6 +184,7 @@ const ProductForm = ({ onSubmit, onCancel }: ProductFormProps) => {
             onImagesChange={handleImagesChange}
             maxImages={5}
             existingImages={formData.images}
+            productId={productId}
           />
         </div>
       </div>
