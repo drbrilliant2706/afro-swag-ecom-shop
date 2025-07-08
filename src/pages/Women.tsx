@@ -8,6 +8,7 @@ import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
+import { useProducts } from "@/hooks/useProducts";
 import ProfileModal from "@/components/profile/ProfileModal";
 import CartModal from "@/components/cart/CartModal";
 
@@ -22,81 +23,20 @@ const Women = () => {
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
   const { user } = useAuth();
   const { toast } = useToast();
+  const { products, loading } = useProducts();
 
-  const womenProducts = [
-    {
-      id: 21,
-      name: "AFRIKA'S FINEST Crop Collection",
-      price: "TSh 25,000",
-      image: "/lovable-uploads/5c33a062-0000-460d-af95-63a3342380ea.png",
-      badge: "NEW",
-      colors: ["White", "Black"],
-      category: "TOPS"
-    },
-    {
-      id: 22,
-      name: "AFRIKA'S FINEST Purple Oversized Tee",
-      price: "TSh 25,000",
-      image: "/lovable-uploads/c0791d3c-b695-4f10-a6c8-3f40e5817d35.png",
-      badge: "BESTSELLER",
-      colors: ["Purple", "Black"],
-      category: "TOPS"
-    },
-    {
-      id: 23,
-      name: "AFRIKA'S FINEST Beige Oversized Tee",
-      price: "TSh 25,000",
-      image: "/lovable-uploads/9281b935-05bf-4bc6-bc91-b290612beca6.png",
-      badge: "EXCLUSIVE",
-      colors: ["Beige", "White"],
-      category: "TOPS"
-    },
-    {
-      id: 24,
-      name: "AFRIKA'S FINEST Navy Chair Collection",
-      price: "TSh 25,000",
-      image: "/lovable-uploads/d3f3d3e5-9d95-4e58-a22a-3f858fda41fc.png",
-      badge: "LIMITED",
-      colors: ["Navy", "Black"],
-      category: "DRESSES"
-    },
-    {
-      id: 25,
-      name: "AFRIKA'S FINEST Oversized Statement Tee",
-      price: "TSh 25,000",
-      image: "/lovable-uploads/5e0f328b-f1d8-4431-8107-31754766376e.png",
-      badge: "CULTURE",
-      colors: ["Navy", "Black"],
-      category: "TOPS"
-    },
-    {
-      id: 26,
-      name: "NYUMBANI QWETU NI AFRIKA Collection",
-      price: "TSh 25,000",
-      image: "/lovable-uploads/ff71bc8e-6331-4e52-8f9f-5c838167aa34.png",
-      badge: "PRIDE",
-      colors: ["White", "Camo"],
-      category: "OUTERWEAR"
-    },
-    {
-      id: 27,
-      name: "FINEST Back Print Collection",
-      price: "TSh 25,000",
-      image: "/lovable-uploads/093741ff-4455-45a5-981c-1152e3ee8456.png",
-      badge: "NEW",
-      colors: ["White", "Burgundy"],
-      category: "TOPS"
-    },
-    {
-      id: 28,
-      name: "FINEST Duo Collection",
-      price: "TSh 25,000",
-      image: "/lovable-uploads/6e193c65-0c7e-4fef-83e2-6acb7a9dc7fc.png",
-      badge: "BESTSELLER",
-      colors: ["White", "Black"],
-      category: "TOPS"
-    }
-  ];
+  // Filter products for women and active status
+  const womenProducts = products.filter(product => 
+    product.gender === 'WOMEN' && product.status === 'active'
+  ).map(product => ({
+    id: product.id,
+    name: product.name,
+    price: `TSh ${product.price.toLocaleString()}`,
+    image: product.images && product.images.length > 0 ? product.images[0] : "/placeholder.svg",
+    badge: "NEW",
+    colors: ["Red", "White", "Black"], // Default colors for now
+    category: product.category || "TOPS"
+  }));
 
   const filteredProducts = womenProducts.filter(product => {
     if (selectedCategory !== "ALL" && product.category !== selectedCategory) {
@@ -336,8 +276,18 @@ const Women = () => {
       {/* Products Grid */}
       <section className="py-8 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
-            {filteredProducts.map((product) => (
+          {loading ? (
+            <div className="flex justify-center items-center py-16">
+              <div className="text-lg text-gray-600">Loading products...</div>
+            </div>
+          ) : filteredProducts.length === 0 ? (
+            <div className="text-center py-16">
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">No products found</h3>
+              <p className="text-gray-600">No women's products are currently available. Check back soon!</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
+              {filteredProducts.map((product) => (
               <Card key={product.id} className="bg-white border-gray-200 hover:border-red-600 transition-all duration-300 group">
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
@@ -354,9 +304,9 @@ const Women = () => {
                     </Badge>
                     <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                       <Heart 
-                        className={`h-5 w-5 md:h-6 md:w-6 cursor-pointer ${
-                          isFavorite(product.id) ? 'text-red-500 fill-red-500' : 'text-black hover:text-red-500'
-                        }`}
+                         className={`h-5 w-5 md:h-6 md:w-6 cursor-pointer ${
+                           isFavorite(Number(product.id)) ? 'text-red-500 fill-red-500' : 'text-black hover:text-red-500'
+                         }`}
                         onClick={() => handleToggleFavorite(product)}
                       />
                     </div>
@@ -390,9 +340,10 @@ const Women = () => {
                     </Button>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
-          </div>
+                </Card>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

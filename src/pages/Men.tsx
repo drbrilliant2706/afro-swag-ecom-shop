@@ -7,6 +7,7 @@ import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
+import { useProducts } from "@/hooks/useProducts";
 import ProfileModal from "@/components/profile/ProfileModal";
 import CartModal from "@/components/cart/CartModal";
 import SearchModal from "@/components/search/SearchModal";
@@ -24,63 +25,20 @@ const Men = () => {
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
   const { user } = useAuth();
   const { toast } = useToast();
+  const { products, loading } = useProducts();
 
-  const menProducts = [
-    {
-      id: 1,
-      name: "FINEST African Mask Tee",
-      price: "TSh 25,000",
-      image: "/lovable-uploads/83e9eb03-ffaa-4765-956a-cb1f637e3b77.png",
-      badge: "BESTSELLER",
-      colors: ["Red", "White", "Black"],
-      category: "TEES"
-    },
-    {
-      id: 2,
-      name: "FINEST Blue Oversized Tee",
-      price: "TSh 25,000",
-      image: "/lovable-uploads/1f0eef57-3784-4a0d-84d8-62b9fcb1c8d9.png",
-      badge: "LIMITED",
-      colors: ["Blue", "White", "Black"],
-      category: "TEES"
-    },
-    {
-      id: 3,
-      name: "AFRIKA'S Finest Beige Tee",
-      price: "TSh 25,000",
-      image: "/lovable-uploads/036867e1-6684-4f8f-889e-e89c5719d973.png",
-      badge: "NEW",
-      colors: ["Beige", "Black", "White"],
-      category: "TEES"
-    },
-    {
-      id: 4,
-      name: "NYUMBANI QWETU Collection",
-      price: "TSh 25,000",
-      image: "/lovable-uploads/86a2ceca-f52f-4c63-91b6-7fd6da14145f.png",
-      badge: "EXCLUSIVE",
-      colors: ["Beige", "Purple", "Black"],
-      category: "HOODIES"
-    },
-    {
-      id: 5,
-      name: "FINEST Crop Top Collection",
-      price: "TSh 25,000",
-      image: "/lovable-uploads/cab6174c-81c0-4121-bea1-7e06bcd15fae.png",
-      badge: "PRIDE",
-      colors: ["Red", "White", "Black"],
-      category: "BOTTOMS"
-    },
-    {
-      id: 6,
-      name: "FINEST Split Jeans Style",
-      price: "TSh 25,000",
-      image: "/lovable-uploads/e634235e-8a2c-4e35-91ca-4d56793cad8f.png",
-      badge: "CULTURE",
-      colors: ["White", "Blue", "Black"],
-      category: "BOTTOMS"
-    }
-  ];
+  // Filter products for men and active status
+  const menProducts = products.filter(product => 
+    product.gender === 'MEN' && product.status === 'active'
+  ).map(product => ({
+    id: product.id,
+    name: product.name,
+    price: `TSh ${product.price.toLocaleString()}`,
+    image: product.images && product.images.length > 0 ? product.images[0] : "/placeholder.svg",
+    badge: "NEW",
+    colors: ["Red", "White", "Black"], // Default colors for now
+    category: product.category || "TEES"
+  }));
 
   const filteredProducts = menProducts.filter(product => {
     if (selectedCategory !== "ALL" && product.category !== selectedCategory) {
@@ -317,8 +275,18 @@ const Men = () => {
       {/* Products Grid */}
       <section className="py-8 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
-            {filteredProducts.map((product) => (
+          {loading ? (
+            <div className="flex justify-center items-center py-16">
+              <div className="text-lg text-gray-600">Loading products...</div>
+            </div>
+          ) : filteredProducts.length === 0 ? (
+            <div className="text-center py-16">
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">No products found</h3>
+              <p className="text-gray-600">No men's products are currently available. Check back soon!</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
+              {filteredProducts.map((product) => (
               <Card key={product.id} className="bg-white border-gray-200 hover:border-red-600 transition-all duration-300 group">
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
@@ -334,9 +302,9 @@ const Men = () => {
                     </Badge>
                     <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                       <Heart 
-                        className={`h-5 w-5 md:h-6 md:w-6 cursor-pointer ${
-                          isFavorite(product.id) ? 'text-red-500 fill-red-500' : 'text-black hover:text-red-500'
-                        }`}
+                         className={`h-5 w-5 md:h-6 md:w-6 cursor-pointer ${
+                           isFavorite(Number(product.id)) ? 'text-red-500 fill-red-500' : 'text-black hover:text-red-500'
+                         }`}
                         onClick={() => handleToggleFavorite(product)}
                       />
                     </div>
@@ -370,9 +338,10 @@ const Men = () => {
                     </Button>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
-          </div>
+                </Card>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

@@ -3,31 +3,35 @@ import { useState, useMemo } from 'react';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { X, Search } from 'lucide-react';
+import { useProducts } from '@/hooks/useProducts';
 
 interface SearchModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const mockProducts = [
-  { id: 1, name: "AFRIKA'S FINEST Mask Tee", price: "TSh 25,000", category: "Men's T-Shirts" },
-  { id: 2, name: "FINEST Crop Collection", price: "TSh 25,000", category: "Women's Tops" },
-  { id: 3, name: "NYUMBANI QWETU Tee", price: "TSh 25,000", category: "Unisex" },
-  { id: 4, name: "African Pride Hoodie", price: "TSh 35,000", category: "Men's Hoodies" },
-  { id: 5, name: "Cultural Heritage Dress", price: "TSh 45,000", category: "Women's Dresses" },
-];
-
 const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const { products, loading } = useProducts();
 
   const filteredProducts = useMemo(() => {
     if (!searchTerm.trim()) return [];
     
-    return mockProducts.filter(product =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.category.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }, [searchTerm]);
+    return products
+      .filter(product => 
+        product.status === 'active' && (
+          product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          product.category?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          product.brand?.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      )
+      .map(product => ({
+        id: product.id,
+        name: product.name,
+        price: `TSh ${product.price.toLocaleString()}`,
+        category: `${product.gender}'s ${product.category}`
+      }));
+  }, [searchTerm, products]);
 
   if (!isOpen) return null;
 
