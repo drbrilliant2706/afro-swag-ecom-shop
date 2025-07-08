@@ -26,7 +26,7 @@ interface ProductFormProps {
   productId?: string;
 }
 
-const ProductForm = ({ onSubmit, onCancel, productId }: ProductFormProps) => {
+const ProductForm = ({ onSubmit, onCancel }: ProductFormProps) => {
   const [formData, setFormData] = useState<ProductFormData>({
     name: '',
     description: '',
@@ -184,7 +184,6 @@ const ProductForm = ({ onSubmit, onCancel, productId }: ProductFormProps) => {
             onImagesChange={handleImagesChange}
             maxImages={5}
             existingImages={formData.images}
-            productId={productId}
           />
         </div>
       </div>
