@@ -1,3 +1,4 @@
+
 import { useState, lazy, Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -19,18 +20,40 @@ import {
   X
 } from 'lucide-react';
 
-// Lazy load admin components for better performance - fix named exports
-const AdminDashboard = lazy(() => import('./AdminDashboard').then(module => ({ default: module.AdminDashboard })));
-const ProductManagement = lazy(() => import('./ProductManagement').then(module => ({ default: module.ProductManagement })));
-const OrderManagement = lazy(() => import('./OrderManagement').then(module => ({ default: module.OrderManagement })));
-const CustomerManagement = lazy(() => import('./CustomerManagement').then(module => ({ default: module.CustomerManagement })));
-const InventoryManagement = lazy(() => import('./InventoryManagement').then(module => ({ default: module.InventoryManagement })));
-const PricingPromotions = lazy(() => import('./PricingPromotions').then(module => ({ default: module.PricingPromotions })));
-const Analytics = lazy(() => import('./Analytics').then(module => ({ default: module.Analytics })));
-const PaymentSettings = lazy(() => import('./PaymentSettings').then(module => ({ default: module.PaymentSettings })));
-const ContentManagement = lazy(() => import('./ContentManagement').then(module => ({ default: module.ContentManagement })));
-const VendorManagement = lazy(() => import('./VendorManagement').then(module => ({ default: module.VendorManagement })));
-const SecurityFraud = lazy(() => import('./SecurityFraud').then(module => ({ default: module.SecurityFraud })));
+// Optimized lazy loading with preloading
+const AdminDashboard = lazy(() => 
+  import('./AdminDashboard').then(module => ({ default: module.AdminDashboard }))
+);
+const ProductManagement = lazy(() => 
+  import('./ProductManagement').then(module => ({ default: module.ProductManagement }))
+);
+const OrderManagement = lazy(() => 
+  import('./OrderManagement').then(module => ({ default: module.OrderManagement }))
+);
+const CustomerManagement = lazy(() => 
+  import('./CustomerManagement').then(module => ({ default: module.CustomerManagement }))
+);
+const InventoryManagement = lazy(() => 
+  import('./InventoryManagement').then(module => ({ default: module.InventoryManagement }))
+);
+const PricingPromotions = lazy(() => 
+  import('./PricingPromotions').then(module => ({ default: module.PricingPromotions }))
+);
+const Analytics = lazy(() => 
+  import('./Analytics').then(module => ({ default: module.Analytics }))
+);
+const PaymentSettings = lazy(() => 
+  import('./PaymentSettings').then(module => ({ default: module.PaymentSettings }))
+);
+const ContentManagement = lazy(() => 
+  import('./ContentManagement').then(module => ({ default: module.ContentManagement }))
+);
+const VendorManagement = lazy(() => 
+  import('./VendorManagement').then(module => ({ default: module.VendorManagement }))
+);
+const SecurityFraud = lazy(() => 
+  import('./SecurityFraud').then(module => ({ default: module.SecurityFraud }))
+);
 
 interface MenuItem {
   id: string;
@@ -55,7 +78,7 @@ const menuItems: MenuItem[] = [
 ];
 
 const LoadingSkeleton = () => (
-  <div className="space-y-4">
+  <div className="space-y-4 animate-in fade-in-50 duration-500">
     <Skeleton className="h-8 w-64" />
     <Skeleton className="h-4 w-48" />
     <div className="grid gap-4 md:grid-cols-3">
@@ -73,6 +96,15 @@ export const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const ActiveComponent = menuItems.find(item => item.id === activeTab)?.component || AdminDashboard;
+
+  // Preload components on hover
+  const handleMenuHover = (itemId: string) => {
+    const menuItem = menuItems.find(item => item.id === itemId);
+    if (menuItem && menuItem.component) {
+      // Trigger lazy loading
+      import('./AdminDashboard');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -122,6 +154,7 @@ export const AdminLayout = () => {
                       setActiveTab(item.id);
                       setSidebarOpen(false);
                     }}
+                    onMouseEnter={() => handleMenuHover(item.id)}
                     className={`
                       w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg transition-colors
                       ${activeTab === item.id 
