@@ -1,7 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { 
   Table, 
   TableBody, 
@@ -12,18 +11,16 @@ import {
 } from '@/components/ui/table';
 import { 
   Users, 
-  Search, 
-  Filter, 
-  UserPlus,
-  Mail,
-  Phone,
+  UserPlus, 
+  Mail, 
+  Phone, 
   MapPin,
   Calendar,
-  ShoppingBag,
   DollarSign,
+  ShoppingBag,
   Eye,
   Edit,
-  MessageSquare
+  TrendingUp
 } from 'lucide-react';
 
 const customers = [
@@ -33,12 +30,10 @@ const customers = [
     email: 'john.mwangi@example.com',
     phone: '+254 712 345 678',
     location: 'Nairobi, Kenya',
-    joinDate: '2023-05-15',
-    orderCount: 12,
-    totalSpent: 125000,
-    status: 'active',
-    lastOrder: '2024-01-05',
-    segment: 'VIP'
+    joinDate: '2023-01-15',
+    orders: 12,
+    totalSpent: 750000,
+    status: 'active'
   },
   {
     id: 'CUST-002',
@@ -46,25 +41,21 @@ const customers = [
     email: 'sarah.wanjiku@example.com',
     phone: '+254 723 456 789',
     location: 'Mombasa, Kenya',
-    joinDate: '2023-07-20',
-    orderCount: 8,
-    totalSpent: 89000,
-    status: 'active',
-    lastOrder: '2023-12-28',
-    segment: 'Loyal'
+    joinDate: '2023-03-20',
+    orders: 5,
+    totalSpent: 320000,
+    status: 'active'
   },
   {
     id: 'CUST-003',
-    name: 'Peter Omondi',
-    email: 'peter.omondi@example.com',
+    name: 'David Kamau',
+    email: 'david.kamau@example.com',
     phone: '+254 734 567 890',
     location: 'Kisumu, Kenya',
-    joinDate: '2023-09-10',
-    orderCount: 3,
-    totalSpent: 32000,
-    status: 'inactive',
-    lastOrder: '2023-11-15',
-    segment: 'New'
+    joinDate: '2023-05-10',
+    orders: 3,
+    totalSpent: 180000,
+    status: 'inactive'
   },
   {
     id: 'CUST-004',
@@ -72,12 +63,76 @@ const customers = [
     email: 'mary.njeri@example.com',
     phone: '+254 745 678 901',
     location: 'Nakuru, Kenya',
-    joinDate: '2023-11-05',
-    orderCount: 15,
-    totalSpent: 185000,
-    status: 'active',
-    lastOrder: '2024-01-10',
-    segment: 'VIP'
+    joinDate: '2023-07-05',
+    orders: 8,
+    totalSpent: 540000,
+    status: 'active'
+  },
+  {
+    id: 'CUST-005',
+    name: 'Peter Omondi',
+    email: 'peter.omondi@example.com',
+    phone: '+254 756 789 012',
+    location: 'Eldoret, Kenya',
+    joinDate: '2023-09-12',
+    orders: 15,
+    totalSpent: 920000,
+    status: 'active'
+  },
+  {
+    id: 'CUST-006',
+    name: 'Alice Muthoni',
+    email: 'alice.muthoni@example.com',
+    phone: '+254 767 890 123',
+    location: 'Thika, Kenya',
+    joinDate: '2023-11-01',
+    orders: 2,
+    totalSpent: 90000,
+    status: 'inactive'
+  },
+  {
+    id: 'CUST-007',
+    name: 'James Mutua',
+    email: 'james.mutua@example.com',
+    phone: '+254 778 901 234',
+    location: 'Kitale, Kenya',
+    joinDate: '2024-01-25',
+    orders: 7,
+    totalSpent: 480000,
+    status: 'active'
+  },
+  {
+    id: 'CUST-008',
+    name: 'Ruth Akinyi',
+    email: 'ruth.akinyi@example.com',
+    phone: '+254 789 012 345',
+    location: 'Machakos, Kenya',
+    joinDate: '2024-03-10',
+    orders: 4,
+    totalSpent: 260000,
+    status: 'inactive'
+  },
+  {
+    id: 'CUST-009',
+    name: 'Samuel Kariuki',
+    email: 'samuel.kariuki@example.com',
+    phone: '+254 790 123 456',
+    location: 'Nyeri, Kenya',
+    joinDate: '2024-05-18',
+    orders: 10,
+    totalSpent: 680000,
+    status: 'active'
+  },
+  {
+    id: 'CUST-010',
+    name: 'Esther Atieno',
+    email: 'esther.atieno@example.com',
+    phone: '+254 701 234 567',
+    location: 'Kakamega, Kenya',
+    joinDate: '2024-07-01',
+    orders: 6,
+    totalSpent: 410000,
+    status: 'active'
   }
 ];
 
@@ -93,7 +148,7 @@ const getStatusColor = (status: string) => {
 const CustomerManagement = () => {
   const totalCustomers = customers.length;
   const activeCustomers = customers.filter(c => c.status === 'active').length;
-  const totalOrders = customers.reduce((sum, c) => sum + c.orderCount, 0);
+  const inactiveCustomers = customers.filter(c => c.status === 'inactive').length;
   const totalRevenue = customers.reduce((sum, c) => sum + c.totalSpent, 0);
 
   return (
@@ -102,7 +157,7 @@ const CustomerManagement = () => {
         <div>
           <h2 className="text-3xl font-bold tracking-tight">Customer Management</h2>
           <p className="text-muted-foreground">
-            Manage customer accounts, orders, and communication
+            Manage customer accounts, track order history, and analyze customer data
           </p>
         </div>
         <Button>
@@ -111,8 +166,8 @@ const CustomerManagement = () => {
         </Button>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      {/* Customer Overview */}
+      <div className="grid gap-4 md:grid-cols-4">
         <Card className="hover:shadow-lg transition-shadow">
           <CardContent className="p-6">
             <div className="flex items-center gap-3">
@@ -142,12 +197,12 @@ const CustomerManagement = () => {
         <Card className="hover:shadow-lg transition-shadow">
           <CardContent className="p-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-purple-50 dark:bg-purple-900/10">
-                <ShoppingBag className="h-5 w-5 text-purple-600" />
+              <div className="p-2 rounded-lg bg-red-50 dark:bg-red-900/10">
+                <Users className="h-5 w-5 text-red-600" />
               </div>
               <div>
-                <div className="text-2xl font-bold">{totalOrders}</div>
-                <p className="text-sm text-muted-foreground">Total Orders</p>
+                <div className="text-2xl font-bold">{inactiveCustomers}</div>
+                <p className="text-sm text-muted-foreground">Inactive Customers</p>
               </div>
             </div>
           </CardContent>
@@ -167,25 +222,6 @@ const CustomerManagement = () => {
         </Card>
       </div>
 
-      {/* Search and Filter */}
-      <Card>
-        <CardContent className="p-4">
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Search customers..."
-                className="pl-10"
-              />
-            </div>
-            <Button variant="outline" size="sm">
-              <Filter className="h-4 w-4 mr-2" />
-              More Filters
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-
       {/* Customer Table */}
       <Card>
         <CardHeader>
@@ -197,8 +233,8 @@ const CustomerManagement = () => {
               <TableRow>
                 <TableHead>Customer</TableHead>
                 <TableHead>Contact</TableHead>
-                <TableHead>Stats</TableHead>
-                <TableHead>Segment</TableHead>
+                <TableHead>Orders</TableHead>
+                <TableHead>Total Spent</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
@@ -230,20 +266,10 @@ const CustomerManagement = () => {
                       </div>
                     </div>
                   </TableCell>
-                  <TableCell>
-                    <div className="space-y-1">
-                      <p className="text-sm font-medium">
-                        {customer.orderCount} Orders
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        TSh {customer.totalSpent.toLocaleString()} spent
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        Last order: {customer.lastOrder}
-                      </p>
-                    </div>
+                  <TableCell className="font-medium">{customer.orders}</TableCell>
+                  <TableCell className="font-medium">
+                    TSh {customer.totalSpent.toLocaleString()}
                   </TableCell>
-                  <TableCell className="font-medium">{customer.segment}</TableCell>
                   <TableCell>
                     <Badge className={getStatusColor(customer.status)} variant="secondary">
                       {customer.status}
@@ -257,9 +283,6 @@ const CustomerManagement = () => {
                       <Button variant="ghost" size="sm">
                         <Edit className="h-4 w-4" />
                       </Button>
-                      <Button variant="ghost" size="sm">
-                        <MessageSquare className="h-4 w-4" />
-                      </Button>
                     </div>
                   </TableCell>
                 </TableRow>
@@ -269,55 +292,79 @@ const CustomerManagement = () => {
         </CardContent>
       </Card>
 
-      {/* Customer Segments */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Customer Segments</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="bg-blue-50 dark:bg-blue-900/10 hover:shadow-md transition-shadow">
-              <CardContent className="p-4">
+      {/* Customer Insights */}
+      <div className="grid gap-4 md:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle>New vs. Returning Customers</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-800">
-                    <Users className="h-5 w-5 text-blue-600" />
+                  <div className="flex-shrink-0 w-8 h-8 bg-green-50 dark:bg-green-900/10 rounded-full flex items-center justify-center">
+                    <Users className="h-4 w-4 text-green-600" />
                   </div>
                   <div>
-                    <div className="text-xl font-bold">VIP</div>
-                    <p className="text-sm text-muted-foreground">High-value customers</p>
+                    <p className="font-medium">New Customers</p>
+                    <p className="text-sm text-muted-foreground">This month</p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-            <Card className="bg-green-50 dark:bg-green-900/10 hover:shadow-md transition-shadow">
-              <CardContent className="p-4">
+                <div className="text-right">
+                  <p className="font-medium">34</p>
+                  <p className="text-sm text-green-600">+12% <TrendingUp className="inline-block h-3 w-3 ml-1" /></p>
+                </div>
+              </div>
+              <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-green-100 dark:bg-green-800">
-                    <TrendingUp className="h-5 w-5 text-green-600" />
+                  <div className="flex-shrink-0 w-8 h-8 bg-blue-50 dark:bg-blue-900/10 rounded-full flex items-center justify-center">
+                    <Users className="h-4 w-4 text-blue-600" />
                   </div>
                   <div>
-                    <div className="text-xl font-bold">Loyal</div>
-                    <p className="text-sm text-muted-foreground">Repeat customers</p>
+                    <p className="font-medium">Returning Customers</p>
+                    <p className="text-sm text-muted-foreground">This month</p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-            <Card className="bg-yellow-50 dark:bg-yellow-900/10 hover:shadow-md transition-shadow">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-yellow-100 dark:bg-yellow-800">
-                    <Calendar className="h-5 w-5 text-yellow-600" />
-                  </div>
-                  <div>
-                    <div className="text-xl font-bold">New</div>
-                    <p className="text-sm text-muted-foreground">Recently joined</p>
-                  </div>
+                <div className="text-right">
+                  <p className="font-medium">89</p>
+                  <p className="text-sm text-blue-600">+8% <TrendingUp className="inline-block h-3 w-3 ml-1" /></p>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
-        </CardContent>
-      </Card>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Customer Spending Habits</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-900/10 rounded-lg">
+                <div>
+                  <p className="font-medium text-green-800 dark:text-green-200">Average Order Value</p>
+                  <p className="text-sm text-green-600 dark:text-green-400">Per customer</p>
+                </div>
+                <p className="text-2xl font-bold text-green-600">TSh 6,300</p>
+              </div>
+              <div className="flex items-center justify-between p-3 bg-blue-50 dark:bg-blue-900/10 rounded-lg">
+                <div>
+                  <p className="font-medium text-blue-800 dark:text-blue-200">Most Popular Category</p>
+                  <p className="text-sm text-blue-600 dark:text-blue-400">By orders</p>
+                </div>
+                <p className="text-2xl font-bold text-blue-600">T-Shirts</p>
+              </div>
+              <div className="flex items-center justify-between p-3 bg-purple-50 dark:bg-purple-900/10 rounded-lg">
+                <div>
+                  <p className="font-medium text-purple-800 dark:text-purple-200">Highest Spending Customer</p>
+                  <p className="text-sm text-purple-600 dark:text-purple-400">This month</p>
+                </div>
+                <p className="text-2xl font-bold text-purple-600">TSh 89K</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 };

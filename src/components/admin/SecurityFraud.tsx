@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -18,7 +19,9 @@ import {
   XCircle,
   Clock,
   Search,
-  Filter
+  Filter,
+  Calendar,
+  Plus
 } from 'lucide-react';
 
 const securityIncidents = [

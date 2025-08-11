@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -82,7 +83,7 @@ const AdminDashboard = () => {
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">TSh {stats.totalRevenue.toLocaleString()}</div>
+            <div className="text-2xl font-bold">TSh {stats.total_revenue.toLocaleString()}</div>
             <p className="text-xs text-muted-foreground">
               +20.1% from last month
             </p>
@@ -94,7 +95,7 @@ const AdminDashboard = () => {
             <ShoppingBag className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.totalOrders}</div>
+            <div className="text-2xl font-bold">{stats.total_orders}</div>
             <p className="text-xs text-muted-foreground">
               +12% from last month
             </p>
@@ -106,7 +107,7 @@ const AdminDashboard = () => {
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.totalCustomers}</div>
+            <div className="text-2xl font-bold">{stats.total_customers}</div>
             <p className="text-xs text-muted-foreground">
               +5.7% from last month
             </p>
@@ -118,7 +119,7 @@ const AdminDashboard = () => {
             <Package className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.totalProducts}</div>
+            <div className="text-2xl font-bold">{stats.total_products}</div>
             <p className="text-xs text-muted-foreground">
               +2 new this week
             </p>
