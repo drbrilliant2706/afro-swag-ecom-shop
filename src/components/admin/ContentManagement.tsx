@@ -1,141 +1,140 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { 
   FileText, 
   Image, 
-  Search, 
-  Globe,
-  TrendingUp,
-  Plus,
+  Video, 
+  Calendar,
+  Eye,
   Edit,
   Trash2,
-  Eye,
+  Plus,
   Upload,
-  Settings,
-  BarChart3
+  Globe,
+  Users,
+  TrendingUp,
+  MessageSquare
 } from 'lucide-react';
 
 const pages = [
   {
     id: 'PAGE-001',
-    title: 'About Us',
-    slug: '/about',
+    title: 'Homepage',
+    slug: '/',
+    type: 'page',
     status: 'published',
-    lastModified: '2024-01-15',
     author: 'Admin',
-    views: 1234,
-    seoScore: 85
+    createdAt: '2024-01-01',
+    updatedAt: '2024-01-15',
+    views: 1234
   },
   {
     id: 'PAGE-002',
-    title: 'Size Guide',
-    slug: '/size-guide',
+    title: 'About Us',
+    slug: '/about',
+    type: 'page',
     status: 'published',
-    lastModified: '2024-01-10',
     author: 'Admin',
-    views: 892,
-    seoScore: 92
+    createdAt: '2024-01-01',
+    updatedAt: '2024-01-20',
+    views: 876
   },
   {
     id: 'PAGE-003',
-    title: 'Shipping Information',
-    slug: '/shipping-info',
+    title: 'Contact Us',
+    slug: '/contact',
+    type: 'page',
     status: 'draft',
-    lastModified: '2024-01-20',
     author: 'Admin',
-    views: 0,
-    seoScore: 67
+    createdAt: '2024-01-05',
+    updatedAt: null,
+    views: 0
+  }
+];
+
+const media = [
+  {
+    id: 'MEDIA-001',
+    name: 'logo.png',
+    type: 'image',
+    size: '256KB',
+    uploadedAt: '2024-01-01',
+    url: '/images/logo.png'
+  },
+  {
+    id: 'MEDIA-002',
+    name: 'banner.jpg',
+    type: 'image',
+    size: '1.2MB',
+    uploadedAt: '2024-01-10',
+    url: '/images/banner.jpg'
+  },
+  {
+    id: 'MEDIA-003',
+    name: 'promo_video.mp4',
+    type: 'video',
+    size: '15MB',
+    uploadedAt: '2024-01-15',
+    url: '/videos/promo_video.mp4'
   }
 ];
 
 const blogPosts = [
   {
-    id: 'BLOG-001',
-    title: 'The Story Behind African Fashion',
-    slug: '/blog/african-fashion-story',
+    id: 'POST-001',
+    title: 'Top 10 African Fashion Trends in 2024',
+    slug: '/blog/top-10-african-fashion-trends-in-2024',
     status: 'published',
-    publishDate: '2024-01-15',
-    author: 'Sarah Njeri',
-    views: 2341,
-    comments: 23,
-    category: 'Culture'
+    author: 'Admin',
+    createdAt: '2024-01-01',
+    updatedAt: '2024-01-25',
+    views: 2345,
+    comments: 123
   },
   {
-    id: 'BLOG-002',
-    title: 'Sustainable Fashion in Africa',
-    slug: '/blog/sustainable-fashion',
+    id: 'POST-002',
+    title: 'The Rise of Sustainable Fashion in Africa',
+    slug: '/blog/the-rise-of-sustainable-fashion-in-africa',
     status: 'published',
-    publishDate: '2024-01-12',
-    author: 'John Mwangi',
+    author: 'Admin',
+    createdAt: '2024-01-10',
+    updatedAt: '2024-02-01',
     views: 1876,
-    comments: 15,
-    category: 'Sustainability'
+    comments: 78
   },
   {
-    id: 'BLOG-003',
-    title: 'Traditional Patterns in Modern Design',
-    slug: '/blog/traditional-patterns',
+    id: 'POST-003',
+    title: '5 Must-Have Accessories for the Modern African Woman',
+    slug: '/blog/5-must-have-accessories-for-the-modern-african-woman',
     status: 'draft',
-    publishDate: null,
-    author: 'Grace Wanjiku',
+    author: 'Admin',
+    createdAt: '2024-02-01',
+    updatedAt: null,
     views: 0,
-    comments: 0,
-    category: 'Design'
+    comments: 0
   }
 ];
 
-const mediaLibrary = [
-  {
-    id: 'IMG-001',
-    name: 'hero-banner-1.jpg',
-    type: 'image',
-    size: '2.4 MB',
-    dimensions: '1920x1080',
-    uploadDate: '2024-01-15',
-    usedIn: 3
-  },
-  {
-    id: 'IMG-002',
-    name: 'product-lifestyle-1.jpg',
-    type: 'image',
-    size: '1.8 MB',
-    dimensions: '1200x800',
-    uploadDate: '2024-01-14',
-    usedIn: 1
-  },
-  {
-    id: 'IMG-003',
-    name: 'brand-story-video.mp4',
-    type: 'video',
-    size: '45.2 MB',
-    dimensions: '1920x1080',
-    uploadDate: '2024-01-10',
-    usedIn: 1
-  }
-];
-
-export const ContentManagement = () => {
+const ContentManagement = () => {
   const [activeTab, setActiveTab] = useState('pages');
-  const [searchTerm, setSearchTerm] = useState('');
+
+  const publishedPages = pages.filter(page => page.status === 'published').length;
+  const totalMedia = media.length;
+  const totalBlogPosts = blogPosts.length;
+  const totalViews = pages.reduce((sum, page) => sum + page.views, 0) + blogPosts.reduce((sum, post) => sum + post.views, 0);
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'published': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300';
       case 'draft': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300';
-      case 'archived': return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300';
+      case 'scheduled': return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300';
       default: return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300';
     }
-  };
-
-  const getSeoScoreColor = (score: number) => {
-    if (score >= 80) return 'text-green-600';
-    if (score >= 60) return 'text-yellow-600';
-    return 'text-red-600';
   };
 
   return (
@@ -144,7 +143,7 @@ export const ContentManagement = () => {
         <div>
           <h2 className="text-3xl font-bold tracking-tight">Content Management</h2>
           <p className="text-muted-foreground">
-            Manage your website content, SEO, and media assets
+            Manage website content, media, and blog posts
           </p>
         </div>
         <Button>
@@ -153,7 +152,7 @@ export const ContentManagement = () => {
         </Button>
       </div>
 
-      {/* Content Overview */}
+      {/* Quick Stats */}
       <div className="grid gap-4 md:grid-cols-4">
         <Card>
           <CardContent className="p-6">
@@ -162,8 +161,8 @@ export const ContentManagement = () => {
                 <FileText className="h-5 w-5 text-blue-600" />
               </div>
               <div>
-                <div className="text-2xl font-bold">12</div>
-                <p className="text-sm text-muted-foreground">Total Pages</p>
+                <div className="text-2xl font-bold">{publishedPages}</div>
+                <p className="text-sm text-muted-foreground">Published Pages</p>
               </div>
             </div>
           </CardContent>
@@ -172,11 +171,11 @@ export const ContentManagement = () => {
           <CardContent className="p-6">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg bg-green-50 dark:bg-green-900/10">
-                <Globe className="h-5 w-5 text-green-600" />
+                <Image className="h-5 w-5 text-green-600" />
               </div>
               <div>
-                <div className="text-2xl font-bold">8</div>
-                <p className="text-sm text-muted-foreground">Published</p>
+                <div className="text-2xl font-bold">{totalMedia}</div>
+                <p className="text-sm text-muted-foreground">Total Media Files</p>
               </div>
             </div>
           </CardContent>
@@ -185,11 +184,11 @@ export const ContentManagement = () => {
           <CardContent className="p-6">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg bg-purple-50 dark:bg-purple-900/10">
-                <TrendingUp className="h-5 w-5 text-purple-600" />
+                <MessageSquare className="h-5 w-5 text-purple-600" />
               </div>
               <div>
-                <div className="text-2xl font-bold">15.2K</div>
-                <p className="text-sm text-muted-foreground">Total Page Views</p>
+                <div className="text-2xl font-bold">{totalBlogPosts}</div>
+                <p className="text-sm text-muted-foreground">Blog Posts</p>
               </div>
             </div>
           </CardContent>
@@ -198,11 +197,11 @@ export const ContentManagement = () => {
           <CardContent className="p-6">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg bg-orange-50 dark:bg-orange-900/10">
-                <BarChart3 className="h-5 w-5 text-orange-600" />
+                <TrendingUp className="h-5 w-5 text-orange-600" />
               </div>
               <div>
-                <div className="text-2xl font-bold">82</div>
-                <p className="text-sm text-muted-foreground">Avg SEO Score</p>
+                <div className="text-2xl font-bold">{totalViews}</div>
+                <p className="text-sm text-muted-foreground">Total Content Views</p>
               </div>
             </div>
           </CardContent>
@@ -212,112 +211,43 @@ export const ContentManagement = () => {
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
         <TabsList>
           <TabsTrigger value="pages">Pages</TabsTrigger>
-          <TabsTrigger value="blog">Blog</TabsTrigger>
-          <TabsTrigger value="media">Media Library</TabsTrigger>
-          <TabsTrigger value="seo">SEO Settings</TabsTrigger>
+          <TabsTrigger value="media">Media</TabsTrigger>
+          <TabsTrigger value="blog">Blog Posts</TabsTrigger>
         </TabsList>
 
         <TabsContent value="pages" className="space-y-4">
-          {/* Search */}
           <Card>
-            <CardContent className="p-4">
-              <div className="flex gap-4">
-                <div className="flex-1 relative">
-                  <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    placeholder="Search pages..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10"
-                  />
-                </div>
-                <Button>
-                  <Plus className="h-4 w-4 mr-2" />
-                  New Page
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Pages List */}
-          <div className="space-y-4">
-            {pages.map((page) => (
-              <Card key={page.id} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-lg font-medium">{page.title}</h3>
-                        <Badge className={getStatusColor(page.status)} variant="secondary">
-                          {page.status}
-                        </Badge>
-                      </div>
-                      <p className="text-sm text-muted-foreground mb-2">{page.slug}</p>
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                        <span>Modified: {page.lastModified}</span>
-                        <span>By: {page.author}</span>
-                        <span>Views: {page.views}</span>
-                        <span className={`font-medium ${getSeoScoreColor(page.seoScore)}`}>
-                          SEO: {page.seoScore}/100
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Button variant="ghost" size="sm">
-                        <Eye className="h-4 w-4" />
-                      </Button>
-                      <Button variant="ghost" size="sm">
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                      <Button variant="ghost" size="sm">
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </TabsContent>
-
-        <TabsContent value="blog" className="space-y-4">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>Blog Posts</CardTitle>
-              <Button>
-                <Plus className="h-4 w-4 mr-2" />
-                New Post
-              </Button>
+            <CardHeader>
+              <CardTitle>Website Pages</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {blogPosts.map((post) => (
-                  <div key={post.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h4 className="font-medium">{post.title}</h4>
-                        <Badge className={getStatusColor(post.status)} variant="secondary">
-                          {post.status}
-                        </Badge>
-                        <Badge variant="outline">{post.category}</Badge>
+                {pages.map((page) => (
+                  <div key={page.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50">
+                    <div className="flex items-center gap-4">
+                      <div className="p-2 rounded-lg bg-primary/10">
+                        <FileText className="h-4 w-4 text-primary" />
                       </div>
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                        <span>By: {post.author}</span>
-                        {post.publishDate && <span>Published: {post.publishDate}</span>}
-                        <span>Views: {post.views}</span>
-                        <span>Comments: {post.comments}</span>
+                      <div>
+                        <p className="font-medium">{page.title}</p>
+                        <p className="text-sm text-muted-foreground">{page.slug}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Button variant="ghost" size="sm">
-                        <Eye className="h-4 w-4" />
-                      </Button>
-                      <Button variant="ghost" size="sm">
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                      <Button variant="ghost" size="sm">
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
+                      <Badge className={getStatusColor(page.status)} variant="secondary">
+                        {page.status}
+                      </Badge>
+                      <div className="flex gap-1">
+                        <Button variant="ghost" size="sm">
+                          <Eye className="h-4 w-4" />
+                        </Button>
+                        <Button variant="ghost" size="sm">
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button variant="ghost" size="sm">
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -330,94 +260,83 @@ export const ContentManagement = () => {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle>Media Library</CardTitle>
-              <Button>
+              <Button size="sm">
                 <Upload className="h-4 w-4 mr-2" />
                 Upload Media
               </Button>
             </CardHeader>
             <CardContent>
               <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
-                {mediaLibrary.map((media) => (
-                  <Card key={media.id} className="hover:shadow-lg transition-shadow">
-                    <CardContent className="p-4">
-                      <div className="aspect-video bg-muted rounded-lg mb-3 flex items-center justify-center">
-                        {media.type === 'image' ? (
-                          <Image className="h-8 w-8 text-muted-foreground" />
-                        ) : (
-                          <FileText className="h-8 w-8 text-muted-foreground" />
-                        )}
+                {media.map((item) => (
+                  <div key={item.id} className="relative">
+                    {item.type === 'image' ? (
+                      <img src={item.url} alt={item.name} className="rounded-md aspect-square object-cover" />
+                    ) : (
+                      <div className="flex items-center justify-center h-full bg-muted rounded-md aspect-square">
+                        <Video className="h-6 w-6 text-muted-foreground" />
                       </div>
-                      <h4 className="font-medium text-sm truncate">{media.name}</h4>
-                      <div className="text-xs text-muted-foreground space-y-1">
-                        <p>{media.size} • {media.dimensions}</p>
-                        <p>Uploaded: {media.uploadDate}</p>
-                        <p>Used in {media.usedIn} places</p>
-                      </div>
-                    </CardContent>
-                  </Card>
+                    )}
+                    <div className="absolute bottom-0 left-0 w-full bg-background/80 p-2 rounded-b-md">
+                      <p className="text-sm font-medium">{item.name}</p>
+                      <p className="text-xs text-muted-foreground">{item.size}</p>
+                    </div>
+                  </div>
                 ))}
               </div>
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="seo" className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-2">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Settings className="h-5 w-5" />
-                  General SEO Settings
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <label className="text-sm font-medium">Site Title</label>
-                  <Input placeholder="AFRIKA'S FINEST - Premium African Fashion" className="mt-1" />
-                </div>
-                <div>
-                  <label className="text-sm font-medium">Meta Description</label>
-                  <Input placeholder="Discover authentic African fashion..." className="mt-1" />
-                </div>
-                <div>
-                  <label className="text-sm font-medium">Keywords</label>
-                  <Input placeholder="african fashion, traditional clothing..." className="mt-1" />
-                </div>
-                <Button>Save SEO Settings</Button>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>SEO Performance</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-900/10 rounded-lg">
-                  <div>
-                    <p className="font-medium text-green-800 dark:text-green-200">Organic Traffic</p>
-                    <p className="text-sm text-green-600 dark:text-green-400">This month</p>
+        <TabsContent value="blog" className="space-y-4">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between">
+              <CardTitle>Blog Posts</CardTitle>
+              <Button size="sm">
+                <Plus className="h-4 w-4 mr-2" />
+                Add Post
+              </Button>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {blogPosts.map((post) => (
+                  <div key={post.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50">
+                    <div className="flex items-center gap-4">
+                      <div className="p-2 rounded-lg bg-primary/10">
+                        <FileText className="h-4 w-4 text-primary" />
+                      </div>
+                      <div>
+                        <p className="font-medium">{post.title}</p>
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Globe className="h-3 w-3" />
+                          <span>{post.slug}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Badge className={getStatusColor(post.status)} variant="secondary">
+                        {post.status}
+                      </Badge>
+                      <div className="flex gap-1">
+                        <Button variant="ghost" size="sm">
+                          <Eye className="h-4 w-4" />
+                        </Button>
+                        <Button variant="ghost" size="sm">
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button variant="ghost" size="sm">
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-2xl font-bold text-green-600">+23%</p>
-                </div>
-                <div className="flex items-center justify-between p-3 bg-blue-50 dark:bg-blue-900/10 rounded-lg">
-                  <div>
-                    <p className="font-medium text-blue-800 dark:text-blue-200">Search Ranking</p>
-                    <p className="text-sm text-blue-600 dark:text-blue-400">Average position</p>
-                  </div>
-                  <p className="text-2xl font-bold text-blue-600">12.5</p>
-                </div>
-                <div className="flex items-center justify-between p-3 bg-purple-50 dark:bg-purple-900/10 rounded-lg">
-                  <div>
-                    <p className="font-medium text-purple-800 dark:text-purple-200">Page Speed</p>
-                    <p className="text-sm text-purple-600 dark:text-purple-400">Core Web Vitals</p>
-                  </div>
-                  <p className="text-2xl font-bold text-purple-600">Good</p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>
   );
 };
+
+export default ContentManagement;
