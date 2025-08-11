@@ -19,7 +19,6 @@ const Men = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("ALL");
-  const [priceRange, setPriceRange] = useState("ALL");
   
   const { addToCart, getTotalItems } = useCart();
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
@@ -37,7 +36,7 @@ const Men = () => {
     image: product.images && product.images.length > 0 ? product.images[0] : "/placeholder.svg",
     badge: "NEW",
     colors: ["Red", "White", "Black"], // Default colors for now
-    category: product.category || "TEES"
+    category: product.category || "TOPS"
   }));
 
   const filteredProducts = menProducts.filter(product => {
@@ -174,7 +173,7 @@ const Men = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('/lovable-uploads/7f0b3db7-fa12-4dda-9ab8-e43780531947.png')`,
+            backgroundImage: `url('/lovable-uploads/01e49984-7597-4559-943f-8455b941c993.png')`,
           }}
         >
           <div className="absolute inset-0 bg-black bg-opacity-60"></div>
@@ -185,7 +184,7 @@ const Men = () => {
             MEN'S <span className="text-red-600">COLLECTION</span>
           </h2>
           <p className="text-lg md:text-xl text-gray-200">
-            Bold designs inspired by the warriors of East Africa
+            Step into style with our curated collection for men
           </p>
         </div>
       </section>
@@ -213,22 +212,28 @@ const Men = () => {
                   ALL
                 </button>
                 <button 
-                  onClick={() => setSelectedCategory("TEES")}
-                  className={selectedCategory === "TEES" ? "text-red-600 border-b border-red-600" : "text-gray-600 hover:text-black"}
+                  onClick={() => setSelectedCategory("SHIRTS")}
+                  className={selectedCategory === "SHIRTS" ? "text-red-600 border-b border-red-600" : "text-gray-600 hover:text-black"}
                 >
-                  TEES
+                  SHIRTS
                 </button>
                 <button 
-                  onClick={() => setSelectedCategory("HOODIES")}
-                  className={selectedCategory === "HOODIES" ? "text-red-600 border-b border-red-600" : "text-gray-600 hover:text-black"}
+                  onClick={() => setSelectedCategory("PANTS")}
+                  className={selectedCategory === "PANTS" ? "text-red-600 border-b border-red-600" : "text-gray-600 hover:text-black"}
                 >
-                  HOODIES
+                  PANTS
                 </button>
                 <button 
-                  onClick={() => setSelectedCategory("BOTTOMS")}
-                  className={selectedCategory === "BOTTOMS" ? "text-red-600 border-b border-red-600" : "text-gray-600 hover:text-black"}
+                  onClick={() => setSelectedCategory("SHOES")}
+                  className={selectedCategory === "SHOES" ? "text-red-600 border-b border-red-600" : "text-gray-600 hover:text-black"}
                 >
-                  BOTTOMS
+                  SHOES
+                </button>
+                <button 
+                  onClick={() => setSelectedCategory("ACCESSORIES")}
+                  className={selectedCategory === "ACCESSORIES" ? "text-red-600 border-b border-red-600" : "text-gray-600 hover:text-black"}
+                >
+                  ACCESSORIES
                 </button>
               </div>
             </div>
@@ -249,7 +254,7 @@ const Men = () => {
               <div className="space-y-2">
                 <h4 className="font-medium text-sm">Category</h4>
                 <div className="grid grid-cols-2 gap-2">
-                  {["ALL", "TEES", "HOODIES", "BOTTOMS"].map((category) => (
+                  {["ALL", "SHIRTS", "PANTS", "SHOES", "ACCESSORIES"].map((category) => (
                     <button
                       key={category}
                       onClick={() => {
@@ -294,7 +299,8 @@ const Men = () => {
                       <img 
                         src={product.image} 
                         alt={product.name}
-                        className="w-full h-48 md:h-80 object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
+                        className="w-full h-48 md:h-80 object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
                       />
                     </a>
                     <Badge className="absolute top-4 left-4 bg-red-600 hover:bg-red-600 text-white text-xs">
@@ -312,7 +318,7 @@ const Men = () => {
                   
                   <div className="p-4 md:p-6">
                     <a href={`/product/${product.id}`}>
-                      <h4 className="text-black font-bold text-base md:text-lg mb-2 hover:text-red-600 transition-colors cursor-pointer">{product.name}</h4>
+                      <h4 className="text-black font-bold text-base md:text-lg mb-2 hover:text-red-600 transition-colors">{product.name}</h4>
                     </a>
                     <p className="text-red-600 font-bold text-lg md:text-xl mb-4">{product.price}</p>
                     
