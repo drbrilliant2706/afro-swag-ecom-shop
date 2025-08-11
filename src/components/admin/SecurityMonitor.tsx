@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -24,7 +23,7 @@ interface SecurityCheck {
   severity: 'low' | 'medium' | 'high';
 }
 
-export const SecurityMonitor = () => {
+const SecurityMonitor = () => {
   const [checks, setChecks] = useState<SecurityCheck[]>([]);
   const [loading, setLoading] = useState(true);
   const { user, session } = useAuth();
@@ -310,3 +309,5 @@ export const SecurityMonitor = () => {
     </div>
   );
 };
+
+export default SecurityMonitor;

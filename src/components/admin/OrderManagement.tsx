@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -41,7 +42,7 @@ const orders = [
   },
 ];
 
-export const OrderManagement = () => {
+const OrderManagement = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300';
@@ -151,3 +152,5 @@ export const OrderManagement = () => {
     </div>
   );
 };
+
+export default OrderManagement;

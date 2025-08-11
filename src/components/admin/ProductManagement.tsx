@@ -9,7 +9,7 @@ import ProductTable from './tables/ProductTable';
 import { useProducts } from '@/hooks/useProducts';
 import { useDashboardStats } from '@/hooks/useDashboardStats';
 
-export const ProductManagement = () => {
+const ProductManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showAddProduct, setShowAddProduct] = useState(false);
   const { products, loading, refetch } = useProducts();
@@ -111,3 +111,5 @@ export const ProductManagement = () => {
     </div>
   );
 };
+
+export default ProductManagement;

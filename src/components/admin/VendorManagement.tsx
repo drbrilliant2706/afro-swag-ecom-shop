@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -92,7 +91,7 @@ const getStatusColor = (status: string) => {
   }
 };
 
-export const VendorManagement = () => {
+const VendorManagement = () => {
   const totalVendors = vendors.length;
   const activeVendors = vendors.filter(v => v.status === 'active').length;
   const totalProducts = vendors.reduce((sum, v) => sum + v.products, 0);
@@ -308,3 +307,5 @@ export const VendorManagement = () => {
     </div>
   );
 };
+
+export default VendorManagement;
