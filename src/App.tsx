@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { CartProvider } from "@/contexts/CartContext";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { Suspense, lazy } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -28,15 +29,29 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const Admin = lazy(() => import("./pages/Admin"));
 const Auth = lazy(() => import("./pages/Auth"));
 
-// Create query client with optimized settings
+// Create query client with optimized settings and error handling
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 5 * 60 * 1000, // 5 minutes
       gcTime: 10 * 60 * 1000, // 10 minutes
       refetchOnWindowFocus: false,
-      retry: 1,
+      retry: (failureCount, error) => {
+        // Don't retry on auth errors
+        if (error instanceof Error && error.message.includes('JWT')) {
+          return false;
+        }
+        // Retry up to 2 times for other errors
+        return failureCount < 2;
+      },
+      retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
     },
+    mutations: {
+      retry: 1,
+      onError: (error) => {
+        console.error('Mutation error:', error);
+      }
+    }
   },
 });
 
@@ -58,40 +73,44 @@ const PageLoader = () => (
 );
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <CartProvider>
-        <FavoritesProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Suspense fallback={<PageLoader />}>
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/men" element={<Men />} />
-                  <Route path="/women" element={<Women />} />
-                  <Route path="/lookbook" element={<Lookbook />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/culture" element={<Culture />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/faq" element={<FAQ />} />
-                  <Route path="/size-guide" element={<SizeGuide />} />
-                  <Route path="/shipping-info" element={<ShippingInfo />} />
-                  <Route path="/returns" element={<Returns />} />
-                  <Route path="/product/:id" element={<Product />} />
-                  <Route path="/favorites" element={<Favorites />} />
-                  <Route path="/auth" element={<Auth />} />
-                  <Route path="/admin" element={<Admin />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Suspense>
-            </BrowserRouter>
-          </TooltipProvider>
-        </FavoritesProvider>
-      </CartProvider>
-    </AuthProvider>
-  </QueryClientProvider>
+  <ErrorBoundary>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <CartProvider>
+          <FavoritesProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <ErrorBoundary>
+                  <Suspense fallback={<PageLoader />}>
+                    <Routes>
+                      <Route path="/" element={<Index />} />
+                      <Route path="/men" element={<Men />} />
+                      <Route path="/women" element={<Women />} />
+                      <Route path="/lookbook" element={<Lookbook />} />
+                      <Route path="/about" element={<About />} />
+                      <Route path="/culture" element={<Culture />} />
+                      <Route path="/contact" element={<Contact />} />
+                      <Route path="/faq" element={<FAQ />} />
+                      <Route path="/size-guide" element={<SizeGuide />} />
+                      <Route path="/shipping-info" element={<ShippingInfo />} />
+                      <Route path="/returns" element={<Returns />} />
+                      <Route path="/product/:id" element={<Product />} />
+                      <Route path="/favorites" element={<Favorites />} />
+                      <Route path="/auth" element={<Auth />} />
+                      <Route path="/admin" element={<Admin />} />
+                      <Route path="*" element={<NotFound />} />
+                    </Routes>
+                  </Suspense>
+                </ErrorBoundary>
+              </BrowserRouter>
+            </TooltipProvider>
+          </FavoritesProvider>
+        </CartProvider>
+      </AuthProvider>
+    </QueryClientProvider>
+  </ErrorBoundary>
 );
 
 export default App;
