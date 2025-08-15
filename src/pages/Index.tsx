@@ -1,407 +1,295 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Heart, ShoppingCart, Search, User, Star, Menu } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { ShoppingBag, Star, Heart, Search, Menu, User } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
-import { useAuth } from "@/contexts/AuthContext";
-import { useToast } from "@/hooks/use-toast";
-import ProfileModal from "@/components/profile/ProfileModal";
-import CartModal from "@/components/cart/CartModal";
-import SearchModal from "@/components/search/SearchModal";
-import { DropAnimation, DropAnimationGroup } from "@/components/animations/DropAnimation";
+import { OptimizedImage } from "@/components/ui/optimized-image";
+import { CartModal } from "@/components/cart/CartModal";
+import { SearchModal } from "@/components/search/SearchModal";
+import { ProfileModal } from "@/components/profile/ProfileModal";
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+  rating: number;
+  reviews: number;
+}
+
+const products = [
+  {
+    id: 1,
+    name: "African Heritage Tee",
+    price: 29.99,
+    image: "/lovable-uploads/036867e1-6684-4f8f-889e-e89c5719d973.png",
+    rating: 4.8,
+    reviews: 124
+  },
+  {
+    id: 2,
+    name: "Kente Cloth Shorts",
+    price: 39.50,
+    image: "/lovable-uploads/1c991567-7437-4901-a99f-906426c790e3.png",
+    rating: 4.5,
+    reviews: 89
+  },
+  {
+    id: 3,
+    name: "Ankara Print Dress",
+    price: 59.00,
+    image: "/lovable-uploads/41a8989b-a99f-4963-a573-55929559e96e.png",
+    rating: 4.9,
+    reviews: 156
+  },
+  {
+    id: 4,
+    name: "Dashiki Summer Shirt",
+    price: 34.99,
+    image: "/lovable-uploads/5a9ca967-7539-4591-854c-961a29f69ca7.png",
+    rating: 4.2,
+    reviews: 62
+  },
+  {
+    id: 5,
+    name: "Maasai Beaded Bracelet",
+    price: 19.99,
+    image: "/lovable-uploads/71999957-e96d-496d-89d7-0a511555245b.png",
+    rating: 4.7,
+    reviews: 95
+  },
+  {
+    id: 6,
+    name: "Zulu Pattern Scarf",
+    price: 24.50,
+    image: "/lovable-uploads/7873199a-5849-4949-8449-60195539597a.png",
+    rating: 4.6,
+    reviews: 78
+  },
+  {
+    id: 7,
+    name: "Ethiopian Cross Pendant",
+    price: 49.00,
+    image: "/lovable-uploads/82159091-9541-461a-8554-989611a9935b.png",
+    rating: 4.9,
+    reviews: 132
+  },
+  {
+    id: 8,
+    name: "Rasta Color Beanie",
+    price: 27.99,
+    image: "/lovable-uploads/b647994a-597a-4999-86e3-2a89ca055a99.png",
+    rating: 4.3,
+    reviews: 54
+  },
+];
 
 const Index = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const { addToCart, getTotalItems } = useCart();
-  const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
-  const { user } = useAuth();
-  const { toast } = useToast();
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const { cartItems } = useCart();
+  const { favorites, toggleFavorite } = useFavorites();
 
-  const featuredProducts = [
-    {
-      id: 1,
-      name: "FINEST African Mask Tee",
-      price: "TSh 25,000",
-      image: "/lovable-uploads/83e9eb03-ffaa-4765-956a-cb1f637e3b77.png",
-      badge: "BESTSELLER"
-    },
-    {
-      id: 2,
-      name: "FINEST Blue Oversized Tee",
-      price: "TSh 25,000",
-      image: "/lovable-uploads/1f0eef57-3784-4a0d-84d8-62b9fcb1c8d9.png",
-      badge: "LIMITED"
-    },
-    {
-      id: 3,
-      name: "NYUMBANI QWETU Collection",
-      price: "TSh 25,000",
-      image: "/lovable-uploads/86a2ceca-f52f-4c63-91b6-7fd6da14145f.png",
-      badge: "EXCLUSIVE"
-    },
-    {
-      id: 4,
-      name: "AFRIKA'S Finest Tee",
-      price: "TSh 25,000",
-      image: "/lovable-uploads/036867e1-6684-4f8f-889e-e89c5719d973.png",
-      badge: "NEW"
-    }
-  ];
-
-  const handleAddToCart = (product: any) => {
-    if (!user) {
-      toast({
-        title: "Please log in",
-        description: "You must be logged in to add items to your cart.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    addToCart({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.image
-    });
-
-    toast({
-      title: "Added to cart!",
-      description: `${product.name} has been added to your cart.`,
-    });
-  };
-
-  const handleToggleFavorite = (product: any) => {
-    if (!user) {
-      toast({
-        title: "Please log in",
-        description: "You must be logged in to add items to favorites.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    if (isFavorite(product.id)) {
-      removeFromFavorites(product.id);
-      toast({
-        title: "Removed from favorites",
-        description: `${product.name} has been removed from your favorites.`,
-      });
-    } else {
-      addToFavorites({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image
-      });
-      toast({
-        title: "Added to favorites!",
-        description: `${product.name} has been added to your favorites.`,
-      });
-    }
-  };
+  useEffect(() => {
+    document.title = "Afrika's Finest - Home";
+  }, []);
 
   return (
-    <div className="min-h-screen bg-white text-black">
-      <style>
-        {`
-          @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-          }
-          .marquee {
-            animation: marquee 15s linear infinite;
-          }
-        `}
-      </style>
-
-      {/* Marquee Header */}
-      <div className="bg-red-600 text-white py-1.5 sm:py-2 overflow-hidden">
-        <div className="marquee whitespace-nowrap text-xs sm:text-sm md:text-base px-2">
-          🎉 Fashion at it's ultimate prime. Shop with us and become part of our vast family worldwide. Afrika's finest telling our African Story. 🎉
-        </div>
-      </div>
-
-      {/* Navigation with drop animation */}
-      <DropAnimation delay={200} dropHeight={30}>
-        <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
-            <div className="flex justify-between items-center h-14 sm:h-16">
-              <div className="flex-shrink-0 flex items-center">
-                <img 
-                  src="/lovable-uploads/05b02c6d-e604-4df1-b5f6-7267787edde7.png" 
-                  alt="Afrika's Finest Logo" 
-                  className="h-8 w-auto sm:h-10 md:h-12 mr-2"
-                />
-                <h1 className="text-sm sm:text-lg md:text-xl font-bold text-black hidden xs:block">
-                  AFRICAN'S <span className="text-red-600">FINEST</span>
-                </h1>
-              </div>
-
-              <div className="hidden lg:block">
-                <div className="ml-10 flex items-baseline space-x-6 xl:space-x-8">
-                  <a href="/" className="text-red-600 border-b-2 border-red-600 pb-1 text-sm xl:text-base font-medium">HOME</a>
-                  <a href="/men" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">MEN</a>
-                  <a href="/women" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">WOMEN</a>
-                  <a href="/lookbook" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">LOOKBOOK</a>
-                  <a href="/about" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">ABOUT</a>
-                  <a href="/culture" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">CULTURE</a>
-                </div>
-              </div>
-
-              <DropAnimationGroup staggerDelay={0.05}>
-                {[
-                  <Search 
-                    className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
-                    onClick={() => setIsSearchOpen(true)}
-                  />,
-                  <User 
-                    className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
-                    onClick={() => setIsProfileOpen(true)}
-                  />,
-                  <a href="/favorites">
-                    <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
-                  </a>,
-                  <div className="relative">
-                    <ShoppingCart 
-                      className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
-                      onClick={() => setIsCartOpen(true)}
-                    />
-                    <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-                      {getTotalItems()}
-                    </span>
-                  </div>,
-                  <Menu 
-                    className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors lg:hidden" 
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  />
-                ]}
-              </DropAnimationGroup>
-            </div>
-
+    <div className="min-h-screen bg-background">
+      {/* Mobile-First Header */}
+      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
+        <div className="mobile-padding py-3">
+          <div className="flex items-center justify-between">
             {/* Mobile Menu */}
-            {isMenuOpen && (
-              <div className="lg:hidden border-t border-gray-200 py-3 bg-white">
-                <div className="flex flex-col space-y-3 px-2">
-                  <a href="/" className="text-red-600 py-2 font-medium">HOME</a>
-                  <a href="/men" className="text-black hover:text-red-600 transition-colors py-2">MEN</a>
-                  <a href="/women" className="text-black hover:text-red-600 transition-colors py-2">WOMEN</a>
-                  <a href="/lookbook" className="text-black hover:text-red-600 transition-colors py-2">LOOKBOOK</a>
-                  <a href="/about" className="text-black hover:text-red-600 transition-colors py-2">ABOUT</a>
-                  <a href="/culture" className="text-black hover:text-red-600 transition-colors py-2">CULTURE</a>
+            <Button variant="ghost" size="icon" className="touch-target md:hidden">
+              <Menu className="h-5 w-5" />
+            </Button>
+            
+            {/* Logo */}
+            <Link to="/" className="flex items-center space-x-2">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-full flex items-center justify-center">
+                <span className="text-primary-foreground font-bold text-sm sm:text-base">AF</span>
+              </div>
+              <span className="font-bold text-lg sm:text-xl text-foreground">AFRIKA'S FINEST</span>
+            </Link>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-6">
+              <Link to="/men" className="text-foreground hover:text-primary transition-colors">Men</Link>
+              <Link to="/women" className="text-foreground hover:text-primary transition-colors">Women</Link>
+              <Link to="/lookbook" className="text-foreground hover:text-primary transition-colors">Lookbook</Link>
+              <Link to="/culture" className="text-foreground hover:text-primary transition-colors">Culture</Link>
+            </nav>
+
+            {/* Actions */}
+            <div className="flex items-center space-x-2">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="touch-target relative"
+                onClick={() => setIsSearchOpen(true)}
+              >
+                <Search className="h-5 w-5" />
+              </Button>
+              
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="touch-target relative"
+                onClick={() => setIsProfileOpen(true)}
+              >
+                <User className="h-5 w-5" />
+              </Button>
+
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="touch-target relative"
+                onClick={() => setIsCartOpen(true)}
+              >
+                <ShoppingBag className="h-5 w-5" />
+                {cartItems.length > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {cartItems.length}
+                  </span>
+                )}
+              </Button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero Section - Mobile First */}
+      <section className="relative min-h-[60vh] sm:min-h-[70vh] lg:min-h-[80vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-secondary/90 z-10"></div>
+        <OptimizedImage
+          src="/lovable-uploads/9281b935-05bf-4bc6-bc91-b290612beca6.png"
+          alt="African heritage fashion"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        
+        <div className="relative z-20 text-center mobile-padding max-w-4xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
+            AFRIKA'S FINEST
+          </h1>
+          <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto">
+            Redefining the African narrative through bold designs and timeless style
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
+            <Button size="lg" className="w-full sm:w-auto touch-target bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8">
+              Shop Collection
+            </Button>
+            <Button variant="outline" size="lg" className="w-full sm:w-auto touch-target border-white text-white hover:bg-white hover:text-primary px-8">
+              Our Story
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products - Mobile Optimized */}
+      <section className="py-12 sm:py-16 lg:py-20">
+        <div className="mobile-padding max-w-7xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="mobile-heading font-bold text-foreground mb-4">
+              Featured Collection
+            </h2>
+            <p className="mobile-text text-muted-foreground max-w-2xl mx-auto">
+              Discover our most popular pieces celebrating African heritage and contemporary style
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {products.slice(0, 4).map((product) => (
+              <div key={product.id} className="group cursor-pointer">
+                <div className="relative overflow-hidden rounded-lg mb-3 sm:mb-4">
+                  <OptimizedImage
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="absolute top-2 right-2 touch-target bg-background/80 hover:bg-background"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleFavorite(product.id);
+                    }}
+                  >
+                    <Heart 
+                      className={`h-4 w-4 ${favorites.includes(product.id) ? 'fill-primary text-primary' : 'text-muted-foreground'}`} 
+                    />
+                  </Button>
+                </div>
+                
+                <div className="space-y-1 sm:space-y-2">
+                  <h3 className="font-semibold text-foreground text-sm sm:text-base group-hover:text-primary transition-colors">
+                    {product.name}
+                  </h3>
+                  <div className="flex items-center gap-2">
+                    <div className="flex items-center">
+                      {[...Array(5)].map((_, i) => (
+                        <Star 
+                          key={i} 
+                          className={`h-3 w-3 sm:h-4 sm:w-4 ${i < Math.floor(product.rating) ? 'fill-accent text-accent' : 'text-muted-foreground'}`} 
+                        />
+                      ))}
+                    </div>
+                    <span className="text-xs sm:text-sm text-muted-foreground">({product.reviews})</span>
+                  </div>
+                  <p className="font-bold text-primary text-base sm:text-lg">${product.price}</p>
                 </div>
               </div>
-            )}
-          </div>
-        </nav>
-      </DropAnimation>
-
-      {/* Hero Section with drop animation */}
-      <DropAnimation delay={400} dropHeight={60}>
-        <section className="relative h-60 sm:h-80 md:h-96 lg:h-screen flex items-center justify-center overflow-hidden">
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url('/lovable-uploads/7f0b3db7-fa12-4dda-9ab8-e43780531947.png')`,
-            }}
-          >
-            <div className="absolute inset-0 bg-black bg-opacity-60"></div>
-          </div>
-          
-          <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
-            <DropAnimation delay={800} dropHeight={40}>
-              <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-3 sm:mb-4 text-white leading-tight">
-                AFRICA'S <span className="text-red-600">FINEST</span>
-              </h2>
-            </DropAnimation>
-            <DropAnimation delay={1000} dropHeight={30}>
-              <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 sm:mb-8 px-4">
-                Authentic streetwear celebrating East African culture
-              </p>
-            </DropAnimation>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
-              <DropAnimationGroup staggerDelay={0.1}>
-                {[
-                  <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 md:px-8 w-full sm:w-auto">
-                    <a href="/men">SHOP MEN</a>
-                  </Button>,
-                  <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black font-bold px-6 md:px-8 w-full sm:w-auto">
-                    <a href="/women">SHOP WOMEN</a>
-                  </Button>
-                ]}
-              </DropAnimationGroup>
-            </div>
-          </div>
-        </section>
-      </DropAnimation>
-
-      {/* Featured Products with staggered animations */}
-      <section className="py-6 sm:py-8 md:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <DropAnimation delay={600} dropHeight={40}>
-            <div className="text-center mb-6 sm:mb-8 md:mb-12">
-              <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-black mb-2 sm:mb-4">
-                FEATURED <span className="text-red-600">PRODUCTS</span>
-              </h2>
-              <p className="text-gray-600 text-sm sm:text-base md:text-lg">Discover our most popular items</p>
-            </div>
-          </DropAnimation>
-
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-8">
-            {featuredProducts.map((product, index) => (
-              <DropAnimation key={product.id} delay={800 + index * 150} dropHeight={50}>
-                <Card className="bg-white border-gray-200 hover:border-red-600 transition-all duration-300 group">
-                  <CardContent className="p-0">
-                    <div className="relative overflow-hidden">
-                      <a href={`/product/${product.id}`}>
-                        <img 
-                          src={product.image} 
-                          alt={product.name}
-                          className="w-full h-32 sm:h-48 md:h-64 object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
-                        />
-                      </a>
-                      <Badge className="absolute top-2 left-2 bg-red-600 hover:bg-red-600 text-white text-xs">
-                        {product.badge}
-                      </Badge>
-                      <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Heart 
-                          className={`h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 cursor-pointer ${
-                            isFavorite(product.id) ? 'text-red-500 fill-red-500' : 'text-black hover:text-red-500'
-                          }`}
-                          onClick={() => handleToggleFavorite(product)}
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className="p-2 sm:p-3 md:p-4">
-                      <a href={`/product/${product.id}`}>
-                        <h4 className="text-black font-bold text-xs sm:text-sm md:text-base mb-1 sm:mb-2 hover:text-red-600 transition-colors cursor-pointer line-clamp-2">{product.name}</h4>
-                      </a>
-                      <div className="flex items-center justify-between mb-2 sm:mb-3 md:mb-4">
-                        <p className="text-red-600 font-bold text-sm sm:text-base md:text-lg">{product.price}</p>
-                        <div className="flex items-center space-x-1">
-                          {[...Array(5)].map((_, i) => (
-                            <Star key={i} className="h-2 w-2 sm:h-3 sm:w-3 md:h-4 md:w-4 fill-red-600 text-red-600" />
-                          ))}
-                        </div>
-                      </div>
-
-                      <Button 
-                        onClick={() => handleAddToCart(product)}
-                        className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs sm:text-sm py-1.5 sm:py-2"
-                      >
-                        ADD TO CART
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </DropAnimation>
             ))}
           </div>
 
-          <DropAnimation delay={1400} dropHeight={30}>
-            <div className="text-center mt-6 sm:mt-8 md:mt-12">
-              <Button asChild size="lg" variant="outline" className="border-red-600 text-red-600 hover:bg-red-600 hover:text-white font-bold">
-                <a href="/men">VIEW ALL PRODUCTS</a>
-              </Button>
-            </div>
-          </DropAnimation>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section className="py-6 sm:py-8 md:py-16 bg-gray-100">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center">
-            <DropAnimation delay={1000} dropHeight={50} className="order-2 lg:order-1">
-              <div>
-                <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-black mb-3 sm:mb-4 md:mb-6">
-                  OUR <span className="text-red-600">STORY</span>
-                </h2>
-                <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-3 sm:mb-4 md:mb-6">
-                  African's Finest is more than just clothing—it's a movement celebrating the rich heritage and vibrant culture of East Africa. Each piece tells a story of tradition, pride, and contemporary style.
-                </p>
-                <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-4 sm:mb-6 md:mb-8">
-                  From the bustling streets of Nairobi to the cultural heart of Dar es Salaam, we bring you authentic designs that honor our roots while embracing modern fashion.
-                </p>
-                <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold w-full sm:w-auto">
-                  <a href="/about">LEARN MORE</a>
-                </Button>
-              </div>
-            </DropAnimation>
-            <DropAnimation delay={1200} dropHeight={60} className="relative order-1 lg:order-2">
-              <div>
-                <img 
-                  src="/lovable-uploads/c1a27c87-fecb-4603-846b-e559103c12ef.png" 
-                  alt="African Fashion"
-                  className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-xl"
-                />
-              </div>
-            </DropAnimation>
+          <div className="text-center mt-8 sm:mt-12">
+            <Button size="lg" className="touch-target bg-secondary hover:bg-secondary/90 text-secondary-foreground px-8">
+              View All Products
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <DropAnimation delay={1400} dropHeight={40}>
-        <footer className="bg-black text-white py-6 sm:py-8 md:py-12">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-              <div className="col-span-1 sm:col-span-2">
-                <div className="flex items-center mb-3 sm:mb-4">
-                  <img 
-                    src="/lovable-uploads/05b02c6d-e604-4df1-b5f6-7267787edde7.png" 
-                    alt="Afrika's Finest Logo" 
-                    className="h-8 w-auto sm:h-10 mr-2 filter invert"
-                  />
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold">
-                    AFRICAN'S <span className="text-red-600">FINEST</span>
-                  </h3>
-                </div>
-                <p className="text-gray-300 text-sm md:text-base mb-4">
-                  Fashion at it's ultimate prime. Shop with us and become part of our vast family worldwide. Afrika's finest telling our African Story.
-                </p>
-              </div>
-              
-              <div>
-                <h4 className="font-bold mb-3 sm:mb-4 text-sm md:text-base">QUICK LINKS</h4>
-                <ul className="space-y-2 text-sm">
-                  <li><a href="/men" className="text-gray-300 hover:text-red-600 transition-colors">Men</a></li>
-                  <li><a href="/women" className="text-gray-300 hover:text-red-600 transition-colors">Women</a></li>
-                  <li><a href="/lookbook" className="text-gray-300 hover:text-red-600 transition-colors">Lookbook</a></li>
-                  <li><a href="/about" className="text-gray-300 hover:text-red-600 transition-colors">About</a></li>
-                </ul>
-              </div>
-              
-              <div>
-                <h4 className="font-bold mb-3 sm:mb-4 text-sm md:text-base">SUPPORT</h4>
-                <ul className="space-y-2 text-sm">
-                  <li><a href="/contact" className="text-gray-300 hover:text-red-600 transition-colors">Contact</a></li>
-                  <li><a href="/faq" className="text-gray-300 hover:text-red-600 transition-colors">FAQ</a></li>
-                  <li><a href="/shipping-info" className="text-gray-300 hover:text-red-600 transition-colors">Shipping</a></li>
-                  <li><a href="/returns" className="text-gray-300 hover:text-red-600 transition-colors">Returns</a></li>
-                </ul>
-              </div>
-            </div>
-            
-            <div className="border-t border-gray-800 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center">
-              <p className="text-gray-400 text-sm">
-                © 2025 African's Finest. Proudly representing Tanzania & Kenya.
+      {/* Brand Story Section */}
+      <section className="py-12 sm:py-16 lg:py-20 bg-muted">
+        <div className="mobile-padding max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div>
+              <h2 className="mobile-heading font-bold text-foreground mb-4 sm:mb-6">
+                Our Mission
+              </h2>
+              <p className="mobile-text text-muted-foreground mb-4 sm:mb-6 leading-relaxed">
+                To create world-class African-inspired apparel and content that celebrates our heritage, 
+                reshapes perceptions, and empowers Africans to dream bigger, live better, and lead boldly.
               </p>
+              <p className="mobile-text text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
+                Every piece we create is a statement: Africa is not defined by the limits others place on us. 
+                Our outfits are worn with pride, carrying the essence of the motherland into every street, stage, and social space.
+              </p>
+              <Link to="/about">
+                <Button className="touch-target bg-accent hover:bg-accent/90 text-accent-foreground">
+                  Learn More About Us
+                </Button>
+              </Link>
+            </div>
+            <div className="order-first lg:order-last">
+              <OptimizedImage
+                src="/lovable-uploads/83e9eb03-ffaa-4765-956a-cb1f637e3b77.png"
+                alt="African culture and heritage"
+                className="w-full h-64 sm:h-80 lg:h-96 object-cover rounded-lg"
+              />
             </div>
           </div>
-        </footer>
-      </DropAnimation>
+        </div>
+      </section>
 
       {/* Modals */}
-      <ProfileModal isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
       <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
       <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      <ProfileModal isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
     </div>
   );
 };
