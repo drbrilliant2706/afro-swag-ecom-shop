@@ -60,17 +60,16 @@ const About = () => {
         </div>
       </section>
 
-      {/* Main Content */}
+      {/* Main Story Section */}
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-16">
             <h3 className="text-4xl font-bold text-black mb-6">
-              UNAPOLOGETICALLY AFRICAN. UNIVERSALLY FINEST.
+              THE REAL AFRICAN STORY
             </h3>
             <p className="text-xl text-gray-700 leading-relaxed">
-              Founded in the heart of East Africa, African's Finest represents more than just fashion. 
-              We are a movement celebrating the rich heritage of Tanzania and Kenya while embracing 
-              contemporary streetwear culture that speaks to the global African diaspora.
+              AFRIKA'S FINEST is an African-inspired apparel brand on a mission to tell the real African story: 
+              the story of greatness, resilience, creativity, and pride.
             </p>
           </div>
 
@@ -78,21 +77,59 @@ const About = () => {
             <div>
               <img 
                 src="/lovable-uploads/036867e1-6684-4f8f-889e-e89c5719d973.png"
-                alt="Our founder"
+                alt="African culture and heritage"
                 className="rounded-lg shadow-2xl w-full h-64 object-cover"
               />
             </div>
             <div className="flex flex-col justify-center">
-              <h4 className="text-3xl font-bold text-black mb-4">From Dar es Salaam to the World</h4>
               <p className="text-gray-700 mb-6">
-                Our journey began in 2020 when our founder, inspired by the vibrant street culture 
-                of Dar es Salaam and Nairobi, decided to create clothing that celebrates African 
-                identity while meeting international fashion standards.
+                Through bold designs, timeless styles, and powerful visuals, we celebrate Africa's history — 
+                its triumphs and struggles — while showcasing the richness of its cultures, music, food, 
+                sports, and everyday life.
+              </p>
+              <p className="text-gray-700 mb-6">
+                Every piece we create is a statement: Africa is not defined by the limits others place on us. 
+                Our outfits are worn with pride, carrying the essence of the motherland into every street, 
+                stage, and social space.
               </p>
               <p className="text-gray-700">
-                Every design tells a story - from the Maasai warriors to the bustling markets of 
-                Stone Town, we infuse authentic African elements into modern streetwear that 
-                resonates globally.
+                AFRIKA'S FINEST is also committed to using our platform to educate, inspire, and empower 
+                Africans to rise above poverty, embrace knowledge, and create lasting success.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Vision & Mission Section */}
+      <section className="py-16 bg-gray-100">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Vision */}
+            <div className="bg-white p-8 rounded-lg shadow-lg">
+              <div className="text-center mb-6">
+                <div className="bg-red-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                  <Target className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-3xl font-bold text-black mb-4">OUR VISION</h3>
+              </div>
+              <p className="text-gray-700 text-lg leading-relaxed">
+                To redefine the African narrative by becoming the most influential African-inspired clothing brand — 
+                a brand that inspires pride, unity, and global recognition for Africa's culture, creativity, and potential.
+              </p>
+            </div>
+
+            {/* Mission */}
+            <div className="bg-white p-8 rounded-lg shadow-lg">
+              <div className="text-center mb-6">
+                <div className="bg-black rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                  <Globe className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-3xl font-bold text-black mb-4">OUR MISSION</h3>
+              </div>
+              <p className="text-gray-700 text-lg leading-relaxed">
+                To create world-class African-inspired apparel and content that celebrates our heritage, 
+                reshapes perceptions, and empowers Africans to dream bigger, live better, and lead boldly.
               </p>
             </div>
           </div>
@@ -100,7 +137,7 @@ const About = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-16 bg-gray-100">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h3 className="text-4xl font-bold text-black mb-4">OUR VALUES</h3>
