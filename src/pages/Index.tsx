@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ShoppingBag, Star, Heart, Search, Menu, User } from "lucide-react";
@@ -6,9 +5,9 @@ import { Link } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { OptimizedImage } from "@/components/ui/optimized-image";
-import CartModal from "@/components/cart/CartModal";
-import SearchModal from "@/components/search/SearchModal";
-import ProfileModal from "@/components/profile/ProfileModal";
+import { CartModal } from "@/components/cart/CartModal";
+import { SearchModal } from "@/components/search/SearchModal";
+import { ProfileModal } from "@/components/profile/ProfileModal";
 
 interface Product {
   id: number;
@@ -90,36 +89,21 @@ const Index = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const { items, getTotalItems } = useCart();
-  const { favorites, addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
+  const { cartItems } = useCart();
+  const { favorites, toggleFavorite } = useFavorites();
 
   useEffect(() => {
     document.title = "Afrika's Finest - Home";
   }, []);
 
-  const handleToggleFavorite = (product: Product) => {
-    const favoriteItem = {
-      id: product.id,
-      name: product.name,
-      price: `$${product.price}`,
-      image: product.image
-    };
-
-    if (isFavorite(product.id)) {
-      removeFromFavorites(product.id);
-    } else {
-      addToFavorites(favoriteItem);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-background">
       {/* Mobile-First Header */}
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
-        <div className="px-4 sm:px-6 lg:px-8 py-3">
+      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
+        <div className="mobile-padding py-3">
           <div className="flex items-center justify-between">
             {/* Mobile Menu */}
-            <Button variant="ghost" size="icon" className="h-11 w-11 md:hidden">
+            <Button variant="ghost" size="icon" className="touch-target md:hidden">
               <Menu className="h-5 w-5" />
             </Button>
             
@@ -144,7 +128,7 @@ const Index = () => {
               <Button 
                 variant="ghost" 
                 size="icon" 
-                className="h-11 w-11 relative"
+                className="touch-target relative"
                 onClick={() => setIsSearchOpen(true)}
               >
                 <Search className="h-5 w-5" />
@@ -153,7 +137,7 @@ const Index = () => {
               <Button 
                 variant="ghost" 
                 size="icon" 
-                className="h-11 w-11 relative"
+                className="touch-target relative"
                 onClick={() => setIsProfileOpen(true)}
               >
                 <User className="h-5 w-5" />
@@ -162,13 +146,13 @@ const Index = () => {
               <Button 
                 variant="ghost" 
                 size="icon" 
-                className="h-11 w-11 relative"
+                className="touch-target relative"
                 onClick={() => setIsCartOpen(true)}
               >
                 <ShoppingBag className="h-5 w-5" />
-                {getTotalItems() > 0 && (
+                {cartItems.length > 0 && (
                   <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    {getTotalItems()}
+                    {cartItems.length}
                   </span>
                 )}
               </Button>
@@ -186,7 +170,7 @@ const Index = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         
-        <div className="relative z-20 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+        <div className="relative z-20 text-center mobile-padding max-w-4xl mx-auto">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
             AFRIKA'S FINEST
           </h1>
@@ -194,10 +178,10 @@ const Index = () => {
             Redefining the African narrative through bold designs and timeless style
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
-            <Button size="lg" className="w-full sm:w-auto min-h-[44px] bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8">
+            <Button size="lg" className="w-full sm:w-auto touch-target bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8">
               Shop Collection
             </Button>
-            <Button variant="outline" size="lg" className="w-full sm:w-auto min-h-[44px] border-white text-white hover:bg-white hover:text-primary px-8">
+            <Button variant="outline" size="lg" className="w-full sm:w-auto touch-target border-white text-white hover:bg-white hover:text-primary px-8">
               Our Story
             </Button>
           </div>
@@ -206,12 +190,12 @@ const Index = () => {
 
       {/* Featured Products - Mobile Optimized */}
       <section className="py-12 sm:py-16 lg:py-20">
-        <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="mobile-padding max-w-7xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
+            <h2 className="mobile-heading font-bold text-foreground mb-4">
               Featured Collection
             </h2>
-            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="mobile-text text-muted-foreground max-w-2xl mx-auto">
               Discover our most popular pieces celebrating African heritage and contemporary style
             </p>
           </div>
@@ -228,14 +212,14 @@ const Index = () => {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="absolute top-2 right-2 min-h-[44px] min-w-[44px] bg-background/80 hover:bg-background"
+                    className="absolute top-2 right-2 touch-target bg-background/80 hover:bg-background"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleToggleFavorite(product);
+                      toggleFavorite(product.id);
                     }}
                   >
                     <Heart 
-                      className={`h-4 w-4 ${isFavorite(product.id) ? 'fill-primary text-primary' : 'text-muted-foreground'}`} 
+                      className={`h-4 w-4 ${favorites.includes(product.id) ? 'fill-primary text-primary' : 'text-muted-foreground'}`} 
                     />
                   </Button>
                 </div>
@@ -262,7 +246,7 @@ const Index = () => {
           </div>
 
           <div className="text-center mt-8 sm:mt-12">
-            <Button size="lg" className="min-h-[44px] bg-secondary hover:bg-secondary/90 text-secondary-foreground px-8">
+            <Button size="lg" className="touch-target bg-secondary hover:bg-secondary/90 text-secondary-foreground px-8">
               View All Products
             </Button>
           </div>
@@ -271,22 +255,22 @@ const Index = () => {
 
       {/* Brand Story Section */}
       <section className="py-12 sm:py-16 lg:py-20 bg-muted">
-        <div className="px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div className="mobile-padding max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4 sm:mb-6">
+              <h2 className="mobile-heading font-bold text-foreground mb-4 sm:mb-6">
                 Our Mission
               </h2>
-              <p className="text-base sm:text-lg text-muted-foreground mb-4 sm:mb-6 leading-relaxed">
+              <p className="mobile-text text-muted-foreground mb-4 sm:mb-6 leading-relaxed">
                 To create world-class African-inspired apparel and content that celebrates our heritage, 
                 reshapes perceptions, and empowers Africans to dream bigger, live better, and lead boldly.
               </p>
-              <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
+              <p className="mobile-text text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
                 Every piece we create is a statement: Africa is not defined by the limits others place on us. 
                 Our outfits are worn with pride, carrying the essence of the motherland into every street, stage, and social space.
               </p>
               <Link to="/about">
-                <Button className="min-h-[44px] bg-accent hover:bg-accent/90 text-accent-foreground">
+                <Button className="touch-target bg-accent hover:bg-accent/90 text-accent-foreground">
                   Learn More About Us
                 </Button>
               </Link>
