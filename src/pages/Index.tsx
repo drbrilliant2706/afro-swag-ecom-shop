@@ -11,6 +11,7 @@ import ProfileModal from "@/components/profile/ProfileModal";
 import CartModal from "@/components/cart/CartModal";
 import SearchModal from "@/components/search/SearchModal";
 import { DropAnimation, DropAnimationGroup } from "@/components/animations/DropAnimation";
+import { HeaderCarousel } from "@/components/ui/header-carousel";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -127,6 +128,11 @@ const Index = () => {
         </div>
       </div>
 
+      {/* Header Image Carousel */}
+      <DropAnimation delay={100} dropHeight={30}>
+        <HeaderCarousel />
+      </DropAnimation>
+
       {/* Navigation with drop animation */}
       <DropAnimation delay={200} dropHeight={30}>
         <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -146,11 +152,12 @@ const Index = () => {
               <div className="hidden lg:block">
                 <div className="ml-10 flex items-baseline space-x-6 xl:space-x-8">
                   <a href="/" className="text-red-600 border-b-2 border-red-600 pb-1 text-sm xl:text-base font-medium">HOME</a>
-                  <a href="/men" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">MEN</a>
-                  <a href="/women" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">WOMEN</a>
                   <a href="/lookbook" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">LOOKBOOK</a>
                   <a href="/about" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">ABOUT</a>
                   <a href="/culture" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">CULTURE</a>
+                  <Button asChild size="sm" className="bg-white text-black border border-black hover:bg-black hover:text-white transition-colors font-bold">
+                    <a href="/men">NEW DROP</a>
+                  </Button>
                 </div>
               </div>
 
@@ -189,11 +196,12 @@ const Index = () => {
               <div className="lg:hidden border-t border-gray-200 py-3 bg-white">
                 <div className="flex flex-col space-y-3 px-2">
                   <a href="/" className="text-red-600 py-2 font-medium">HOME</a>
-                  <a href="/men" className="text-black hover:text-red-600 transition-colors py-2">MEN</a>
-                  <a href="/women" className="text-black hover:text-red-600 transition-colors py-2">WOMEN</a>
                   <a href="/lookbook" className="text-black hover:text-red-600 transition-colors py-2">LOOKBOOK</a>
                   <a href="/about" className="text-black hover:text-red-600 transition-colors py-2">ABOUT</a>
                   <a href="/culture" className="text-black hover:text-red-600 transition-colors py-2">CULTURE</a>
+                  <Button asChild size="sm" className="bg-white text-black border border-black hover:bg-black hover:text-white transition-colors font-bold mx-2 my-1">
+                    <a href="/men">NEW DROP</a>
+                  </Button>
                 </div>
               </div>
             )}
@@ -224,17 +232,12 @@ const Index = () => {
                 Authentic streetwear celebrating East African culture
               </p>
             </DropAnimation>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
-              <DropAnimationGroup staggerDelay={0.1}>
-                {[
-                  <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 md:px-8 w-full sm:w-auto">
-                    <a href="/men">SHOP MEN</a>
-                  </Button>,
-                  <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black font-bold px-6 md:px-8 w-full sm:w-auto">
-                    <a href="/women">SHOP WOMEN</a>
-                  </Button>
-                ]}
-              </DropAnimationGroup>
+            <div className="flex justify-center px-4">
+              <DropAnimation delay={1200} dropHeight={30}>
+                <Button asChild size="lg" className="bg-white text-black border-2 border-black hover:bg-black hover:text-white font-bold px-8 md:px-12 text-lg">
+                  <a href="/men">NEW DROP</a>
+                </Button>
+              </DropAnimation>
             </div>
           </div>
         </section>
