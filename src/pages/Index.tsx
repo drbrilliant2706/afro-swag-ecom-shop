@@ -128,11 +128,6 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Header Image Carousel */}
-      <DropAnimation delay={100} dropHeight={30}>
-        <HeaderCarousel />
-      </DropAnimation>
-
       {/* Navigation with drop animation */}
       <DropAnimation delay={200} dropHeight={30}>
         <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -207,6 +202,11 @@ const Index = () => {
             )}
           </div>
         </nav>
+      </DropAnimation>
+
+      {/* Header Image Carousel */}
+      <DropAnimation delay={300} dropHeight={30}>
+        <HeaderCarousel />
       </DropAnimation>
 
       {/* Hero Section with drop animation */}
