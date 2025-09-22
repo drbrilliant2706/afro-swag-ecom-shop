@@ -204,43 +204,27 @@ const Index = () => {
         </nav>
       </DropAnimation>
 
-      {/* Header Image Carousel */}
-      <DropAnimation delay={300} dropHeight={30}>
-        <HeaderCarousel />
-      </DropAnimation>
-
-      {/* Hero Section with drop animation */}
-      <DropAnimation delay={400} dropHeight={60}>
-        <section className="relative h-60 sm:h-80 md:h-96 lg:h-screen flex items-center justify-center overflow-hidden">
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url('/lovable-uploads/7f0b3db7-fa12-4dda-9ab8-e43780531947.png')`,
-            }}
-          >
-            <div className="absolute inset-0 bg-black bg-opacity-60"></div>
-          </div>
-          
-          <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
-            <DropAnimation delay={800} dropHeight={40}>
-              <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-3 sm:mb-4 text-white leading-tight">
+      {/* Hero Text Section */}
+      <DropAnimation delay={300} dropHeight={40}>
+        <section className="bg-white py-8 sm:py-12 md:py-16">
+          <div className="text-center max-w-4xl mx-auto px-4">
+            <DropAnimation delay={400} dropHeight={40}>
+              <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-3 sm:mb-4 text-black leading-tight">
                 AFRICA'S <span className="text-red-600">FINEST</span>
               </h2>
             </DropAnimation>
-            <DropAnimation delay={1000} dropHeight={30}>
-              <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 sm:mb-8 px-4">
+            <DropAnimation delay={500} dropHeight={30}>
+              <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-gray-600 mb-6 sm:mb-8 px-4">
                 Authentic streetwear celebrating East African culture
               </p>
             </DropAnimation>
-            <div className="flex justify-center px-4">
-              <DropAnimation delay={1200} dropHeight={30}>
-                <Button asChild size="lg" className="bg-white text-black border-2 border-black hover:bg-black hover:text-white font-bold px-8 md:px-12 text-lg">
-                  <a href="/men">NEW DROP</a>
-                </Button>
-              </DropAnimation>
-            </div>
           </div>
         </section>
+      </DropAnimation>
+
+      {/* Header Image Carousel */}
+      <DropAnimation delay={600} dropHeight={30}>
+        <HeaderCarousel />
       </DropAnimation>
 
       {/* Featured Products with staggered animations */}
