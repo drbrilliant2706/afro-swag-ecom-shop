@@ -150,7 +150,7 @@ const Favorites = () => {
                         onClick={() => handleAddToCart(product)}
                         className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-sm md:text-base"
                       >
-                        ADD TO CART
+                        VIEW PRODUCT
                       </Button>
                     </div>
                   </CardContent>

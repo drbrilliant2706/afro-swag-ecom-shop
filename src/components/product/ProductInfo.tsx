@@ -1,5 +1,5 @@
 
-import { Star } from "lucide-react";
+
 
 interface ProductInfoProps {
   product: {
@@ -15,14 +15,6 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-black mb-2">{product.name}</h1>
-        <div className="flex items-center space-x-2 mb-4">
-          <div className="flex items-center">
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} className="h-4 w-4 fill-red-600 text-red-600" />
-            ))}
-          </div>
-          <span className="text-gray-600">(4.8) · 127 reviews</span>
-        </div>
         <p className="text-3xl font-bold text-red-600 mb-4">{product.price}</p>
       </div>
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Heart, ShoppingCart, Search, User, Menu, Star, Filter, X } from "lucide-react";
+import { Heart, ShoppingCart, Search, User, Menu, Filter, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { useCart } from "@/contexts/CartContext";
@@ -328,19 +328,13 @@ const Women = () => {
                           <div key={index} className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-gray-300 border border-gray-400"></div>
                         ))}
                       </div>
-                      
-                      <div className="flex items-center space-x-1">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="h-3 w-3 md:h-4 md:w-4 fill-red-600 text-red-600" />
-                        ))}
-                      </div>
                     </div>
 
                     <Button 
                       onClick={() => handleAddToCart(product)}
                       className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-sm md:text-base"
                     >
-                      ADD TO CART
+                      VIEW PRODUCT
                     </Button>
                   </div>
                 </CardContent>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Heart, ShoppingCart, Search, User, Star, Menu } from "lucide-react";
+import { Heart, ShoppingCart, Search, User, Menu } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { useCart } from "@/contexts/CartContext";
@@ -282,20 +282,15 @@ const Index = () => {
                       <a href={`/product/${product.id}`}>
                         <h4 className="text-black font-bold text-xs sm:text-sm md:text-base mb-1 sm:mb-2 hover:text-red-600 transition-colors cursor-pointer line-clamp-2">{product.name}</h4>
                       </a>
-                      <div className="flex items-center justify-between mb-2 sm:mb-3 md:mb-4">
-                        <p className="text-red-600 font-bold text-sm sm:text-base md:text-lg">{product.price}</p>
-                        <div className="flex items-center space-x-1">
-                          {[...Array(5)].map((_, i) => (
-                            <Star key={i} className="h-2 w-2 sm:h-3 sm:w-3 md:h-4 md:w-4 fill-red-600 text-red-600" />
-                          ))}
-                        </div>
-                      </div>
+                       <div className="flex items-center justify-between mb-2 sm:mb-3 md:mb-4">
+                         <p className="text-red-600 font-bold text-sm sm:text-base md:text-lg">{product.price}</p>
+                       </div>
 
                       <Button 
                         onClick={() => handleAddToCart(product)}
                         className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs sm:text-sm py-1.5 sm:py-2"
                       >
-                        ADD TO CART
+                        VIEW PRODUCT
                       </Button>
                     </div>
                   </CardContent>

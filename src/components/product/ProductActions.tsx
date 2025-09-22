@@ -112,7 +112,7 @@ const ProductActions = ({ product, selectedSize, selectedColor }: ProductActions
           size="lg"
         >
           <ShoppingCart className="mr-2 h-5 w-5" />
-          ADD TO CART - {product.price}
+          VIEW PRODUCT - {product.price}
         </Button>
 
         <Button
