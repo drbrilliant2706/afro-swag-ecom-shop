@@ -204,27 +204,33 @@ const Index = () => {
         </nav>
       </DropAnimation>
 
-      {/* Hero Text Section */}
+      {/* Hero Section with Carousel Background */}
       <DropAnimation delay={300} dropHeight={40}>
-        <section className="bg-white py-8 sm:py-12 md:py-16">
-          <div className="text-center max-w-4xl mx-auto px-4">
-            <DropAnimation delay={400} dropHeight={40}>
-              <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-3 sm:mb-4 text-black leading-tight">
-                AFRICA'S <span className="text-red-600">FINEST</span>
-              </h2>
-            </DropAnimation>
-            <DropAnimation delay={500} dropHeight={30}>
-              <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-gray-600 mb-6 sm:mb-8 px-4">
-                Authentic streetwear celebrating East African culture
-              </p>
-            </DropAnimation>
+        <section className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-screen overflow-hidden">
+          {/* Background Carousel */}
+          <div className="absolute inset-0">
+            <HeaderCarousel />
+          </div>
+          
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+          
+          {/* Text Content Overlay */}
+          <div className="relative z-10 h-full flex items-center justify-center">
+            <div className="text-center max-w-4xl mx-auto px-4">
+              <DropAnimation delay={400} dropHeight={40}>
+                <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-3 sm:mb-4 text-white leading-tight">
+                  AFRICA'S <span className="text-red-600">FINEST</span>
+                </h2>
+              </DropAnimation>
+              <DropAnimation delay={500} dropHeight={30}>
+                <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-white mb-6 sm:mb-8 px-4">
+                  Authentic streetwear celebrating East African culture
+                </p>
+              </DropAnimation>
+            </div>
           </div>
         </section>
-      </DropAnimation>
-
-      {/* Header Image Carousel */}
-      <DropAnimation delay={600} dropHeight={30}>
-        <HeaderCarousel />
       </DropAnimation>
 
       {/* Featured Products with staggered animations */}
