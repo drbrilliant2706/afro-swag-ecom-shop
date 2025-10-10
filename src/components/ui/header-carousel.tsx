@@ -35,7 +35,7 @@ export const HeaderCarousel: React.FC<HeaderCarouselProps> = ({ className = '' }
   }, []);
 
   return (
-    <div className={`relative w-full h-32 sm:h-40 md:h-48 overflow-hidden ${className}`}>
+    <div className={`relative w-full h-full overflow-hidden ${className}`}>
       {images.map((image, index) => (
         <div
           key={index}
@@ -51,7 +51,6 @@ export const HeaderCarousel: React.FC<HeaderCarouselProps> = ({ className = '' }
           />
         </div>
       ))}
-      <div className="absolute inset-0 bg-black bg-opacity-30" />
     </div>
   );
 };
