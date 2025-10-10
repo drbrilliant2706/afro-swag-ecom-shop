@@ -130,23 +130,23 @@ const Index = () => {
 
       {/* Navigation with drop animation */}
       <DropAnimation delay={200} dropHeight={30}>
-        <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <nav className="bg-white border-b border-gray-200 sticky top-0 z-50" role="navigation" aria-label="Main navigation">
           <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
             <div className="flex justify-between items-center h-14 sm:h-16">
               <div className="flex-shrink-0 flex items-center">
                 <img 
                   src="/lovable-uploads/05b02c6d-e604-4df1-b5f6-7267787edde7.png" 
-                  alt="Afrika's Finest Logo" 
+                  alt="Afrika's Finest Logo - East African Streetwear Brand" 
                   className="h-8 w-auto sm:h-10 md:h-12 mr-2"
                 />
-                <h1 className="text-sm sm:text-lg md:text-xl font-bold text-black hidden xs:block">
+                <a href="/" className="text-sm sm:text-lg md:text-xl font-bold text-black hidden xs:block">
                   AFRICAN'S <span className="text-red-600">FINEST</span>
-                </h1>
+                </a>
               </div>
 
               <div className="hidden lg:block">
                 <div className="ml-10 flex items-baseline space-x-6 xl:space-x-8">
-                  <a href="/" className="text-red-600 border-b-2 border-red-600 pb-1 text-sm xl:text-base font-medium">HOME</a>
+                  <a href="/" className="text-red-600 border-b-2 border-red-600 pb-1 text-sm xl:text-base font-medium" aria-current="page">HOME</a>
                   <a href="/lookbook" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">LOOKBOOK</a>
                   <a href="/about" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">ABOUT</a>
                   <a href="/culture" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">CULTURE</a>
@@ -159,28 +159,36 @@ const Index = () => {
               <DropAnimationGroup staggerDelay={0.05}>
                 {[
                   <Search 
+                    key="search"
                     className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
                     onClick={() => setIsSearchOpen(true)}
+                    aria-label="Search products"
                   />,
                   <User 
+                    key="user"
                     className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
                     onClick={() => setIsProfileOpen(true)}
+                    aria-label="User profile"
                   />,
-                  <a href="/favorites">
+                  <a key="favorites" href="/favorites" aria-label="View favorites">
                     <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
                   </a>,
-                  <div className="relative">
+                  <div key="cart" className="relative">
                     <ShoppingCart 
                       className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
                       onClick={() => setIsCartOpen(true)}
+                      aria-label="Shopping cart"
                     />
-                    <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                    <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center" aria-label={`${getTotalItems()} items in cart`}>
                       {getTotalItems()}
                     </span>
                   </div>,
                   <Menu 
+                    key="menu"
                     className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors lg:hidden" 
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    aria-label="Toggle menu"
+                    aria-expanded={isMenuOpen}
                   />
                 ]}
               </DropAnimationGroup>
@@ -206,7 +214,7 @@ const Index = () => {
 
       {/* Hero Section with Carousel Background */}
       <DropAnimation delay={300} dropHeight={40}>
-        <section className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-screen overflow-hidden">
+        <header className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-screen overflow-hidden">
           {/* Background Carousel */}
           <div className="absolute inset-0">
             <HeaderCarousel />
@@ -219,9 +227,9 @@ const Index = () => {
           <div className="relative z-10 h-full flex items-center justify-center">
             <div className="text-center max-w-4xl mx-auto px-4">
               <DropAnimation delay={400} dropHeight={40}>
-                <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-3 sm:mb-4 text-white leading-tight">
+                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-3 sm:mb-4 text-white leading-tight">
                   AFRICA'S <span className="text-red-600">FINEST</span>
-                </h2>
+                </h1>
               </DropAnimation>
               <DropAnimation delay={500} dropHeight={30}>
                 <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-white mb-6 sm:mb-8 px-4">
@@ -230,20 +238,21 @@ const Index = () => {
               </DropAnimation>
             </div>
           </div>
-        </section>
+        </header>
       </DropAnimation>
 
       {/* Featured Products with staggered animations */}
-      <section className="py-6 sm:py-8 md:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <DropAnimation delay={600} dropHeight={40}>
-            <div className="text-center mb-6 sm:mb-8 md:mb-12">
-              <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-black mb-2 sm:mb-4">
-                FEATURED <span className="text-red-600">PRODUCTS</span>
-              </h2>
-              <p className="text-gray-600 text-sm sm:text-base md:text-lg">Discover our most popular items</p>
-            </div>
-          </DropAnimation>
+      <main>
+        <section className="py-6 sm:py-8 md:py-16 bg-white" aria-labelledby="featured-products">
+          <div className="max-w-7xl mx-auto px-4">
+            <DropAnimation delay={600} dropHeight={40}>
+              <div className="text-center mb-6 sm:mb-8 md:mb-12">
+                <h2 id="featured-products" className="text-xl sm:text-2xl md:text-4xl font-bold text-black mb-2 sm:mb-4">
+                  FEATURED <span className="text-red-600">PRODUCTS</span>
+                </h2>
+                <p className="text-gray-600 text-sm sm:text-base md:text-lg">Discover our most popular items</p>
+              </div>
+            </DropAnimation>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-8">
             {featuredProducts.map((product, index) => (
@@ -254,7 +263,7 @@ const Index = () => {
                       <a href={`/product/${product.id}`}>
                         <img 
                           src={product.image} 
-                          alt={product.name}
+                          alt={`${product.name} - African streetwear fashion`}
                           className="w-full h-32 sm:h-48 md:h-64 object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
                         />
                       </a>
@@ -300,15 +309,15 @@ const Index = () => {
             </div>
           </DropAnimation>
         </div>
-      </section>
+        </section>
 
-      {/* About Section */}
-      <section className="py-6 sm:py-8 md:py-16 bg-gray-100">
+        {/* About Section */}
+        <section className="py-6 sm:py-8 md:py-16 bg-gray-100" aria-labelledby="our-story">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center">
             <DropAnimation delay={1000} dropHeight={50} className="order-2 lg:order-1">
-              <div>
-                <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-black mb-3 sm:mb-4 md:mb-6">
+              <article>
+                <h2 id="our-story" className="text-xl sm:text-2xl md:text-4xl font-bold text-black mb-3 sm:mb-4 md:mb-6">
                   OUR <span className="text-red-600">STORY</span>
                 </h2>
                 <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-3 sm:mb-4 md:mb-6">
@@ -320,37 +329,38 @@ const Index = () => {
                 <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold w-full sm:w-auto">
                   <a href="/about">LEARN MORE</a>
                 </Button>
-              </div>
+              </article>
             </DropAnimation>
             <DropAnimation delay={1200} dropHeight={60} className="relative order-1 lg:order-2">
               <div>
                 <img 
                   src="/lovable-uploads/c1a27c87-fecb-4603-846b-e559103c12ef.png" 
-                  alt="African Fashion"
+                  alt="East African fashion and culture - celebrating heritage through streetwear"
                   className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-xl"
                 />
               </div>
             </DropAnimation>
           </div>
         </div>
-      </section>
+        </section>
 
-      {/* About CTA Section */}
-      <DropAnimation delay={1400} dropHeight={40}>
-        <section className="bg-black text-white py-12 sm:py-16 md:py-20 text-center">
-          <div className="max-w-4xl mx-auto px-4">
-            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
-              LEARN MORE <span className="text-red-600">ABOUT US</span>
-            </h3>
+        {/* About CTA Section */}
+        <DropAnimation delay={1400} dropHeight={40}>
+          <section className="bg-black text-white py-12 sm:py-16 md:py-20 text-center" aria-labelledby="learn-more-cta">
+            <div className="max-w-4xl mx-auto px-4">
+              <h2 id="learn-more-cta" className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
+                LEARN MORE <span className="text-red-600">ABOUT US</span>
+              </h2>
             <p className="text-gray-300 text-base sm:text-lg md:text-xl mb-6 sm:mb-8">
               Discover our story, values, and the team behind Africa's Finest
             </p>
-            <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold">
-              <a href="/about">VISIT ABOUT PAGE</a>
-            </Button>
-          </div>
-        </section>
-      </DropAnimation>
+              <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold">
+                <a href="/about">VISIT ABOUT PAGE</a>
+              </Button>
+            </div>
+          </section>
+        </DropAnimation>
+      </main>
 
       {/* Modals */}
       <ProfileModal isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
