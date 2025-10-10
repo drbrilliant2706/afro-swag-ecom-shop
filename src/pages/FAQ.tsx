@@ -42,7 +42,7 @@ const FAQ = () => {
     },
     {
       question: "Do you offer bulk orders or wholesale?",
-      answer: "Yes, we offer bulk orders for businesses, events, and organizations. Contact us at Kevinchaz091@gmail.com for wholesale pricing."
+      answer: "Yes, we offer bulk orders for businesses, events, and organizations. Contact us at africasfinest2@gmail.com for wholesale pricing."
     },
     {
       question: "How can I stay updated on new releases?",

@@ -59,7 +59,7 @@ const Contact = () => {
               <CardContent className="p-8">
                 <Mail className="h-12 w-12 text-red-600 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-black mb-3">EMAIL US</h3>
-                <p className="text-gray-600 mb-2">Kevinchaz091@gmail.com</p>
+                <p className="text-gray-600 mb-2">africasfinest2@gmail.com</p>
                 <p className="text-gray-600">info@africansfinest.com</p>
               </CardContent>
             </Card>
@@ -155,7 +155,7 @@ const Contact = () => {
                       </p>
                       <p className="flex items-center">
                         <Mail className="h-4 w-4 text-red-600 mr-2" />
-                        Kevinchaz091@gmail.com
+                        africasfinest2@gmail.com
                       </p>
                     </div>
                   </CardContent>

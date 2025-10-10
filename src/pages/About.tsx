@@ -188,38 +188,16 @@ const About = () => {
             <p className="text-xl text-gray-600">The minds behind the movement</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
+          <div className="flex justify-center">
+            <div className="text-center max-w-md">
               <img 
                 src="/lovable-uploads/83e9eb03-ffaa-4765-956a-cb1f637e3b77.png"
                 alt="CEO"
-                className="rounded-full w-32 h-32 mx-auto mb-4 object-cover"
+                className="rounded-full w-40 h-40 mx-auto mb-4 object-cover"
               />
-              <h4 className="text-xl font-bold text-black mb-2">AMANI MWALIMU</h4>
-              <p className="text-red-600 mb-2">Founder & CEO</p>
-              <p className="text-gray-600">Visionary from Dar es Salaam with 10+ years in fashion</p>
-            </div>
-
-            <div className="text-center">
-              <img 
-                src="/lovable-uploads/1f0eef57-3784-4a0d-84d8-62b9fcb1c8d9.png"
-                alt="Creative Director"
-                className="rounded-full w-32 h-32 mx-auto mb-4 object-cover"
-              />
-              <h4 className="text-xl font-bold text-black mb-2">KESI NGUVU</h4>
-              <p className="text-red-600 mb-2">Creative Director</p>
-              <p className="text-gray-600">Nairobi-based designer specializing in Afrofuturism</p>
-            </div>
-
-            <div className="text-center">
-              <img 
-                src="/lovable-uploads/6a04cec4-55f6-473d-b3d2-82836bbbadde.png"
-                alt="Head of Production"
-                className="rounded-full w-32 h-32 mx-auto mb-4 object-cover"
-              />
-              <h4 className="text-xl font-bold text-black mb-2">ZARA KILIFI</h4>
-              <p className="text-red-600 mb-2">Head of Production</p>
-              <p className="text-gray-600">Ensuring quality from Mombasa to global markets</p>
+              <h4 className="text-2xl font-bold text-black mb-2">QEVOQCH</h4>
+              <p className="text-red-600 mb-3 text-lg">Founder & CEO</p>
+              <p className="text-gray-600">Visionary leader driving Africa's Finest to tell the authentic African story through fashion and culture</p>
             </div>
           </div>
         </div>

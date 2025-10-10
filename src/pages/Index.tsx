@@ -335,55 +335,21 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* About CTA Section */}
       <DropAnimation delay={1400} dropHeight={40}>
-        <footer className="bg-black text-white py-6 sm:py-8 md:py-12">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-              <div className="col-span-1 sm:col-span-2">
-                <div className="flex items-center mb-3 sm:mb-4">
-                  <img 
-                    src="/lovable-uploads/05b02c6d-e604-4df1-b5f6-7267787edde7.png" 
-                    alt="Afrika's Finest Logo" 
-                    className="h-8 w-auto sm:h-10 mr-2 filter invert"
-                  />
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold">
-                    AFRICAN'S <span className="text-red-600">FINEST</span>
-                  </h3>
-                </div>
-                <p className="text-gray-300 text-sm md:text-base mb-4">
-                  Fashion at it's ultimate prime. Shop with us and become part of our vast family worldwide. Afrika's finest telling our African Story.
-                </p>
-              </div>
-              
-              <div>
-                <h4 className="font-bold mb-3 sm:mb-4 text-sm md:text-base">QUICK LINKS</h4>
-                <ul className="space-y-2 text-sm">
-                  <li><a href="/men" className="text-gray-300 hover:text-red-600 transition-colors">Men</a></li>
-                  <li><a href="/women" className="text-gray-300 hover:text-red-600 transition-colors">Women</a></li>
-                  <li><a href="/lookbook" className="text-gray-300 hover:text-red-600 transition-colors">Lookbook</a></li>
-                  <li><a href="/about" className="text-gray-300 hover:text-red-600 transition-colors">About</a></li>
-                </ul>
-              </div>
-              
-              <div>
-                <h4 className="font-bold mb-3 sm:mb-4 text-sm md:text-base">SUPPORT</h4>
-                <ul className="space-y-2 text-sm">
-                  <li><a href="/contact" className="text-gray-300 hover:text-red-600 transition-colors">Contact</a></li>
-                  <li><a href="/faq" className="text-gray-300 hover:text-red-600 transition-colors">FAQ</a></li>
-                  <li><a href="/shipping-info" className="text-gray-300 hover:text-red-600 transition-colors">Shipping</a></li>
-                  <li><a href="/returns" className="text-gray-300 hover:text-red-600 transition-colors">Returns</a></li>
-                </ul>
-              </div>
-            </div>
-            
-            <div className="border-t border-gray-800 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center">
-              <p className="text-gray-400 text-sm">
-                © 2025 African's Finest. Proudly representing Tanzania & Kenya.
-              </p>
-            </div>
+        <section className="bg-black text-white py-12 sm:py-16 md:py-20 text-center">
+          <div className="max-w-4xl mx-auto px-4">
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
+              LEARN MORE <span className="text-red-600">ABOUT US</span>
+            </h3>
+            <p className="text-gray-300 text-base sm:text-lg md:text-xl mb-6 sm:mb-8">
+              Discover our story, values, and the team behind Africa's Finest
+            </p>
+            <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold">
+              <a href="/about">VISIT ABOUT PAGE</a>
+            </Button>
           </div>
-        </footer>
+        </section>
       </DropAnimation>
 
       {/* Modals */}
