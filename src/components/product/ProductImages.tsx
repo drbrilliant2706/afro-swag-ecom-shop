@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 
 interface ProductImagesProps {
   product: {
@@ -16,26 +17,28 @@ const ProductImages = ({ product }: ProductImagesProps) => {
   return (
     <div className="space-y-4">
       <div className="relative overflow-hidden rounded-lg">
-        <img
+        <OptimizedImage
           src={activeImage}
           alt={product.name}
-          className="w-full h-96 lg:h-[600px] object-cover hover:scale-105 transition-transform duration-300"
+          className="w-full h-64 md:h-96 lg:h-[600px] object-cover hover:scale-105 transition-transform duration-300"
+          lazy={false}
         />
-        <Badge className="absolute top-4 left-4 bg-red-600 text-white">
+        <Badge className="absolute top-4 left-4 bg-red-600 text-white text-xs md:text-sm">
           {product.badge}
         </Badge>
       </div>
       
-      <div className="flex space-x-2">
+      <div className="flex space-x-2 overflow-x-auto">
         {[product.image, product.image, product.image].map((img, index) => (
-          <img
+          <OptimizedImage
             key={index}
             src={img}
             alt={`${product.name} ${index + 1}`}
-            className={`w-20 h-20 object-cover rounded cursor-pointer border-2 transition-all hover:scale-105 ${
+            className={`w-16 h-16 md:w-20 md:h-20 object-cover rounded cursor-pointer border-2 transition-all hover:scale-105 flex-shrink-0 ${
               activeImage === img ? 'border-red-600' : 'border-gray-200'
             }`}
             onClick={() => setActiveImage(img)}
+            lazy={true}
           />
         ))}
       </div>

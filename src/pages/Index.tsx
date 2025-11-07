@@ -12,6 +12,7 @@ import CartModal from "@/components/cart/CartModal";
 import SearchModal from "@/components/search/SearchModal";
 import { DropAnimation, DropAnimationGroup } from "@/components/animations/DropAnimation";
 import { HeaderCarousel } from "@/components/ui/header-carousel";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -134,10 +135,11 @@ const Index = () => {
           <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
             <div className="flex justify-between items-center h-14 sm:h-16">
               <div className="flex-shrink-0 flex items-center">
-                <img 
+                <OptimizedImage
                   src="/lovable-uploads/05b02c6d-e604-4df1-b5f6-7267787edde7.png" 
                   alt="Afrika's Finest Logo - East African Streetwear Brand" 
                   className="h-8 w-auto sm:h-10 md:h-12 mr-2"
+                  lazy={false}
                 />
                 <a href="/" className="text-sm sm:text-lg md:text-xl font-bold text-black hidden xs:block">
                   AFRICAN'S <span className="text-red-600">FINEST</span>
@@ -261,10 +263,11 @@ const Index = () => {
                   <CardContent className="p-0">
                     <div className="relative overflow-hidden">
                       <a href={`/product/${product.id}`}>
-                        <img 
+                        <OptimizedImage
                           src={product.image} 
                           alt={`${product.name} - African streetwear fashion`}
                           className="w-full h-32 sm:h-48 md:h-64 object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
+                          lazy={true}
                         />
                       </a>
                       <Badge className="absolute top-2 left-2 bg-red-600 hover:bg-red-600 text-white text-xs">
@@ -316,14 +319,14 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center">
             <DropAnimation delay={1000} dropHeight={50} className="order-2 lg:order-1">
-              <article>
+              <article className="px-2">
                 <h2 id="our-story" className="text-xl sm:text-2xl md:text-4xl font-bold text-black mb-3 sm:mb-4 md:mb-6">
                   OUR <span className="text-red-600">STORY</span>
                 </h2>
-                <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-3 sm:mb-4 md:mb-6">
+                <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-3 sm:mb-4 md:mb-6 leading-relaxed">
                   African's Finest is more than just clothing—it's a movement celebrating the rich heritage and vibrant culture of East Africa. Each piece tells a story of tradition, pride, and contemporary style.
                 </p>
-                <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-4 sm:mb-6 md:mb-8">
+                <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-4 sm:mb-6 md:mb-8 leading-relaxed">
                   From the bustling streets of Nairobi to the cultural heart of Dar es Salaam, we bring you authentic designs that honor our roots while embracing modern fashion.
                 </p>
                 <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold w-full sm:w-auto">
@@ -333,10 +336,11 @@ const Index = () => {
             </DropAnimation>
             <DropAnimation delay={1200} dropHeight={60} className="relative order-1 lg:order-2">
               <div>
-                <img 
+                <OptimizedImage
                   src="/lovable-uploads/c1a27c87-fecb-4603-846b-e559103c12ef.png" 
                   alt="East African fashion and culture - celebrating heritage through streetwear"
                   className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-xl"
+                  lazy={true}
                 />
               </div>
             </DropAnimation>
