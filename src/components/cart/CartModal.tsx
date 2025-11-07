@@ -3,6 +3,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { useCart } from '@/contexts/CartContext';
 import { Minus, Plus, Trash2 } from 'lucide-react';
+import { useState } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 interface CartModalProps {
   isOpen: boolean;
@@ -11,8 +16,91 @@ interface CartModalProps {
 
 const CartModal = ({ isOpen, onClose }: CartModalProps) => {
   const { items, removeFromCart, updateQuantity, getTotalPrice, clearCart } = useCart();
+  const [customerName, setCustomerName] = useState('');
+  const [customerPhone, setCustomerPhone] = useState('');
+  const [customerEmail, setCustomerEmail] = useState('');
+  const [loading, setLoading] = useState(false);
 
   if (!isOpen) return null;
+
+  const handleSubmitOrder = async () => {
+    if (!customerName || !customerPhone) {
+      toast.error('Please provide your name and phone number');
+      return;
+    }
+
+    if (items.length === 0) {
+      toast.error('Your cart is empty');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      // Create customer
+      const { data: customer, error: customerError } = await supabase
+        .from('customers')
+        .insert({
+          first_name: customerName,
+          phone: customerPhone,
+          email: customerEmail || null,
+        })
+        .select()
+        .single();
+
+      if (customerError) throw customerError;
+
+      // Calculate totals
+      const subtotal = items.reduce((sum, item) => {
+        const price = parseFloat(item.price.replace(/[^\d.]/g, ''));
+        return sum + (price * item.quantity);
+      }, 0);
+
+      // Create order
+      const orderNumber = `ORD-${Date.now()}`;
+      const { data: order, error: orderError } = await supabase
+        .from('orders')
+        .insert({
+          customer_id: customer.id,
+          order_number: orderNumber,
+          status: 'pending',
+          payment_status: 'pending',
+          subtotal: subtotal,
+          total_amount: subtotal,
+          currency: 'TSh',
+        })
+        .select()
+        .single();
+
+      if (orderError) throw orderError;
+
+      // Create order items
+      const orderItems = items.map(item => ({
+        order_id: order.id,
+        product_id: item.id.toString(),
+        quantity: item.quantity,
+        unit_price: parseFloat(item.price.replace(/[^\d.]/g, '')),
+        total_price: parseFloat(item.price.replace(/[^\d.]/g, '')) * item.quantity,
+      }));
+
+      const { error: itemsError } = await supabase
+        .from('order_items')
+        .insert(orderItems);
+
+      if (itemsError) throw itemsError;
+
+      toast.success('Order submitted successfully! Admin will verify your order soon.');
+      clearCart();
+      setCustomerName('');
+      setCustomerPhone('');
+      setCustomerEmail('');
+      onClose();
+    } catch (error) {
+      console.error('Order submission error:', error);
+      toast.error('Failed to submit order. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -88,9 +176,48 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
                     TSh {getTotalPrice()}
                   </span>
                 </div>
+                
+                <div className="space-y-3 mb-4">
+                  <div>
+                    <Label htmlFor="name" className="text-black">Name *</Label>
+                    <Input
+                      id="name"
+                      value={customerName}
+                      onChange={(e) => setCustomerName(e.target.value)}
+                      placeholder="Your full name"
+                      className="border-gray-300"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="phone" className="text-black">Phone Number *</Label>
+                    <Input
+                      id="phone"
+                      value={customerPhone}
+                      onChange={(e) => setCustomerPhone(e.target.value)}
+                      placeholder="+255 XXX XXX XXX"
+                      className="border-gray-300"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="email" className="text-black">Email (Optional)</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={customerEmail}
+                      onChange={(e) => setCustomerEmail(e.target.value)}
+                      placeholder="your@email.com"
+                      className="border-gray-300"
+                    />
+                  </div>
+                </div>
+
                 <div className="space-y-2">
-                  <Button className="w-full bg-red-600 hover:bg-red-700 text-white">
-                    Checkout
+                  <Button 
+                    onClick={handleSubmitOrder}
+                    disabled={loading}
+                    className="w-full bg-red-600 hover:bg-red-700 text-white"
+                  >
+                    {loading ? 'Submitting...' : 'Submit Order'}
                   </Button>
                   <Button
                     variant="outline"
