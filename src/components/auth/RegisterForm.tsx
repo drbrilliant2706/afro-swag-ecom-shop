@@ -39,10 +39,10 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto bg-black border-red-600">
+    <Card className="w-full max-w-md mx-auto bg-black border-green-600">
       <CardHeader>
         <h2 className="text-2xl font-bold text-white text-center">REGISTER</h2>
-        <p className="text-red-200 text-center">Join the African's Finest family</p>
+        <p className="text-green-200 text-center">Join the African's Finest family</p>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -52,7 +52,7 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="bg-red-900 border-red-600 text-white placeholder-red-300"
+              className="bg-green-900 border-green-600 text-white placeholder-green-300"
               required
             />
           </div>
@@ -63,7 +63,7 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="bg-red-900 border-red-600 text-white placeholder-red-300"
+              className="bg-green-900 border-green-600 text-white placeholder-green-300"
               required
             />
           </div>
@@ -74,25 +74,25 @@ const RegisterForm = ({ onSuccess, onSwitchToLogin }: RegisterFormProps) => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="bg-red-900 border-red-600 text-white placeholder-red-300"
+              className="bg-green-900 border-green-600 text-white placeholder-green-300"
               required
             />
           </div>
-          {error && <p className="text-red-400 text-sm">{error}</p>}
+          {error && <p className="text-green-400 text-sm">{error}</p>}
           <Button
             type="submit"
             disabled={loading}
-            className="w-full bg-red-600 hover:bg-red-700 text-white font-bold"
+            className="w-full bg-green-600 hover:bg-green-700 text-white font-bold"
           >
             {loading ? 'Creating Account...' : 'CREATE ACCOUNT'}
           </Button>
           <div className="text-center">
-            <p className="text-red-200 text-sm">
+            <p className="text-green-200 text-sm">
               Already have an account?{' '}
               <button
                 type="button"
                 onClick={onSwitchToLogin}
-                className="text-red-400 hover:underline"
+                className="text-green-400 hover:underline"
               >
                 Login here
               </button>

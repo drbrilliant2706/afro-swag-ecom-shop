@@ -101,7 +101,7 @@ const ProductForm = ({ onSubmit, onCancel }: ProductFormProps) => {
         <Button type="button" variant="outline" onClick={onCancel}>
           Cancel
         </Button>
-        <Button type="submit" className="bg-red-600 hover:bg-red-700 text-white">
+        <Button type="submit" className="bg-green-600 hover:bg-green-700 text-white">
           Add Product
         </Button>
       </div>

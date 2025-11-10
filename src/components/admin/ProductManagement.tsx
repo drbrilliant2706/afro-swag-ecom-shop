@@ -33,7 +33,7 @@ const ProductManagement = () => {
             Manage your product catalog with intuitive controls
           </p>
         </div>
-        <Button onClick={() => setShowAddProduct(true)} className="w-full sm:w-auto bg-red-600 hover:bg-red-700">
+        <Button onClick={() => setShowAddProduct(true)} className="w-full sm:w-auto bg-green-600 hover:bg-green-700">
           <Plus className="h-4 w-4 mr-2" />
           Add Product
         </Button>
@@ -91,7 +91,7 @@ const ProductManagement = () => {
         </Card>
         <Card>
           <CardContent className="p-6">
-            <div className="text-2xl font-bold text-red-600">{stats?.low_stock_products || 0}</div>
+            <div className="text-2xl font-bold text-green-600">{stats?.low_stock_products || 0}</div>
             <p className="text-sm text-muted-foreground">Low Stock Items</p>
           </CardContent>
         </Card>

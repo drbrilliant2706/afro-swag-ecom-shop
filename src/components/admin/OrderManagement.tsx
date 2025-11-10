@@ -215,7 +215,7 @@ const OrderManagement = () => {
                             )}
                           </div>
                         </TableCell>
-                        <TableCell className="font-bold text-red-600">
+                        <TableCell className="font-bold text-green-600">
                           TSh {order.total_amount.toLocaleString()}
                         </TableCell>
                         <TableCell>{new Date(order.created_at).toLocaleDateString()}</TableCell>
