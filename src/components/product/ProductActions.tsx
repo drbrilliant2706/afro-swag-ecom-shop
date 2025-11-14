@@ -108,7 +108,7 @@ const ProductActions = ({ product, selectedSize, selectedColor }: ProductActions
       <div className="space-y-4">
         <Button
           onClick={handleAddToCart}
-          className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 transition-all duration-300 transform hover:scale-105"
+          className="w-full bg-brand-green hover:bg-brand-green/90 text-white font-bold py-4 transition-all duration-300 transform hover:scale-105"
           size="lg"
         >
           <ShoppingCart className="mr-2 h-5 w-5" />
@@ -120,8 +120,8 @@ const ProductActions = ({ product, selectedSize, selectedColor }: ProductActions
           variant="outline"
           className={`w-full border-2 py-4 transition-all duration-300 transform hover:scale-105 ${
             isFavorite(product.id)
-              ? 'border-red-600 text-red-600 bg-red-50'
-              : 'border-gray-300 text-gray-700 hover:border-red-600'
+              ? 'border-brand-green text-brand-green bg-brand-green/10'
+              : 'border-gray-300 text-gray-700 hover:border-brand-green'
           }`}
           size="lg"
         >

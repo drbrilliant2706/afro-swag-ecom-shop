@@ -28,7 +28,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         <ul className="space-y-2">
           {product.features.map((feature, index) => (
             <li key={index} className="text-gray-600 flex items-center">
-              <span className="w-2 h-2 bg-red-600 rounded-full mr-3"></span>
+              <span className="w-2 h-2 bg-brand-green rounded-full mr-3"></span>
               {feature}
             </li>
           ))}

@@ -121,7 +121,7 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
               <p className="text-gray-600">Your cart is empty</p>
               <Button
                 onClick={onClose}
-                className="mt-4 bg-red-600 hover:bg-red-700 text-white"
+                className="mt-4 bg-brand-green hover:bg-brand-green/90 text-white"
               >
                 Continue Shopping
               </Button>
@@ -215,7 +215,7 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
                   <Button 
                     onClick={handleSubmitOrder}
                     disabled={loading}
-                    className="w-full bg-red-600 hover:bg-red-700 text-white"
+                    className="w-full bg-brand-green hover:bg-brand-green/90 text-white"
                   >
                     {loading ? 'Submitting...' : 'Submit Order'}
                   </Button>

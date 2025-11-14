@@ -27,8 +27,8 @@ const ProductOptions = ({
               onClick={() => onColorChange(color)}
               className={`px-4 py-2 border rounded-md transition-all hover:scale-105 ${
                 selectedColor === color
-                  ? 'border-red-600 bg-red-50 text-red-600'
-                  : 'border-gray-300 text-gray-700 hover:border-red-600'
+                  ? 'border-brand-green bg-brand-green/10 text-brand-green'
+                  : 'border-gray-300 text-gray-700 hover:border-brand-green'
               }`}
             >
               {color}
@@ -46,8 +46,8 @@ const ProductOptions = ({
               onClick={() => onSizeChange(size)}
               className={`py-3 border rounded-md transition-all hover:scale-105 ${
                 selectedSize === size
-                  ? 'border-red-600 bg-red-600 text-white'
-                  : 'border-gray-300 text-gray-700 hover:border-red-600'
+                  ? 'border-brand-green bg-brand-green text-white'
+                  : 'border-gray-300 text-gray-700 hover:border-brand-green'
               }`}
             >
               {size}
