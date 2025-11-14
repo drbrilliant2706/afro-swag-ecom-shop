@@ -64,3 +64,42 @@ export const memoize = <T extends (...args: any[]) => any>(fn: T): T => {
     return result;
   }) as T;
 };
+
+// Route prefetching
+export const prefetchRoute = (path: string) => {
+  const link = document.createElement('link');
+  link.rel = 'prefetch';
+  link.href = path;
+  document.head.appendChild(link);
+};
+
+// Image loading priority
+export const loadImageWithPriority = (src: string, priority: 'high' | 'low' = 'high'): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    if (priority === 'high') {
+      img.loading = 'eager';
+      img.fetchPriority = 'high';
+    } else {
+      img.loading = 'lazy';
+      img.fetchPriority = 'low';
+    }
+    img.onload = () => resolve();
+    img.onerror = reject;
+    img.src = src;
+  });
+};
+
+// Batch image preloading with priority
+export const batchPreloadImages = async (
+  images: Array<{ src: string; priority?: 'high' | 'low' }>
+): Promise<void[]> => {
+  const highPriority = images.filter(img => img.priority === 'high');
+  const lowPriority = images.filter(img => !img.priority || img.priority === 'low');
+  
+  // Load high priority images first
+  await Promise.all(highPriority.map(img => loadImageWithPriority(img.src, 'high')));
+  
+  // Then load low priority images
+  return Promise.all(lowPriority.map(img => loadImageWithPriority(img.src, 'low')));
+};
