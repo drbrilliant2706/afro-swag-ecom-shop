@@ -139,7 +139,7 @@ const customers = [
 const getStatusColor = (status: string) => {
   switch (status) {
     case 'active': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300';
-    case 'inactive': return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300';
+    case 'inactive': return 'bg-brand-green/10 text-brand-green dark:bg-brand-green/20 dark:text-brand-green-light';
     case 'pending': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300';
     default: return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300';
   }
@@ -197,8 +197,8 @@ const CustomerManagement = () => {
         <Card className="hover:shadow-lg transition-shadow">
           <CardContent className="p-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-red-50 dark:bg-red-900/10">
-                <Users className="h-5 w-5 text-red-600" />
+              <div className="p-2 rounded-lg bg-brand-green/10 dark:bg-brand-green/20">
+                <Users className="h-5 w-5 text-brand-green" />
               </div>
               <div>
                 <div className="text-2xl font-bold">{inactiveCustomers}</div>

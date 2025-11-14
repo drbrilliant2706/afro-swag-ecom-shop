@@ -175,7 +175,7 @@ const SecurityMonitor = () => {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'pass': return <Shield className="h-4 w-4 text-green-600" />;
-      case 'fail': return <AlertTriangle className="h-4 w-4 text-red-600" />;
+      case 'fail': return <AlertTriangle className="h-4 w-4 text-brand-green" />;
       case 'warning': return <Activity className="h-4 w-4 text-yellow-600" />;
       default: return <Shield className="h-4 w-4 text-gray-600" />;
     }
@@ -184,7 +184,7 @@ const SecurityMonitor = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'pass': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300';
-      case 'fail': return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300';
+      case 'fail': return 'bg-brand-green/10 text-brand-green dark:bg-brand-green/20 dark:text-brand-green-light';
       case 'warning': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300';
       default: return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300';
     }
@@ -192,7 +192,7 @@ const SecurityMonitor = () => {
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
-      case 'high': return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300';
+      case 'high': return 'bg-brand-green/10 text-brand-green dark:bg-brand-green/20 dark:text-brand-green-light';
       case 'medium': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300';
       case 'low': return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300';
       default: return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300';
@@ -252,11 +252,11 @@ const SecurityMonitor = () => {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-red-50 dark:bg-red-900/10">
-                <AlertTriangle className="h-5 w-5 text-red-600" />
+              <div className="p-2 rounded-lg bg-brand-green/10 dark:bg-brand-green/20">
+                <AlertTriangle className="h-5 w-5 text-brand-green" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-red-600">{failedChecks}</div>
+                <div className="text-2xl font-bold text-brand-green">{failedChecks}</div>
                 <p className="text-sm text-muted-foreground">Failed</p>
               </div>
             </div>

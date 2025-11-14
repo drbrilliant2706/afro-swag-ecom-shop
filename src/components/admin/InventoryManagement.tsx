@@ -61,7 +61,7 @@ const getStatusColor = (status: string) => {
   switch (status) {
     case 'in-stock': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300';
     case 'low-stock': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300';
-    case 'out-of-stock': return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300';
+    case 'out-of-stock': return 'bg-brand-green/10 text-brand-green dark:bg-brand-green/20 dark:text-brand-green-light';
     default: return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300';
   }
 };
@@ -113,8 +113,8 @@ const InventoryManagement = () => {
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-red-50 dark:bg-red-900/10">
-                <TrendingDown className="h-5 w-5 text-red-600" />
+              <div className="p-2 rounded-lg bg-brand-green/10 dark:bg-brand-green/20">
+                <TrendingDown className="h-5 w-5 text-brand-green" />
               </div>
               <div>
                 <div className="text-2xl font-bold">3</div>

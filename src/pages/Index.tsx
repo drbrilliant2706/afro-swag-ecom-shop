@@ -123,7 +123,7 @@ const Index = () => {
       </style>
 
       {/* Marquee Header */}
-      <div className="bg-red-600 text-white py-1.5 sm:py-2 overflow-hidden">
+      <div className="bg-brand-green text-white py-1.5 sm:py-2 overflow-hidden">
         <div className="marquee whitespace-nowrap text-xs sm:text-sm md:text-base px-2">
           🎉 Fashion at it's ultimate prime. Shop with us and become part of our vast family worldwide. Afrika's finest telling our African Story. 🎉
         </div>
@@ -142,16 +142,16 @@ const Index = () => {
                   lazy={false}
                 />
                 <a href="/" className="text-sm sm:text-lg md:text-xl font-bold text-black hidden xs:block">
-                  AFRICAN'S <span className="text-red-600">FINEST</span>
+                  AFRICAN'S <span className="text-brand-green">FINEST</span>
                 </a>
               </div>
 
               <div className="hidden lg:block">
                 <div className="ml-10 flex items-baseline space-x-6 xl:space-x-8">
-                  <a href="/" className="text-red-600 border-b-2 border-red-600 pb-1 text-sm xl:text-base font-medium" aria-current="page">HOME</a>
-                  <a href="/lookbook" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">LOOKBOOK</a>
-                  <a href="/about" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">ABOUT</a>
-                  <a href="/culture" className="text-black hover:text-red-600 transition-colors text-sm xl:text-base">CULTURE</a>
+                  <a href="/" className="text-brand-green border-b-2 border-brand-green pb-1 text-sm xl:text-base font-medium" aria-current="page">HOME</a>
+                  <a href="/lookbook" className="text-black hover:text-brand-green transition-colors text-sm xl:text-base">LOOKBOOK</a>
+                  <a href="/about" className="text-black hover:text-brand-green transition-colors text-sm xl:text-base">ABOUT</a>
+                  <a href="/culture" className="text-black hover:text-brand-green transition-colors text-sm xl:text-base">CULTURE</a>
                   <Button asChild size="sm" className="bg-white text-black border border-black hover:bg-black hover:text-white transition-colors font-bold">
                     <a href="/men">NEW DROP</a>
                   </Button>
@@ -162,32 +162,32 @@ const Index = () => {
                 {[
                   <Search 
                     key="search"
-                    className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
+                    className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-brand-green cursor-pointer transition-colors"
                     onClick={() => setIsSearchOpen(true)}
                     aria-label="Search products"
                   />,
                   <User 
                     key="user"
-                    className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
+                    className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-brand-green cursor-pointer transition-colors"
                     onClick={() => setIsProfileOpen(true)}
                     aria-label="User profile"
                   />,
                   <a key="favorites" href="/favorites" aria-label="View favorites">
-                    <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
+                    <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
                   </a>,
                   <div key="cart" className="relative">
                     <ShoppingCart 
-                      className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
+                      className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-brand-green cursor-pointer transition-colors" 
                       onClick={() => setIsCartOpen(true)}
                       aria-label="Shopping cart"
                     />
-                    <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center" aria-label={`${getTotalItems()} items in cart`}>
+                    <span className="absolute -top-2 -right-2 bg-brand-green text-white text-xs rounded-full w-4 h-4 flex items-center justify-center" aria-label={`${getTotalItems()} items in cart`}>
                       {getTotalItems()}
                     </span>
                   </div>,
                   <Menu 
                     key="menu"
-                    className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors lg:hidden" 
+                    className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors lg:hidden" 
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                     aria-label="Toggle menu"
                     aria-expanded={isMenuOpen}
@@ -200,10 +200,10 @@ const Index = () => {
             {isMenuOpen && (
               <div className="lg:hidden border-t border-gray-200 py-3 bg-white">
                 <div className="flex flex-col space-y-3 px-2">
-                  <a href="/" className="text-red-600 py-2 font-medium">HOME</a>
-                  <a href="/lookbook" className="text-black hover:text-red-600 transition-colors py-2">LOOKBOOK</a>
-                  <a href="/about" className="text-black hover:text-red-600 transition-colors py-2">ABOUT</a>
-                  <a href="/culture" className="text-black hover:text-red-600 transition-colors py-2">CULTURE</a>
+                  <a href="/" className="text-brand-green py-2 font-medium">HOME</a>
+                  <a href="/lookbook" className="text-black hover:text-brand-green transition-colors py-2">LOOKBOOK</a>
+                  <a href="/about" className="text-black hover:text-brand-green transition-colors py-2">ABOUT</a>
+                  <a href="/culture" className="text-black hover:text-brand-green transition-colors py-2">CULTURE</a>
                   <Button asChild size="sm" className="bg-white text-black border border-black hover:bg-black hover:text-white transition-colors font-bold mx-2 my-1">
                     <a href="/men">NEW DROP</a>
                   </Button>
@@ -230,7 +230,7 @@ const Index = () => {
             <div className="text-center max-w-4xl mx-auto px-4">
               <DropAnimation delay={400} dropHeight={40}>
                 <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-3 sm:mb-4 text-white leading-tight">
-                  AFRICA'S <span className="text-red-600">FINEST</span>
+                  AFRICA'S <span className="text-brand-green">FINEST</span>
                 </h1>
               </DropAnimation>
               <DropAnimation delay={500} dropHeight={30}>
@@ -250,7 +250,7 @@ const Index = () => {
             <DropAnimation delay={600} dropHeight={40}>
               <div className="text-center mb-6 sm:mb-8 md:mb-12">
                 <h2 id="featured-products" className="text-xl sm:text-2xl md:text-4xl font-bold text-black mb-2 sm:mb-4">
-                  FEATURED <span className="text-red-600">PRODUCTS</span>
+                  FEATURED <span className="text-brand-green">PRODUCTS</span>
                 </h2>
                 <p className="text-gray-600 text-sm sm:text-base md:text-lg">Discover our most popular items</p>
               </div>
@@ -259,7 +259,7 @@ const Index = () => {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-8">
             {featuredProducts.map((product, index) => (
               <DropAnimation key={product.id} delay={800 + index * 150} dropHeight={50}>
-                <Card className="bg-white border-gray-200 hover:border-red-600 transition-all duration-300 group">
+                <Card className="bg-white border-gray-200 hover:border-brand-green transition-all duration-300 group">
                   <CardContent className="p-0">
                     <div className="relative overflow-hidden">
                       <a href={`/product/${product.id}`}>
@@ -270,13 +270,13 @@ const Index = () => {
                           lazy={true}
                         />
                       </a>
-                      <Badge className="absolute top-2 left-2 bg-red-600 hover:bg-red-600 text-white text-xs">
+                      <Badge className="absolute top-2 left-2 bg-brand-green hover:bg-brand-green text-white text-xs">
                         {product.badge}
                       </Badge>
                       <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                         <Heart 
                           className={`h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 cursor-pointer ${
-                            isFavorite(product.id) ? 'text-red-500 fill-red-500' : 'text-black hover:text-red-500'
+                            isFavorite(product.id) ? 'text-brand-green fill-brand-green' : 'text-black hover:text-brand-green'
                           }`}
                           onClick={() => handleToggleFavorite(product)}
                         />
@@ -285,15 +285,15 @@ const Index = () => {
                     
                     <div className="p-2 sm:p-3 md:p-4">
                       <a href={`/product/${product.id}`}>
-                        <h4 className="text-black font-bold text-xs sm:text-sm md:text-base mb-1 sm:mb-2 hover:text-red-600 transition-colors cursor-pointer line-clamp-2">{product.name}</h4>
+                        <h4 className="text-black font-bold text-xs sm:text-sm md:text-base mb-1 sm:mb-2 hover:text-brand-green transition-colors cursor-pointer line-clamp-2">{product.name}</h4>
                       </a>
                        <div className="flex items-center justify-between mb-2 sm:mb-3 md:mb-4">
-                         <p className="text-red-600 font-bold text-sm sm:text-base md:text-lg">{product.price}</p>
+                         <p className="text-brand-green font-bold text-sm sm:text-base md:text-lg">{product.price}</p>
                        </div>
 
                       <Button 
                         onClick={() => handleAddToCart(product)}
-                        className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs sm:text-sm py-1.5 sm:py-2"
+                        className="w-full bg-brand-green hover:bg-brand-green/90 text-white font-bold text-xs sm:text-sm py-1.5 sm:py-2"
                       >
                         VIEW PRODUCT
                       </Button>
@@ -306,7 +306,7 @@ const Index = () => {
 
           <DropAnimation delay={1400} dropHeight={30}>
             <div className="text-center mt-6 sm:mt-8 md:mt-12">
-              <Button asChild size="lg" variant="outline" className="border-red-600 text-red-600 hover:bg-red-600 hover:text-white font-bold">
+              <Button asChild size="lg" variant="outline" className="border-brand-green text-brand-green hover:bg-brand-green hover:text-white font-bold">
                 <a href="/men">VIEW ALL PRODUCTS</a>
               </Button>
             </div>
@@ -321,7 +321,7 @@ const Index = () => {
             <DropAnimation delay={1000} dropHeight={50} className="order-2 lg:order-1">
               <article className="px-2">
                 <h2 id="our-story" className="text-xl sm:text-2xl md:text-4xl font-bold text-black mb-3 sm:mb-4 md:mb-6">
-                  OUR <span className="text-red-600">STORY</span>
+                  OUR <span className="text-brand-green">STORY</span>
                 </h2>
                 <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-3 sm:mb-4 md:mb-6 leading-relaxed">
                   African's Finest is more than just clothing—it's a movement celebrating the rich heritage and vibrant culture of East Africa. Each piece tells a story of tradition, pride, and contemporary style.
@@ -329,7 +329,7 @@ const Index = () => {
                 <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-4 sm:mb-6 md:mb-8 leading-relaxed">
                   From the bustling streets of Nairobi to the cultural heart of Dar es Salaam, we bring you authentic designs that honor our roots while embracing modern fashion.
                 </p>
-                <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold w-full sm:w-auto">
+                <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green/90 text-white font-bold w-full sm:w-auto">
                   <a href="/about">LEARN MORE</a>
                 </Button>
               </article>
@@ -353,12 +353,12 @@ const Index = () => {
           <section className="bg-black text-white py-12 sm:py-16 md:py-20 text-center" aria-labelledby="learn-more-cta">
             <div className="max-w-4xl mx-auto px-4">
               <h2 id="learn-more-cta" className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
-                LEARN MORE <span className="text-red-600">ABOUT US</span>
+                LEARN MORE <span className="text-brand-green">ABOUT US</span>
               </h2>
             <p className="text-gray-300 text-base sm:text-lg md:text-xl mb-6 sm:mb-8">
               Discover our story, values, and the team behind Africa's Finest
             </p>
-              <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold">
+              <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green/90 text-white font-bold">
                 <a href="/about">VISIT ABOUT PAGE</a>
               </Button>
             </div>

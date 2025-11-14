@@ -23,7 +23,7 @@ const ProductImages = ({ product }: ProductImagesProps) => {
           className="w-full h-64 md:h-96 lg:h-[600px] object-cover hover:scale-105 transition-transform duration-300"
           lazy={false}
         />
-        <Badge className="absolute top-4 left-4 bg-red-600 text-white text-xs md:text-sm">
+        <Badge className="absolute top-4 left-4 bg-brand-green text-white text-xs md:text-sm">
           {product.badge}
         </Badge>
       </div>
@@ -35,7 +35,7 @@ const ProductImages = ({ product }: ProductImagesProps) => {
             src={img}
             alt={`${product.name} ${index + 1}`}
             className={`w-16 h-16 md:w-20 md:h-20 object-cover rounded cursor-pointer border-2 transition-all hover:scale-105 flex-shrink-0 ${
-              activeImage === img ? 'border-red-600' : 'border-gray-200'
+              activeImage === img ? 'border-brand-green' : 'border-gray-200'
             }`}
             onClick={() => setActiveImage(img)}
             lazy={true}
