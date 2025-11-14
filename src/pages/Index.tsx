@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Heart, ShoppingCart, Search, User, Menu } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +13,8 @@ import SearchModal from "@/components/search/SearchModal";
 import { DropAnimation, DropAnimationGroup } from "@/components/animations/DropAnimation";
 import { HeaderCarousel } from "@/components/ui/header-carousel";
 import { OptimizedImage } from "@/components/ui/optimized-image";
+import { PrefetchLink } from "@/components/ui/prefetch-link";
+import { batchPreloadImages } from "@/utils/performance";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -108,6 +110,18 @@ const Index = () => {
     }
   };
 
+  // Preload critical images on mount
+  useEffect(() => {
+    const criticalImages = featuredProducts.slice(0, 2).map(p => ({
+      src: p.image,
+      priority: 'high' as const
+    }));
+    
+    batchPreloadImages(criticalImages).catch(err => 
+      console.error('Failed to preload images:', err)
+    );
+  }, []);
+
   return (
     <div className="min-h-screen bg-white text-black">
       <style>
@@ -140,20 +154,21 @@ const Index = () => {
                   alt="Afrika's Finest Logo - East African Streetwear Brand" 
                   className="h-8 w-auto sm:h-10 md:h-12 mr-2"
                   lazy={false}
+                  priority="high"
                 />
-                <a href="/" className="text-sm sm:text-lg md:text-xl font-bold text-black hidden xs:block">
+                <PrefetchLink to="/" className="text-sm sm:text-lg md:text-xl font-bold text-black hidden xs:block">
                   AFRICAN'S <span className="text-brand-green">FINEST</span>
-                </a>
+                </PrefetchLink>
               </div>
 
               <div className="hidden lg:block">
                 <div className="ml-10 flex items-baseline space-x-6 xl:space-x-8">
-                  <a href="/" className="text-brand-green border-b-2 border-brand-green pb-1 text-sm xl:text-base font-medium" aria-current="page">HOME</a>
-                  <a href="/lookbook" className="text-black hover:text-brand-green transition-colors text-sm xl:text-base">LOOKBOOK</a>
-                  <a href="/about" className="text-black hover:text-brand-green transition-colors text-sm xl:text-base">ABOUT</a>
-                  <a href="/culture" className="text-black hover:text-brand-green transition-colors text-sm xl:text-base">CULTURE</a>
+                  <PrefetchLink to="/" className="text-brand-green border-b-2 border-brand-green pb-1 text-sm xl:text-base font-medium" aria-current="page">HOME</PrefetchLink>
+                  <PrefetchLink to="/lookbook" className="text-black hover:text-brand-green transition-colors text-sm xl:text-base">LOOKBOOK</PrefetchLink>
+                  <PrefetchLink to="/about" className="text-black hover:text-brand-green transition-colors text-sm xl:text-base">ABOUT</PrefetchLink>
+                  <PrefetchLink to="/culture" className="text-black hover:text-brand-green transition-colors text-sm xl:text-base">CULTURE</PrefetchLink>
                   <Button asChild size="sm" className="bg-white text-black border border-black hover:bg-black hover:text-white transition-colors font-bold">
-                    <a href="/men">NEW DROP</a>
+                    <PrefetchLink to="/men">NEW DROP</PrefetchLink>
                   </Button>
                 </div>
               </div>
@@ -172,9 +187,9 @@ const Index = () => {
                     onClick={() => setIsProfileOpen(true)}
                     aria-label="User profile"
                   />,
-                  <a key="favorites" href="/favorites" aria-label="View favorites">
+                  <PrefetchLink to="/favorites" aria-label="View favorites">
                     <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
-                  </a>,
+                  </PrefetchLink>,
                   <div key="cart" className="relative">
                     <ShoppingCart 
                       className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-brand-green cursor-pointer transition-colors" 
@@ -200,12 +215,12 @@ const Index = () => {
             {isMenuOpen && (
               <div className="lg:hidden border-t border-gray-200 py-3 bg-white">
                 <div className="flex flex-col space-y-3 px-2">
-                  <a href="/" className="text-brand-green py-2 font-medium">HOME</a>
-                  <a href="/lookbook" className="text-black hover:text-brand-green transition-colors py-2">LOOKBOOK</a>
-                  <a href="/about" className="text-black hover:text-brand-green transition-colors py-2">ABOUT</a>
-                  <a href="/culture" className="text-black hover:text-brand-green transition-colors py-2">CULTURE</a>
+                  <PrefetchLink to="/" className="text-brand-green py-2 font-medium">HOME</PrefetchLink>
+                  <PrefetchLink to="/lookbook" className="text-black hover:text-brand-green transition-colors py-2">LOOKBOOK</PrefetchLink>
+                  <PrefetchLink to="/about" className="text-black hover:text-brand-green transition-colors py-2">ABOUT</PrefetchLink>
+                  <PrefetchLink to="/culture" className="text-black hover:text-brand-green transition-colors py-2">CULTURE</PrefetchLink>
                   <Button asChild size="sm" className="bg-white text-black border border-black hover:bg-black hover:text-white transition-colors font-bold mx-2 my-1">
-                    <a href="/men">NEW DROP</a>
+                    <PrefetchLink to="/men">NEW DROP</PrefetchLink>
                   </Button>
                 </div>
               </div>
@@ -262,14 +277,15 @@ const Index = () => {
                 <Card className="bg-white border-gray-200 hover:border-brand-green transition-all duration-300 group">
                   <CardContent className="p-0">
                     <div className="relative overflow-hidden">
-                      <a href={`/product/${product.id}`}>
+                      <PrefetchLink to={`/product/${product.id}`}>
                         <OptimizedImage
                           src={product.image} 
                           alt={`${product.name} - African streetwear fashion`}
                           className="w-full h-32 sm:h-48 md:h-64 object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
-                          lazy={true}
+                          lazy={index >= 2}
+                          priority={index < 2 ? 'high' : 'low'}
                         />
-                      </a>
+                      </PrefetchLink>
                       <Badge className="absolute top-2 left-2 bg-brand-green hover:bg-brand-green text-white text-xs">
                         {product.badge}
                       </Badge>
@@ -284,9 +300,9 @@ const Index = () => {
                     </div>
                     
                     <div className="p-2 sm:p-3 md:p-4">
-                      <a href={`/product/${product.id}`}>
+                      <PrefetchLink to={`/product/${product.id}`}>
                         <h4 className="text-black font-bold text-xs sm:text-sm md:text-base mb-1 sm:mb-2 hover:text-brand-green transition-colors cursor-pointer line-clamp-2">{product.name}</h4>
-                      </a>
+                      </PrefetchLink>
                        <div className="flex items-center justify-between mb-2 sm:mb-3 md:mb-4">
                          <p className="text-brand-green font-bold text-sm sm:text-base md:text-lg">{product.price}</p>
                        </div>
@@ -307,7 +323,7 @@ const Index = () => {
           <DropAnimation delay={1400} dropHeight={30}>
             <div className="text-center mt-6 sm:mt-8 md:mt-12">
               <Button asChild size="lg" variant="outline" className="border-brand-green text-brand-green hover:bg-brand-green hover:text-white font-bold">
-                <a href="/men">VIEW ALL PRODUCTS</a>
+                <PrefetchLink to="/men">VIEW ALL PRODUCTS</PrefetchLink>
               </Button>
             </div>
           </DropAnimation>
@@ -330,7 +346,7 @@ const Index = () => {
                   From the bustling streets of Nairobi to the cultural heart of Dar es Salaam, we bring you authentic designs that honor our roots while embracing modern fashion.
                 </p>
                 <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green/90 text-white font-bold w-full sm:w-auto">
-                  <a href="/about">LEARN MORE</a>
+                  <PrefetchLink to="/about">LEARN MORE</PrefetchLink>
                 </Button>
               </article>
             </DropAnimation>
@@ -341,6 +357,7 @@ const Index = () => {
                   alt="East African fashion and culture - celebrating heritage through streetwear"
                   className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-xl"
                   lazy={true}
+                  priority="low"
                 />
               </div>
             </DropAnimation>
@@ -359,7 +376,7 @@ const Index = () => {
               Discover our story, values, and the team behind Africa's Finest
             </p>
               <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green/90 text-white font-bold">
-                <a href="/about">VISIT ABOUT PAGE</a>
+                <PrefetchLink to="/about">VISIT ABOUT PAGE</PrefetchLink>
               </Button>
             </div>
           </section>

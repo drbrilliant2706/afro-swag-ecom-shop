@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -8,6 +7,8 @@ interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> 
   className?: string;
   fallback?: string;
   lazy?: boolean;
+  priority?: 'high' | 'low';
+  blur?: boolean;
 }
 
 export const OptimizedImage: React.FC<OptimizedImageProps> = ({
@@ -16,6 +17,8 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   className,
   fallback = '/placeholder.svg',
   lazy = true,
+  priority = 'low',
+  blur = true,
   ...props
 }) => {
   const [imageSrc, setImageSrc] = useState<string>(lazy ? '' : src);
@@ -24,7 +27,10 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    if (!lazy) return;
+    if (!lazy) {
+      setImageSrc(src);
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -35,7 +41,10 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
           }
         });
       },
-      { threshold: 0.1 }
+      { 
+        threshold: 0.01,
+        rootMargin: '100px' // Start loading 100px before element comes into view
+      }
     );
 
     if (imgRef.current) {
@@ -57,7 +66,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
 
   return (
     <div ref={imgRef} className={cn('relative overflow-hidden', className)}>
-      {isLoading && (
+      {isLoading && blur && (
         <div className="absolute inset-0 bg-muted animate-pulse" />
       )}
       {imageSrc && (
@@ -66,9 +75,12 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
           alt={alt}
           onLoad={handleLoad}
           onError={handleError}
+          loading={lazy ? 'lazy' : 'eager'}
+          fetchPriority={priority}
+          decoding="async"
           className={cn(
-            'transition-opacity duration-300',
-            isLoading ? 'opacity-0' : 'opacity-100',
+            'transition-all duration-500 ease-in-out',
+            isLoading ? 'opacity-0 scale-105 blur-sm' : 'opacity-100 scale-100 blur-0',
             className
           )}
           {...props}
