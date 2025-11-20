@@ -14,28 +14,28 @@ const Contact = () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex-shrink-0">
               <h1 className="text-2xl font-bold text-black">
-                AFRICAN'S <span className="text-red-600">FINEST</span>
+                AFRICAN'S <span className="text-brand-green">FINEST</span>
               </h1>
             </div>
 
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
-                <a href="/" className="text-black hover:text-red-600 transition-colors">HOME</a>
-                <a href="/men" className="text-black hover:text-red-600 transition-colors">MEN</a>
-                <a href="/women" className="text-black hover:text-red-600 transition-colors">WOMEN</a>
-                <a href="/lookbook" className="text-black hover:text-red-600 transition-colors">LOOKBOOK</a>
-                <a href="/about" className="text-black hover:text-red-600 transition-colors">ABOUT</a>
-                <a href="/culture" className="text-black hover:text-red-600 transition-colors">CULTURE</a>
+                <a href="/" className="text-black hover:text-brand-green transition-colors">HOME</a>
+                <a href="/men" className="text-black hover:text-brand-green transition-colors">MEN</a>
+                <a href="/women" className="text-black hover:text-brand-green transition-colors">WOMEN</a>
+                <a href="/lookbook" className="text-black hover:text-brand-green transition-colors">LOOKBOOK</a>
+                <a href="/about" className="text-black hover:text-brand-green transition-colors">ABOUT</a>
+                <a href="/culture" className="text-black hover:text-brand-green transition-colors">CULTURE</a>
               </div>
             </div>
 
             <div className="flex items-center space-x-4">
-              <Search className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
-              <User className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
-              <Heart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
+              <Search className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
+              <User className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
+              <Heart className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
               <div className="relative">
-                <ShoppingCart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
-                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                <ShoppingCart className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
+                <span className="absolute -top-2 -right-2 bg-brand-green text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
               </div>
             </div>
           </div>
@@ -43,7 +43,7 @@ const Contact = () => {
       </nav>
 
       {/* Header */}
-      <section className="py-16 bg-red-600">
+      <section className="py-16 bg-brand-green">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold text-white mb-4">CONTACT US</h1>
           <p className="text-xl text-white">Get in touch with the African's Finest family</p>
@@ -57,7 +57,7 @@ const Contact = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             <Card className="bg-white border-gray-200 text-center">
               <CardContent className="p-8">
-                <Mail className="h-12 w-12 text-red-600 mx-auto mb-4" />
+                <Mail className="h-12 w-12 text-brand-green mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-black mb-3">EMAIL US</h3>
                 <p className="text-gray-600 mb-2">africasfinest2@gmail.com</p>
                 <p className="text-gray-600">info@africansfinest.com</p>
@@ -75,7 +75,7 @@ const Contact = () => {
 
             <Card className="bg-white border-gray-200 text-center">
               <CardContent className="p-8">
-                <MapPin className="h-12 w-12 text-red-600 mx-auto mb-4" />
+                <MapPin className="h-12 w-12 text-brand-green mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-black mb-3">VISIT US</h3>
                 <p className="text-gray-600 mb-2">Dar es Salaam, Tanzania</p>
                 <p className="text-gray-600">Nairobi, Kenya</p>
@@ -131,7 +131,7 @@ const Contact = () => {
                   />
                 </div>
                 
-                <Button className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 w-full">
+                <Button className="bg-brand-green hover:bg-brand-green-light text-white px-8 py-3 w-full">
                   SEND MESSAGE
                 </Button>
               </form>
@@ -146,15 +146,15 @@ const Contact = () => {
                     <h3 className="text-xl font-bold text-black mb-3">TANZANIA HEADQUARTERS</h3>
                     <div className="space-y-2 text-gray-700">
                       <p className="flex items-center">
-                        <MapPin className="h-4 w-4 text-red-600 mr-2" />
+                        <MapPin className="h-4 w-4 text-brand-green mr-2" />
                         Dar es Salaam, Tanzania
                       </p>
                       <p className="flex items-center">
-                        <Phone className="h-4 w-4 text-red-600 mr-2" />
+                        <Phone className="h-4 w-4 text-brand-green mr-2" />
                         +255 628 009 126
                       </p>
                       <p className="flex items-center">
-                        <Mail className="h-4 w-4 text-red-600 mr-2" />
+                        <Mail className="h-4 w-4 text-brand-green mr-2" />
                         africasfinest2@gmail.com
                       </p>
                     </div>
@@ -166,15 +166,15 @@ const Contact = () => {
                     <h3 className="text-xl font-bold text-black mb-3">KENYA OFFICE</h3>
                     <div className="space-y-2 text-gray-700">
                       <p className="flex items-center">
-                        <MapPin className="h-4 w-4 text-red-600 mr-2" />
+                        <MapPin className="h-4 w-4 text-brand-green mr-2" />
                         Nairobi, Kenya
                       </p>
                       <p className="flex items-center">
-                        <Phone className="h-4 w-4 text-red-600 mr-2" />
+                        <Phone className="h-4 w-4 text-brand-green mr-2" />
                         +255 748 996 330
                       </p>
                       <p className="flex items-center">
-                        <Mail className="h-4 w-4 text-red-600 mr-2" />
+                        <Mail className="h-4 w-4 text-brand-green mr-2" />
                         info@africansfinest.com
                       </p>
                     </div>
@@ -191,7 +191,7 @@ const Contact = () => {
                   <Button variant="outline" className="w-full border-black text-black hover:bg-black hover:text-white">
                     WhatsApp Support
                   </Button>
-                  <Button variant="outline" className="w-full border-red-600 text-red-600 hover:bg-red-600 hover:text-white">
+                  <Button variant="outline" className="w-full border-brand-green text-brand-green hover:bg-brand-green hover:text-white">
                     Live Chat
                   </Button>
                 </div>

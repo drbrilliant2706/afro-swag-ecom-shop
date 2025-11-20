@@ -11,26 +11,26 @@ const About = () => {
           <div className="flex justify-between items-center h-14 sm:h-16">
             <div className="flex-shrink-0">
               <a href="/" className="text-lg sm:text-xl md:text-2xl font-bold text-black">
-                AFRICAN'S <span className="text-red-600">FINEST</span>
+                AFRICAN'S <span className="text-brand-green">FINEST</span>
               </a>
             </div>
 
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4 lg:space-x-8">
-                <a href="/" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">HOME</a>
-                <a href="/lookbook" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">LOOKBOOK</a>
-                <a href="/about" className="text-red-600 border-b-2 border-red-600 pb-1 text-sm lg:text-base" aria-current="page">ABOUT</a>
-                <a href="/culture" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">CULTURE</a>
+                <a href="/" className="text-black hover:text-brand-green transition-colors text-sm lg:text-base">HOME</a>
+                <a href="/lookbook" className="text-black hover:text-brand-green transition-colors text-sm lg:text-base">LOOKBOOK</a>
+                <a href="/about" className="text-brand-green border-b-2 border-brand-green pb-1 text-sm lg:text-base" aria-current="page">ABOUT</a>
+                <a href="/culture" className="text-black hover:text-brand-green transition-colors text-sm lg:text-base">CULTURE</a>
               </div>
             </div>
 
             <div className="flex items-center space-x-3 sm:space-x-4">
-              <Search className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" aria-label="Search" />
-              <User className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" aria-label="User profile" />
-              <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" aria-label="Favorites" />
+              <Search className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-brand-green cursor-pointer transition-colors" aria-label="Search" />
+              <User className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-brand-green cursor-pointer transition-colors" aria-label="User profile" />
+              <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-brand-green cursor-pointer transition-colors" aria-label="Favorites" />
               <div className="relative">
-                <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" aria-label="Shopping cart" />
-                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-brand-green cursor-pointer transition-colors" aria-label="Shopping cart" />
+                <span className="absolute -top-2 -right-2 bg-brand-green text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
               </div>
             </div>
           </div>
@@ -50,7 +50,7 @@ const About = () => {
         
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 text-white">
-            OUR <span className="text-red-600">STORY</span>
+            OUR <span className="text-brand-green">STORY</span>
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-gray-200">
             Born in East Africa, designed for the world
@@ -108,7 +108,7 @@ const About = () => {
             {/* Vision */}
             <article className="bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg">
               <div className="text-center mb-4 sm:mb-6">
-                <div className="bg-red-600 rounded-full w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <div className="bg-brand-green rounded-full w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center mx-auto mb-3 sm:mb-4">
                   <Target className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-white" aria-hidden="true" />
                 </div>
                 <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-black mb-3 sm:mb-4">OUR VISION</h2>
@@ -146,7 +146,7 @@ const About = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             <article className="text-center">
-              <div className="bg-red-600 rounded-full w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center mx-auto mb-3 sm:mb-4">
+              <div className="bg-brand-green rounded-full w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center mx-auto mb-3 sm:mb-4">
                 <Award className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-white" aria-hidden="true" />
               </div>
               <h3 className="text-lg sm:text-xl font-bold text-black mb-2">EXCELLENCE</h3>
@@ -162,7 +162,7 @@ const About = () => {
             </article>
 
             <article className="text-center">
-              <div className="bg-red-600 rounded-full w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center mx-auto mb-3 sm:mb-4">
+              <div className="bg-brand-green rounded-full w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center mx-auto mb-3 sm:mb-4">
                 <Globe className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-white" aria-hidden="true" />
               </div>
               <h3 className="text-lg sm:text-xl font-bold text-black mb-2">GLOBAL REACH</h3>
@@ -196,7 +196,7 @@ const About = () => {
                 className="rounded-full w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4 object-cover"
               />
               <h3 className="text-xl sm:text-2xl font-bold text-black mb-2">QEVOQCH</h3>
-              <p className="text-red-600 mb-2 sm:mb-3 text-base sm:text-lg font-semibold">Founder & CEO</p>
+              <p className="text-brand-green mb-2 sm:mb-3 text-base sm:text-lg font-semibold">Founder & CEO</p>
               <p className="text-sm sm:text-base text-gray-600">Visionary leader driving Africa's Finest to tell the authentic African story through fashion and culture</p>
             </article>
           </div>
@@ -204,13 +204,13 @@ const About = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 sm:py-14 md:py-16 bg-red-600">
+      <section className="py-12 sm:py-14 md:py-16 bg-brand-green">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">JOIN THE MOVEMENT</h2>
           <p className="text-base sm:text-lg md:text-xl text-white mb-6 sm:mb-8">
             Be part of a community that celebrates African excellence
           </p>
-          <Button className="bg-white text-red-600 hover:bg-gray-100 px-6 sm:px-8 py-2 sm:py-3 text-base sm:text-lg font-bold">
+          <Button className="bg-white text-brand-green hover:bg-gray-100 px-6 sm:px-8 py-2 sm:py-3 text-base sm:text-lg font-bold">
             SHOP THE COLLECTION
           </Button>
         </div>

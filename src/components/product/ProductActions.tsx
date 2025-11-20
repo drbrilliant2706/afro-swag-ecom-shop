@@ -125,7 +125,7 @@ const ProductActions = ({ product, selectedSize, selectedColor }: ProductActions
           }`}
           size="lg"
         >
-          <Heart className={`mr-2 h-5 w-5 ${isFavorite(product.id) ? 'fill-red-600' : ''}`} />
+          <Heart className={`mr-2 h-5 w-5 ${isFavorite(product.id) ? 'fill-brand-green' : ''}`} />
           {isFavorite(product.id) ? 'ADDED TO FAVORITES' : 'ADD TO FAVORITES'}
         </Button>
       </div>

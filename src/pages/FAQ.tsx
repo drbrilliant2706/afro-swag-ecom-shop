@@ -62,28 +62,28 @@ const FAQ = () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex-shrink-0">
               <h1 className="text-2xl font-bold text-black">
-                AFRICAN'S <span className="text-red-600">FINEST</span>
+                AFRICAN'S <span className="text-brand-green">FINEST</span>
               </h1>
             </div>
 
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
-                <a href="/" className="text-black hover:text-red-600 transition-colors">HOME</a>
-                <a href="/men" className="text-black hover:text-red-600 transition-colors">MEN</a>
-                <a href="/women" className="text-black hover:text-red-600 transition-colors">WOMEN</a>
-                <a href="/lookbook" className="text-black hover:text-red-600 transition-colors">LOOKBOOK</a>
-                <a href="/about" className="text-black hover:text-red-600 transition-colors">ABOUT</a>
-                <a href="/culture" className="text-black hover:text-red-600 transition-colors">CULTURE</a>
+                <a href="/" className="text-black hover:text-brand-green transition-colors">HOME</a>
+                <a href="/men" className="text-black hover:text-brand-green transition-colors">MEN</a>
+                <a href="/women" className="text-black hover:text-brand-green transition-colors">WOMEN</a>
+                <a href="/lookbook" className="text-black hover:text-brand-green transition-colors">LOOKBOOK</a>
+                <a href="/about" className="text-black hover:text-brand-green transition-colors">ABOUT</a>
+                <a href="/culture" className="text-black hover:text-brand-green transition-colors">CULTURE</a>
               </div>
             </div>
 
             <div className="flex items-center space-x-4">
-              <Search className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
-              <User className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
-              <Heart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
+              <Search className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
+              <User className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
+              <Heart className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
               <div className="relative">
-                <ShoppingCart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
-                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                <ShoppingCart className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
+                <span className="absolute -top-2 -right-2 bg-brand-green text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
               </div>
             </div>
           </div>

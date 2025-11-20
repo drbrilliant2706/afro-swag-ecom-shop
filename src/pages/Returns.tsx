@@ -12,28 +12,28 @@ const Returns = () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex-shrink-0">
               <h1 className="text-2xl font-bold text-black">
-                AFRICAN'S <span className="text-red-600">FINEST</span>
+                AFRICAN'S <span className="text-brand-green">FINEST</span>
               </h1>
             </div>
 
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
-                <a href="/" className="text-black hover:text-red-600 transition-colors">HOME</a>
-                <a href="/men" className="text-black hover:text-red-600 transition-colors">MEN</a>
-                <a href="/women" className="text-black hover:text-red-600 transition-colors">WOMEN</a>
-                <a href="/lookbook" className="text-black hover:text-red-600 transition-colors">LOOKBOOK</a>
-                <a href="/about" className="text-black hover:text-red-600 transition-colors">ABOUT</a>
-                <a href="/culture" className="text-black hover:text-red-600 transition-colors">CULTURE</a>
+                <a href="/" className="text-black hover:text-brand-green transition-colors">HOME</a>
+                <a href="/men" className="text-black hover:text-brand-green transition-colors">MEN</a>
+                <a href="/women" className="text-black hover:text-brand-green transition-colors">WOMEN</a>
+                <a href="/lookbook" className="text-black hover:text-brand-green transition-colors">LOOKBOOK</a>
+                <a href="/about" className="text-black hover:text-brand-green transition-colors">ABOUT</a>
+                <a href="/culture" className="text-black hover:text-brand-green transition-colors">CULTURE</a>
               </div>
             </div>
 
             <div className="flex items-center space-x-4">
-              <Search className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
-              <User className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
-              <Heart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
+              <Search className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
+              <User className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
+              <Heart className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
               <div className="relative">
-                <ShoppingCart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
-                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                <ShoppingCart className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
+                <span className="absolute -top-2 -right-2 bg-brand-green text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
               </div>
             </div>
           </div>
@@ -41,7 +41,7 @@ const Returns = () => {
       </nav>
 
       {/* Header */}
-      <section className="py-16 bg-red-600">
+      <section className="py-16 bg-brand-green">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold text-white mb-4">RETURNS & EXCHANGES</h1>
           <p className="text-xl text-white">Easy returns within 30 days of purchase</p>
@@ -59,7 +59,7 @@ const Returns = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <Card className="bg-white border-gray-200 text-center">
               <CardContent className="p-8">
-                <RotateCcw className="h-12 w-12 text-red-600 mx-auto mb-4" />
+                <RotateCcw className="h-12 w-12 text-brand-green mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-black mb-3">30-DAY RETURNS</h3>
                 <p className="text-gray-600">Return any unworn item within 30 days of delivery for a full refund</p>
               </CardContent>
@@ -75,7 +75,7 @@ const Returns = () => {
 
             <Card className="bg-white border-gray-200 text-center">
               <CardContent className="p-8">
-                <AlertCircle className="h-12 w-12 text-red-600 mx-auto mb-4" />
+                <AlertCircle className="h-12 w-12 text-brand-green mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-black mb-3">QUALITY GUARANTEE</h3>
                 <p className="text-gray-600">Defective items can be returned at any time for replacement</p>
               </CardContent>

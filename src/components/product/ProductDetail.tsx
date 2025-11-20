@@ -28,9 +28,9 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
       <div className="bg-gray-50 py-4">
         <div className="max-w-7xl mx-auto px-4">
           <nav className="text-sm">
-            <a href="/" className="text-gray-500 hover:text-red-600 transition-colors">Home</a>
+            <a href="/" className="text-gray-500 hover:text-brand-green transition-colors">Home</a>
             <span className="mx-2 text-gray-500">/</span>
-            <a href="/men" className="text-gray-500 hover:text-red-600 transition-colors">Men</a>
+            <a href="/men" className="text-gray-500 hover:text-brand-green transition-colors">Men</a>
             <span className="mx-2 text-gray-500">/</span>
             <span className="text-black">{product.name}</span>
           </nav>
