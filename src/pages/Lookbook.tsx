@@ -63,28 +63,28 @@ const Lookbook = () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex-shrink-0">
               <h1 className="text-2xl font-bold text-black">
-                AFRICAN'S <span className="text-red-600">FINEST</span>
+                AFRICAN'S <span className="text-brand-green">FINEST</span>
               </h1>
             </div>
 
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
-                <a href="/" className="text-black hover:text-red-600 transition-colors">HOME</a>
-                <a href="/men" className="text-black hover:text-red-600 transition-colors">MEN</a>
-                <a href="/women" className="text-black hover:text-red-600 transition-colors">WOMEN</a>
-                <a href="/lookbook" className="text-red-600 border-b-2 border-red-600 pb-1">LOOKBOOK</a>
-                <a href="/about" className="text-black hover:text-red-600 transition-colors">ABOUT</a>
-                <a href="/culture" className="text-black hover:text-red-600 transition-colors">CULTURE</a>
+                <a href="/" className="text-black hover:text-brand-green transition-colors">HOME</a>
+                <a href="/men" className="text-black hover:text-brand-green transition-colors">MEN</a>
+                <a href="/women" className="text-black hover:text-brand-green transition-colors">WOMEN</a>
+                <a href="/lookbook" className="text-brand-green border-b-2 border-brand-green pb-1">LOOKBOOK</a>
+                <a href="/about" className="text-black hover:text-brand-green transition-colors">ABOUT</a>
+                <a href="/culture" className="text-black hover:text-brand-green transition-colors">CULTURE</a>
               </div>
             </div>
 
             <div className="flex items-center space-x-4">
-              <Search className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
-              <User className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
-              <Heart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
+              <Search className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
+              <User className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
+              <Heart className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
               <div className="relative">
-                <ShoppingCart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
-                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                <ShoppingCart className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
+                <span className="absolute -top-2 -right-2 bg-brand-green text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
               </div>
             </div>
           </div>
@@ -104,7 +104,7 @@ const Lookbook = () => {
         
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <h2 className="text-5xl md:text-6xl font-bold mb-4 text-white">
-            SPRING <span className="text-red-600">LOOKBOOK</span>
+            SPRING <span className="text-brand-green">LOOKBOOK</span>
           </h2>
           <p className="text-xl text-gray-200">
             East African elegance meets contemporary streetwear
@@ -116,10 +116,10 @@ const Lookbook = () => {
       <section className="py-6 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-center space-x-8 text-sm font-medium">
-            <a href="#" className="text-red-600 border-b-2 border-red-600 pb-2">SPRING 2025</a>
-            <a href="#" className="text-gray-600 hover:text-red-600 pb-2">SUMMER 2025</a>
-            <a href="#" className="text-gray-600 hover:text-red-600 pb-2">FALL 2024</a>
-            <a href="#" className="text-gray-600 hover:text-red-600 pb-2">WINTER 2024</a>
+            <a href="#" className="text-brand-green border-b-2 border-brand-green pb-2">SPRING 2025</a>
+            <a href="#" className="text-gray-600 hover:text-brand-green pb-2">SUMMER 2025</a>
+            <a href="#" className="text-gray-600 hover:text-brand-green pb-2">FALL 2024</a>
+            <a href="#" className="text-gray-600 hover:text-brand-green pb-2">WINTER 2024</a>
           </div>
         </div>
       </section>
@@ -129,7 +129,7 @@ const Lookbook = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {lookbookItems.map((item, index) => (
-              <Card key={item.id} className={`bg-white border-gray-200 hover:border-red-600 transition-all duration-300 group ${index % 3 === 0 ? 'md:col-span-2' : ''}`}>
+              <Card key={item.id} className={`bg-white border-gray-200 hover:border-brand-green transition-all duration-300 group ${index % 3 === 0 ? 'md:col-span-2' : ''}`}>
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
                     <img 
@@ -177,7 +177,7 @@ const Lookbook = () => {
       </section>
 
       {/* Style Guide Section */}
-      <section className="py-16 bg-red-600">
+      <section className="py-16 bg-brand-green">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h3 className="text-4xl font-bold text-white mb-6">STYLE GUIDE</h3>
           <p className="text-xl text-white mb-8">
@@ -197,7 +197,7 @@ const Lookbook = () => {
               <p className="text-white">Versatile pieces for the global citizen</p>
             </div>
           </div>
-          <Button className="bg-white text-red-600 hover:bg-gray-100 px-8 py-3">
+          <Button className="bg-white text-brand-green hover:bg-gray-100 px-8 py-3">
             DOWNLOAD STYLE GUIDE
           </Button>
         </div>

@@ -107,20 +107,20 @@ const Men = () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex-shrink-0">
               <a href="/">
-                <h1 className="text-xl md:text-2xl font-bold text-black">
-                  AFRICAN'S <span className="text-red-600">FINEST</span>
+                  <h1 className="text-xl md:text-2xl font-bold text-black">
+                  AFRICAN'S <span className="text-brand-green">FINEST</span>
                 </h1>
               </a>
             </div>
 
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4 lg:space-x-8">
-                <a href="/" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">HOME</a>
-                <a href="/men" className="text-red-600 border-b-2 border-red-600 pb-1 text-sm lg:text-base">MEN</a>
-                <a href="/women" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">WOMEN</a>
-                <a href="/lookbook" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">LOOKBOOK</a>
-                <a href="/about" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">ABOUT</a>
-                <a href="/culture" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">CULTURE</a>
+                <a href="/" className="text-black hover:text-brand-green transition-colors text-sm lg:text-base">HOME</a>
+                <a href="/men" className="text-brand-green border-b-2 border-brand-green pb-1 text-sm lg:text-base">MEN</a>
+                <a href="/women" className="text-black hover:text-brand-green transition-colors text-sm lg:text-base">WOMEN</a>
+                <a href="/lookbook" className="text-black hover:text-brand-green transition-colors text-sm lg:text-base">LOOKBOOK</a>
+                <a href="/about" className="text-black hover:text-brand-green transition-colors text-sm lg:text-base">ABOUT</a>
+                <a href="/culture" className="text-black hover:text-brand-green transition-colors text-sm lg:text-base">CULTURE</a>
               </div>
             </div>
 
@@ -156,12 +156,12 @@ const Men = () => {
           {isMenuOpen && (
             <div className="md:hidden border-t border-gray-200 py-4">
               <div className="flex flex-col space-y-2">
-                <a href="/" className="text-black hover:text-red-600 transition-colors py-2">HOME</a>
-                <a href="/men" className="text-red-600 py-2">MEN</a>
-                <a href="/women" className="text-black hover:text-red-600 transition-colors py-2">WOMEN</a>
-                <a href="/lookbook" className="text-black hover:text-red-600 transition-colors py-2">LOOKBOOK</a>
-                <a href="/about" className="text-black hover:text-red-600 transition-colors py-2">ABOUT</a>
-                <a href="/culture" className="text-black hover:text-red-600 transition-colors py-2">CULTURE</a>
+                <a href="/" className="text-black hover:text-brand-green transition-colors py-2">HOME</a>
+                <a href="/men" className="text-brand-green py-2">MEN</a>
+                <a href="/women" className="text-black hover:text-brand-green transition-colors py-2">WOMEN</a>
+                <a href="/lookbook" className="text-black hover:text-brand-green transition-colors py-2">LOOKBOOK</a>
+                <a href="/about" className="text-black hover:text-brand-green transition-colors py-2">ABOUT</a>
+                <a href="/culture" className="text-black hover:text-brand-green transition-colors py-2">CULTURE</a>
               </div>
             </div>
           )}
@@ -181,7 +181,7 @@ const Men = () => {
         
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">
-            MEN'S <span className="text-red-600">COLLECTION</span>
+            MEN'S <span className="text-brand-green">COLLECTION</span>
           </h2>
           <p className="text-lg md:text-xl text-gray-200">
             Step into style with our curated collection for men
@@ -207,31 +207,31 @@ const Men = () => {
               <div className="hidden md:flex space-x-4 text-sm">
                 <button 
                   onClick={() => setSelectedCategory("ALL")}
-                  className={selectedCategory === "ALL" ? "text-red-600 border-b border-red-600" : "text-gray-600 hover:text-black"}
+                  className={selectedCategory === "ALL" ? "text-brand-green border-b border-brand-green" : "text-gray-600 hover:text-black"}
                 >
                   ALL
                 </button>
                 <button 
                   onClick={() => setSelectedCategory("SHIRTS")}
-                  className={selectedCategory === "SHIRTS" ? "text-red-600 border-b border-red-600" : "text-gray-600 hover:text-black"}
+                  className={selectedCategory === "SHIRTS" ? "text-brand-green border-b border-brand-green" : "text-gray-600 hover:text-black"}
                 >
                   SHIRTS
                 </button>
                 <button 
                   onClick={() => setSelectedCategory("PANTS")}
-                  className={selectedCategory === "PANTS" ? "text-red-600 border-b border-red-600" : "text-gray-600 hover:text-black"}
+                  className={selectedCategory === "PANTS" ? "text-brand-green border-b border-brand-green" : "text-gray-600 hover:text-black"}
                 >
                   PANTS
                 </button>
                 <button 
                   onClick={() => setSelectedCategory("SHOES")}
-                  className={selectedCategory === "SHOES" ? "text-red-600 border-b border-red-600" : "text-gray-600 hover:text-black"}
+                  className={selectedCategory === "SHOES" ? "text-brand-green border-b border-brand-green" : "text-gray-600 hover:text-black"}
                 >
                   SHOES
                 </button>
                 <button 
                   onClick={() => setSelectedCategory("ACCESSORIES")}
-                  className={selectedCategory === "ACCESSORIES" ? "text-red-600 border-b border-red-600" : "text-gray-600 hover:text-black"}
+                  className={selectedCategory === "ACCESSORIES" ? "text-brand-green border-b border-brand-green" : "text-gray-600 hover:text-black"}
                 >
                   ACCESSORIES
                 </button>
@@ -292,7 +292,7 @@ const Men = () => {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
               {filteredProducts.map((product) => (
-              <Card key={product.id} className="bg-white border-gray-200 hover:border-red-600 transition-all duration-300 group">
+              <Card key={product.id} className="bg-white border-gray-200 hover:border-brand-green transition-all duration-300 group">
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
                     <a href={`/product/${product.id}`}>
@@ -303,13 +303,13 @@ const Men = () => {
                         loading="lazy"
                       />
                     </a>
-                    <Badge className="absolute top-4 left-4 bg-red-600 hover:bg-red-600 text-white text-xs">
+                    <Badge className="absolute top-4 left-4 bg-brand-green hover:bg-brand-green text-white text-xs">
                       {product.badge}
                     </Badge>
                     <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                       <Heart 
                          className={`h-5 w-5 md:h-6 md:w-6 cursor-pointer ${
-                           isFavorite(Number(product.id)) ? 'text-red-500 fill-red-500' : 'text-black hover:text-red-500'
+                           isFavorite(Number(product.id)) ? 'text-brand-green fill-brand-green' : 'text-black hover:text-brand-green'
                          }`}
                         onClick={() => handleToggleFavorite(product)}
                       />
@@ -332,7 +332,7 @@ const Men = () => {
 
                     <Button 
                       onClick={() => handleAddToCart(product)}
-                      className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-sm md:text-base"
+                      className="w-full bg-brand-green hover:bg-brand-green-light text-white font-bold text-sm md:text-base"
                     >
                       VIEW PRODUCT
                     </Button>

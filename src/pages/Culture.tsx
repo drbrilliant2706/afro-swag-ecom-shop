@@ -63,28 +63,28 @@ const Culture = () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex-shrink-0">
               <h1 className="text-2xl font-bold text-black">
-                AFRICAN'S <span className="text-red-600">FINEST</span>
+                AFRICAN'S <span className="text-brand-green">FINEST</span>
               </h1>
             </div>
 
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
-                <a href="/" className="text-black hover:text-red-600 transition-colors">HOME</a>
-                <a href="/men" className="text-black hover:text-red-600 transition-colors">MEN</a>
-                <a href="/women" className="text-black hover:text-red-600 transition-colors">WOMEN</a>
-                <a href="/lookbook" className="text-black hover:text-red-600 transition-colors">LOOKBOOK</a>
-                <a href="/about" className="text-black hover:text-red-600 transition-colors">ABOUT</a>
-                <a href="/culture" className="text-red-600 border-b-2 border-red-600 pb-1">CULTURE</a>
+                <a href="/" className="text-black hover:text-brand-green transition-colors">HOME</a>
+                <a href="/men" className="text-black hover:text-brand-green transition-colors">MEN</a>
+                <a href="/women" className="text-black hover:text-brand-green transition-colors">WOMEN</a>
+                <a href="/lookbook" className="text-black hover:text-brand-green transition-colors">LOOKBOOK</a>
+                <a href="/about" className="text-black hover:text-brand-green transition-colors">ABOUT</a>
+                <a href="/culture" className="text-brand-green border-b-2 border-brand-green pb-1">CULTURE</a>
               </div>
             </div>
 
             <div className="flex items-center space-x-4">
-              <Search className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
-              <User className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
-              <Heart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
+              <Search className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
+              <User className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
+              <Heart className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
               <div className="relative">
-                <ShoppingCart className="h-5 w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
-                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                <ShoppingCart className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
+                <span className="absolute -top-2 -right-2 bg-brand-green text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">0</span>
               </div>
             </div>
           </div>
@@ -104,7 +104,7 @@ const Culture = () => {
         
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <h2 className="text-5xl md:text-6xl font-bold mb-4 text-white">
-            OUR <span className="text-red-600">CULTURE</span>
+            OUR <span className="text-brand-green">CULTURE</span>
           </h2>
           <p className="text-xl text-gray-200">
             Stories, traditions, and inspirations from East Africa
@@ -122,7 +122,7 @@ const Culture = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {culturalStories.map((story) => (
-              <Card key={story.id} className="bg-white border-gray-200 hover:border-red-600 transition-all duration-300 group">
+              <Card key={story.id} className="bg-white border-gray-200 hover:border-brand-green transition-all duration-300 group">
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
                     <img 
@@ -158,7 +158,7 @@ const Culture = () => {
       </section>
 
       {/* Heritage Section */}
-      <section className="py-16 bg-red-600">
+      <section className="py-16 bg-brand-green">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -209,7 +209,7 @@ const Culture = () => {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div>
                       <h4 className="text-2xl font-bold text-black mb-2">{event.title}</h4>
-                      <div className="flex items-center text-red-600 mb-2">
+                      <div className="flex items-center text-brand-green mb-2">
                         <Calendar className="h-4 w-4 mr-2" />
                         {event.date}
                       </div>
@@ -221,7 +221,7 @@ const Culture = () => {
                     
                     <div className="md:col-span-2">
                       <p className="text-gray-700 mb-4">{event.description}</p>
-                      <Button className="bg-red-600 hover:bg-red-700 text-white">
+                      <Button className="bg-brand-green hover:bg-brand-green-light text-white">
                         LEARN MORE
                       </Button>
                     </div>
@@ -237,7 +237,7 @@ const Culture = () => {
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <div className="mb-8">
-            <Users className="h-16 w-16 text-red-600 mx-auto mb-4" />
+            <Users className="h-16 w-16 text-brand-green mx-auto mb-4" />
             <h3 className="text-4xl font-bold text-black mb-6">JOIN OUR COMMUNITY</h3>
             <p className="text-xl text-gray-700 mb-8">
               Connect with fellow culture enthusiasts and be part of the African's Finest family
@@ -245,7 +245,7 @@ const Culture = () => {
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-red-600 hover:bg-red-700 text-white px-8 py-3">
+            <Button className="bg-brand-green hover:bg-brand-green-light text-white px-8 py-3">
               FOLLOW ON INSTAGRAM
             </Button>
             <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white px-8 py-3">

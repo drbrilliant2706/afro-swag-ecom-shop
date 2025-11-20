@@ -78,7 +78,7 @@ const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
                         <h3 className="font-medium text-black">{product.name}</h3>
                         <p className="text-sm text-gray-500">{product.category}</p>
                       </div>
-                      <p className="font-bold text-red-600">{product.price}</p>
+                      <p className="font-bold text-brand-green">{product.price}</p>
                     </div>
                   </CardContent>
                 </Card>

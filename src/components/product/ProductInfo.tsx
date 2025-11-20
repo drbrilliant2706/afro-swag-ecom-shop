@@ -15,7 +15,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-black mb-2">{product.name}</h1>
-        <p className="text-3xl font-bold text-red-600 mb-4">{product.price}</p>
+        <p className="text-3xl font-bold text-brand-green mb-4">{product.price}</p>
       </div>
 
       <div>

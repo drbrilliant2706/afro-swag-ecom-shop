@@ -140,18 +140,18 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
                         />
                         <div className="flex-1">
                           <h4 className="text-black font-bold text-sm">{item.name}</h4>
-                          <p className="text-red-600 font-bold">{item.price}</p>
+                          <p className="text-brand-green font-bold">{item.price}</p>
                           <div className="flex items-center space-x-2 mt-2">
                             <button
                               onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                              className="text-black hover:text-red-600"
+                              className="text-black hover:text-brand-green"
                             >
                               <Minus className="h-4 w-4" />
                             </button>
                             <span className="text-black">{item.quantity}</span>
                             <button
                               onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                              className="text-black hover:text-red-600"
+                              className="text-black hover:text-brand-green"
                             >
                               <Plus className="h-4 w-4" />
                             </button>
@@ -159,7 +159,7 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
                         </div>
                         <button
                           onClick={() => removeFromCart(item.id)}
-                          className="text-red-500 hover:text-red-400"
+                          className="text-brand-green hover:text-brand-green-light"
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>
@@ -172,7 +172,7 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
               <div className="mt-6 border-t border-gray-200 pt-4">
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-black font-bold">Total:</span>
-                  <span className="text-red-600 font-bold text-lg">
+                  <span className="text-brand-green font-bold text-lg">
                     TSh {getTotalPrice()}
                   </span>
                 </div>
