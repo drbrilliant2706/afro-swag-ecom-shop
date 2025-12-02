@@ -122,39 +122,33 @@ const Favorites = () => {
               </Button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
+            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
               {favorites.map((product) => (
-                <Card key={product.id} className="bg-white border-gray-200 hover:border-red-600 transition-all duration-300 group">
-                  <CardContent className="p-0">
-                    <div className="relative overflow-hidden">
-                      <img 
-                        src={product.image} 
-                        alt={product.name}
-                        className="w-full h-48 md:h-80 object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute top-4 right-4">
-                        <button
-                          onClick={() => handleRemoveFromFavorites(product.id)}
-                          className="p-2 bg-white rounded-full shadow-md hover:bg-red-50 transition-colors"
-                        >
-                          <Trash2 className="h-4 w-4 text-red-500" />
-                        </button>
-                      </div>
-                    </div>
-                    
-                    <div className="p-4">
-                      <h4 className="text-black font-bold text-base md:text-lg mb-2">{product.name}</h4>
-                      <p className="text-red-600 font-bold text-lg md:text-xl mb-4">{product.price}</p>
-
-                      <Button 
-                        onClick={() => handleAddToCart(product)}
-                        className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-sm md:text-base"
+                <div key={product.id} className="group">
+                  <div className="relative overflow-hidden bg-gray-50 mb-3">
+                    <img 
+                      src={product.image} 
+                      alt={product.name}
+                      className="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-3 right-3">
+                      <button
+                        onClick={() => handleRemoveFromFavorites(product.id)}
+                        className="p-1.5 hover:bg-white/80 rounded-full transition-colors"
                       >
-                        VIEW PRODUCT
-                      </Button>
+                        <Trash2 className="h-5 w-5 text-gray-600 hover:text-black" />
+                      </button>
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                  
+                  <div className="space-y-1">
+                    <div className="flex items-start justify-between">
+                      <h4 className="text-black font-medium text-sm sm:text-base line-clamp-2">{product.name}</h4>
+                      <span className="text-gray-400 hover:text-black cursor-pointer ml-2">+</span>
+                    </div>
+                    <p className="text-black text-sm sm:text-base">{product.price}</p>
+                  </div>
+                </div>
               ))}
             </div>
           )}

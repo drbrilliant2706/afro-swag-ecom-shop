@@ -271,51 +271,40 @@ const Index = () => {
               </div>
             </DropAnimation>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
             {featuredProducts.map((product, index) => (
               <DropAnimation key={product.id} delay={800 + index * 150} dropHeight={50}>
-                <Card className="bg-white border-gray-200 hover:border-black transition-all duration-300 group">
-                  <CardContent className="p-0">
-                    <div className="relative overflow-hidden">
-                      <PrefetchLink to={`/product/${product.id}`}>
-                        <OptimizedImage
-                          src={product.image} 
-                          alt={`${product.name} - African streetwear fashion`}
-                          className="w-full h-32 sm:h-48 md:h-64 object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
-                          lazy={index >= 2}
-                          priority={index < 2 ? 'high' : 'low'}
-                        />
-                      </PrefetchLink>
-                      <Badge className="absolute top-2 left-2 bg-black hover:bg-black text-white text-xs">
-                        {product.badge}
-                      </Badge>
-                      <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Heart 
-                          className={`h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 cursor-pointer ${
-                            isFavorite(product.id) ? 'text-black fill-black' : 'text-black hover:text-gray-600'
-                          }`}
-                          onClick={() => handleToggleFavorite(product)}
-                        />
-                      </div>
+                <div className="group">
+                  <div className="relative overflow-hidden bg-gray-50 mb-3">
+                    <PrefetchLink to={`/product/${product.id}`}>
+                      <OptimizedImage
+                        src={product.image} 
+                        alt={`${product.name} - African streetwear fashion`}
+                        className="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
+                        lazy={index >= 2}
+                        priority={index < 2 ? 'high' : 'low'}
+                      />
+                    </PrefetchLink>
+                    <div className="absolute top-3 right-3">
+                      <Heart 
+                        className={`h-5 w-5 sm:h-6 sm:w-6 cursor-pointer transition-colors ${
+                          isFavorite(product.id) ? 'text-black fill-black' : 'text-gray-400 hover:text-black'
+                        }`}
+                        onClick={() => handleToggleFavorite(product)}
+                      />
                     </div>
-                    
-                    <div className="p-2 sm:p-3 md:p-4">
+                  </div>
+                  
+                  <div className="space-y-1">
+                    <div className="flex items-start justify-between">
                       <PrefetchLink to={`/product/${product.id}`}>
-                        <h4 className="text-black font-bold text-xs sm:text-sm md:text-base mb-1 sm:mb-2 hover:text-gray-600 transition-colors cursor-pointer line-clamp-2">{product.name}</h4>
+                        <h4 className="text-black font-medium text-sm sm:text-base hover:underline cursor-pointer line-clamp-2">{product.name}</h4>
                       </PrefetchLink>
-                       <div className="flex items-center justify-between mb-2 sm:mb-3 md:mb-4">
-                         <p className="text-black font-bold text-sm sm:text-base md:text-lg">{product.price}</p>
-                       </div>
-
-                      <Button 
-                        onClick={() => handleAddToCart(product)}
-                        className="w-full bg-black hover:bg-gray-800 text-white font-bold text-xs sm:text-sm py-1.5 sm:py-2"
-                      >
-                        VIEW PRODUCT
-                      </Button>
+                      <span className="text-gray-400 hover:text-black cursor-pointer ml-2">+</span>
                     </div>
-                  </CardContent>
-                </Card>
+                    <p className="text-black text-sm sm:text-base">{product.price}</p>
+                  </div>
+                </div>
               </DropAnimation>
             ))}
           </div>
