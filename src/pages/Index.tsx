@@ -137,7 +137,7 @@ const Index = () => {
       </style>
 
       {/* Marquee Header */}
-      <div className="bg-brand-green text-white py-1.5 sm:py-2 overflow-hidden">
+      <div className="bg-black text-white py-1.5 sm:py-2 overflow-hidden">
         <div className="marquee whitespace-nowrap text-xs sm:text-sm md:text-base px-2">
           🎉 Fashion at it's ultimate prime. Shop with us and become part of our vast family worldwide. Afrika's finest telling our African Story. 🎉
         </div>
@@ -157,16 +157,16 @@ const Index = () => {
                   priority="high"
                 />
                 <PrefetchLink to="/" className="text-sm sm:text-lg md:text-xl font-bold text-black hidden xs:block">
-                  AFRICAN'S <span className="text-brand-green">FINEST</span>
+                  AFRICAN'S <span className="text-black">FINEST</span>
                 </PrefetchLink>
               </div>
 
               <div className="hidden lg:block">
                 <div className="ml-10 flex items-baseline space-x-6 xl:space-x-8">
-                  <PrefetchLink to="/" className="text-brand-green border-b-2 border-brand-green pb-1 text-sm xl:text-base font-medium" aria-current="page">HOME</PrefetchLink>
-                  <PrefetchLink to="/lookbook" className="text-black hover:text-brand-green transition-colors text-sm xl:text-base">LOOKBOOK</PrefetchLink>
-                  <PrefetchLink to="/about" className="text-black hover:text-brand-green transition-colors text-sm xl:text-base">ABOUT</PrefetchLink>
-                  <PrefetchLink to="/culture" className="text-black hover:text-brand-green transition-colors text-sm xl:text-base">CULTURE</PrefetchLink>
+                  <PrefetchLink to="/" className="text-black border-b-2 border-black pb-1 text-sm xl:text-base font-medium" aria-current="page">HOME</PrefetchLink>
+                  <PrefetchLink to="/lookbook" className="text-black hover:text-gray-600 transition-colors text-sm xl:text-base">LOOKBOOK</PrefetchLink>
+                  <PrefetchLink to="/about" className="text-black hover:text-gray-600 transition-colors text-sm xl:text-base">ABOUT</PrefetchLink>
+                  <PrefetchLink to="/culture" className="text-black hover:text-gray-600 transition-colors text-sm xl:text-base">CULTURE</PrefetchLink>
                   <Button asChild size="sm" className="bg-white text-black border border-black hover:bg-black hover:text-white transition-colors font-bold">
                     <PrefetchLink to="/men">NEW DROP</PrefetchLink>
                   </Button>
@@ -177,32 +177,32 @@ const Index = () => {
                 {[
                   <Search 
                     key="search"
-                    className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-brand-green cursor-pointer transition-colors"
+                    className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-gray-600 cursor-pointer transition-colors"
                     onClick={() => setIsSearchOpen(true)}
                     aria-label="Search products"
                   />,
                   <User 
                     key="user"
-                    className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-brand-green cursor-pointer transition-colors"
+                    className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-gray-600 cursor-pointer transition-colors"
                     onClick={() => setIsProfileOpen(true)}
                     aria-label="User profile"
                   />,
                   <PrefetchLink to="/favorites" aria-label="View favorites">
-                    <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-brand-green cursor-pointer transition-colors" />
+                    <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-gray-600 cursor-pointer transition-colors" />
                   </PrefetchLink>,
                   <div key="cart" className="relative">
                     <ShoppingCart 
-                      className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-brand-green cursor-pointer transition-colors" 
+                      className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-gray-600 cursor-pointer transition-colors" 
                       onClick={() => setIsCartOpen(true)}
                       aria-label="Shopping cart"
                     />
-                    <span className="absolute -top-2 -right-2 bg-brand-green text-white text-xs rounded-full w-4 h-4 flex items-center justify-center" aria-label={`${getTotalItems()} items in cart`}>
+                    <span className="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full w-4 h-4 flex items-center justify-center" aria-label={`${getTotalItems()} items in cart`}>
                       {getTotalItems()}
                     </span>
                   </div>,
                   <Menu 
                     key="menu"
-                    className="h-5 w-5 text-black hover:text-brand-green cursor-pointer transition-colors lg:hidden" 
+                    className="h-5 w-5 text-black hover:text-gray-600 cursor-pointer transition-colors lg:hidden" 
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                     aria-label="Toggle menu"
                     aria-expanded={isMenuOpen}
@@ -215,10 +215,10 @@ const Index = () => {
             {isMenuOpen && (
               <div className="lg:hidden border-t border-gray-200 py-3 bg-white">
                 <div className="flex flex-col space-y-3 px-2">
-                  <PrefetchLink to="/" className="text-brand-green py-2 font-medium">HOME</PrefetchLink>
-                  <PrefetchLink to="/lookbook" className="text-black hover:text-brand-green transition-colors py-2">LOOKBOOK</PrefetchLink>
-                  <PrefetchLink to="/about" className="text-black hover:text-brand-green transition-colors py-2">ABOUT</PrefetchLink>
-                  <PrefetchLink to="/culture" className="text-black hover:text-brand-green transition-colors py-2">CULTURE</PrefetchLink>
+                  <PrefetchLink to="/" className="text-black py-2 font-medium">HOME</PrefetchLink>
+                  <PrefetchLink to="/lookbook" className="text-black hover:text-gray-600 transition-colors py-2">LOOKBOOK</PrefetchLink>
+                  <PrefetchLink to="/about" className="text-black hover:text-gray-600 transition-colors py-2">ABOUT</PrefetchLink>
+                  <PrefetchLink to="/culture" className="text-black hover:text-gray-600 transition-colors py-2">CULTURE</PrefetchLink>
                   <Button asChild size="sm" className="bg-white text-black border border-black hover:bg-black hover:text-white transition-colors font-bold mx-2 my-1">
                     <PrefetchLink to="/men">NEW DROP</PrefetchLink>
                   </Button>
@@ -245,7 +245,7 @@ const Index = () => {
             <div className="text-center max-w-4xl mx-auto px-4">
               <DropAnimation delay={400} dropHeight={40}>
                 <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-3 sm:mb-4 text-white leading-tight">
-                  AFRICA'S <span className="text-brand-green">FINEST</span>
+                  AFRICA'S <span className="text-white">FINEST</span>
                 </h1>
               </DropAnimation>
               <DropAnimation delay={500} dropHeight={30}>
@@ -265,7 +265,7 @@ const Index = () => {
             <DropAnimation delay={600} dropHeight={40}>
               <div className="text-center mb-6 sm:mb-8 md:mb-12">
                 <h2 id="featured-products" className="text-xl sm:text-2xl md:text-4xl font-bold text-black mb-2 sm:mb-4">
-                  FEATURED <span className="text-brand-green">PRODUCTS</span>
+                  FEATURED <span className="text-black">PRODUCTS</span>
                 </h2>
                 <p className="text-gray-600 text-sm sm:text-base md:text-lg">Discover our most popular items</p>
               </div>
@@ -274,7 +274,7 @@ const Index = () => {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-8">
             {featuredProducts.map((product, index) => (
               <DropAnimation key={product.id} delay={800 + index * 150} dropHeight={50}>
-                <Card className="bg-white border-gray-200 hover:border-brand-green transition-all duration-300 group">
+                <Card className="bg-white border-gray-200 hover:border-black transition-all duration-300 group">
                   <CardContent className="p-0">
                     <div className="relative overflow-hidden">
                       <PrefetchLink to={`/product/${product.id}`}>
@@ -286,13 +286,13 @@ const Index = () => {
                           priority={index < 2 ? 'high' : 'low'}
                         />
                       </PrefetchLink>
-                      <Badge className="absolute top-2 left-2 bg-brand-green hover:bg-brand-green text-white text-xs">
+                      <Badge className="absolute top-2 left-2 bg-black hover:bg-black text-white text-xs">
                         {product.badge}
                       </Badge>
                       <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                         <Heart 
                           className={`h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 cursor-pointer ${
-                            isFavorite(product.id) ? 'text-brand-green fill-brand-green' : 'text-black hover:text-brand-green'
+                            isFavorite(product.id) ? 'text-black fill-black' : 'text-black hover:text-gray-600'
                           }`}
                           onClick={() => handleToggleFavorite(product)}
                         />
@@ -301,15 +301,15 @@ const Index = () => {
                     
                     <div className="p-2 sm:p-3 md:p-4">
                       <PrefetchLink to={`/product/${product.id}`}>
-                        <h4 className="text-black font-bold text-xs sm:text-sm md:text-base mb-1 sm:mb-2 hover:text-brand-green transition-colors cursor-pointer line-clamp-2">{product.name}</h4>
+                        <h4 className="text-black font-bold text-xs sm:text-sm md:text-base mb-1 sm:mb-2 hover:text-gray-600 transition-colors cursor-pointer line-clamp-2">{product.name}</h4>
                       </PrefetchLink>
                        <div className="flex items-center justify-between mb-2 sm:mb-3 md:mb-4">
-                         <p className="text-brand-green font-bold text-sm sm:text-base md:text-lg">{product.price}</p>
+                         <p className="text-black font-bold text-sm sm:text-base md:text-lg">{product.price}</p>
                        </div>
 
                       <Button 
                         onClick={() => handleAddToCart(product)}
-                        className="w-full bg-brand-green hover:bg-brand-green/90 text-white font-bold text-xs sm:text-sm py-1.5 sm:py-2"
+                        className="w-full bg-black hover:bg-gray-800 text-white font-bold text-xs sm:text-sm py-1.5 sm:py-2"
                       >
                         VIEW PRODUCT
                       </Button>
@@ -322,7 +322,7 @@ const Index = () => {
 
           <DropAnimation delay={1400} dropHeight={30}>
             <div className="text-center mt-6 sm:mt-8 md:mt-12">
-              <Button asChild size="lg" variant="outline" className="border-brand-green text-brand-green hover:bg-brand-green hover:text-white font-bold">
+              <Button asChild size="lg" variant="outline" className="border-black text-black hover:bg-black hover:text-white font-bold">
                 <PrefetchLink to="/men">VIEW ALL PRODUCTS</PrefetchLink>
               </Button>
             </div>
@@ -330,58 +330,61 @@ const Index = () => {
         </div>
         </section>
 
-        {/* About Section */}
-        <section className="py-6 sm:py-8 md:py-16 bg-gray-100" aria-labelledby="our-story">
+      </main>
+
+      {/* Classic Footer */}
+      <footer className="bg-black text-white py-12 sm:py-16" style={{ fontFamily: 'Georgia, Times New Roman, serif' }}>
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center">
-            <DropAnimation delay={1000} dropHeight={50} className="order-2 lg:order-1">
-              <article className="px-2">
-                <h2 id="our-story" className="text-xl sm:text-2xl md:text-4xl font-bold text-black mb-3 sm:mb-4 md:mb-6">
-                  OUR <span className="text-brand-green">STORY</span>
-                </h2>
-                <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-3 sm:mb-4 md:mb-6 leading-relaxed">
-                  African's Finest is more than just clothing—it's a movement celebrating the rich heritage and vibrant culture of East Africa. Each piece tells a story of tradition, pride, and contemporary style.
-                </p>
-                <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-4 sm:mb-6 md:mb-8 leading-relaxed">
-                  From the bustling streets of Nairobi to the cultural heart of Dar es Salaam, we bring you authentic designs that honor our roots while embracing modern fashion.
-                </p>
-                <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green/90 text-white font-bold w-full sm:w-auto">
-                  <PrefetchLink to="/about">LEARN MORE</PrefetchLink>
-                </Button>
-              </article>
-            </DropAnimation>
-            <DropAnimation delay={1200} dropHeight={60} className="relative order-1 lg:order-2">
-              <div>
-                <OptimizedImage
-                  src="/lovable-uploads/c1a27c87-fecb-4603-846b-e559103c12ef.png" 
-                  alt="East African fashion and culture - celebrating heritage through streetwear"
-                  className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-xl"
-                  lazy={true}
-                  priority="low"
-                />
-              </div>
-            </DropAnimation>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+            {/* Shop Links */}
+            <div>
+              <h3 className="text-lg font-bold mb-4 tracking-wide">SHOP</h3>
+              <ul className="space-y-2">
+                <li><PrefetchLink to="/men" className="text-gray-300 hover:text-white transition-colors">Men</PrefetchLink></li>
+                <li><PrefetchLink to="/women" className="text-gray-300 hover:text-white transition-colors">Women</PrefetchLink></li>
+                <li><PrefetchLink to="/lookbook" className="text-gray-300 hover:text-white transition-colors">Lookbook</PrefetchLink></li>
+                <li><PrefetchLink to="/favorites" className="text-gray-300 hover:text-white transition-colors">Favorites</PrefetchLink></li>
+              </ul>
+            </div>
+
+            {/* Company Links */}
+            <div>
+              <h3 className="text-lg font-bold mb-4 tracking-wide">COMPANY</h3>
+              <ul className="space-y-2">
+                <li><PrefetchLink to="/about" className="text-gray-300 hover:text-white transition-colors">About Us</PrefetchLink></li>
+                <li><PrefetchLink to="/culture" className="text-gray-300 hover:text-white transition-colors">Culture</PrefetchLink></li>
+                <li><PrefetchLink to="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</PrefetchLink></li>
+              </ul>
+            </div>
+
+            {/* Support Links */}
+            <div>
+              <h3 className="text-lg font-bold mb-4 tracking-wide">SUPPORT</h3>
+              <ul className="space-y-2">
+                <li><PrefetchLink to="/faq" className="text-gray-300 hover:text-white transition-colors">FAQ</PrefetchLink></li>
+                <li><PrefetchLink to="/shipping" className="text-gray-300 hover:text-white transition-colors">Shipping Info</PrefetchLink></li>
+                <li><PrefetchLink to="/returns" className="text-gray-300 hover:text-white transition-colors">Returns</PrefetchLink></li>
+                <li><PrefetchLink to="/size-guide" className="text-gray-300 hover:text-white transition-colors">Size Guide</PrefetchLink></li>
+              </ul>
+            </div>
+
+            {/* Brand */}
+            <div>
+              <h3 className="text-lg font-bold mb-4 tracking-wide">AFRICA'S FINEST</h3>
+              <p className="text-gray-300 text-sm leading-relaxed">
+                Authentic streetwear celebrating East African culture and heritage.
+              </p>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-gray-700 pt-8 text-center">
+            <p className="text-gray-400 text-sm">
+              © {new Date().getFullYear()} Africa's Finest. All rights reserved.
+            </p>
           </div>
         </div>
-        </section>
-
-        {/* About CTA Section */}
-        <DropAnimation delay={1400} dropHeight={40}>
-          <section className="bg-black text-white py-12 sm:py-16 md:py-20 text-center" aria-labelledby="learn-more-cta">
-            <div className="max-w-4xl mx-auto px-4">
-              <h2 id="learn-more-cta" className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
-                LEARN MORE <span className="text-brand-green">ABOUT US</span>
-              </h2>
-            <p className="text-gray-300 text-base sm:text-lg md:text-xl mb-6 sm:mb-8">
-              Discover our story, values, and the team behind Africa's Finest
-            </p>
-              <Button asChild size="lg" className="bg-brand-green hover:bg-brand-green/90 text-white font-bold">
-                <PrefetchLink to="/about">VISIT ABOUT PAGE</PrefetchLink>
-              </Button>
-            </div>
-          </section>
-        </DropAnimation>
-      </main>
+      </footer>
 
       {/* Modals */}
       <ProfileModal isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
