@@ -290,55 +290,41 @@ const Women = () => {
               <p className="text-gray-600">No women's products are currently available. Check back soon!</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
+            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
               {filteredProducts.map((product) => (
-              <Card key={product.id} className="bg-white border-gray-200 hover:border-brand-green transition-all duration-300 group">
-                <CardContent className="p-0">
-                  <div className="relative overflow-hidden">
+                <div key={product.id} className="group">
+                  <div className="relative overflow-hidden bg-gray-50 mb-3">
                     <a href={`/product/${product.id}`}>
                       <img 
                         src={product.image} 
                         alt={product.name}
-                        className="w-full h-48 md:h-80 object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-300"
                         loading="lazy"
                       />
                     </a>
-                    <Badge className="absolute top-4 left-4 bg-brand-green hover:bg-brand-green text-white text-xs">
+                    <Badge className="absolute top-3 left-3 bg-gray-100 text-gray-600 text-xs font-normal">
                       {product.badge}
                     </Badge>
-                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="absolute top-3 right-3">
                       <Heart 
-                         className={`h-5 w-5 md:h-6 md:w-6 cursor-pointer ${
-                           isFavorite(Number(product.id)) ? 'text-red-500 fill-red-500' : 'text-black hover:text-red-500'
-                         }`}
+                        className={`h-5 w-5 sm:h-6 sm:w-6 cursor-pointer transition-colors ${
+                          isFavorite(Number(product.id)) ? 'text-black fill-black' : 'text-gray-400 hover:text-black'
+                        }`}
                         onClick={() => handleToggleFavorite(product)}
                       />
                     </div>
                   </div>
                   
-                  <div className="p-4 md:p-6">
-                    <a href={`/product/${product.id}`}>
-                      <h4 className="text-black font-bold text-base md:text-lg mb-2 hover:text-red-600 transition-colors">{product.name}</h4>
-                    </a>
-                    <p className="text-red-600 font-bold text-lg md:text-xl mb-4">{product.price}</p>
-                    
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex space-x-2">
-                        {product.colors.map((color, index) => (
-                          <div key={index} className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-gray-300 border border-gray-400"></div>
-                        ))}
-                      </div>
+                  <div className="space-y-1">
+                    <div className="flex items-start justify-between">
+                      <a href={`/product/${product.id}`}>
+                        <h4 className="text-black font-medium text-sm sm:text-base hover:underline line-clamp-2">{product.name}</h4>
+                      </a>
+                      <span className="text-gray-400 hover:text-black cursor-pointer ml-2">+</span>
                     </div>
-
-                    <Button 
-                      onClick={() => handleAddToCart(product)}
-                      className="w-full bg-brand-green hover:bg-brand-green-light text-white font-bold text-sm md:text-base"
-                    >
-                      VIEW PRODUCT
-                    </Button>
+                    <p className="text-black text-sm sm:text-base">{product.price}</p>
                   </div>
-                </CardContent>
-                </Card>
+                </div>
               ))}
             </div>
           )}
