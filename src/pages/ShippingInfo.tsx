@@ -6,28 +6,22 @@ import { Card, CardContent } from "@/components/ui/card";
 const ShippingInfo = () => {
   const shippingRates = [
     {
-      region: "Tanzania (Mainland)",
-      standard: "TSh 5,000 - 10,000",
-      express: "TSh 15,000 - 20,000",
-      time: "3-5 business days"
-    },
-    {
-      region: "Kenya",
-      standard: "KSh 500 - 1,200",
-      express: "KSh 1,500 - 2,500",
-      time: "3-5 business days"
+      region: "Dar es Salaam",
+      standard: "TSh 5,000 - 8,000",
+      express: "TSh 12,000 - 15,000",
+      time: "1-2 business days"
     },
     {
       region: "Zanzibar",
       standard: "TSh 8,000 - 12,000",
       express: "TSh 18,000 - 25,000",
-      time: "4-6 business days"
+      time: "2-4 business days"
     },
     {
-      region: "Rest of East Africa",
-      standard: "USD 15 - 25",
-      express: "USD 35 - 50",
-      time: "7-10 business days"
+      region: "Other Regions (Tanzania)",
+      standard: "TSh 10,000 - 15,000",
+      express: "TSh 20,000 - 30,000",
+      time: "3-5 business days"
     },
     {
       region: "International",
@@ -77,7 +71,7 @@ const ShippingInfo = () => {
       <section className="py-16 bg-brand-green">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold text-white mb-4">SHIPPING INFORMATION</h1>
-          <p className="text-xl text-white">Fast and reliable delivery across East Africa and beyond</p>
+          <p className="text-xl text-white">Fast and reliable delivery across Tanzania</p>
         </div>
       </section>
 
@@ -122,7 +116,7 @@ const ShippingInfo = () => {
                 <h3 className="text-xl font-bold text-black mb-3">PICKUP POINTS</h3>
                 <p className="text-gray-600 mb-4">Collect from convenient locations</p>
                 <ul className="text-sm text-gray-600 space-y-1">
-                  <li>Dar es Salaam & Nairobi</li>
+                  <li>Dar es Salaam</li>
                   <li>Extended hours</li>
                   <li>Secure storage</li>
                 </ul>
@@ -168,15 +162,9 @@ const ShippingInfo = () => {
             <p className="text-xl text-white mb-4">
               Enjoy free standard shipping on orders over:
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-white bg-opacity-20 p-4 rounded">
-                <p className="text-2xl font-bold text-white">TSh 100,000</p>
-                <p className="text-white">Tanzania</p>
-              </div>
-              <div className="bg-white bg-opacity-20 p-4 rounded">
-                <p className="text-2xl font-bold text-white">KSh 12,000</p>
-                <p className="text-white">Kenya</p>
-              </div>
+            <div className="bg-white bg-opacity-20 p-6 rounded max-w-xs mx-auto">
+              <p className="text-3xl font-bold text-white">TSh 100,000</p>
+              <p className="text-white">Within Tanzania</p>
             </div>
           </div>
 
@@ -210,7 +198,7 @@ const ShippingInfo = () => {
       <footer className="bg-black border-t border-gray-800 py-8">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-gray-400">
-            © 2025 African's Finest. Proudly representing Tanzania & Kenya.
+            © 2025 African's Finest. Proudly representing Tanzania.
           </p>
         </div>
       </footer>
