@@ -31,29 +31,31 @@ const ComponentLoader = () => (
 export const AdminLayout = () => {
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto p-6">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold tracking-tight">Admin Dashboard</h1>
-          <p className="text-muted-foreground">
-            Manage your African's Finest store
+      <div className="container mx-auto px-4 py-4 sm:px-6 sm:py-6">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">Admin Dashboard</h1>
+          <p className="text-sm sm:text-base text-muted-foreground mt-1">
+            Manage your Afrika's Finest store
           </p>
         </div>
 
-        <Tabs defaultValue="dashboard" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-6 lg:grid-cols-12">
-            <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
-            <TabsTrigger value="products">Products</TabsTrigger>
-            <TabsTrigger value="orders">Orders</TabsTrigger>
-            <TabsTrigger value="customers">Customers</TabsTrigger>
-            <TabsTrigger value="inventory">Inventory</TabsTrigger>
-            <TabsTrigger value="analytics">Analytics</TabsTrigger>
-            <TabsTrigger value="content">Content</TabsTrigger>
-            <TabsTrigger value="vendors">Vendors</TabsTrigger>
-            <TabsTrigger value="pricing">Pricing</TabsTrigger>
-            <TabsTrigger value="payments">Payments</TabsTrigger>
-            <TabsTrigger value="security">Security</TabsTrigger>
-            <TabsTrigger value="monitor">Monitor</TabsTrigger>
-          </TabsList>
+        <Tabs defaultValue="dashboard" className="space-y-4 sm:space-y-6">
+          <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+            <TabsList className="inline-flex h-auto min-w-max gap-1 p-1 bg-muted/50 rounded-lg">
+              <TabsTrigger value="dashboard" className="text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">Dashboard</TabsTrigger>
+              <TabsTrigger value="products" className="text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">Products</TabsTrigger>
+              <TabsTrigger value="orders" className="text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">Orders</TabsTrigger>
+              <TabsTrigger value="customers" className="text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">Customers</TabsTrigger>
+              <TabsTrigger value="inventory" className="text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">Inventory</TabsTrigger>
+              <TabsTrigger value="analytics" className="text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">Analytics</TabsTrigger>
+              <TabsTrigger value="content" className="text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">Content</TabsTrigger>
+              <TabsTrigger value="vendors" className="text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">Vendors</TabsTrigger>
+              <TabsTrigger value="pricing" className="text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">Pricing</TabsTrigger>
+              <TabsTrigger value="payments" className="text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">Payments</TabsTrigger>
+              <TabsTrigger value="security" className="text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">Security</TabsTrigger>
+              <TabsTrigger value="monitor" className="text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">Monitor</TabsTrigger>
+            </TabsList>
+          </div>
 
           <TabsContent value="dashboard">
             <Suspense fallback={<ComponentLoader />}>
