@@ -76,7 +76,8 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
           onLoad={handleLoad}
           onError={handleError}
           loading={lazy ? 'lazy' : 'eager'}
-          fetchPriority={priority}
+          // @ts-ignore - fetchpriority is a valid HTML attribute
+          fetchpriority={priority}
           decoding="async"
           className={cn(
             'transition-all duration-500 ease-in-out',
