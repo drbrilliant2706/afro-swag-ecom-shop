@@ -167,48 +167,43 @@ const Index = () => {
                   <PrefetchLink to="/lookbook" className="text-black hover:text-gray-600 transition-colors text-sm xl:text-base">LOOKBOOK</PrefetchLink>
                   <PrefetchLink to="/about" className="text-black hover:text-gray-600 transition-colors text-sm xl:text-base">ABOUT</PrefetchLink>
                   <PrefetchLink to="/culture" className="text-black hover:text-gray-600 transition-colors text-sm xl:text-base">CULTURE</PrefetchLink>
-                  <Button asChild size="sm" className="bg-white text-black border border-black hover:bg-black hover:text-white transition-colors font-bold">
+                  <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-bold">
                     <PrefetchLink to="/men">NEW DROP</PrefetchLink>
                   </Button>
                 </div>
               </div>
 
-              <DropAnimationGroup staggerDelay={0.05}>
-                {[
-                  <Search 
-                    key="search"
-                    className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-gray-600 cursor-pointer transition-colors"
-                    onClick={() => setIsSearchOpen(true)}
-                    aria-label="Search products"
-                  />,
-                  <User 
-                    key="user"
-                    className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-gray-600 cursor-pointer transition-colors"
-                    onClick={() => setIsProfileOpen(true)}
-                    aria-label="User profile"
-                  />,
-                  <PrefetchLink to="/favorites" aria-label="View favorites">
-                    <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-gray-600 cursor-pointer transition-colors" />
-                  </PrefetchLink>,
-                  <div key="cart" className="relative">
-                    <ShoppingCart 
-                      className="h-4 w-4 sm:h-5 sm:w-5 text-black hover:text-gray-600 cursor-pointer transition-colors" 
-                      onClick={() => setIsCartOpen(true)}
-                      aria-label="Shopping cart"
-                    />
-                    <span className="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full w-4 h-4 flex items-center justify-center" aria-label={`${getTotalItems()} items in cart`}>
-                      {getTotalItems()}
-                    </span>
-                  </div>,
-                  <Menu 
-                    key="menu"
-                    className="h-5 w-5 text-black hover:text-gray-600 cursor-pointer transition-colors lg:hidden" 
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    aria-label="Toggle menu"
-                    aria-expanded={isMenuOpen}
+              <div className="flex items-center space-x-3 sm:space-x-4">
+                <Search 
+                  className="h-4 w-4 sm:h-5 sm:w-5 text-primary hover:text-primary/70 cursor-pointer transition-colors"
+                  onClick={() => setIsSearchOpen(true)}
+                  aria-label="Search products"
+                />
+                <User 
+                  className="h-4 w-4 sm:h-5 sm:w-5 text-primary hover:text-primary/70 cursor-pointer transition-colors"
+                  onClick={() => setIsProfileOpen(true)}
+                  aria-label="User profile"
+                />
+                <PrefetchLink to="/favorites" aria-label="View favorites">
+                  <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-primary hover:text-primary/70 cursor-pointer transition-colors" />
+                </PrefetchLink>
+                <div className="relative">
+                  <ShoppingCart 
+                    className="h-4 w-4 sm:h-5 sm:w-5 text-primary hover:text-primary/70 cursor-pointer transition-colors" 
+                    onClick={() => setIsCartOpen(true)}
+                    aria-label="Shopping cart"
                   />
-                ]}
-              </DropAnimationGroup>
+                  <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs rounded-full w-4 h-4 flex items-center justify-center" aria-label={`${getTotalItems()} items in cart`}>
+                    {getTotalItems()}
+                  </span>
+                </div>
+                <Menu 
+                  className="h-5 w-5 text-primary hover:text-primary/70 cursor-pointer transition-colors lg:hidden" 
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  aria-label="Toggle menu"
+                  aria-expanded={isMenuOpen}
+                />
+              </div>
             </div>
 
             {/* Mobile Menu */}
@@ -219,7 +214,7 @@ const Index = () => {
                   <PrefetchLink to="/lookbook" className="text-black hover:text-gray-600 transition-colors py-2">LOOKBOOK</PrefetchLink>
                   <PrefetchLink to="/about" className="text-black hover:text-gray-600 transition-colors py-2">ABOUT</PrefetchLink>
                   <PrefetchLink to="/culture" className="text-black hover:text-gray-600 transition-colors py-2">CULTURE</PrefetchLink>
-                  <Button asChild size="sm" className="bg-white text-black border border-black hover:bg-black hover:text-white transition-colors font-bold mx-2 my-1">
+                  <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-bold mx-2 my-1">
                     <PrefetchLink to="/men">NEW DROP</PrefetchLink>
                   </Button>
                 </div>
@@ -288,7 +283,7 @@ const Index = () => {
                     <div className="absolute top-3 right-3">
                       <Heart 
                         className={`h-5 w-5 sm:h-6 sm:w-6 cursor-pointer transition-colors ${
-                          isFavorite(product.id) ? 'text-black fill-black' : 'text-gray-400 hover:text-black'
+                          isFavorite(product.id) ? 'text-primary fill-primary' : 'text-gray-400 hover:text-primary'
                         }`}
                         onClick={() => handleToggleFavorite(product)}
                       />
@@ -311,7 +306,7 @@ const Index = () => {
 
           <DropAnimation delay={1400} dropHeight={30}>
             <div className="text-center mt-6 sm:mt-8 md:mt-12">
-              <Button asChild size="lg" variant="outline" className="border-black text-black hover:bg-black hover:text-white font-bold">
+              <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold">
                 <PrefetchLink to="/men">VIEW ALL PRODUCTS</PrefetchLink>
               </Button>
             </div>
