@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Heart, ShoppingCart, Search, User, Mail, Phone, MapPin, Clock } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import Footer from "@/components/layout/Footer";
 
 const Contact = () => {
   return (
@@ -237,14 +238,7 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-black border-t border-gray-800 py-8">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-gray-400">
-            © 2025 African's Finest. Fashion at it's ultimate prime. Proudly representing Tanzania & Kenya.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
