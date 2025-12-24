@@ -15,6 +15,7 @@ import { HeaderCarousel } from "@/components/ui/header-carousel";
 import { OptimizedImage } from "@/components/ui/optimized-image";
 import { PrefetchLink } from "@/components/ui/prefetch-link";
 import { batchPreloadImages } from "@/utils/performance";
+import Footer from "@/components/layout/Footer";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -316,59 +317,7 @@ const Index = () => {
 
       </main>
 
-      {/* Classic Footer */}
-      <footer className="bg-black text-white py-12 sm:py-16" style={{ fontFamily: 'Georgia, Times New Roman, serif' }}>
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-            {/* Shop Links */}
-            <div>
-              <h3 className="text-lg font-bold mb-4 tracking-wide">SHOP</h3>
-              <ul className="space-y-2">
-                <li><PrefetchLink to="/men" className="text-gray-300 hover:text-white transition-colors">Men</PrefetchLink></li>
-                <li><PrefetchLink to="/women" className="text-gray-300 hover:text-white transition-colors">Women</PrefetchLink></li>
-                <li><PrefetchLink to="/lookbook" className="text-gray-300 hover:text-white transition-colors">Lookbook</PrefetchLink></li>
-                <li><PrefetchLink to="/favorites" className="text-gray-300 hover:text-white transition-colors">Favorites</PrefetchLink></li>
-              </ul>
-            </div>
-
-            {/* Company Links */}
-            <div>
-              <h3 className="text-lg font-bold mb-4 tracking-wide">COMPANY</h3>
-              <ul className="space-y-2">
-                <li><PrefetchLink to="/about" className="text-gray-300 hover:text-white transition-colors">About Us</PrefetchLink></li>
-                <li><PrefetchLink to="/culture" className="text-gray-300 hover:text-white transition-colors">Culture</PrefetchLink></li>
-                <li><PrefetchLink to="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</PrefetchLink></li>
-              </ul>
-            </div>
-
-            {/* Support Links */}
-            <div>
-              <h3 className="text-lg font-bold mb-4 tracking-wide">SUPPORT</h3>
-              <ul className="space-y-2">
-                <li><PrefetchLink to="/faq" className="text-gray-300 hover:text-white transition-colors">FAQ</PrefetchLink></li>
-                <li><PrefetchLink to="/shipping" className="text-gray-300 hover:text-white transition-colors">Shipping Info</PrefetchLink></li>
-                <li><PrefetchLink to="/returns" className="text-gray-300 hover:text-white transition-colors">Returns</PrefetchLink></li>
-                <li><PrefetchLink to="/size-guide" className="text-gray-300 hover:text-white transition-colors">Size Guide</PrefetchLink></li>
-              </ul>
-            </div>
-
-            {/* Brand */}
-            <div>
-              <h3 className="text-lg font-bold mb-4 tracking-wide">AFRICA'S FINEST</h3>
-              <p className="text-gray-300 text-sm leading-relaxed">
-                Authentic streetwear celebrating East African culture and heritage.
-              </p>
-            </div>
-          </div>
-
-          {/* Bottom Bar */}
-          <div className="border-t border-gray-700 pt-8 text-center">
-            <p className="text-gray-400 text-sm">
-              © {new Date().getFullYear()} Africa's Finest. All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer variant="full" />
 
       {/* Modals */}
       <ProfileModal isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />

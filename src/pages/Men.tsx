@@ -11,6 +11,7 @@ import { useProducts } from "@/hooks/useProducts";
 import ProfileModal from "@/components/profile/ProfileModal";
 import CartModal from "@/components/cart/CartModal";
 import SearchModal from "@/components/search/SearchModal";
+import Footer from "@/components/layout/Footer";
 
 const Men = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -331,14 +332,7 @@ const Men = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-black border-t border-gray-800 py-8">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-gray-400 text-sm md:text-base">
-            © 2025 African's Finest. Proudly representing Tanzania & Kenya.
-          </p>
-        </div>
-      </footer>
+      <Footer />
 
       {/* Modals */}
       <ProfileModal isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />

@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Heart, ShoppingCart, Search, User, RotateCcw, CheckCircle, XCircle, AlertCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import Footer from "@/components/layout/Footer";
 
 const Returns = () => {
   return (
@@ -191,14 +192,7 @@ const Returns = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-black border-t border-gray-800 py-8">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-gray-400">
-            © 2025 African's Finest. Proudly representing Tanzania & Kenya.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
