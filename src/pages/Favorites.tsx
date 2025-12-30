@@ -59,37 +59,37 @@ const Favorites = () => {
             <div className="flex-shrink-0">
               <a href="/">
                 <h1 className="text-xl md:text-2xl font-bold text-black">
-                  AFRICAN'S <span className="text-red-600">FINEST</span>
+                  AFRICAN'S <span className="text-primary">FINEST</span>
                 </h1>
               </a>
             </div>
 
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4 lg:space-x-8">
-                <a href="/" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">HOME</a>
-                <a href="/men" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">MEN</a>
-                <a href="/women" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">WOMEN</a>
-                <a href="/lookbook" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">LOOKBOOK</a>
-                <a href="/about" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">ABOUT</a>
-                <a href="/culture" className="text-black hover:text-red-600 transition-colors text-sm lg:text-base">CULTURE</a>
+                <a href="/" className="text-black hover:text-primary transition-colors text-sm lg:text-base">HOME</a>
+                <a href="/men" className="text-black hover:text-primary transition-colors text-sm lg:text-base">MEN</a>
+                <a href="/women" className="text-black hover:text-primary transition-colors text-sm lg:text-base">WOMEN</a>
+                <a href="/lookbook" className="text-black hover:text-primary transition-colors text-sm lg:text-base">LOOKBOOK</a>
+                <a href="/about" className="text-black hover:text-primary transition-colors text-sm lg:text-base">ABOUT</a>
+                <a href="/culture" className="text-black hover:text-primary transition-colors text-sm lg:text-base">CULTURE</a>
               </div>
             </div>
 
             <div className="flex items-center space-x-3 md:space-x-4">
-              <Search className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
+              <Search className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-primary cursor-pointer transition-colors" />
               <User 
-                className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
+                className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-primary cursor-pointer transition-colors" 
                 onClick={() => setIsProfileOpen(true)}
               />
               <a href="/favorites">
-                <Heart className="h-4 w-4 md:h-5 md:w-5 text-red-600 fill-red-600 cursor-pointer transition-colors" />
+                <Heart className="h-4 w-4 md:h-5 md:w-5 text-primary fill-primary cursor-pointer transition-colors" />
               </a>
               <div className="relative">
                 <ShoppingCart 
-                  className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
+                  className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-primary cursor-pointer transition-colors" 
                   onClick={() => setIsCartOpen(true)}
                 />
-                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs rounded-full w-4 h-4 flex items-center justify-center">
                   {getTotalItems()}
                 </span>
               </div>
@@ -102,7 +102,7 @@ const Favorites = () => {
       <section className="py-8 md:py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-4 text-black">
-            YOUR <span className="text-red-600">FAVORITES</span>
+            YOUR <span className="text-primary">FAVORITES</span>
           </h2>
           <p className="text-lg md:text-xl text-gray-600">
             Items you've saved for later
@@ -118,7 +118,7 @@ const Favorites = () => {
               <Heart className="h-16 w-16 text-gray-300 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-600 mb-2">No favorites yet</h3>
               <p className="text-gray-500 mb-6">Start browsing and add items you love!</p>
-              <Button asChild className="bg-red-600 hover:bg-red-700">
+              <Button asChild className="bg-primary hover:bg-primary/90">
                 <a href="/men">Browse Products</a>
               </Button>
             </div>
