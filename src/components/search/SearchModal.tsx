@@ -1,9 +1,9 @@
-
 import { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { X, Search } from 'lucide-react';
-import { useProducts } from '@/hooks/useProducts';
+import { useProductsQuery } from '@/hooks/useProductsQuery';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -12,7 +12,7 @@ interface SearchModalProps {
 
 const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const { products, loading } = useProducts();
+  const { products, loading } = useProductsQuery();
 
   const filteredProducts = useMemo(() => {
     if (!searchTerm.trim()) return [];
@@ -71,17 +71,19 @@ const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
           ) : (
             <div className="p-4 space-y-2">
               {filteredProducts.map((product) => (
-                <Card key={product.id} className="cursor-pointer hover:bg-gray-50 transition-colors">
-                  <CardContent className="p-4">
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <h3 className="font-medium text-black">{product.name}</h3>
-                        <p className="text-sm text-gray-500">{product.category}</p>
+                <Link key={product.id} to={`/product/${product.id}`} onClick={onClose}>
+                  <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
+                    <CardContent className="p-4">
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <h3 className="font-medium text-black">{product.name}</h3>
+                          <p className="text-sm text-gray-500">{product.category}</p>
+                        </div>
+                        <p className="font-bold text-brand-green">{product.price}</p>
                       </div>
-                      <p className="font-bold text-brand-green">{product.price}</p>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
             </div>
           )}
