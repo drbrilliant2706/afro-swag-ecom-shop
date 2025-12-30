@@ -1,31 +1,26 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Heart, ShoppingCart, Search, User, Menu, Filter, X } from "lucide-react";
+import { Heart, Filter, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
-import { useProducts } from "@/hooks/useProducts";
-import ProfileModal from "@/components/profile/ProfileModal";
-import CartModal from "@/components/cart/CartModal";
-import SearchModal from "@/components/search/SearchModal";
+import { useProductsQuery } from "@/hooks/useProductsQuery";
+import { ProductSkeleton } from "@/components/ui/ProductSkeleton";
+import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 const Men = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("ALL");
   
-  const { addToCart, getTotalItems } = useCart();
+  const { addToCart } = useCart();
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
   const { user } = useAuth();
   const { toast } = useToast();
-  const { products, loading } = useProducts();
+  const { products, loading } = useProductsQuery();
 
   // Filter products for men and active status
   const menProducts = products.filter(product => 
@@ -36,7 +31,7 @@ const Men = () => {
     price: `TSh ${product.price.toLocaleString()}`,
     image: product.images && product.images.length > 0 ? product.images[0] : "/placeholder.svg",
     badge: "NEW",
-    colors: ["Red", "White", "Black"], // Default colors for now
+    colors: ["Red", "White", "Black"],
     category: product.category || "TOPS"
   }));
 
@@ -100,74 +95,11 @@ const Men = () => {
     }
   };
 
+  const categories = ["ALL", "SHIRTS", "PANTS", "SHOES", "ACCESSORIES"];
+
   return (
     <div className="min-h-screen bg-white text-black">
-      {/* Navigation */}
-      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex-shrink-0">
-              <a href="/">
-                  <h1 className="text-xl md:text-2xl font-bold text-black">
-                  AFRICAN'S <span className="text-brand-green">FINEST</span>
-                </h1>
-              </a>
-            </div>
-
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-4 lg:space-x-8">
-                <a href="/" className="text-black hover:text-brand-green transition-colors text-sm lg:text-base">HOME</a>
-                <a href="/men" className="text-brand-green border-b-2 border-brand-green pb-1 text-sm lg:text-base">MEN</a>
-                <a href="/women" className="text-black hover:text-brand-green transition-colors text-sm lg:text-base">WOMEN</a>
-                <a href="/lookbook" className="text-black hover:text-brand-green transition-colors text-sm lg:text-base">LOOKBOOK</a>
-                <a href="/about" className="text-black hover:text-brand-green transition-colors text-sm lg:text-base">ABOUT</a>
-                <a href="/culture" className="text-black hover:text-brand-green transition-colors text-sm lg:text-base">CULTURE</a>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-3 md:space-x-4">
-              <Search 
-                className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
-                onClick={() => setIsSearchOpen(true)}
-              />
-              <User 
-                className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
-                onClick={() => setIsProfileOpen(true)}
-              />
-              <a href="/favorites">
-                <Heart className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" />
-              </a>
-              <div className="relative">
-                <ShoppingCart 
-                  className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors" 
-                  onClick={() => setIsCartOpen(true)}
-                />
-                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-                  {getTotalItems()}
-                </span>
-              </div>
-              <Menu 
-                className="h-4 w-4 md:h-5 md:w-5 text-black hover:text-red-600 cursor-pointer transition-colors md:hidden" 
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-              />
-            </div>
-          </div>
-
-          {/* Mobile Menu */}
-          {isMenuOpen && (
-            <div className="md:hidden border-t border-gray-200 py-4">
-              <div className="flex flex-col space-y-2">
-                <a href="/" className="text-black hover:text-brand-green transition-colors py-2">HOME</a>
-                <a href="/men" className="text-brand-green py-2">MEN</a>
-                <a href="/women" className="text-black hover:text-brand-green transition-colors py-2">WOMEN</a>
-                <a href="/lookbook" className="text-black hover:text-brand-green transition-colors py-2">LOOKBOOK</a>
-                <a href="/about" className="text-black hover:text-brand-green transition-colors py-2">ABOUT</a>
-                <a href="/culture" className="text-black hover:text-brand-green transition-colors py-2">CULTURE</a>
-              </div>
-            </div>
-          )}
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero Section */}
       <section className="relative h-64 md:h-96 flex items-center justify-center overflow-hidden">
@@ -206,36 +138,17 @@ const Men = () => {
               
               {/* Desktop Filter Options */}
               <div className="hidden md:flex space-x-4 text-sm">
-                <button 
-                  onClick={() => setSelectedCategory("ALL")}
-                  className={selectedCategory === "ALL" ? "text-brand-green border-b border-brand-green" : "text-gray-600 hover:text-black"}
-                >
-                  ALL
-                </button>
-                <button 
-                  onClick={() => setSelectedCategory("SHIRTS")}
-                  className={selectedCategory === "SHIRTS" ? "text-brand-green border-b border-brand-green" : "text-gray-600 hover:text-black"}
-                >
-                  SHIRTS
-                </button>
-                <button 
-                  onClick={() => setSelectedCategory("PANTS")}
-                  className={selectedCategory === "PANTS" ? "text-brand-green border-b border-brand-green" : "text-gray-600 hover:text-black"}
-                >
-                  PANTS
-                </button>
-                <button 
-                  onClick={() => setSelectedCategory("SHOES")}
-                  className={selectedCategory === "SHOES" ? "text-brand-green border-b border-brand-green" : "text-gray-600 hover:text-black"}
-                >
-                  SHOES
-                </button>
-                <button 
-                  onClick={() => setSelectedCategory("ACCESSORIES")}
-                  className={selectedCategory === "ACCESSORIES" ? "text-brand-green border-b border-brand-green" : "text-gray-600 hover:text-black"}
-                >
-                  ACCESSORIES
-                </button>
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={selectedCategory === category 
+                      ? "text-brand-green border-b border-brand-green" 
+                      : "text-gray-600 hover:text-black"}
+                  >
+                    {category}
+                  </button>
+                ))}
               </div>
             </div>
             <p className="text-gray-600 text-sm">{filteredProducts.length} products</p>
@@ -246,16 +159,13 @@ const Men = () => {
             <div className="md:hidden mt-4 p-4 bg-white rounded-lg shadow-lg">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="font-semibold">Filter Products</h3>
-                <X 
-                  className="h-5 w-5 cursor-pointer" 
-                  onClick={() => setIsFilterOpen(false)}
-                />
+                <X className="h-5 w-5 cursor-pointer" onClick={() => setIsFilterOpen(false)} />
               </div>
               
               <div className="space-y-2">
                 <h4 className="font-medium text-sm">Category</h4>
                 <div className="grid grid-cols-2 gap-2">
-                  {["ALL", "SHIRTS", "PANTS", "SHOES", "ACCESSORIES"].map((category) => (
+                  {categories.map((category) => (
                     <button
                       key={category}
                       onClick={() => {
@@ -282,9 +192,7 @@ const Men = () => {
       <section className="py-8 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           {loading ? (
-            <div className="flex justify-center items-center py-16">
-              <div className="text-lg text-gray-600">Loading products...</div>
-            </div>
+            <ProductSkeleton count={8} />
           ) : filteredProducts.length === 0 ? (
             <div className="text-center py-16">
               <h3 className="text-xl font-semibold text-gray-900 mb-2">No products found</h3>
@@ -295,14 +203,14 @@ const Men = () => {
               {filteredProducts.map((product) => (
                 <div key={product.id} className="group">
                   <div className="relative overflow-hidden bg-gray-50 mb-3">
-                    <a href={`/product/${product.id}`}>
+                    <Link to={`/product/${product.id}`}>
                       <img 
                         src={product.image} 
                         alt={product.name}
                         className="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-300"
                         loading="lazy"
                       />
-                    </a>
+                    </Link>
                     <Badge className="absolute top-3 left-3 bg-gray-100 text-gray-600 text-xs font-normal">
                       {product.badge}
                     </Badge>
@@ -318,9 +226,9 @@ const Men = () => {
                   
                   <div className="space-y-1">
                     <div className="flex items-start justify-between">
-                      <a href={`/product/${product.id}`}>
+                      <Link to={`/product/${product.id}`}>
                         <h4 className="text-black font-medium text-sm sm:text-base hover:underline line-clamp-2">{product.name}</h4>
-                      </a>
+                      </Link>
                       <span className="text-gray-400 hover:text-black cursor-pointer ml-2">+</span>
                     </div>
                     <p className="text-black text-sm sm:text-base">{product.price}</p>
@@ -333,11 +241,6 @@ const Men = () => {
       </section>
 
       <Footer />
-
-      {/* Modals */}
-      <ProfileModal isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
-      <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
-      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </div>
   );
 };
