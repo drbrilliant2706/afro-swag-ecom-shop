@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { X, Mail, Sparkles } from "lucide-react";
+import { X, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 
 const emailSchema = z.string().email("Please enter a valid email address");
@@ -46,13 +47,34 @@ const NewsletterPopup = () => {
 
     setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const { error } = await supabase
+        .from('newsletter_subscribers')
+        .insert({ email: email.trim(), source: 'popup' });
 
-    toast({
-      title: "Welcome to our family! 🎉",
-      description: "You've successfully subscribed to our newsletter.",
-    });
+      if (error) {
+        if (error.code === '23505') {
+          // Unique constraint violation - already subscribed
+          toast({
+            title: "Already subscribed!",
+            description: "This email is already on our list.",
+          });
+        } else {
+          throw error;
+        }
+      } else {
+        toast({
+          title: "Welcome to our family! 🎉",
+          description: "You've successfully subscribed to our newsletter.",
+        });
+      }
+    } catch (err) {
+      toast({
+        title: "Something went wrong",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    }
 
     setIsSubmitting(false);
     handleClose();
