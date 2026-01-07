@@ -16,6 +16,7 @@ import { OptimizedImage } from "@/components/ui/optimized-image";
 import { PrefetchLink } from "@/components/ui/prefetch-link";
 import { batchPreloadImages } from "@/utils/performance";
 import Footer from "@/components/layout/Footer";
+import NewsletterPopup from "@/components/newsletter/NewsletterPopup";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -323,6 +324,9 @@ const Index = () => {
       <ProfileModal isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
       <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
       <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      
+      {/* Newsletter Popup */}
+      <NewsletterPopup />
     </div>
   );
 };
