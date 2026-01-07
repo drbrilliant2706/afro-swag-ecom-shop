@@ -16,6 +16,7 @@ const PricingPromotions = lazy(() => import('./PricingPromotions'));
 const PaymentSettings = lazy(() => import('./PaymentSettings'));
 const SecurityFraud = lazy(() => import('./SecurityFraud'));
 const SecurityMonitor = lazy(() => import('./SecurityMonitor'));
+const NewsletterManagement = lazy(() => import('./NewsletterManagement'));
 
 const ComponentLoader = () => (
   <div className="space-y-4">
@@ -54,6 +55,7 @@ export const AdminLayout = () => {
               <TabsTrigger value="payments" className="text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">Payments</TabsTrigger>
               <TabsTrigger value="security" className="text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">Security</TabsTrigger>
               <TabsTrigger value="monitor" className="text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">Monitor</TabsTrigger>
+              <TabsTrigger value="newsletter" className="text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 whitespace-nowrap">Newsletter</TabsTrigger>
             </TabsList>
           </div>
 
@@ -126,6 +128,12 @@ export const AdminLayout = () => {
           <TabsContent value="monitor">
             <Suspense fallback={<ComponentLoader />}>
               <SecurityMonitor />
+            </Suspense>
+          </TabsContent>
+
+          <TabsContent value="newsletter">
+            <Suspense fallback={<ComponentLoader />}>
+              <NewsletterManagement />
             </Suspense>
           </TabsContent>
         </Tabs>
