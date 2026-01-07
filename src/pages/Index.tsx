@@ -175,32 +175,32 @@ const Index = () => {
                 </div>
               </div>
 
-              <div className="flex items-center space-x-3 sm:space-x-4">
+              <div className="flex items-center space-x-4 sm:space-x-4">
                 <Search 
-                  className="h-4 w-4 sm:h-5 sm:w-5 text-primary hover:text-primary/70 cursor-pointer transition-colors"
+                  className="h-5 w-5 sm:h-5 sm:w-5 text-primary hover:text-primary/70 cursor-pointer transition-colors p-0.5 touch-manipulation"
                   onClick={() => setIsSearchOpen(true)}
                   aria-label="Search products"
                 />
                 <User 
-                  className="h-4 w-4 sm:h-5 sm:w-5 text-primary hover:text-primary/70 cursor-pointer transition-colors"
+                  className="h-5 w-5 sm:h-5 sm:w-5 text-primary hover:text-primary/70 cursor-pointer transition-colors p-0.5 touch-manipulation"
                   onClick={() => setIsProfileOpen(true)}
                   aria-label="User profile"
                 />
-                <PrefetchLink to="/favorites" aria-label="View favorites">
-                  <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-primary hover:text-primary/70 cursor-pointer transition-colors" />
+                <PrefetchLink to="/favorites" aria-label="View favorites" className="touch-manipulation">
+                  <Heart className="h-5 w-5 sm:h-5 sm:w-5 text-primary hover:text-primary/70 cursor-pointer transition-colors" />
                 </PrefetchLink>
-                <div className="relative">
+                <div className="relative touch-manipulation">
                   <ShoppingCart 
-                    className="h-4 w-4 sm:h-5 sm:w-5 text-primary hover:text-primary/70 cursor-pointer transition-colors" 
+                    className="h-5 w-5 sm:h-5 sm:w-5 text-primary hover:text-primary/70 cursor-pointer transition-colors" 
                     onClick={() => setIsCartOpen(true)}
                     aria-label="Shopping cart"
                   />
-                  <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs rounded-full w-4 h-4 flex items-center justify-center" aria-label={`${getTotalItems()} items in cart`}>
+                  <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs rounded-full w-5 h-5 sm:w-4 sm:h-4 flex items-center justify-center text-[10px] sm:text-xs" aria-label={`${getTotalItems()} items in cart`}>
                     {getTotalItems()}
                   </span>
                 </div>
                 <Menu 
-                  className="h-5 w-5 text-primary hover:text-primary/70 cursor-pointer transition-colors lg:hidden" 
+                  className="h-6 w-6 text-primary hover:text-primary/70 cursor-pointer transition-colors lg:hidden p-0.5 touch-manipulation" 
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
                   aria-label="Toggle menu"
                   aria-expanded={isMenuOpen}
@@ -210,13 +210,13 @@ const Index = () => {
 
             {/* Mobile Menu */}
             {isMenuOpen && (
-              <div className="lg:hidden border-t border-gray-200 py-3 bg-white">
-                <div className="flex flex-col space-y-3 px-2">
-                  <PrefetchLink to="/" className="text-black py-2 font-medium">HOME</PrefetchLink>
-                  <PrefetchLink to="/lookbook" className="text-black hover:text-gray-600 transition-colors py-2">LOOKBOOK</PrefetchLink>
-                  <PrefetchLink to="/about" className="text-black hover:text-gray-600 transition-colors py-2">ABOUT</PrefetchLink>
-                  <PrefetchLink to="/culture" className="text-black hover:text-gray-600 transition-colors py-2">CULTURE</PrefetchLink>
-                  <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-bold mx-2 my-1">
+              <div className="lg:hidden border-t border-gray-200 py-4 bg-white">
+                <div className="flex flex-col space-y-1 px-2">
+                  <PrefetchLink to="/" className="text-black py-3 px-2 font-medium rounded-lg hover:bg-gray-100 touch-manipulation">HOME</PrefetchLink>
+                  <PrefetchLink to="/lookbook" className="text-black hover:text-gray-600 transition-colors py-3 px-2 rounded-lg hover:bg-gray-100 touch-manipulation">LOOKBOOK</PrefetchLink>
+                  <PrefetchLink to="/about" className="text-black hover:text-gray-600 transition-colors py-3 px-2 rounded-lg hover:bg-gray-100 touch-manipulation">ABOUT</PrefetchLink>
+                  <PrefetchLink to="/culture" className="text-black hover:text-gray-600 transition-colors py-3 px-2 rounded-lg hover:bg-gray-100 touch-manipulation">CULTURE</PrefetchLink>
+                  <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-bold mx-2 my-2 h-12 touch-manipulation">
                     <PrefetchLink to="/men">NEW DROP</PrefetchLink>
                   </Button>
                 </div>
